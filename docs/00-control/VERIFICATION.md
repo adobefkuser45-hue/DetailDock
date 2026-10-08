@@ -123,4 +123,26 @@ All claims of completion must be verified with concrete evidence before receivin
 - **Log Verification:**
   - `docs/00-control/INSTALLATION_LOG.md` complete with all 26 entries logged.
 
+---
+
+## ADR-003 & ADR-004: Tool Assignment & Legal Commercial Licensing Verification
+
+- **Task ID:** ADR-003 / ADR-004
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-09
+- **Classification:** `ARCHITECTURAL`
+
+### Acceptance Criteria:
+1. Phase-by-phase tooling matrix codified in `AGENTS.md` and `docs/00-control/DECISIONS.md`.
+2. Commercial licensing compliance criteria defined: only permissive licenses (`MIT`, `Apache-2.0`, `ISC`, `BSD-2/3`, `OFL`, `CC0`) permitted.
+3. Restrictive copyleft licenses (`GPL`, `AGPL`, `LGPL`) and non-commercial licenses (`CC-BY-NC`) explicitly prohibited to guarantee commercial sellability.
+4. Logo & asset creation rules defined: 100% custom code-native SVG vectors; zero trademark risk.
+5. All cloud operations configured on verified $0 Free Tiers (MongoDB Atlas M0, Vercel Hobby, Render Web Service, Cloudinary Free).
+
+### Verification Evidence:
+- `AGENTS.md`: Contains `Legal & Commercial Compliance (Zero Copyright Risk)` and `Phase-Specific Tooling Arsenal`.
+- `DECISIONS.md`: `ADR-003` (Tool Assignment) and `ADR-004` (Commercial Licensing) marked `ACCEPTED`.
+- Pre-commit license validation rule codified in MERN Master System v1.1.
+
+
 

@@ -45,3 +45,21 @@
   - Zero redundant or conflicting tools (e.g., daisyUI eliminated, shadcn/ui standardized).
   - Explicit justification required before proposing any paid upgrade.
 
+---
+
+## ADR-004: Commercial Licensing & Intellectual Property Compliance Guarantee
+- **Status:** ACCEPTED
+- **Date:** 2026-10-09
+- **Context:** DetailDock is being built for full commercial readiness, distribution, and potential sale or client handover. Using dependencies, assets, logos, or media with copyleft or non-commercial restrictions could lead to copyright claims, mandatory source disclosure, or legal liabilities.
+- **Decision:** Enforce 100% commercially sellable and permissive open-source standards across all project layers:
+  1. **Dependencies & Libraries:** Exclusively permit `MIT`, `Apache-2.0`, `ISC`, and `BSD-2/3-Clause` licenses. Strictly prohibit copyleft licenses (`GPL`, `AGPL`, `LGPL`) and non-commercial licenses (`CC-BY-NC`).
+  2. **Typography & Fonts:** Exclusively use SIL Open Font License 1.1 (`OFL`) or `Apache 2.0` fonts (e.g., Inter, Geist, Plus Jakarta Sans via Google Fonts) allowing unrestricted commercial bundling.
+  3. **Branding & Logos:** Build bespoke procedural vector SVGs in code. No third-party stock logos, ripped icons, or trademarked silhouettes.
+  4. **Iconography:** Standardize on `lucide-react` (ISC License - fully unrestricted commercial use).
+  5. **Media & Assets:** Use permissive royalty-free commercial stock assets (Unsplash/Pexels license permitting commercial modification and display) or client-provided car imagery, hosted on Cloudinary Free Tier.
+- **Consequences:**
+  - 100% legal immunity from copyright infringement or forced open-source copyleft disclosures.
+  - The entire DetailDock platform can be commercially monetized, licensed, sold, or transferred without legal encumbrances.
+  - All automated pre-commit audits will check licenses of added npm packages.
+
+

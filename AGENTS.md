@@ -33,6 +33,24 @@ Architectural work requires an approved design/spec and approved implementation 
 
 Run the checks required by the task and record actual evidence before claiming completion.
 
+## Legal & Commercial Compliance (Zero Copyright Risk)
+All project artifacts, dependencies, libraries, fonts, and assets must strictly adhere to permissive commercial open-source licenses:
+- Permitted licenses: `MIT`, `Apache 2.0`, `BSD-2/3`, `ISC`, `SIL Open Font License (OFL)`, `CC0`.
+- Strictly Forbidden: Restrictive copyleft (`GPL`, `AGPL`) or non-commercial (`CC-BY-NC`) licenses that would legally restrict selling, licensing, or commercializing the platform.
+- Logos & Artwork: Generate 100% original bespoke code-native SVG graphics or licensed permissive assets. No trademark infringement.
+- Media: Permissive commercial assets only (Unsplash/Pexels license or user-supplied photography).
+
+## Phase-Specific Tooling Arsenal
+- **Product & Requirements:** Superpowers (`brainstorming`, `writing-plans`), GSD (`gsd-spec-phase`), Anthropic `doc-coauthoring`.
+- **Branding & Logo Design:** Anthropic `brand-guidelines`, `canvas-design`, procedural vector SVGs.
+- **UI Architecture & Styling:** `UI UX Pro Max`, `TasteSkill` (design-taste-frontend), `Impeccable` (v4.5.0), Anthropic `frontend-design`, `21st.dev` (CLI & MCP), `shadcn/ui` (MIT), Tailwind CSS (MIT).
+- **Motion & Micro-interactions:** `Design Motion Principles`, `Motion` library (`motion` / MIT).
+- **Database & Schemas:** Official `MongoDB Agent Skills` (8 skills), `MongoDB MCP Server` (live cluster inspector).
+- **Backend Architecture & Documentation:** Express.js, Mongoose, `Context7 MCP` (live docs), Superpowers `test-driven-development`.
+- **Quality & Security Pentesting:** `Strix Security Skills` (OWASP Top 10, API security testing), `CodeRabbit Reviewer`, `Playwright E2E`.
+- **Media Optimization:** `Cloudinary MCP` & Node SDK (Free Tier, 25 credits/mo).
+- **Deployment & Growth:** `Vercel MCP` (Hobby Free), `Render API` (Free Web Service), `BeyondSEO` (Schema.org AutoRepair).
+
 ## Complex Work
 For architectural, multi-hour, migration, or major-refactor work, use an execution plan following `.agent/PLANS.md` when present.
 

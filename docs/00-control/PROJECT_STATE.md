@@ -36,19 +36,21 @@
     - Cloudinary Media Storage (`wrptkj0e`, Plan: Free)
     - 21st.dev UI Marketplace (`adobefkuser45`)
     - 14 Antigravity skills & Superpowers framework active
+  - `ADR-003` & `ADR-004`: Phase-by-phase tool assignments and 100% commercial licensing compliance guarantees formally codified.
 - **In Progress:**
-  - Ready for Prompt 1: DetailDock Requirements & Scope Intake.
+  - Ready for Prompt 1: DetailDock Idea Intake & MVP Scope Definition.
 - **Blockers:**
   - None.
 
 ---
 
 ## 4. Last Verified
-- **Task:** `TASK-001B — Complete Manifest Audit & Skills / MCP Integration`
+- **Task:** `TASK-001B — Complete Manifest Audit & Skills / MCP Integration + Licensing Compliance`
 - **Date:** 2026-10-09
-- **Evidence Reference:** [INSTALLATION_LOG.md](file:///docs/00-control/INSTALLATION_LOG.md)
+- **Evidence Reference:** [INSTALLATION_LOG.md](file:///docs/00-control/INSTALLATION_LOG.md), [DECISIONS.md#adr-004](file:///docs/00-control/DECISIONS.md#adr-004)
 
 ---
 
 ## 5. Currently Working On
-Manifest audit and skill integrations 100% complete. All tools, skills, and MCP configurations are logged and verified with evidence. Standing by to review tools research and begin Prompt 1 (DetailDock Idea Intake & PRD).
+All systems, native & third-party skills, MCP servers, and cloud accounts are 100% verified and cataloged. Strict commercial compliance (MIT/Apache only, zero copyright risk) is codified in AGENTS.md and DECISIONS.md. Standing by to intake the user's DetailDock idea, feature requirements, and scope (Prompt 1).
+
