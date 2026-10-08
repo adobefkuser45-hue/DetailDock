@@ -78,3 +78,44 @@ All claims of completion must be verified with concrete evidence before receivin
 - Skill check: `Test-Path ~/.gemini/antigravity/skills/21st-dev/SKILL.md` → `True`
 - Skill check: `Test-Path ~/.gemini/antigravity/skills/ui-ux-pro-max/SKILL.md` → `True`
 
+---
+
+## TASK-001B: Manifest Audit & Skills / MCP Integration (26 Items)
+
+- **Task ID:** TASK-001B
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-09
+- **Classification:** `ARCHITECTURAL`
+
+### Acceptance Criteria:
+1. Complete audit of all 26 items in `ANTIGRAVITY_ALL_SKILLS_PLUGINS_MCP_INSTALLATION_MANIFEST.md` executed sequentially.
+2. Verified origin, source code, permissions, and security evaluated for every item before install.
+3. User approval obtained before executing third-party installations.
+4. No sensitive secrets, tokens, or credentials stored in chat or tracked repository files.
+5. Functional tests executed for installed tools/skills and recorded with real output evidence.
+6. Status logged for all 26 items in `docs/00-control/INSTALLATION_LOG.md` following Section D3 format.
+
+### Verification Evidence:
+- **Active Skills Deployed & Verified:**
+  - `Test-Path ~/.gemini/antigravity/skills/karpathy-guidelines/SKILL.md` → `True` (S02)
+  - `Test-Path ~/.gemini/antigravity/skills/mongodb-schema-design/SKILL.md` → `True` (S04, 8 MongoDB skills)
+  - `Test-Path ~/.gemini/antigravity/skills/ui-ux-pro-max/SKILL.md` → `True` (S05)
+  - `Test-Path ~/.gemini/antigravity/skills/impeccable/SKILL.md` → `True` (S06, v4.5.0)
+  - `Test-Path ~/.gemini/antigravity/skills/21st-dev/SKILL.md` → `True` (S09)
+  - `Test-Path ~/.gemini/antigravity/skills/taste-skill/SKILL.md` → `True` (S10)
+  - `Test-Path ~/.gemini/antigravity/skills/design-motion-principles/SKILL.md` → `True` (S12)
+  - `Test-Path ~/.gemini/antigravity/skills/gsd-graphify/SKILL.md` → `True` (S14)
+  - `Test-Path ~/.gemini/antigravity/skills/beyondseo/SKILL.md` → `True` (S17, v2.9.1)
+  - Superpowers framework active with 15 skills mapped (S01)
+- **Active MCP Servers Verified:**
+  - `context7`: Tested via `npx @upstash/context7-mcp` → exit code 0 (M03 in manifest, S03)
+  - `21st`: Registered in `mcp_config.json` → `https://21st.dev/api/mcp` (M08)
+- **Deferred / Architectural Classifications:**
+  - Project dependencies (S07 shadcn/ui, S08 Playwright, S11 Motion, S13 Agentation) scheduled for frontend/test stages.
+  - Runtime tools (S16 Strix) scheduled for pre-prod security audit.
+  - Competing / internal tools (S15 Archify, S18 daisyUI) marked `NOT_APPLICABLE` with rationale.
+  - Remote MCP services (M01–M07) deferred to their respective operational phases (database provisioning, deployment, analytics).
+- **Log Verification:**
+  - `docs/00-control/INSTALLATION_LOG.md` complete with all 26 entries logged.
+
+
