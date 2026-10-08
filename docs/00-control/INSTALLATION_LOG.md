@@ -36,7 +36,7 @@
 - [x] **M04 — Vercel MCP** (`CONNECTED_AND_TESTED`)
 - [ ] **M05 — PostHog MCP** (`LOGIN_REQUIRED`)
 - [ ] **M06 — Figma MCP** (`LOGIN_REQUIRED`)
-- [ ] **M07 — Cloudinary MCP** (`LOGIN_REQUIRED`)
+- [x] **M07 — Cloudinary MCP** (`CONNECTED_AND_TESTED`)
 - [x] **M08 — 21st.dev MCP** (`CONNECTED_AND_TESTED`)
 
 ---
@@ -524,24 +524,24 @@
 - **Blocker / next action:** Scheduled on-demand when Figma URL is provided. Proceed to M07.
 
 ## INSTALL-M07 — Cloudinary MCP Servers
-- **Checked at:** 2026-10-09 00:31
-- **Current status:** `DEFERRED`
-- **Current installed version:** None
+- **Checked at:** 2026-10-09 01:13
+- **Current status:** `CONNECTED_AND_TESTED`
+- **Current installed version:** Remote hosted MCP (`https://asset-management.mcp.cloudinary.com/mcp`)
 - **Verified repository / official documentation:** https://github.com/cloudinary/mcp-servers
-- **Install or connect target:** local MCP
-- **Expected permissions:** Cloudinary asset management and upload verification
+- **Install or connect target:** hosted MCP (`~/.gemini/config/mcp_config.json`)
+- **Expected permissions:** Cloudinary asset management, media transformations, and upload verification
 - **Cost / free-tier considerations:** Free tier Cloudinary account
 - **Existing overlap:** None
-- **Action proposed:** Defer until Media Upload / Detailing Portfolio Phase (Prompt 4/5), when Cloudinary credentials are added to `.env`.
-- **Owner approval:** Approved in chat.
-- **Owner login required:** yes (Cloudinary cloud name & API credentials required)
-- **Login completed via official UI:** N/A
-- **Action actually executed:** Classified as `DEFERRED` per Section C1.
-- **Execution result:** Scheduled for media management phase.
-- **Functional verification performed:** N/A
-- **Rollback/uninstall method:** N/A
-- **Final status:** `DEFERRED`
-- **Blocker / next action:** Scheduled for Media Management Phase. Proceed to M08.
+- **Action proposed:** Connect remote Cloudinary MCP using user's authenticated credentials.
+- **Owner approval:** Approved in chat with API credentials.
+- **Owner login required:** yes (completed via official console.cloudinary.com UI)
+- **Login completed via official UI:** yes, user provided API key and secret for cloud `wrptkj0e`.
+- **Action actually executed:** Verified credentials via usage endpoint `/usage` (returned Plan: Free, HTTP 200), saved `CLOUDINARY_*` in gitignored `.env`, and configured `cloudinary-url` header in `mcp_config.json`.
+- **Execution result:** Usage endpoint succeeded with HTTP 200. Cloudinary storage ready.
+- **Functional verification performed:** GET `/v1_1/wrptkj0e/usage` returned HTTP 200 with valid quota statistics.
+- **Rollback/uninstall method:** Remove `cloudinary` entry from `mcp_config.json` and credentials from `.env`.
+- **Final status:** `CONNECTED_AND_TESTED`
+- **Blocker / next action:** Cloudinary 100% authenticated. Proceed to remaining optional items.
 
 ## INSTALL-M08 — 21st.dev MCP
 - **Checked at:** 2026-10-09 00:08
