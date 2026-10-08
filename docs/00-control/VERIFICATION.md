@@ -106,6 +106,7 @@ All claims of completion must be verified with concrete evidence before receivin
   - `Test-Path ~/.gemini/antigravity/skills/design-motion-principles/SKILL.md` → `True` (S12)
   - `Test-Path ~/.gemini/antigravity/skills/gsd-graphify/SKILL.md` → `True` (S14)
   - `Test-Path ~/.gemini/antigravity/skills/beyondseo/SKILL.md` → `True` (S17, v2.9.1)
+  - `Test-Path ~/.gemini/antigravity/skills/frontend-design/SKILL.md` → `True` (Anthropic suite, 19 skills)
   - Superpowers framework active with 15 skills mapped (S01)
 - **Active MCP Servers & Cloud Services Verified:**
   - `GitHub MCP`: Authenticated user `adobefkuser45-hue` via REST API and stdio MCP server (M01).

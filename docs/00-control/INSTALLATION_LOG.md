@@ -563,5 +563,26 @@
 - **Final status:** `CONNECTED_AND_TESTED`
 - **Blocker / next action:** Complete Manifest Audit Finished!
 
+## INSTALL-EXT-01 — Anthropic Official Skills Suite (19 Skills)
+- **Checked at:** 2026-10-09 01:21
+- **Current status:** `INSTALLED_AND_TESTED`
+- **Current installed version:** official repo snapshot
+- **Verified repository / official documentation:** https://github.com/anthropics/skills.git
+- **Install or connect target:** global skills (`~/.gemini/antigravity/skills/` and `~/.gemini/config/skills/`)
+- **Expected permissions:** Frontend design, branding, document co-authoring, webapp testing, theme creation
+- **Cost / free-tier considerations:** Free / Open Source
+- **Existing overlap:** Complementary additions to UI UX Pro Max, Impeccable, and Superpowers.
+- **Action proposed:** Deploy 19 official Anthropic portable skills: `frontend-design`, `brand-guidelines`, `theme-factory`, `canvas-design`, `web-artifacts-builder`, `webapp-testing`, `mcp-builder`, `claude-api`, `doc-coauthoring`, `skill-creator`, `pdf`, `xlsx`, `docx`, `pptx`, `academy-guide`, `algorithmic-art`, `discernment-nudge`, `internal-comms`, `slack-gif-creator`.
+- **Owner approval:** Explicitly requested and approved by owner in chat ("installed it").
+- **Owner login required:** no
+- **Login completed via official UI:** N/A
+- **Action actually executed:** Cloned `anthropics/skills`, extracted all 19 skills, deployed to `~/.gemini/antigravity/skills/` and `~/.gemini/config/skills/`.
+- **Execution result:** All 19 skills deployed successfully.
+- **Functional verification performed:** `Test-Path frontend-design/SKILL.md` → `True`, `Test-Path brand-guidelines/SKILL.md` → `True`, `Test-Path theme-factory/SKILL.md` → `True`.
+- **Rollback/uninstall method:** Remove individual skill directories from skills folders.
+- **Final status:** `INSTALLED_AND_TESTED`
+- **Blocker / next action:** 19 Anthropic skills ready for DetailDock development.
+
+
 
 
