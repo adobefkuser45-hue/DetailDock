@@ -239,6 +239,50 @@ All claims of completion must be verified with concrete evidence before receivin
     ```
   - Exit code `0`.
 
+---
+
+## TASK-010: Mongoose Models & Realistic Luxury Detailing Seed Data
+
+- **Task ID:** TASK-010
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-09
+- **Classification:** `BOUNDED`
+
+### Acceptance Criteria:
+1. Mongoose models created: `User`, `VehicleCategory`, `ServicePackage`, `Addon`, `Booking`, `StudioSetting`.
+2. Immutable pricing snapshot fields embedded in `Booking` schema.
+3. Seeder script `server/src/scripts/seed.js` populates realistic luxury automotive services, multipliers, add-ons, studio settings, and demo admin/customer credentials.
+4. Database verification query confirms document counts in Atlas.
+
+### Verification Evidence:
+- **Seeder Execution:**
+  - Command: `npm run seed --workspace=server`
+  - Output:
+    ```text
+    [DetailDock DB]: MongoDB Atlas Connected successfully -> Host: ac-11dnu91-shard-00-00.na6yl4b.mongodb.net
+    [Seed]: Created 4 Vehicle Categories.
+    [Seed]: Created 3 Service Packages.
+    [Seed]: Created 5 Add-ons.
+    [Seed]: Created Studio Settings -> DetailDock Luxury Atelier.
+    [Seed]: Created Admin User (admin@detaildock.com) and Demo Customer (alex@example.com).
+    [Seed]: Database seeding successfully completed!
+    ```
+  - Exit code `0`.
+- **Database Count Query:**
+  - Command: `node server/src/scripts/verifyDb.js`
+  - Output:
+    ```text
+    === DATABASE VERIFICATION REPORT ===
+    Vehicle Categories: 4
+    Service Packages:   3
+    Add-ons:            5
+    Studio Name:        DetailDock Luxury Atelier
+    Users (Admin+Demo): 2
+    ====================================
+    ```
+  - Exit code `0`.
+
+
 
 
 

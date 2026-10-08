@@ -109,6 +109,24 @@
   - Live Atlas check: `Invoke-RestMethod http://localhost:5000/api/v1/health` returned `{ success: true, database: { status: "Connected", connected: true } }`.
 - **Next Step:** Proceed to TASK-010 (Mongoose Models & Realistic Luxury Detailing Seed Data).
 
+## 2026-10-09 — Session 08: Mongoose Models & Database Seeding (TASK-010)
+
+- **Action:** Executed TASK-010. Created production-grade Mongoose models matching `DATA_MODEL.md` and developed an idempotent database seeder script populating realistic luxury detailing services, vehicle multipliers, add-ons, studio settings, and demo user accounts.
+- **Implemented:**
+  - `server/src/models/User.js`: User model with bcrypt pre-save password hashing and compare method.
+  - `server/src/models/VehicleCategory.js`: Body types (`sedan`, `executive-coupe`, `compact-suv`, `full-suv`) with price and duration multipliers.
+  - `server/src/models/ServicePackage.js`: Tiered detailing packages (`essential-clean`, `signature-detail`, `ceramic-shield`) with feature checklists.
+  - `server/src/models/Addon.js`: Standalone upgrades (Engine bay, Leather ceramic, Pet hair, Wheel ceramic, Headlight polish).
+  - `server/src/models/Booking.js`: Complete booking model with embedded customer, vehicle, pricing snapshot, and compound indexing.
+  - `server/src/models/StudioSetting.js`: Studio capacity and business hour constraints.
+  - `server/src/scripts/seed.js`: Database seeding script.
+  - `server/src/scripts/verifyDb.js`: Verification script.
+- **Verified:**
+  - `npm run seed --workspace=server` executed with zero warnings.
+  - `node server/src/scripts/verifyDb.js` confirmed: 4 Categories, 3 Packages, 5 Add-ons, Studio Settings, 2 Users.
+- **Next Step:** Proceed to TASK-011 (Authoritative Pricing Engine & Slot Availability API).
+
+
 
 
 

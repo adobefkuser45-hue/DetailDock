@@ -1,0 +1,101 @@
+import mongoose from 'mongoose';
+
+const BookingSchema = new mongoose.Schema({
+  bookingCode: { 
+    type: String, 
+    required: true, 
+    unique: true, 
+    uppercase: true, 
+    trim: true,
+    index: true 
+  },
+  
+  // Customer details snapshot
+  customer: {
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
+    name: { type: String, required: true, trim: true },
+    email: { type: String, required: true, lowercase: true, trim: true },
+    phone: { type: String, required: true, trim: true }
+  },
+
+  // Vehicle information snapshot
+  vehicle: {
+    make: { type: String, required: true, trim: true },
+    model: { type: String, required: true, trim: true },
+    year: { type: Number, required: true },
+    categoryName: { type: String, required: true },
+    categorySlug: { type: String, required: true },
+    multiplierApplied: { type: Number, required: true },
+    licensePlate: { type: String, default: '', trim: true },
+    paintColor: { type: String, default: '', trim: true }
+  },
+
+  // Service package snapshot (immutable frozen pricing)
+  packageSnapshot: {
+    packageId: { type: mongoose.Schema.Types.ObjectId, ref: 'ServicePackage' },
+    title: { type: String, required: true },
+    basePrice: { type: Number, required: true },
+    calculatedPrice: { type: Number, required: true },
+    durationMinutes: { type: Number, required: true }
+  },
+
+  // Add-ons snapshot
+  addonsSnapshot: [{
+    addonId: { type: mongoose.Schema.Types.ObjectId, ref: 'Addon' },
+    title: { type: String, required: true },
+    price: { type: Number, required: true },
+    durationMinutes: { type: Number, required: true }
+  }],
+
+  // Authoritative financial summary
+  totalPrice: { 
+    type: Number, 
+    required: true 
+  },
+  totalDurationMinutes: { 
+    type: Number, 
+    required: true 
+  },
+
+  // Scheduling
+  scheduledDate: { 
+    type: Date, 
+    required: true, 
+    index: true 
+  },
+  scheduledTimeSlot: { 
+    type: String, 
+    required: true, 
+    index: true 
+  },
+  bayNumber: { 
+    type: Number, 
+    default: 1 
+  },
+
+  // Status progression
+  status: {
+    type: String,
+    enum: ['Pending', 'Confirmed', 'In Bay', 'Ready', 'Completed', 'Cancelled'],
+    default: 'Pending',
+    index: true
+  },
+
+  notes: { type: String, default: '' },
+  adminNotes: { type: String, default: '' },
+  cancellationReason: { type: String, default: '' },
+
+  // Audit trail
+  statusHistory: [{
+    status: { type: String, required: true },
+    changedAt: { type: Date, default: Date.now },
+    changedBy: { type: String, default: 'Customer' },
+    note: { type: String, default: '' }
+  }]
+}, { timestamps: true });
+
+// Compound index for slot capacity query
+BookingSchema.index({ scheduledDate: 1, scheduledTimeSlot: 1, status: 1 });
+BookingSchema.index({ 'customer.email': 1, createdAt: -1 });
+
+export const Booking = mongoose.model('Booking', BookingSchema);
