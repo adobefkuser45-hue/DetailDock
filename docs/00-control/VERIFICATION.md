@@ -173,6 +173,40 @@ All claims of completion must be verified with concrete evidence before receivin
 - `Test-Path docs/04-quality/SECURITY_CHECKLIST.md` → `True`
 - Application code check: `0` application code lines created in `client/` or `server/`.
 
+---
+
+## TASK-008: Project Scaffolding (Client Vite + Server Express Monorepo)
+
+- **Task ID:** TASK-008
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-09
+- **Classification:** `ARCHITECTURAL`
+
+### Acceptance Criteria:
+1. Root `package.json` initialized with npm monorepo workspaces (`client`, `server`) and unified scripts.
+2. `server/` scaffolded with Express 4, Mongoose 8, Helmet, CORS, Rate Limit, Dotenv, and health endpoint `GET /api/v1/health`.
+3. `client/` scaffolded with React 19, Vite, Tailwind CSS v4, Lucide React, and Motion.
+4. Client production build compiles with zero errors in sub-second time.
+5. Server starts cleanly and returns `200 OK` on `/api/v1/health`.
+6. Zero copyleft dependencies installed (100% MIT, Apache-2.0, ISC).
+
+### Verification Evidence:
+- **Client Build Test:**
+  - Command: `npm run build --workspace=client`
+  - Output: `✓ built in 437ms`, `dist/index.html 0.45 kB`, `dist/assets/index-s6GlGxrE.css 17.80 kB`, `dist/assets/index-CUXcBmVG.js 228.45 kB`. Exit code `0`.
+- **Server Health Ping Test:**
+  - Command: `Invoke-RestMethod -Uri http://localhost:5000/api/v1/health`
+  - Response:
+    ```json
+    {
+      "success": true,
+      "message": "DetailDock API Service is healthy and operational.",
+      "environment": "development"
+    }
+    ```
+  - Exit code `0`.
+
+
 
 
 
