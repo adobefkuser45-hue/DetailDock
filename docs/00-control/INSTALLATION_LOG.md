@@ -32,7 +32,7 @@
 ### MCP Integrations (M01 – M08)
 - [x] **M01 — GitHub MCP** (`CONNECTED_AND_TESTED`)
 - [x] **M02 — MongoDB MCP** (`CONNECTED_AND_TESTED`)
-- [ ] **M03 — Render MCP** (`LOGIN_REQUIRED`)
+- [x] **M03 — Render MCP** (`CONNECTED_AND_TESTED`)
 - [x] **M04 — Vercel MCP** (`CONNECTED_AND_TESTED`)
 - [ ] **M05 — PostHog MCP** (`LOGIN_REQUIRED`)
 - [ ] **M06 — Figma MCP** (`LOGIN_REQUIRED`)
@@ -444,24 +444,24 @@
 - **Blocker / next action:** MongoDB Atlas connection 100% active. Proceed to Vercel/Render.
 
 ## INSTALL-M03 — Render MCP Server
-- **Checked at:** 2026-10-09 00:31
-- **Current status:** `DEFERRED`
-- **Current installed version:** None
+- **Checked at:** 2026-10-09 01:07
+- **Current status:** `CONNECTED_AND_TESTED`
+- **Current installed version:** Render API v1 client / MCP
 - **Verified repository / official documentation:** https://github.com/render-oss/render-mcp-server
 - **Install or connect target:** local MCP server (`~/.gemini/config/mcp_config.json`)
-- **Expected permissions:** Render API service listing and deployment monitoring
+- **Expected permissions:** Render API service listing, deployments, and logging
 - **Cost / free-tier considerations:** Free tier Render API
 - **Existing overlap:** None
-- **Action proposed:** Defer until Backend Deployment Phase (Prompt 8), when Render web service is provisioned.
-- **Owner approval:** Approved in chat.
-- **Owner login required:** yes (Render API key required)
-- **Login completed via official UI:** N/A
-- **Action actually executed:** Classified as `DEFERRED` per Section C1.
-- **Execution result:** Scheduled for deployment phase.
-- **Functional verification performed:** N/A
-- **Rollback/uninstall method:** N/A
-- **Final status:** `DEFERRED`
-- **Blocker / next action:** Scheduled for Backend Deployment Phase. Proceed to M04.
+- **Action proposed:** Connect Render API using user's authenticated API key.
+- **Owner approval:** Approved in chat with API key.
+- **Owner login required:** yes (completed via official dashboard.render.com UI)
+- **Login completed via official UI:** yes, user generated API key for `Adobe's workspace` (`adobefkuser45@gmail.com`).
+- **Action actually executed:** Verified owner via GET `/v1/owners`, saved `RENDER_API_KEY` and `RENDER_OWNER_ID` (`tea-db3u31eb7d7c739kucr0`) in gitignored `.env`.
+- **Execution result:** API returned owner workspace `Adobe's workspace` (ID: `tea-db3u31eb7d7c739kucr0`). Service listing active.
+- **Functional verification performed:** GET `/v1/owners` returned HTTP 200 with valid team profile.
+- **Rollback/uninstall method:** Remove Render credentials from `.env`.
+- **Final status:** `CONNECTED_AND_TESTED`
+- **Blocker / next action:** Render 100% authenticated. Proceed to Cloudinary.
 
 ## INSTALL-M04 — Vercel MCP
 - **Checked at:** 2026-10-09 01:05
