@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DetailDock — 5 Interactive High-Fidelity UI/UX Mockups</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #090C12;
+      --bg-surface: #101522;
+      --bg-elevated: #161D2E;
+      --border-subtle: #1D2536;
+      --border-muted: #2A364E;
+      --border-active: #38BDF8;
+      --text-primary: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+      --accent-cyan: #0284C7;
+      --accent-cyan-light: #38BDF8;
+      --accent-amber: #F59E0B;
+      --accent-emerald: #10B981;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.5;
+      padding-bottom: 60px;
+    }
+
+    /* Top Banner */
+    .top-header {
+      background: rgba(16, 21, 34, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-logo-svg {
+      width: 34px;
+      height: 34px;
+      fill: none;
+      stroke: var(--accent-cyan-light);
+      stroke-width: 2.2;
+    }
+    .brand-text {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .brand-text span { color: var(--accent-cyan-light); }
+
+    /* Nav Tabs */
+    .mockup-nav {
+      display: flex;
+      gap: 8px;
+      background: var(--bg-canvas);
+      padding: 4px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+    }
+    .nav-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .nav-btn:hover { color: var(--text-primary); background: var(--bg-elevated); }
+    .nav-btn.active {
+      background: var(--accent-cyan);
+      color: #fff;
+      box-shadow: 0 0 16px rgba(2, 132, 199, 0.4);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1320px;
+      margin: 32px auto;
+      padding: 0 24px;
+    }
+
+    /* Tab Panels */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 32px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: var(--accent-cyan-light);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      margin-bottom: 12px;
+    }
+    h2 { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; }
+    p.desc { color: var(--text-secondary); font-size: 15px; margin-bottom: 24px; max-width: 800px; }
+
+    /* Mockup Display Box */
+    .mockup-display {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-muted);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      margin-bottom: 24px;
+      background: #000;
+    }
+    .mockup-display img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Interactive Configurator Section */
+    .interactive-box {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-muted);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 24px;
+    }
+    .box-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent-cyan-light);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .option-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .option-card:hover { border-color: var(--text-muted); }
+    .option-card.selected {
+      border-color: var(--accent-cyan-light);
+      background: rgba(2, 132, 199, 0.08);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+    }
+    .option-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .option-card p { font-size: 13px; color: var(--text-secondary); }
+    .option-price {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      color: var(--accent-amber);
+      margin-top: 8px;
+      font-size: 16px;
+    }
+
+    /* Addon Toggles */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .toggle-row.checked { border-color: var(--accent-cyan-light); }
+    .toggle-info { display: flex; align-items: center; gap: 12px; }
+    .toggle-switch {
+      width: 44px;
+      height: 24px;
+      background: var(--border-muted);
+      border-radius: 9999px;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+    }
+    .toggle-row.checked .toggle-switch { background: var(--accent-cyan); }
+    .toggle-row.checked .toggle-switch::after { transform: translateX(20px); }
+
+    /* Sticky Bottom Preview */
+    .summary-dock {
+      background: #0B101B;
+      border: 1px solid var(--border-active);
+      box-shadow: 0 0 24px rgba(56, 189, 248, 0.2);
+      border-radius: 12px;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 24px;
+    }
+    .summary-metrics { display: flex; gap: 32px; align-items: center; }
+    .metric-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
+    .metric-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--accent-cyan-light);
+    }
+    .btn-action {
+      background: var(--accent-cyan);
+      color: #fff;
+      font-weight: 700;
+      padding: 12px 28px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .btn-action:hover { background: var(--accent-cyan-light); color: #000; box-shadow: 0 0 20px rgba(56,189,248,0.5); }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="top-header">
+    <div class="brand">
+      <svg class="brand-logo-svg" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 3v6m0 6v6M3 12h6m6 0h6" />
+        <circle cx="12" cy="12" r="3" fill="#0284C7" />
+      </svg>
+      <div class="brand-text">Detail<span>Dock</span> <small style="font-size: 11px; color: var(--text-muted); font-weight: 500;">v1.0 Mockup Suite</small></div>
+    </div>
+
+    <!-- Tab Buttons -->
+    <nav class="mockup-nav">
+      <button class="nav-btn active" onclick="switchTab(0)">1. Atelier Hero</button>
+      <button class="nav-btn" onclick="switchTab(1)">2. Paint Correction Slider</button>
+      <button class="nav-btn" onclick="switchTab(2)">3. Smart Package Builder</button>
+      <button class="nav-btn" onclick="switchTab(3)">4. Bay Booking Scheduler</button>
+      <button class="nav-btn" onclick="switchTab(4)">5. Admin Pipeline Board</button>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- TAB 1: Hero UI -->
+    <section class="tab-panel active" id="tab-0">
+      <div class="card">
+        <span class="badge">Mockup 1 • First Impression</span>
+        <h2>Luxury Atelier Hero & Instant Quote Showcase</h2>
+        <p class="desc">A dark obsidian supercar aesthetic pairing a high-gloss Porsche GT3 with instant pricing calculation right from the hero fold. Bypasses the traditional "Call for Quote" friction.</p>
+        
+        <div class="mockup-display">
+          <img src="mockups/01_hero_mockup.jpg" alt="DetailDock Hero UI Mockup">
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: Before / After Slider -->
+    <section class="tab-panel" id="tab-1">
+      <div class="card">
+        <span class="badge">Mockup 2 • Visual Proof & Trust</span>
+        <h2>Interactive Before/After Paint Correction Studio</h2>
+        <p class="desc">Visual proof of craftsmanship. Displays heavy swirl marks and scratches versus mirror-finish 9H ceramic coating with a live Gloss Depth Meter (65 GU ➔ 98 GU).</p>
+        
+        <div class="mockup-display">
+          <img src="mockups/02_before_after_mockup.jpg" alt="DetailDock Before and After Paint Correction UI">
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: Smart Package Builder -->
+    <section class="tab-panel" id="tab-2">
+      <div class="card">
+        <span class="badge">Mockup 3 • Signature Feature</span>
+        <h2>Smart Package Builder (Interactive Configurator)</h2>
+        <p class="desc">Select your vehicle type, pick a detailing tier, and customize with optional add-ons. Test the live interactive prototype below!</p>
+        
+        <div class="mockup-display">
+          <img src="mockups/03_package_builder_mockup.jpg" alt="DetailDock Smart Package Builder Mockup">
+        </div>
+
+        <!-- Live Prototype Widget -->
+        <div class="interactive-box">
+          <div class="box-title">⚡ Try Live Interactive Calculation Engine</div>
+          
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">STEP 1: SELECT VEHICLE BODY TYPE</p>
+          <div class="grid-3" id="vehicle-grid">
+            <div class="option-card selected" onclick="selectVehicle('sedan', 1.0, this)">
+              <h4>Sedan / Coupe</h4>
+              <p>Compact & standard 4-door chassis</p>
+              <div class="option-price">Multiplier: 1.0x</div>
+            </div>
+            <div class="option-card" onclick="selectVehicle('suv', 1.25, this)">
+              <h4>Compact SUV / Crossover</h4>
+              <p>Mid-size clearance & tailgate</p>
+              <div class="option-price">Multiplier: 1.25x</div>
+            </div>
+            <div class="option-card" onclick="selectVehicle('truck', 1.45, this)">
+              <h4>Full-Size SUV / Truck</h4>
+              <p>High roofline & extended surface</p>
+              <div class="option-price">Multiplier: 1.45x</div>
+            </div>
+          </div>
+
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">STEP 2: CHOOSE DETAILING PACKAGE</p>
+          <div class="grid-3" id="package-grid">
+            <div class="option-card" onclick="selectPackage('Essential Clean', 249, 120, this)">
+              <h4>Essential Clean</h4>
+              <p>Full exterior foam wash & interior vacuum</p>
+              <div class="option-price">$249 • 2.0h</div>
+            </div>
+            <div class="option-card selected" onclick="selectPackage('Premium Shine', 349, 180, this)">
+              <h4>Premium Shine ★</h4>
+              <p>Single-stage polish & interior decontamination</p>
+              <div class="option-price">$349 • 3.0h</div>
+            </div>
+            <div class="option-card" onclick="selectPackage('Ceramic Pro', 499, 270, this)">
+              <h4>Ceramic Pro Ultimate</h4>
+              <p>9H hydrophobic ceramic coating & deep cure</p>
+              <div class="option-price">$499 • 4.5h</div>
+            </div>
+          </div>
+
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">STEP 3: OPTIONAL ADD-ONS</p>
+          <div class="toggle-row checked" onclick="toggleAddon('Leather Conditioning', 120, 45, this)">
+            <div class="toggle-info">
+              <div class="toggle-switch"></div>
+              <div>
+                <strong>Leather Deep Conditioning</strong>
+                <div style="font-size: 12px; color: var(--text-muted);">Restores natural oils & matte finish (+45m)</div>
+              </div>
+            </div>
+            <div class="option-price">+$120.00</div>
+          </div>
+
+          <div class="toggle-row checked" onclick="toggleAddon('Wheel Ceramic Coating', 199, 45, this)">
+            <div class="toggle-info">
+              <div class="toggle-switch"></div>
+              <div>
+                <strong>Wheel & Caliper Ceramic Coating</strong>
+                <div style="font-size: 12px; color: var(--text-muted);">Brake dust resistance & high-heat protection (+45m)</div>
+              </div>
+            </div>
+            <div class="option-price">+$199.00</div>
+          </div>
+
+          <div class="toggle-row" onclick="toggleAddon('Pet Hair Removal', 50, 30, this)">
+            <div class="toggle-info">
+              <div class="toggle-switch"></div>
+              <div>
+                <strong>Pet Hair Extraction</strong>
+                <div style="font-size: 12px; color: var(--text-muted);">Deep mechanical fiber clean (+30m)</div>
+              </div>
+            </div>
+            <div class="option-price">+$50.00</div>
+          </div>
+
+          <!-- Sticky Cockpit -->
+          <div class="summary-dock">
+            <div class="summary-metrics">
+              <div>
+                <div class="metric-label">Estimated Duration</div>
+                <div class="metric-val" id="disp-duration">4.5 Hours</div>
+              </div>
+              <div>
+                <div class="metric-label">Authoritative Total</div>
+                <div class="metric-val" id="disp-total" style="color: var(--accent-emerald);">$668.00</div>
+              </div>
+            </div>
+            <button class="btn-action">Continue to Scheduling ➔</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 4: Appointment Booking -->
+    <section class="tab-panel" id="tab-3">
+      <div class="card">
+        <span class="badge">Mockup 4 • High-Conversion Booking</span>
+        <h2>Live Bay Availability & Appointment Scheduler</h2>
+        <p class="desc">Interactive calendar with live detailing bay indicators (`Bay 1` & `Bay 2` capacity check). Prevents double booking while creating scarcity and trust.</p>
+        
+        <div class="mockup-display">
+          <img src="mockups/04_booking_mockup.jpg" alt="DetailDock Booking Scheduler UI">
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: Admin Pipeline -->
+    <section class="tab-panel" id="tab-4">
+      <div class="card">
+        <span class="badge">Mockup 5 • Business Operations</span>
+        <h2>Admin Operations Dashboard & Kanban Pipeline</h2>
+        <p class="desc">A full management control room displaying daily workflow progression (`Pending` ➔ `Confirmed` ➔ `In Bay` ➔ `Inspection` ➔ `Completed`), revenue metrics, and car cards.</p>
+        
+        <div class="mockup-display">
+          <img src="mockups/05_admin_pipeline_mockup.jpg" alt="DetailDock Admin Dashboard Mockup">
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Tab Switching
+    function switchTab(index) {
+      document.querySelectorAll('.nav-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+      });
+      document.querySelectorAll('.tab-panel').forEach((panel, i) => {
+        panel.classList.toggle('active', i === index);
+      });
+    }
+
+    // Configurator Math
+    let currentMultiplier = 1.0;
+    let basePkgPrice = 349;
+    let basePkgDuration = 180; // minutes
+    let selectedAddons = [
+      { name: 'Leather Conditioning', price: 120, duration: 45 },
+      { name: 'Wheel Ceramic Coating', price: 199, duration: 45 }
+    ];
+
+    function selectVehicle(type, mult, elem) {
+      currentMultiplier = mult;
+      document.querySelectorAll('#vehicle-grid .option-card').forEach(c => c.classList.remove('selected'));
+      elem.classList.add('selected');
+      updateTotals();
+    }
+
+    function selectPackage(name, price, duration, elem) {
+      basePkgPrice = price;
+      basePkgDuration = duration;
+      document.querySelectorAll('#package-grid .option-card').forEach(c => c.classList.remove('selected'));
+      elem.classList.add('selected');
+      updateTotals();
+    }
+
+    function toggleAddon(name, price, duration, elem) {
+      elem.classList.toggle('checked');
+      const isChecked = elem.classList.contains('checked');
+      if (isChecked) {
+        selectedAddons.push({ name, price, duration });
+      } else {
+        selectedAddons = selectedAddons.filter(a => a.name !== name);
+      }
+      updateTotals();
+    }
+
+    function updateTotals() {
+      const pkgCalculated = basePkgPrice * currentMultiplier;
+      const addonsTotal = selectedAddons.reduce((sum, a) => sum + a.price, 0);
+      const total = pkgCalculated + addonsTotal;
+
+      const addonsDuration = selectedAddons.reduce((sum, a) => sum + a.duration, 0);
+      const totalMinutes = basePkgDuration + addonsDuration;
+      const hours = (totalMinutes / 60).toFixed(1);
+
+      document.getElementById('disp-total').textContent = '$' + total.toFixed(2);
+      document.getElementById('disp-duration').textContent = hours + ' Hours';
+    }
+  </script>
+</body>
+</html>
