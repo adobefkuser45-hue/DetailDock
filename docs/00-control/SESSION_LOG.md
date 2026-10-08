@@ -12,4 +12,5 @@
   - Control hierarchy (`docs/00-control/`, `TASKS.md`, `README.md`, `.gitignore`, `.env.example`)
   - Initialized Git local repository.
 - **Verified:** All 5 Master Files verified present; existing source pack preserved intact; zero application code written.
-- **Next Step:** Connect GitHub remote repository and initiate Project Intake (Prompt 1).
+- **GitHub Connection:** Successfully connected to `https://github.com/adobefkuser45-hue/DetailDock.git` and pushed initial commit to `origin/main` with local authentication isolation. Global PC config preserved for Codex.
+- **Next Step:** Initiate DetailDock Project Idea & Scope Intake (Prompt 1).

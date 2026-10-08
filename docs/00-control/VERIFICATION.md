@@ -32,3 +32,25 @@ All claims of completion must be verified with concrete evidence before receivin
   - All 9 original files in `ORBIT_FORM_Codex_Handoff_Source_Pack_v1.0/` intact and unaltered.
 - **Code Scope Check:**
   - 0 lines of client or server application code created.
+
+---
+
+## TASK-001: Connect Remote GitHub Repository
+
+- **Task ID:** TASK-001
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-08
+- **Classification:** `BOUNDED`
+
+### Acceptance Criteria:
+1. Remote repository connected to `https://github.com/adobefkuser45-hue/DetailDock.git`.
+2. Initial commit pushed to remote `main` branch.
+3. PC global Git configuration remains untouched for Codex / existing tools (`user.name: Faisal Kader`).
+4. Working tree clean.
+
+### Verification Evidence:
+- Remote check: `git remote -v` → `https://github.com/adobefkuser45-hue/DetailDock.git`
+- Push check: `git push -u origin main` → `branch 'main' set up to track 'origin/main'`
+- Global isolation check: `git config --global -l` → `user.name=Faisal Kader`, `user.email=faisalkader45trash@gmail.com`
+- Tree status: `git status` → `Your branch is up to date with 'origin/main'. nothing to commit, working tree clean`
+

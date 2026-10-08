@@ -10,7 +10,7 @@
 | Task ID | Stage | Description | Status | Dependency | Evidence Ref |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **TASK-000** | 00 Control | One-Time System Setup & Master Files Verification | `VERIFIED` | None | [VERIFICATION.md#task-000](file:///docs/00-control/VERIFICATION.md#task-000) |
-| **TASK-001** | 00 Control | Connect Remote GitHub Repository | `PROPOSED` | TASK-000 | Pending user remote URL |
+| **TASK-001** | 00 Control | Connect Remote GitHub Repository | `VERIFIED` | TASK-000 | [VERIFICATION.md#task-001](file:///docs/00-control/VERIFICATION.md#task-001) |
 | **TASK-002** | 01 Product | DetailDock Idea Intake & MVP Scope Definition (Prompt 1) | `PROPOSED` | TASK-001 | Pending user idea brief |
 | **TASK-003** | 01 Product | PRD & User Flows Specification | `PROPOSED` | TASK-002 | `docs/01-product/PRD.md` |
 | **TASK-004** | 02 Tech | TRD, Architecture & MERN Baseline Contracts | `PROPOSED` | TASK-003 | `docs/02-technical/TRD.md` |
