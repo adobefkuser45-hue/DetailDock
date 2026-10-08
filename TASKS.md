@@ -12,12 +12,26 @@
 | **TASK-000** | 00 Control | One-Time System Setup & Master Files Verification | `VERIFIED` | None | [VERIFICATION.md#task-000](file:///docs/00-control/VERIFICATION.md#task-000) |
 | **TASK-001** | 00 Control | Connect Remote GitHub Repository | `VERIFIED` | TASK-000 | [VERIFICATION.md#task-001](file:///docs/00-control/VERIFICATION.md#task-001) |
 | **TASK-001B** | 00 Control | Complete Manifest Audit & Skills / MCP Integration (26 Items) | `VERIFIED` | TASK-001 | [INSTALLATION_LOG.md](file:///docs/00-control/INSTALLATION_LOG.md) |
-| **TASK-002** | 01 Product | DetailDock Idea Intake & MVP Scope Definition (Prompt 1) | `PROPOSED` | TASK-001B | Pending user idea brief |
-| **TASK-003** | 01 Product | PRD & User Flows Specification | `PROPOSED` | TASK-002 | `docs/01-product/PRD.md` |
-| **TASK-004** | 02 Tech | TRD, Architecture & MERN Baseline Contracts | `PROPOSED` | TASK-003 | `docs/02-technical/TRD.md` |
-| **TASK-005** | 02 Tech | Data Model (Mongoose Schemas) & API Contracts | `PROPOSED` | TASK-004 | `docs/02-technical/DATA_MODEL.md` |
-| **TASK-006** | 03 Design | UI Design System & Component Inventory | `PROPOSED` | TASK-005 | `docs/03-design/DESIGN.md` |
-| **TASK-007** | 04 Quality | Security Checklist & Test Plan Setup | `PROPOSED` | TASK-006 | `docs/04-quality/TEST_PLAN.md` |
+| **TASK-002** | 01 Product | DetailDock Idea Intake & MVP Scope Definition | `VERIFIED` | TASK-001B | [PRD.md](file:///docs/01-product/PRD.md) |
+| **TASK-003** | 01 Product | Detailed User Flows Specification | `VERIFIED` | TASK-002 | [USER_FLOWS.md](file:///docs/01-product/USER_FLOWS.md) |
+| **TASK-004** | 02 Tech | TRD & System Architecture Specification | `VERIFIED` | TASK-003 | [TRD.md](file:///docs/02-technical/TRD.md), [ARCHITECTURE.md](file:///docs/02-technical/ARCHITECTURE.md) |
+| **TASK-005** | 02 Tech | Data Model & Mongoose Schemas Specification | `VERIFIED` | TASK-004 | [DATA_MODEL.md](file:///docs/02-technical/DATA_MODEL.md) |
+| **TASK-006** | 03 Design | UI/UX Design System & Luxury Automotive Styling | `VERIFIED` | TASK-005 | [DESIGN.md](file:///docs/03-design/DESIGN.md) |
+| **TASK-007** | 04 Quality | Security Checklist & OWASP Mitigation Plan | `VERIFIED` | TASK-006 | [SECURITY_CHECKLIST.md](file:///docs/04-quality/SECURITY_CHECKLIST.md) |
+| **TASK-008** | 05 Dev | Project Scaffolding (Client Vite + Server Express Monorepo) | `PROPOSED` | TASK-007 | Pending User Plan Approval |
+| **TASK-009** | 05 Dev | Express Server Setup, Security Middleware & Atlas DB Connection | `PROPOSED` | TASK-008 | `server/src/server.js` |
+| **TASK-010** | 05 Dev | Mongoose Models & Realistic Luxury Detailing Seed Data | `PROPOSED` | TASK-009 | `server/src/models/` |
+| **TASK-011** | 05 Dev | Authoritative Pricing Engine & Slot Availability API | `PROPOSED` | TASK-010 | `server/src/services/pricingService.js` |
+| **TASK-012** | 05 Dev | Booking Submission & Public Status Tracking API | `PROPOSED` | TASK-011 | `server/src/routes/bookingRoutes.js` |
+| **TASK-013** | 05 Dev | Admin Operations API & Role-Based Auth (JWT) | `PROPOSED` | TASK-012 | `server/src/routes/adminRoutes.js` |
+| **TASK-014** | 06 Frontend | Frontend Foundation, Styling Tokens & Bespoke SVG Logo | `PROPOSED` | TASK-008 | `client/src/` |
+| **TASK-015** | 06 Frontend | Premium Homepage (Hero, Before/After Slider, Testimonials) | `PROPOSED` | TASK-014 | `client/src/pages/HomePage.jsx` |
+| **TASK-016** | 06 Frontend | Smart Package Builder (Vehicle Multipliers, Packages, Addons) | `PROPOSED` | TASK-015 | `client/src/pages/BuilderPage.jsx` |
+| **TASK-017** | 06 Frontend | Appointment Booking Flow (Calendar, Time Slots, Vehicle Intake) | `PROPOSED` | TASK-016 | `client/src/pages/BookingPage.jsx` |
+| **TASK-018** | 06 Frontend | Live Customer Job Tracking Portal (`/track/:code`) | `PROPOSED` | TASK-017 | `client/src/pages/TrackJobPage.jsx` |
+| **TASK-019** | 06 Frontend | Admin Business Dashboard & Appointment Pipeline Board | `PROPOSED` | TASK-013 | `client/src/pages/admin/` |
+| **TASK-020** | 07 QA | E2E Testing (Playwright), Security Audit & Local SEO Schema | `PROPOSED` | TASK-019 | Automated Test Suite |
+| **TASK-021** | 08 Deploy | Preview & Production Deployment (Vercel + Render + Cloudinary) | `PROPOSED` | TASK-020 | Production URLs |
 
 ---
 
