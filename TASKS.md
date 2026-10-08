@@ -19,7 +19,7 @@
 | **TASK-006** | 03 Design | UI/UX Design System & Luxury Automotive Styling | `VERIFIED` | TASK-005 | [DESIGN.md](file:///docs/03-design/DESIGN.md) |
 | **TASK-007** | 04 Quality | Security Checklist & OWASP Mitigation Plan | `VERIFIED` | TASK-006 | [SECURITY_CHECKLIST.md](file:///docs/04-quality/SECURITY_CHECKLIST.md) |
 | **TASK-008** | 05 Dev | Project Scaffolding (Client Vite + Server Express Monorepo) | `VERIFIED` | TASK-007 | [VERIFICATION.md#task-008](file:///docs/00-control/VERIFICATION.md#task-008) |
-| **TASK-009** | 05 Dev | Express Server Setup, Security Middleware & Atlas DB Connection | `PROPOSED` | TASK-008 | `server/src/server.js` |
+| **TASK-009** | 05 Dev | Express Server Setup, Security Middleware & Atlas DB Connection | `VERIFIED` | TASK-008 | [VERIFICATION.md#task-009](file:///docs/00-control/VERIFICATION.md#task-009) |
 | **TASK-010** | 05 Dev | Mongoose Models & Realistic Luxury Detailing Seed Data | `PROPOSED` | TASK-009 | `server/src/models/` |
 | **TASK-011** | 05 Dev | Authoritative Pricing Engine & Slot Availability API | `PROPOSED` | TASK-010 | `server/src/services/pricingService.js` |
 | **TASK-012** | 05 Dev | Booking Submission & Public Status Tracking API | `PROPOSED` | TASK-011 | `server/src/routes/bookingRoutes.js` |

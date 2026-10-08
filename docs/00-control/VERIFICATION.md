@@ -206,6 +206,40 @@ All claims of completion must be verified with concrete evidence before receivin
     ```
   - Exit code `0`.
 
+---
+
+## TASK-009: Express Server Setup, Security Middleware & Atlas DB Connection
+
+- **Task ID:** TASK-009
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-09
+- **Classification:** `BOUNDED`
+
+### Acceptance Criteria:
+1. Mongoose connection module `server/src/config/db.js` created with connection pooling and timeout guards.
+2. Live MongoDB Atlas cluster `cluster0.na6yl4b.mongodb.net` connected successfully.
+3. Centralized security middleware (`helmet`, `cors`, `apiLimiter`, `errorMiddleware`) registered on Express app.
+4. Health check endpoint `/api/v1/health` reports live MongoDB connection state (`readyState: 1`).
+
+### Verification Evidence:
+- **Live Database & Server Integration Ping Test:**
+  - Command: `Invoke-RestMethod -Uri http://localhost:5000/api/v1/health | ConvertTo-Json`
+  - Response:
+    ```json
+    {
+      "success": true,
+      "message": "DetailDock API Service is healthy and operational.",
+      "database": {
+        "status": "Connected",
+        "connected": true
+      },
+      "environment": "development",
+      "timestamp": "2026-10-08T19:58:31.927Z"
+    }
+    ```
+  - Exit code `0`.
+
+
 
 
 
