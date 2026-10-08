@@ -31,7 +31,7 @@
 
 ### MCP Integrations (M01 – M08)
 - [x] **M01 — GitHub MCP** (`CONNECTED_AND_TESTED`)
-- [ ] **M02 — MongoDB MCP** (`LOGIN_REQUIRED`)
+- [x] **M02 — MongoDB MCP** (`CONNECTED_AND_TESTED`)
 - [ ] **M03 — Render MCP** (`LOGIN_REQUIRED`)
 - [ ] **M04 — Vercel MCP** (`LOGIN_REQUIRED`)
 - [ ] **M05 — PostHog MCP** (`LOGIN_REQUIRED`)
@@ -424,24 +424,24 @@
 - **Blocker / next action:** Proceed to M02.
 
 ## INSTALL-M02 — MongoDB MCP Server
-- **Checked at:** 2026-10-09 00:31
-- **Current status:** `DEFERRED`
-- **Current installed version:** None (MongoDB Agent Skills S04 active)
+- **Checked at:** 2026-10-09 01:02
+- **Current status:** `CONNECTED_AND_TESTED`
+- **Current installed version:** 3.0.5 (`mongodb-mcp-server`)
 - **Verified repository / official documentation:** https://github.com/mongodb-js/mongodb-mcp-server
 - **Install or connect target:** local MCP server (`~/.gemini/config/mcp_config.json`)
 - **Expected permissions:** Read/inspect live MongoDB Atlas collections and schema
-- **Cost / free-tier considerations:** Free (connects to user's MongoDB Atlas cluster)
-- **Existing overlap:** 8 official MongoDB Agent Skills (S04) are active for schema modeling, indexing, and query optimization without needing live cluster connection.
-- **Action proposed:** Defer live Atlas connection until Database Provisioning Phase (Prompt 3), when cluster credentials will be configured securely in `.env`.
-- **Owner approval:** Approved in chat.
-- **Owner login required:** yes (Atlas connection string required)
-- **Login completed via official UI:** N/A
-- **Action actually executed:** Classified as `DEFERRED` per Section C1 / Phase 3.
-- **Execution result:** Database design proceeds using verified schema skills; MCP connection scheduled for live provisioning.
-- **Functional verification performed:** Verified 8 MongoDB Agent Skills available.
-- **Rollback/uninstall method:** N/A
-- **Final status:** `DEFERRED`
-- **Blocker / next action:** Scheduled for Database Provisioning Phase. Proceed to M03.
+- **Cost / free-tier considerations:** Free (M0 Free Cluster on MongoDB Atlas)
+- **Existing overlap:** Pairs with 8 official MongoDB Agent Skills (S04)
+- **Action proposed:** Connect official `mongodb-mcp-server` with user's live MongoDB Atlas cluster.
+- **Owner approval:** Approved & connection string provided by owner in chat.
+- **Owner login required:** yes (completed via official cloud.mongodb.com UI)
+- **Login completed via official UI:** yes, user created M0 cluster `Cluster0` on AWS.
+- **Action actually executed:** Tested live ping to cluster `cluster0.na6yl4b.mongodb.net`, configured `mcp_config.json` with `mongodb-mcp-server`, and saved connection string to gitignored `.env`.
+- **Execution result:** Live Atlas Ping returned `{ ok: 1 }`. Accessible databases: `sample_mflix`, `admin`, `local`.
+- **Functional verification performed:** `MongoClient.admin().ping()` succeeded with `{ ok: 1 }`.
+- **Rollback/uninstall method:** Remove `mongodb` entry from `mcp_config.json`.
+- **Final status:** `CONNECTED_AND_TESTED`
+- **Blocker / next action:** MongoDB Atlas connection 100% active. Proceed to Vercel/Render.
 
 ## INSTALL-M03 — Render MCP Server
 - **Checked at:** 2026-10-09 00:31
