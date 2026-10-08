@@ -54,3 +54,27 @@ All claims of completion must be verified with concrete evidence before receivin
 - Global isolation check: `git config --global -l` → `user.name=Faisal Kader`, `user.email=faisalkader45trash@gmail.com`
 - Tree status: `git status` → `Your branch is up to date with 'origin/main'. nothing to commit, working tree clean`
 
+---
+
+## TOOL-001: 21st.dev & UI-UX Skills Setup & Verification
+
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-09
+- **Classification:** `BOUNDED`
+
+### Acceptance Criteria:
+1. `@21st-dev/cli` installed globally and accessible.
+2. User authenticated successfully as `adobefkuser45`.
+3. 21st MCP configured in `~/.gemini/config/mcp_config.json`.
+4. Antigravity Skill `21st-dev` created and active.
+5. Antigravity Skill `ui-ux-pro-max` installed and active.
+6. Live component search returns verified catalog results.
+
+### Verification Evidence:
+- Auth check: `21st login` → `Logged in as adobefkuser45.` (Exit 0)
+- Search test: `21st search "booking" --limit 2` →
+  - `[component] Appointment Booking Split (id: 29211)`
+  - `[component] Appointment Booking Calendar (id: 25128)`
+- Skill check: `Test-Path ~/.gemini/antigravity/skills/21st-dev/SKILL.md` → `True`
+- Skill check: `Test-Path ~/.gemini/antigravity/skills/ui-ux-pro-max/SKILL.md` → `True`
+
