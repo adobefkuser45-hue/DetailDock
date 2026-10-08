@@ -107,14 +107,18 @@ All claims of completion must be verified with concrete evidence before receivin
   - `Test-Path ~/.gemini/antigravity/skills/gsd-graphify/SKILL.md` → `True` (S14)
   - `Test-Path ~/.gemini/antigravity/skills/beyondseo/SKILL.md` → `True` (S17, v2.9.1)
   - Superpowers framework active with 15 skills mapped (S01)
-- **Active MCP Servers Verified:**
-  - `context7`: Tested via `npx @upstash/context7-mcp` → exit code 0 (M03 in manifest, S03)
-  - `21st`: Registered in `mcp_config.json` → `https://21st.dev/api/mcp` (M08)
-- **Deferred / Architectural Classifications:**
-  - Project dependencies (S07 shadcn/ui, S08 Playwright, S11 Motion, S13 Agentation) scheduled for frontend/test stages.
-  - Runtime tools (S16 Strix) scheduled for pre-prod security audit.
+- **Active MCP Servers & Cloud Services Verified:**
+  - `GitHub MCP`: Authenticated user `adobefkuser45-hue` via REST API and stdio MCP server (M01).
+  - `MongoDB Atlas & MCP`: Live ping `{ ok: 1 }` verified on `cluster0.na6yl4b.mongodb.net`, databases `sample_mflix`, `admin`, `local` available; configured in `mcp_config.json` via `mongodb-mcp-server` v3.0.5 (M02).
+  - `Render API & Cloud`: Authenticated owner `Adobe's workspace` (`tea-db3u31eb7d7c739kucr0`) via API (M03).
+  - `Vercel API & MCP`: Authenticated user `adobefkuser45-9593` (`3zO6jkX15FuLlblQHohttDRt`); remote MCP `https://mcp.vercel.com` authenticated (M04).
+  - `Cloudinary API & MCP`: Usage endpoint verified (Plan: Free) for cloud `wrptkj0e`; remote MCP `https://asset-management.mcp.cloudinary.com/mcp` configured with `cloudinary-url` header (M07).
+  - `21st.dev MCP`: Hosted MCP `https://21st.dev/api/mcp` registered and tested (M08).
+  - `Context7 MCP`: Tested via `npx @upstash/context7-mcp` → exit code 0 (S03).
+- **Deferred / Optional Classifications:**
+  - Project dependencies (S07 shadcn/ui, S11 Motion, S13 Agentation) scheduled for frontend component implementation.
+  - Optional services (M05 PostHog, M06 Figma) remain on-demand for analytics/design phases.
   - Competing / internal tools (S15 Archify, S18 daisyUI) marked `NOT_APPLICABLE` with rationale.
-  - Remote MCP services (M01–M07) deferred to their respective operational phases (database provisioning, deployment, analytics).
 - **Log Verification:**
   - `docs/00-control/INSTALLATION_LOG.md` complete with all 26 entries logged.
 
