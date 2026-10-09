@@ -775,6 +775,62 @@ All claims of completion must be verified with concrete evidence before receivin
   - `testAuthAndAdmin.js` (36 tests): Passed (`exit 0`).
   - Total: 115 / 115 passing tests (`exit 0`).
 
+---
+
+## TASK-018: Live Customer Job Tracking Portal (/track/:code)
+
+- **Task ID:** TASK-018
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-09
+- **Classification:** `BOUNDED`
+
+### Acceptance Criteria:
+1. Public Tracking Lookup Interface (`TrackJobPage.jsx`):
+   - Uppercase-formatted code search bar with quick demo helper links.
+   - Dynamic URL parameter hydration (`/track/:code` automatically triggers query on load).
+2. Visual 5-Stage Job Telemetry Pipeline (`JobProgressMeter.jsx`):
+   - 5 milestones (`Requested` 20%, `Bay Reserved` 40%, `In Studio Bay` 60%, `Showroom Ready` 80%, `Released` 100%).
+   - Animated electric cyan to emerald progress bar with glowing stage pins and stage descriptions.
+   - Specific handling for `Cancelled` appointments.
+3. High-Density Telemetry Pods (`JobTelemetryCards.jsx`):
+   - Pod 1: Vehicle Spec (Chassis category, year, make, model, paint finish, masked license plate).
+   - Pod 2: Cleanroom Bay Allocation (Assigned bay number, scheduled date, slot, climate control telemetry 68°F / 45% RH).
+   - Pod 3: Preservation Spec & Financial Snapshot (Package title, itemized upgrades, duration estimate, locked total amount).
+4. Chronological Technician Audit Log (`JobAuditTimeline.jsx`):
+   - Vertical timeline mapping state transitions, date/time stamps, technician names, and detailed inspection remarks.
+5. Dynamic Status Banners (`ReadyPickupBanner.jsx`):
+   - `Ready` banner: Showroom pickup instructions, atelier address (Austin, TX), and concierge phone.
+   - `In Bay` banner: Active detailing status note with technician cleanroom isolation updates.
+   - `Completed` banner: Serialized warranty activation notification.
+6. Client bundle build verification via Vite production build in < 500ms with zero errors.
+
+### Verification Evidence:
+- **Client Build & Bundle Verification:**
+  - Command: `npm run build --prefix client`
+  - Output:
+    ```text
+    > client@0.0.0 build
+    > node ../node_modules/vite/bin/vite.js build
+
+    vite v8.3.4 building client environment for production...
+    transforming...
+    ✓ 1939 modules transformed.
+    rendering chunks...
+    computing gzip size...
+    dist/index.html                   1.01 kB │ gzip:   0.55 kB
+    dist/assets/index-BaoFAlGH.css   59.29 kB │ gzip:   9.86 kB
+    dist/assets/index-DXnxkcoz.js   411.26 kB │ gzip: 117.51 kB
+
+    ✓ built in 495ms
+    ```
+  - Exit code: `0`.
+- **Backend Non-Regression Suite:**
+  - `testPricingAndAvailability.js` (29 tests): Passed (`exit 0`).
+  - `testBookingAndTracking.js` (25 tests): Passed (`exit 0`).
+  - `testAuthAndAdmin.js` (36 tests): Passed (`exit 0`).
+  - Total: 115 / 115 passing tests (`exit 0`).
+
+
 
 
 
