@@ -609,6 +609,65 @@ All claims of completion must be verified with concrete evidence before receivin
   - Output: 25 / 25 HTTP REST endpoint tests passed (`exit 0`).
   - Database status: `Connected` to MongoDB Atlas cluster `cluster0.na6yl4b.mongodb.net`.
 
+---
+
+## TASK-015: Premium Homepage (Hero, Scangrip Spotlight, Before/After Slider, Testimonials)
+
+- **Task ID:** TASK-015
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-09
+- **Classification:** `BOUNDED`
+
+### Acceptance Criteria:
+1. Interactive **Before/After Paint Correction Comparison Slider** component (`BeforeAfterSlider.jsx`) implemented:
+   - Hardware-accelerated touch/drag horizontal split scrubber (0% - 100%) with polygon/width clipping.
+   - 3 realistic atelier detailing scenarios: Paint Correction (Porsche 911 GT3 RS Shark Blue), Wheels & Calipers (Forged Centerlocks), Interior Leather & Alcantara.
+   - Dynamic Gloss Depth Meter (GU) readout interpolating between 58 GU (swirled/hazed) to 98 GU (ceramic mirror finish).
+   - High-CRI Scangrip LED inspection light mode toggling an optical spotlight that dynamically tracks the cursor over micro-scratches vs perfected clear coat.
+   - Quick preset selectors: "Before (0%)", "50/50 Split", "After (100%)".
+2. **Hero Section** (`HeroSection.jsx`) implemented:
+   - Scangrip overhead cleanroom beam lighting simulation.
+   - Live Studio Status pill ("Dual Bays Active • Austin Cleanroom Atelier").
+   - Instant Estimator Cockpit with 3 vehicle chassis selectors (Coupe/Sedan 1.0x, Compact SUV 1.25x, Full SUV 1.45x) showing dynamic duration and price updates.
+   - Dual Call-to-Actions linking to `/builder` and `/book`.
+3. **Services & Packages Grid** (`ServiceGrid.jsx`) implemented:
+   - Live query to `/api/v1/services` via `getServices()` (`api.js`) with high-fidelity fallback to the 3 studio packages (`Essential Clean & Decon` $149, `Signature Multi-Stage Detail` $289, `Ultimate 9H Ceramic Shield` $499).
+   - Comprehensive feature lists, starting base prices, duration pills, and direct deeplinks to the builder (`/builder?package=...`).
+4. **Why Choose Us / Atelier Difference** (`WhyChooseUs.jsx`) implemented:
+   - Showcases the 4 core pillars: Dual Climate-Controlled Cleanrooms (99.97% filtration), Tunable 96+ CRI Scangrip Lighting, Deterministic Server Pricing Engine (100% price certainty), and Live Job Telemetry (DD-XXXXXX).
+5. **Process Timeline** (`ProcessTimeline.jsx`) implemented:
+   - Illustrates the 4-step client journey: 01. Configure Spec ➔ 02. Reserve Bay ➔ 03. Precision Treatment ➔ 04. Track & Handover.
+6. **Client Testimonials & Guarantee** (`TestimonialsSection.jsx`) implemented:
+   - Verified feedback from exotic & performance car owners (Porsche 911 GT3 RS, Ferrari 296 GTB, BMW M4 Competition, Tesla Model S Plaid).
+   - 100% Paint Defect Elimination Guarantee banner.
+7. **Closing CTA Banner** (`CTASection.jsx`) implemented:
+   - Dual booking action buttons, studio physical address (Austin, TX), operating hours, and concierge phone.
+8. Complete integration in `HomePage.jsx` and verified with Vite production build in < 500ms with zero errors.
+
+### Verification Evidence:
+- **Client Build & Bundle Verification:**
+  - Command: `npm run build --prefix client`
+  - Output:
+    ```text
+    > client@0.0.0 build
+    > node ../node_modules/vite/bin/vite.js build
+
+    vite v8.3.4 building client environment for production...
+    transforming...
+    ✓ 1926 modules transformed.
+    rendering chunks...
+    computing gzip size...
+    dist/index.html                   1.01 kB │ gzip:   0.55 kB
+    dist/assets/index-DOXXcvPo.css   49.63 kB │ gzip:   8.65 kB
+    dist/assets/index-BDa2woYp.js   340.11 kB │ gzip: 102.64 kB
+
+    ✓ built in 465ms
+    ```
+  - Exit code: `0`.
+- **Backend API & Service Non-Regression:**
+  - Tested: `testPricingAndAvailability.js`, `testBookingAndTracking.js`, `testAuthAndAdmin.js`.
+  - Result: 115 / 115 tests passing (`exit 0`).
+
 
 
 
