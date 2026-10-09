@@ -18,7 +18,7 @@
 ## 2. Current Position
 - **Stage:** `06 Frontend Implementation`
 - **Milestone:** `M03 — Luxury Atelier Frontend & Interactive UI`
-- **Current Task:** `TASK-017 — Appointment Booking Flow (Calendar, Time Slots, Vehicle Intake)`
+- **Current Task:** `TASK-018 — Live Customer Job Tracking Portal (/track/:code)`
 - **Task Status:** `PROPOSED`
 - **Classification:** `BOUNDED`
 
@@ -46,17 +46,18 @@
   - `TASK-014`: Frontend Foundation, Styling Tokens & Bespoke SVG Logo (Vite production build verified in 493ms).
   - `TASK-015`: Premium Homepage with Scangrip Spotlight, Before/After Slider, Testimonials, Process Timeline (Vite production build verified in 465ms).
   - `TASK-016`: Smart Package Builder with 3-Step Configurator, Vehicle Multipliers, Addon Toggles, Pricing Cockpit (Vite production build verified in 445ms).
+  - `TASK-017`: Appointment Booking Flow with 3-Step Wizard, Studio Date & Bay Slot Scheduler, Vehicle Intake, and Instant Confirmation Screen (Vite production build verified in 532ms).
 - **In Progress:**
-  - Ready for TASK-017 (Appointment Booking Flow with multi-step wizard, studio calendar, real-time dual-bay availability, and intake form).
+  - Ready for TASK-018 (Live Customer Job Tracking Portal with DD-XXXXXX code lookup, visual 5-stage progress meter, vehicle spec cards, and technician status history).
 - **Blockers:**
   - None.
 
 ---
 
 ## 4. Last Verified
-- **Task:** `TASK-016 — Smart Package Builder (Vehicle Multipliers, Packages, Addons)`
+- **Task:** `TASK-017 — Appointment Booking Flow (Calendar, Time Slots, Vehicle Intake)`
 - **Date:** 2026-10-09
-- **Evidence Reference:** [VERIFICATION.md#task-016](file:///docs/00-control/VERIFICATION.md#task-016)
+- **Evidence Reference:** [VERIFICATION.md#task-017](file:///docs/00-control/VERIFICATION.md#task-017)
 
 ---
 

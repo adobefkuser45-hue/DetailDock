@@ -27,7 +27,7 @@
 | **TASK-014** | 06 Frontend | Frontend Foundation, Styling Tokens & Bespoke SVG Logo | `VERIFIED` | TASK-008 | [VERIFICATION.md#task-014](file:///docs/00-control/VERIFICATION.md#task-014) |
 | **TASK-015** | 06 Frontend | Premium Homepage (Hero, Before/After Slider, Testimonials) | `VERIFIED` | TASK-014 | [VERIFICATION.md#task-015](file:///docs/00-control/VERIFICATION.md#task-015) |
 | **TASK-016** | 06 Frontend | Smart Package Builder (Vehicle Multipliers, Packages, Addons) | `VERIFIED` | TASK-015 | [VERIFICATION.md#task-016](file:///docs/00-control/VERIFICATION.md#task-016) |
-| **TASK-017** | 06 Frontend | Appointment Booking Flow (Calendar, Time Slots, Vehicle Intake) | `PROPOSED` | TASK-016 | `client/src/pages/BookingPage.jsx` |
+| **TASK-017** | 06 Frontend | Appointment Booking Flow (Calendar, Time Slots, Vehicle Intake) | `VERIFIED` | TASK-016 | [VERIFICATION.md#task-017](file:///docs/00-control/VERIFICATION.md#task-017) |
 | **TASK-018** | 06 Frontend | Live Customer Job Tracking Portal (`/track/:code`) | `PROPOSED` | TASK-017 | `client/src/pages/TrackJobPage.jsx` |
 | **TASK-019** | 06 Frontend | Admin Business Dashboard & Appointment Pipeline Board | `PROPOSED` | TASK-013 | `client/src/pages/admin/` |
 | **TASK-020** | 07 QA | E2E Testing (Playwright), Security Audit & Local SEO Schema | `PROPOSED` | TASK-019 | Automated Test Suite |

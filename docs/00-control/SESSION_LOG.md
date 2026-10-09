@@ -231,6 +231,21 @@
   - Backend regression test suite (115/115 tests passing across pricing, availability, booking, auth, and admin).
 - **Next Step:** Proceed to TASK-017 (Appointment Booking Flow with calendar date picker, live dual-bay availability slots, and vehicle intake form).
 
+## 2026-10-09 — Session 15: Appointment Booking Flow & Live Bay Reservation (TASK-017)
+
+- **Action:** Executed TASK-017. Built the complete 3-step appointment booking wizard (`BookingPage.jsx`) with dynamic connecting progress meter, state and URL hydration from the Builder, interactive studio calendar date picker, live dual-bay availability queries, vehicle intake validation form, authoritative server booking submission (`createBooking()`), and celebratory confirmation screen with public tracking code (`DD-XXXXXX`).
+- **Implemented:**
+  - `client/src/components/booking/BookingSummaryStep.jsx`: Step 1 spec review displaying vehicle chassis, package tier, selected addons, and financial breakdown.
+  - `client/src/components/booking/SlotPickerStep.jsx`: Step 2 studio bay scheduler with 10 business-day date selector and real-time dual-bay capacity slots (`Dual Bays Open`, `1 Bay Open`, or `Fully Booked`).
+  - `client/src/components/booking/CustomerIntakeStep.jsx`: Step 3 vehicle intake (make, model, year, color, plate) and customer credentials (name, email, phone, notes) with validation.
+  - `client/src/components/booking/BookingConfirmation.jsx`: Confirmation screen with high-entropy code (`DD-XXXXXX`), assigned bay (Bay 1/Bay 2), arrival protocol, and link to Live Tracking Portal.
+  - `client/src/pages/BookingPage.jsx`: Multi-step wizard coordinator managing step transitions, fallback catalog hydration, and submission error handling.
+- **Verified:**
+  - Client production build (`npm run build --prefix client`) compiled in 532ms with zero errors.
+  - Backend regression test suite (115/115 tests passing across pricing, availability, booking, auth, and admin).
+- **Next Step:** Proceed to TASK-018 (Live Customer Job Tracking Portal with DD-XXXXXX code lookup, visual 5-stage progress meter, vehicle spec cards, and technician status history).
+
+
 
 
 

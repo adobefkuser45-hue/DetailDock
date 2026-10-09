@@ -720,6 +720,62 @@ All claims of completion must be verified with concrete evidence before receivin
   - `testAuthAndAdmin.js` (36 tests): Passed (`exit 0`).
   - Total: 115 / 115 passing tests (`exit 0`).
 
+---
+
+## TASK-017: Appointment Booking Flow (Calendar, Time Slots, Vehicle Intake)
+
+- **Task ID:** TASK-017
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-09
+- **Classification:** `BOUNDED`
+
+### Acceptance Criteria:
+1. 3-Step Wizard Flow (`BookingPage.jsx`) with dynamic connecting progress meter (`1. Review Spec ➔ 2. Date & Bay ➔ 3. Vehicle Intake ➔ 4. Confirmed`).
+2. Specification Review Step (`BookingSummaryStep.jsx`):
+   - Preloads configured chassis, package, and upgrades directly from `BuilderPage.jsx` via state & query parameter hydration.
+   - Shows line-item price breakdown and duration estimates.
+3. Studio Bay Scheduler Step (`SlotPickerStep.jsx`):
+   - Rolling 10 business-day selector skipping Sundays.
+   - Live query to `/api/v1/availability?date=YYYY-MM-DD` displaying real-time dual-bay capacity (`Dual Bays Open`, `1 Bay Open`, or `Fully Booked`).
+   - Prevents booking on unavailable slots with disabled states and capacity indicators.
+4. Vehicle & Customer Intake Form (`CustomerIntakeStep.jsx`):
+   - Vehicle inputs (Make, Model, Year, Color, License Plate) with client-side year validation (1920 to current + 1).
+   - Customer inputs (Full Name, Email with regex validation, Phone, and Special Handling Notes).
+5. Booking Submission & High-Entropy Code Generation:
+   - Posts structured payload to `POST /api/v1/bookings` using centralized API client (`createBooking()`).
+   - Server validates slot capacity, assigns Cleanroom Bay 1 or Bay 2, snapshots authoritative pricing, and generates unique tracking code (`DD-XXXXXX`).
+6. Confirmation Screen (`BookingConfirmation.jsx`):
+   - Displays prominent high-entropy code with one-click copy to clipboard.
+   - Displays assigned bay, appointment date/time, vehicle summary, studio address, and one-click button to Live Tracking (`/track/:code`).
+7. Client bundle build verification via Vite production build in < 600ms with zero errors.
+
+### Verification Evidence:
+- **Client Build & Bundle Verification:**
+  - Command: `npm run build --prefix client`
+  - Output:
+    ```text
+    > client@0.0.0 build
+    > node ../node_modules/vite/bin/vite.js build
+
+    vite v8.3.4 building client environment for production...
+    transforming...
+    ✓ 1935 modules transformed.
+    rendering chunks...
+    computing gzip size...
+    dist/index.html                   1.01 kB │ gzip:   0.55 kB
+    dist/assets/index-sWjuIgww.css   56.05 kB │ gzip:   9.52 kB
+    dist/assets/index-BunahWVN.js   395.94 kB │ gzip: 114.66 kB
+
+    ✓ built in 532ms
+    ```
+  - Exit code: `0`.
+- **Backend Non-Regression Suite:**
+  - `testPricingAndAvailability.js` (29 tests): Passed (`exit 0`).
+  - `testBookingAndTracking.js` (25 tests): Passed (`exit 0`).
+  - `testAuthAndAdmin.js` (36 tests): Passed (`exit 0`).
+  - Total: 115 / 115 passing tests (`exit 0`).
+
+
 
 
 
