@@ -234,12 +234,12 @@ export const GaragePage = () => {
   // If Not Authenticated: Render High-Fidelity Login / Register Portal
   if (!token || !currentUser) {
     return (
-      <div className="w-full bg-[#08090C] text-[#F8FAFC] min-h-screen py-16 px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
+      <div className="w-full bg-[#0B0E14] text-[#F8FAFC] min-h-screen py-16 px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
         <div className="max-w-4xl mx-auto w-full">
           {/* Header Intro */}
           <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0E1017] border border-white/10 text-[#D4AF37] text-xs font-semibold uppercase tracking-wider mb-4 font-mono">
-              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#111622] border border-white/10 text-[#F59E0B] text-xs font-semibold uppercase tracking-wider mb-4 font-mono">
+              <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" />
               Customer Atelier Portal
             </div>
             <h1 className="text-3xl sm:text-5xl font-black text-[#F8FAFC] tracking-[-0.03em] font-display">
@@ -251,14 +251,14 @@ export const GaragePage = () => {
           </div>
 
           {/* Auth Box */}
-          <div className="bg-[#0E1017] border border-white/10 rounded-2xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative overflow-hidden">
+          <div className="bg-[#111622] border border-white/10 rounded-2xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative overflow-hidden">
             {/* Subtle Accent Glow */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#D4AF37]/5 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#F59E0B]/5 rounded-full blur-3xl pointer-events-none" />
 
             {/* Quick Demo Customer Pill */}
-            <div className="mb-6 p-4 rounded-xl bg-[#08090C] border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div className="mb-6 p-4 rounded-xl bg-[#0B0E14] border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div>
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D4AF37] font-mono">
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#F59E0B] font-mono">
                   <Key className="w-3.5 h-3.5" />
                   1-Click Client Experience Demo
                 </div>
@@ -269,7 +269,7 @@ export const GaragePage = () => {
               <button
                 type="button"
                 onClick={handleDemoLogin}
-                className="text-xs font-bold text-[#08090C] bg-[#D4AF37] hover:bg-[#E2C366] px-3.5 py-2 rounded-lg transition-colors flex items-center gap-1.5 shrink-0 cursor-pointer font-mono tactile-press"
+                className="text-xs font-bold text-[#0B0E14] bg-[#F59E0B] hover:bg-[#FBBF24] px-3.5 py-2 rounded-lg transition-colors flex items-center gap-1.5 shrink-0 cursor-pointer font-mono tactile-press"
               >
                 Fill Demo Credentials
               </button>
@@ -281,7 +281,7 @@ export const GaragePage = () => {
                 onClick={() => { setAuthMode('login'); setAuthError(''); }}
                 className={`pb-3 px-4 font-bold text-sm transition-all border-b-2 flex items-center gap-2 cursor-pointer ${
                   authMode === 'login'
-                    ? 'border-[#D4AF37] text-[#D4AF37]'
+                    ? 'border-[#F59E0B] text-[#F59E0B]'
                     : 'border-transparent text-[#94A3B8] hover:text-[#F8FAFC]'
                 }`}
               >
@@ -292,7 +292,7 @@ export const GaragePage = () => {
                 onClick={() => { setAuthMode('register'); setAuthError(''); }}
                 className={`pb-3 px-4 font-bold text-sm transition-all border-b-2 flex items-center gap-2 cursor-pointer ${
                   authMode === 'register'
-                    ? 'border-[#D4AF37] text-[#D4AF37]'
+                    ? 'border-[#F59E0B] text-[#F59E0B]'
                     : 'border-transparent text-[#94A3B8] hover:text-[#F8FAFC]'
                 }`}
               >
@@ -336,7 +336,7 @@ export const GaragePage = () => {
                     value={authPassword}
                     onChange={(e) => setAuthPassword(e.target.value)}
                     placeholder="••••••••••••"
-                    className="w-full bg-[#08090C] border border-white/10 focus:border-[#D4AF37] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
+                    className="w-full bg-[#0B0E14] border border-white/10 focus:border-[#F59E0B] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
                   />
                 </div>
 
@@ -345,7 +345,7 @@ export const GaragePage = () => {
                     type="submit"
                     variant="primary"
                     size="lg"
-                    className="w-full glow-gold-sm"
+                    className="w-full glow-amber"
                     disabled={authLoading}
                   >
                     {authLoading ? (
@@ -372,7 +372,7 @@ export const GaragePage = () => {
                     value={authName}
                     onChange={(e) => setAuthName(e.target.value)}
                     placeholder="Christian Vance"
-                    className="w-full bg-[#08090C] border border-white/10 focus:border-[#D4AF37] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
+                    className="w-full bg-[#0B0E14] border border-white/10 focus:border-[#F59E0B] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
                   />
                 </div>
                 <div>
@@ -385,7 +385,7 @@ export const GaragePage = () => {
                     value={authPhone}
                     onChange={(e) => setAuthPhone(e.target.value)}
                     placeholder="+1 (512) 555-0199"
-                    className="w-full bg-[#08090C] border border-white/10 focus:border-[#D4AF37] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
+                    className="w-full bg-[#0B0E14] border border-white/10 focus:border-[#F59E0B] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
                   />
                 </div>
               </div>
@@ -400,7 +400,7 @@ export const GaragePage = () => {
                   value={authEmail}
                   onChange={(e) => setAuthEmail(e.target.value)}
                   placeholder="vance@atelier.com"
-                  className="w-full bg-[#08090C] border border-white/10 focus:border-[#D4AF37] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
+                  className="w-full bg-[#0B0E14] border border-white/10 focus:border-[#F59E0B] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
                 />
               </div>
 
@@ -415,7 +415,7 @@ export const GaragePage = () => {
                   value={authPassword}
                   onChange={(e) => setAuthPassword(e.target.value)}
                   placeholder="••••••••••••"
-                  className="w-full bg-[#08090C] border border-white/10 focus:border-[#D4AF37] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
+                  className="w-full bg-[#0B0E14] border border-white/10 focus:border-[#F59E0B] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
                 />
               </div>
 
@@ -424,7 +424,7 @@ export const GaragePage = () => {
                   type="submit"
                   variant="primary"
                   size="lg"
-                  className="w-full glow-gold-sm"
+                  className="w-full glow-amber"
                   disabled={authLoading}
                 >
                   {authLoading ? (
@@ -447,8 +447,16 @@ export const GaragePage = () => {
   // Count active warranty certificates across bookings
   const warrantyCount = bookings.filter(b => b.warrantyCertificate?.issued).length;
 
+  const VEHICLE_PREVIEWS = {
+    supercar: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=800&auto=format&fit=crop',
+    coupe: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=800&auto=format&fit=crop',
+    sedan: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=800&auto=format&fit=crop',
+    suv: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800&auto=format&fit=crop',
+    truck: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop'
+  };
+
   return (
-    <div className="w-full bg-[#08090C] text-[#F8FAFC] min-h-screen py-10 px-4 sm:px-6 lg:px-8">
+    <div className="w-full bg-[#0B0E14] text-[#F8FAFC] min-h-screen py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Toast Feedback Banner */}
         {actionSuccess && (
@@ -464,9 +472,9 @@ export const GaragePage = () => {
         )}
 
         {/* Header Profile Bar */}
-        <div className="bg-[#0E1017] border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative overflow-hidden">
+        <div className="bg-[#111622] border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative overflow-hidden">
           <div className="flex items-center gap-5">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#D4AF37] to-[#B8860B] flex items-center justify-center text-[#08090C] text-2xl font-black shadow-lg font-mono">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#F59E0B] to-[#D97706] flex items-center justify-center text-[#0B0E14] text-2xl font-black shadow-lg font-mono">
               {currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'C'}
             </div>
             <div>
@@ -474,7 +482,7 @@ export const GaragePage = () => {
                 <h1 className="text-2xl sm:text-3xl font-black text-[#F8FAFC] font-display">
                   {currentUser.name}
                 </h1>
-                <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/30 font-mono">
+                <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-[#F59E0B]/15 text-[#F59E0B] border border-[#F59E0B]/30 font-mono">
                   Atelier VIP Client
                 </span>
               </div>
@@ -515,17 +523,17 @@ export const GaragePage = () => {
 
         {/* Summary KPI Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-[#0E1017] border border-white/10 rounded-xl p-5 flex items-center justify-between shadow-lg">
+          <div className="bg-[#111622] border border-white/10 rounded-xl p-5 flex items-center justify-between shadow-lg">
             <div>
               <p className="text-xs font-bold uppercase tracking-wider text-[#94A3B8] font-mono">Saved Vehicles</p>
               <p className="text-2xl font-black text-[#F8FAFC] mt-1 font-mono">{savedVehicles.length}</p>
             </div>
-            <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37]">
+            <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#F59E0B]">
               <Car className="w-6 h-6" />
             </div>
           </div>
 
-          <div className="bg-[#0E1017] border border-white/10 rounded-xl p-5 flex items-center justify-between shadow-lg">
+          <div className="bg-[#111622] border border-white/10 rounded-xl p-5 flex items-center justify-between shadow-lg">
             <div>
               <p className="text-xs font-bold uppercase tracking-wider text-[#94A3B8] font-mono">Service Bookings</p>
               <p className="text-2xl font-black text-[#F8FAFC] mt-1 font-mono">{bookings.length}</p>
@@ -535,12 +543,12 @@ export const GaragePage = () => {
             </div>
           </div>
 
-          <div className="bg-[#0E1017] border border-white/10 rounded-xl p-5 flex items-center justify-between shadow-lg">
+          <div className="bg-[#111622] border border-white/10 rounded-xl p-5 flex items-center justify-between shadow-lg">
             <div>
               <p className="text-xs font-bold uppercase tracking-wider text-[#94A3B8] font-mono">Active 9H Warranties</p>
-              <p className="text-2xl font-black text-[#D4AF37] mt-1 font-mono">{warrantyCount}</p>
+              <p className="text-2xl font-black text-[#F59E0B] mt-1 font-mono">{warrantyCount}</p>
             </div>
-            <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37]">
+            <div className="w-12 h-12 rounded-xl bg-[#F59E0B]/15 border border-[#F59E0B]/30 flex items-center justify-center text-[#F59E0B]">
               <Award className="w-6 h-6" />
             </div>
           </div>
@@ -552,7 +560,7 @@ export const GaragePage = () => {
             onClick={() => setActiveTab('vehicles')}
             className={`pb-3 px-4 font-bold text-sm transition-all border-b-2 flex items-center gap-2 cursor-pointer ${
               activeTab === 'vehicles'
-                ? 'border-[#D4AF37] text-[#D4AF37]'
+                ? 'border-[#F59E0B] text-[#F59E0B]'
                 : 'border-transparent text-[#94A3B8] hover:text-[#F8FAFC]'
             }`}
           >
@@ -563,7 +571,7 @@ export const GaragePage = () => {
             onClick={() => setActiveTab('bookings')}
             className={`pb-3 px-4 font-bold text-sm transition-all border-b-2 flex items-center gap-2 cursor-pointer ${
               activeTab === 'bookings'
-                ? 'border-[#D4AF37] text-[#D4AF37]'
+                ? 'border-[#F59E0B] text-[#F59E0B]'
                 : 'border-transparent text-[#94A3B8] hover:text-[#F8FAFC]'
             }`}
           >
@@ -585,7 +593,7 @@ export const GaragePage = () => {
               size="sm"
               icon={Plus}
               onClick={() => setIsAddVehicleOpen(true)}
-              className="glow-gold-sm"
+              className="glow-amber"
             >
               Add Vehicle
             </Button>
@@ -594,7 +602,7 @@ export const GaragePage = () => {
           {loadingGarage ? (
             <div className="py-12 flex justify-center"><LoadingSpinner size="lg" /></div>
           ) : savedVehicles.length === 0 ? (
-            <div className="bg-[#0E1017] border border-white/10 rounded-2xl p-10 text-center shadow-lg">
+            <div className="bg-[#111622] border border-white/10 rounded-2xl p-10 text-center shadow-lg">
               <Car className="w-12 h-12 text-[#94A3B8] mx-auto mb-3 opacity-60" />
               <h3 className="text-lg font-bold text-[#F8FAFC] font-display">No vehicles in your garage yet</h3>
               <p className="text-sm text-[#94A3B8] mt-1 max-w-md mx-auto font-normal">
@@ -606,7 +614,7 @@ export const GaragePage = () => {
                   size="md"
                   icon={Plus}
                   onClick={() => setIsAddVehicleOpen(true)}
-                  className="glow-gold-sm"
+                  className="glow-amber"
                 >
                   Add Your First Vehicle
                 </Button>
@@ -617,25 +625,30 @@ export const GaragePage = () => {
               {savedVehicles.map((vehicle) => (
                 <div
                   key={vehicle._id}
-                  className="bg-[#0E1017] border border-white/10 hover:border-[#D4AF37]/50 transition-all rounded-2xl p-6 shadow-[0_15px_40px_rgba(0,0,0,0.5)] flex flex-col justify-between group relative overflow-hidden"
+                  className="bg-[#111622] border border-white/10 hover:border-[#F59E0B]/50 transition-all rounded-2xl p-6 shadow-[0_15px_40px_rgba(0,0,0,0.5)] flex flex-col justify-between group relative overflow-hidden"
                 >
                   <div>
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37]">
-                        <Car className="w-5 h-5" />
-                      </div>
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-[#08090C] text-[#CBD5E1] border border-white/10">
+                    {/* Automotive Photo Banner */}
+                    <div className="h-40 -mx-6 -mt-6 mb-4 relative overflow-hidden bg-[#0B0E14] border-b border-white/10">
+                      <img 
+                        src={VEHICLE_PREVIEWS[vehicle.categorySlug?.toLowerCase()] || VEHICLE_PREVIEWS.sedan} 
+                        alt={`${vehicle.make} ${vehicle.model}`}
+                        className="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#111622] via-transparent to-transparent" />
+                      <span className="absolute top-3 right-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#0B0E14]/80 text-[#F59E0B] border border-[#F59E0B]/30 backdrop-blur-md">
                         {vehicle.categorySlug || 'sedan'}
                       </span>
                     </div>
 
-                    <div className="mt-4">
+                    <div className="mt-2">
                       <h3 className="text-lg font-black text-[#F8FAFC] font-display">
                         {vehicle.year} {vehicle.make} {vehicle.model}
                       </h3>
                       {vehicle.licensePlate && (
                         <p className="text-xs text-[#94A3B8] mt-1 font-mono tracking-wider">
-                          Plate: <span className="text-[#D4AF37] font-bold">{vehicle.licensePlate}</span>
+                          Plate: <span className="text-[#F59E0B] font-bold">{vehicle.licensePlate}</span>
                         </p>
                       )}
                     </div>
@@ -647,7 +660,7 @@ export const GaragePage = () => {
                       size="sm"
                       iconRight={ArrowRight}
                       onClick={() => navigate(`/builder?category=${vehicle.categorySlug || 'sedan'}`)}
-                      className="text-xs py-1.5 glow-gold-sm"
+                      className="text-xs py-1.5 glow-amber"
                     >
                       Book Detailing
                     </Button>
@@ -684,7 +697,7 @@ export const GaragePage = () => {
           {loadingGarage ? (
             <div className="py-12 flex justify-center"><LoadingSpinner size="lg" /></div>
           ) : bookings.length === 0 ? (
-            <div className="bg-[#0F1420] border border-[#1D2536] rounded-2xl p-10 text-center">
+            <div className="bg-[#111622] border border-white/10 rounded-2xl p-10 text-center">
               <Calendar className="w-12 h-12 text-[#94A3B8] mx-auto mb-3 opacity-60" />
               <h3 className="text-lg font-bold text-[#F8FAFC]">No detailing reservations found</h3>
               <p className="text-sm text-[#94A3B8] mt-1 max-w-md mx-auto">
@@ -707,12 +720,12 @@ export const GaragePage = () => {
                 return (
                   <div
                     key={booking._id}
-                    className="bg-[#0F1420] border border-[#1D2536] rounded-2xl p-5 sm:p-6 shadow-md flex flex-col lg:flex-row lg:items-center justify-between gap-6"
+                    className="bg-[#111622] border border-white/10 rounded-2xl p-5 sm:p-6 shadow-md flex flex-col lg:flex-row lg:items-center justify-between gap-6"
                   >
                     {/* Booking Meta */}
                     <div className="space-y-2">
                       <div className="flex items-center gap-3 flex-wrap">
-                        <span className="font-mono font-bold text-[#38BDF8] text-sm">
+                        <span className="font-mono font-bold text-[#F59E0B] text-sm">
                           {booking.bookingCode}
                         </span>
                         <Badge status={booking.status} size="sm" />

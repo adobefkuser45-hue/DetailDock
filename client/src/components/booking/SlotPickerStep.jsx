@@ -137,11 +137,11 @@ export const SlotPickerStep = ({
                 onClick={() => handleDateClick(d.dateStr)}
                 className={`p-3.5 rounded-2xl border text-center transition-all cursor-pointer tactile-press ${
                   isSelected
-                    ? 'bg-[#151822] border-[#D4AF37] text-white shadow-[0_0_20px_rgba(212,175,55,0.18)] ring-1 ring-[#D4AF37]'
-                    : 'bg-[#0E1017] border-white/10 text-[#94A3B8] hover:border-white/25 hover:text-white'
+                    ? 'bg-[#161D2A] border-[#F59E0B] text-white shadow-[0_0_20px_rgba(245,158,11,0.18)] ring-1 ring-[#F59E0B]'
+                    : 'bg-[#111622] border-white/10 text-[#94A3B8] hover:border-white/25 hover:text-white'
                 }`}
               >
-                <div className="text-[11px] font-mono uppercase text-[#D4AF37] font-bold">
+                <div className="text-[11px] font-mono uppercase text-[#F59E0B] font-bold">
                   {d.weekday}
                 </div>
                 <div className="text-xl font-black text-white my-0.5 font-display">
@@ -163,8 +163,8 @@ export const SlotPickerStep = ({
             2. Select Bay Slot for {activeDate}
           </label>
           {isLoadingSlots && (
-            <span className="text-xs text-[#D4AF37] flex items-center gap-1 font-mono">
-              <RefreshCw className="w-3 h-3 animate-spin text-[#D4AF37]" />
+            <span className="text-xs text-[#F59E0B] flex items-center gap-1 font-mono">
+              <RefreshCw className="w-3 h-3 animate-spin text-[#F59E0B]" />
               Checking live bay sensors...
             </span>
           )}
@@ -186,20 +186,20 @@ export const SlotPickerStep = ({
                 onClick={() => onSelectSlot(slotTime)}
                 className={`p-4 rounded-xl border text-left transition-all relative tactile-press ${
                   !isAvailable
-                    ? 'bg-[#0E1017]/40 border-white/5 opacity-50 cursor-not-allowed'
+                    ? 'bg-[#111622]/40 border-white/5 opacity-50 cursor-not-allowed'
                     : isSelected
-                    ? 'bg-[#151822] border-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.18)] ring-1 ring-[#D4AF37] cursor-pointer'
-                    : 'bg-[#0E1017] border-white/10 hover:border-white/25 hover:bg-[#131620] cursor-pointer'
+                    ? 'bg-[#161D2A] border-[#F59E0B] shadow-[0_0_20px_rgba(245,158,11,0.18)] ring-1 ring-[#F59E0B] cursor-pointer'
+                    : 'bg-[#111622] border-white/10 hover:border-white/25 hover:bg-[#161D2A] cursor-pointer'
                 }`}
               >
                 {/* Time */}
                 <div className="flex items-center justify-between mb-2">
                   <div className="text-base font-black font-mono text-white flex items-center gap-1.5">
-                    <Clock className="w-4 h-4 text-[#D4AF37]" />
+                    <Clock className="w-4 h-4 text-[#F59E0B]" />
                     {slotTime}
                   </div>
                   {isSelected && (
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37] shadow-md shadow-[#D4AF37]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B] shadow-md shadow-[#F59E0B]" />
                   )}
                 </div>
 
@@ -212,7 +212,7 @@ export const SlotPickerStep = ({
                         Dual Bays Open (1 & 2)
                       </span>
                     ) : (
-                      <span className="text-[#D4AF37] font-semibold flex items-center gap-1 font-mono">
+                      <span className="text-[#F59E0B] font-semibold flex items-center gap-1 font-mono">
                         <Warehouse className="w-3.5 h-3.5" />
                         1 Bay Open ({slot.suggestedBay ? `Bay ${slot.suggestedBay}` : 'Bay 1'})
                       </span>
@@ -231,9 +231,9 @@ export const SlotPickerStep = ({
 
       {/* Selected Slot Confirmation Strip */}
       {selectedSlot && (
-        <div className="p-4 rounded-xl bg-[#0E1017] border border-[#D4AF37]/30 flex items-center justify-between text-xs">
+        <div className="p-4 rounded-xl bg-[#111622] border border-[#F59E0B]/30 flex items-center justify-between text-xs">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[#D4AF37]">
+            <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[#F59E0B]">
               <Calendar className="w-4 h-4" />
             </div>
             <div>
@@ -268,7 +268,7 @@ export const SlotPickerStep = ({
           iconRight={ArrowRight}
           disabled={!selectedSlot}
           onClick={onNext}
-          className="glow-gold"
+          className="glow-amber"
         >
           Continue to Vehicle Intake
         </Button>

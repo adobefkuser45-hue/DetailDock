@@ -4,7 +4,7 @@ import { ShieldCheck, MapPin, Phone, Award, Sparkles, Clock, Warehouse } from 'l
 export const ReadyPickupBanner = ({ status, bayNumber }) => {
   if (status === 'Ready') {
     return (
-      <div className="p-6 rounded-2xl bg-gradient-to-r from-[#10B981]/15 to-[#0284C7]/15 border-2 border-[#10B981] shadow-2xl text-left space-y-4">
+      <div className="p-6 rounded-2xl bg-gradient-to-r from-[#10B981]/15 to-[#F59E0B]/10 border-2 border-[#10B981] shadow-2xl text-left space-y-4">
         <div className="flex items-start gap-4">
           <div className="w-12 h-12 rounded-xl bg-[#10B981]/20 border border-[#10B981]/40 flex items-center justify-center text-[#10B981] flex-shrink-0">
             <Sparkles className="w-6 h-6 animate-pulse" />
@@ -22,13 +22,13 @@ export const ReadyPickupBanner = ({ status, bayNumber }) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-[#1D2536] text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-white/10 text-xs">
           <div className="flex items-center gap-2 text-[#E2E8F0]">
-            <MapPin className="w-4 h-4 text-[#38BDF8]" />
+            <MapPin className="w-4 h-4 text-[#F59E0B]" />
             <span>DetailDock Atelier, 2400 E 5th St, Austin, TX 78702</span>
           </div>
           <div className="flex items-center gap-2 text-[#E2E8F0]">
-            <Phone className="w-4 h-4 text-[#38BDF8]" />
+            <Phone className="w-4 h-4 text-[#F59E0B]" />
             <span>Concierge Line: (512) 555-DOCK</span>
           </div>
         </div>
@@ -38,8 +38,8 @@ export const ReadyPickupBanner = ({ status, bayNumber }) => {
 
   if (status === 'In Bay') {
     return (
-      <div className="p-5 rounded-2xl bg-[#0284C7]/10 border border-[#38BDF8]/40 text-left flex items-start gap-4">
-        <div className="w-10 h-10 rounded-xl bg-[#0284C7]/20 flex items-center justify-center text-[#38BDF8] flex-shrink-0">
+      <div className="p-5 rounded-2xl bg-[#F59E0B]/10 border border-[#F59E0B]/40 text-left flex items-start gap-4">
+        <div className="w-10 h-10 rounded-xl bg-[#F59E0B]/20 flex items-center justify-center text-[#F59E0B] flex-shrink-0">
           <Warehouse className="w-5 h-5 animate-pulse" />
         </div>
         <div>

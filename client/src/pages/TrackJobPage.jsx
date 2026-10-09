@@ -97,13 +97,13 @@ export const TrackJobPage = () => {
   };
 
   return (
-    <div className="w-full bg-[#08090C] text-[#F8FAFC] min-h-screen py-12 lg:py-16">
+    <div className="w-full bg-[#0B0E14] text-[#F8FAFC] min-h-screen py-12 lg:py-16">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         {/* Page Header */}
         <div className="text-center max-w-2xl mx-auto">
-          <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D4AF37] bg-[#D4AF37]/10 px-3.5 py-1.5 rounded-full border border-[#D4AF37]/25 inline-flex items-center gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+          <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#F59E0B] bg-[#F59E0B]/10 px-3.5 py-1.5 rounded-full border border-[#F59E0B]/25 inline-flex items-center gap-2">
+            <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" />
             Live Client Telemetry Portal
           </span>
           <h1 className="text-3xl sm:text-5xl font-black text-[#F8FAFC] tracking-[-0.03em] mt-3 font-display">
@@ -118,7 +118,7 @@ export const TrackJobPage = () => {
         <div className="max-w-2xl mx-auto">
           <form 
             onSubmit={handleFormSubmit}
-            className="p-3 sm:p-4 rounded-2xl bg-[#0E1017] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] flex flex-col sm:flex-row gap-3 hover:border-[#D4AF37]/30 transition-all"
+            className="p-3 sm:p-4 rounded-2xl bg-[#111622] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] flex flex-col sm:flex-row gap-3 hover:border-[#F59E0B]/30 transition-all"
           >
             <div className="relative flex-1">
               <Search className="w-5 h-5 text-[#94A3B8] absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -127,7 +127,7 @@ export const TrackJobPage = () => {
                 value={inputCode}
                 onChange={(e) => setInputCode(e.target.value.toUpperCase())}
                 placeholder="Enter Code e.g. DD-XXXXXX"
-                className="w-full bg-[#08090C] border border-white/10 focus:border-[#D4AF37] rounded-xl pl-11 pr-4 py-3 text-sm font-mono text-[#F8FAFC] placeholder-[#64748B] uppercase tracking-wider focus:outline-none focus:ring-1 focus:ring-[#D4AF37]"
+                className="w-full bg-[#0B0E14] border border-white/10 focus:border-[#F59E0B] rounded-xl pl-11 pr-4 py-3 text-sm font-mono text-[#F8FAFC] placeholder-[#64748B] uppercase tracking-wider focus:outline-none focus:ring-1 focus:ring-[#F59E0B]"
               />
             </div>
             <Button
@@ -136,7 +136,7 @@ export const TrackJobPage = () => {
               size="md"
               isLoading={loading}
               iconRight={ArrowRight}
-              className="glow-gold-sm"
+              className="glow-amber"
             >
               Track Vehicle
             </Button>
@@ -151,7 +151,7 @@ export const TrackJobPage = () => {
                 setInputCode('DD-DEMO01');
                 executeTrack('DD-DEMO01');
               }}
-              className="text-[#D4AF37] hover:underline font-bold cursor-pointer"
+              className="text-[#F59E0B] hover:underline font-bold cursor-pointer"
             >
               Try DD-DEMO01
             </button>
@@ -178,18 +178,18 @@ export const TrackJobPage = () => {
           <div className="space-y-8 animate-fadeIn">
             
             {/* Top Bar with Tracking Code & Status Pill */}
-            <div className="p-6 sm:p-8 rounded-2xl bg-[#0E1017] border border-[#D4AF37]/50 shadow-[0_20px_50px_rgba(212,175,55,0.15)] flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-left">
+            <div className="p-6 sm:p-8 rounded-2xl bg-[#111622] border border-[#F59E0B]/50 shadow-[0_20px_50px_rgba(245,158,11,0.15)] flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-left">
               <div>
                 <div className="text-xs uppercase font-bold text-[#94A3B8] font-mono tracking-wider">
                   Vehicle Appointment Code
                 </div>
                 <div className="flex items-center gap-3 mt-1">
-                  <span className="text-3xl sm:text-4xl font-black font-mono text-[#D4AF37] tracking-widest drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                  <span className="text-3xl sm:text-4xl font-black font-mono text-[#F59E0B] tracking-widest drop-shadow-[0_0_15px_rgba(245,158,11,0.4)]">
                     {bookingData.bookingCode}
                   </span>
                   <button
                     onClick={handleCopyCode}
-                    className="p-2 rounded-xl bg-white/5 border border-white/10 text-[#CBD5E1] hover:text-[#D4AF37] hover:border-[#D4AF37]/50 transition-colors cursor-pointer tactile-press"
+                    className="p-2 rounded-xl bg-white/5 border border-white/10 text-[#CBD5E1] hover:text-[#F59E0B] hover:border-[#F59E0B]/50 transition-colors cursor-pointer tactile-press"
                     title="Copy code"
                   >
                     {copied ? <Check className="w-4 h-4 text-[#10B981]" /> : <Copy className="w-4 h-4" />}
@@ -222,10 +222,10 @@ export const TrackJobPage = () => {
             />
 
             {/* Financial Settlement & Tax Invoicing Section */}
-            <div className="p-6 sm:p-7 rounded-2xl bg-[#0E1017] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] text-left space-y-4">
+            <div className="p-6 sm:p-7 rounded-2xl bg-[#111622] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] text-left space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
-                  <CreditCard className="w-4 h-4 text-[#D4AF37]" />
+                  <CreditCard className="w-4 h-4 text-[#F59E0B]" />
                   <h3 className="text-sm font-bold uppercase tracking-wider text-white font-mono">
                     Financial Settlement & Official Invoicing
                   </h3>
@@ -234,7 +234,7 @@ export const TrackJobPage = () => {
                   bookingData.payment?.status === 'paid'
                     ? 'bg-[#10B981]/15 text-[#34D399] border border-[#10B981]/30'
                     : bookingData.payment?.status === 'deposit_paid'
-                    ? 'bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/30'
+                    ? 'bg-[#F59E0B]/15 text-[#F59E0B] border border-[#F59E0B]/30'
                     : 'bg-white/5 text-[#CBD5E1] border border-white/10'
                 }`}>
                   {bookingData.payment?.status === 'paid'
@@ -246,21 +246,21 @@ export const TrackJobPage = () => {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                <div className="p-3.5 rounded-xl bg-[#08090C] border border-white/10">
+                <div className="p-3.5 rounded-xl bg-[#0B0E14] border border-white/10">
                   <span className="text-[#94A3B8] block text-[11px] font-mono">Authoritative Total:</span>
                   <span className="text-base font-black text-white font-mono">
                     ${Number(bookingData.service?.totalPrice || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
                   </span>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-[#08090C] border border-white/10">
+                <div className="p-3.5 rounded-xl bg-[#0B0E14] border border-white/10">
                   <span className="text-[#94A3B8] block text-[11px] font-mono">Settlement Method:</span>
                   <span className="text-sm font-semibold text-white capitalize font-display">
                     {bookingData.payment?.method === 'stripe' ? 'Online Card (Stripe)' : 'Pay on Arrival'}
                   </span>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-[#08090C] border border-white/10">
+                <div className="p-3.5 rounded-xl bg-[#0B0E14] border border-white/10">
                   <span className="text-[#94A3B8] block text-[11px] font-mono">Amount Settled:</span>
                   <span className="text-base font-black text-[#10B981] font-mono">
                     ${Number(bookingData.payment?.amountPaid || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
@@ -280,7 +280,7 @@ export const TrackJobPage = () => {
                     variant="outline"
                     size="sm"
                     icon={FileDown}
-                    className="w-full sm:w-auto text-xs border-[#D4AF37]/40 text-[#D4AF37] hover:bg-[#D4AF37]/10"
+                    className="w-full sm:w-auto text-xs border-[#F59E0B]/40 text-[#F59E0B] hover:bg-[#F59E0B]/10"
                   >
                     Download Tax Invoice / Receipt (PDF)
                   </Button>

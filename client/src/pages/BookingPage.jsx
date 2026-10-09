@@ -198,13 +198,13 @@ export const BookingPage = () => {
   };
 
   return (
-    <div className="w-full bg-[#08090C] text-[#F8FAFC] min-h-screen py-12 lg:py-16">
+    <div className="w-full bg-[#0B0E14] text-[#F8FAFC] min-h-screen py-12 lg:py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Header */}
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0E1017] border border-white/10 text-xs font-semibold text-[#D4AF37] mb-4">
-            <Warehouse className="w-3.5 h-3.5 text-[#D4AF37]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#111622] border border-white/10 text-xs font-semibold text-[#F59E0B] mb-4">
+            <Warehouse className="w-3.5 h-3.5 text-[#F59E0B]" />
             <span className="font-mono">
               {settings?.maxBayCapacity === 1 ? 'Single Cleanroom Bay' : `${settings?.maxBayCapacity || 2} Cleanroom Bays`} • {settings?.address?.city || 'Austin'} Atelier
             </span>
@@ -224,7 +224,7 @@ export const BookingPage = () => {
               {/* Connecting background bar */}
               <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 h-[2px] bg-white/10 -z-0" />
               <div 
-                className="absolute top-1/2 left-0 -translate-y-1/2 h-[2px] bg-[#D4AF37] shadow-[0_0_12px_rgba(212,175,55,0.7)] transition-all duration-300 -z-0" 
+                className="absolute top-1/2 left-0 -translate-y-1/2 h-[2px] bg-[#F59E0B] shadow-[0_0_12px_rgba(245,158,11,0.7)] transition-all duration-300 -z-0" 
                 style={{ width: currentStep === 1 ? '0%' : currentStep === 2 ? '50%' : '100%' }}
               />
 
@@ -237,18 +237,18 @@ export const BookingPage = () => {
                 const isCurrent = currentStep === item.step;
 
                 return (
-                  <div key={item.step} className="flex flex-col items-center bg-[#08090C] px-3 z-10">
+                  <div key={item.step} className="flex flex-col items-center bg-[#0B0E14] px-3 z-10">
                     <div className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-black font-mono transition-all ${
                       isPassed
                         ? 'bg-[#10B981] text-white shadow-md'
                         : isCurrent
-                        ? 'bg-[#D4AF37] text-[#08090C] ring-4 ring-[#D4AF37]/20 shadow-lg shadow-[#D4AF37]/40'
-                        : 'bg-[#0E1017] text-[#94A3B8] border border-white/10'
+                        ? 'bg-[#F59E0B] text-[#0B0E14] ring-4 ring-[#F59E0B]/20 shadow-lg shadow-[#F59E0B]/40'
+                        : 'bg-[#111622] text-[#94A3B8] border border-white/10'
                     }`}>
                       {isPassed ? <Check className="w-4 h-4 stroke-[3]" /> : item.step}
                     </div>
                     <span className={`text-xs mt-2 font-medium font-mono ${
-                      isCurrent ? 'text-white font-bold' : isPassed ? 'text-[#D4AF37]' : 'text-[#64748B]'
+                      isCurrent ? 'text-white font-bold' : isPassed ? 'text-[#F59E0B]' : 'text-[#64748B]'
                     }`}>
                       {item.label}
                     </span>

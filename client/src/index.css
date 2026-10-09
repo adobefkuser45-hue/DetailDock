@@ -1,27 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  /* Surfaces & Backgrounds (Obsidian Nero & Cleanroom Titanium) */
-  --bg-canvas: #08090C;           /* Deepest Obsidian Nero - zero cartoonish blue tint */
-  --bg-surface: #0E1017;          /* Cleanroom Surface / Studio bay plate */
-  --bg-elevated: #151822;         /* Elevated Concourse Cards & Modals */
-  --bg-subtle: #1C202C;           /* Hover states, active tabs */
+  /* Surfaces & Canvas (Deep Metallic Graphite & Frosted Slate) */
+  --bg-canvas: #0B0E14;           /* Deep metallic graphite canvas */
+  --bg-surface: #111622;          /* Cleanroom surface & section base */
+  --bg-elevated: #161D2A;         /* Elevated cards & modal background */
+  --bg-subtle: #1E2738;           /* Hover states, active tabs, pill buttons */
 
   /* Hairlines & Borders */
-  --border-subtle: #1B1E28;       /* Subtle section dividers */
-  --border-muted: #262B3A;        /* Card borders & inputs */
-  --border-active: #D4AF37;       /* Concourse Champagne Gold */
+  --border-subtle: rgba(255, 255, 255, 0.08); /* Subtle hairline dividers */
+  --border-muted: rgba(255, 255, 255, 0.14);  /* Card borders & form inputs */
+  --border-active: #F59E0B;                   /* Tuscan Amber Gold */
 
   /* Typography */
-  --text-primary: #F8FAFC;        /* Crisp Titanium White */
+  --text-primary: #F8FAFC;        /* Liquid Platinum White */
   --text-secondary: #94A3B8;      /* Technical Slate */
-  --text-muted: #64748B;          /* Subdued helper text & timestamps */
+  --text-muted: #64748B;          /* Subdued helper text */
 
-  /* Authentic Luxury Accents */
-  --accent-gold: #D4AF37;         /* Liquid Champagne Gold (Primary luxury metallic) */
-  --accent-gold-light: #E5C07B;   /* Radiant Specular Gold */
-  --accent-gold-deep: #B8860B;    /* Deep Bronze Amber */
-  --accent-titanium: #CBD5E1;     /* Brushed Titanium */
+  /* Authentic Automotive Luxury Accents (Tuscan Amber & Warm Bronze) */
+  --accent-amber: #F59E0B;        /* Tuscan Amber (Primary luxury accent) */
+  --accent-amber-light: #FBBF24;  /* Radiant Specular Amber */
+  --accent-amber-deep: #D97706;   /* Rich Sunset Bronze */
+  --accent-platinum: #E2E8F0;     /* Liquid Platinum */
   --accent-emerald: #10B981;      /* Cleanroom Bay Active / 9H Certified */
   --accent-rose: #EF4444;         /* Service Alert / Cancelled */
 }
@@ -46,46 +46,78 @@ code, pre, .font-mono {
 
 /* Concourse Luxury Scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: var(--bg-canvas);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border-muted);
+  background: #1E2738;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-gold);
+  background: var(--accent-amber);
 }
 
-/* Liquid Glass Refraction (Anti-AI Slop) */
+/* Liquid Glass Refraction */
 .liquid-glass {
-  background: rgba(14, 16, 23, 0.75);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: rgba(17, 22, 34, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 .liquid-glass-elevated {
-  background: rgba(21, 24, 34, 0.85);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
+  background: rgba(22, 29, 42, 0.90);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 20px 45px -15px rgba(0, 0, 0, 0.7);
 }
 
-/* Specular Light & Luxury Glow */
+/* Luxury Amber Glows */
+.glow-amber {
+  box-shadow: 0 0 35px -5px rgba(245, 158, 11, 0.28);
+}
+
+.glow-amber-sm {
+  box-shadow: 0 0 16px -2px rgba(245, 158, 11, 0.35);
+}
+
+/* Backward compatibility for previous token names */
 .glow-gold {
-  box-shadow: 0 0 30px -5px rgba(212, 175, 55, 0.22);
+  box-shadow: 0 0 35px -5px rgba(245, 158, 11, 0.28);
 }
-
 .glow-gold-sm {
-  box-shadow: 0 0 14px -2px rgba(212, 175, 55, 0.28);
+  box-shadow: 0 0 16px -2px rgba(245, 158, 11, 0.35);
 }
 
+/* Card Hover Elevation Physics */
+.card-hover {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.35s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(245, 158, 11, 0.45);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 25px -5px rgba(245, 158, 11, 0.15);
+}
+
+/* Image Zoom on Card Hover */
+.image-zoom-container {
+  overflow: hidden;
+  position: relative;
+}
+.image-zoom-container img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.image-zoom-container:hover img,
+.group:hover .image-zoom-container img {
+  transform: scale(1.06);
+}
+
+/* Specular Sheen Physics */
 .specular-sheen {
   position: relative;
   overflow: hidden;
@@ -101,7 +133,7 @@ code, pre, .font-mono {
   background: linear-gradient(
     60deg,
     transparent 40%,
-    rgba(255, 255, 255, 0.04) 50%,
+    rgba(255, 255, 255, 0.06) 50%,
     transparent 60%
   );
   pointer-events: none;
@@ -113,7 +145,7 @@ code, pre, .font-mono {
   transform: rotate(25deg) translate(30%, 30%);
 }
 
-/* Tactile Spring Physics (Emil Kowalski + Jakub Krehel) */
+/* Tactile Spring Physics */
 .spring-snap {
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -128,8 +160,23 @@ code, pre, .font-mono {
 
 /* Selection Color */
 ::selection {
-  background-color: rgba(212, 175, 55, 0.35);
+  background-color: rgba(245, 158, 11, 0.35);
   color: #FFFFFF;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {

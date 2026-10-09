@@ -55,16 +55,16 @@ export const TestimonialsSection = () => {
   };
 
   return (
-    <section className="py-24 bg-[#08090C] border-t border-white/10 relative overflow-hidden">
+    <section className="py-24 bg-[#0B0E14] border-t border-white/10 relative overflow-hidden">
       {/* Subtle radial glow */}
-      <div className="absolute top-1/2 left-1/3 w-80 h-80 bg-[#D4AF37]/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/3 w-80 h-80 bg-[#F59E0B]/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] bg-[#D4AF37]/10 px-4 py-1.5 rounded-full border border-[#D4AF37]/25 inline-flex items-center gap-2">
-            <Award className="w-3.5 h-3.5 text-[#D4AF37]" />
+          <span className="text-xs font-bold uppercase tracking-widest text-[#F59E0B] bg-[#F59E0B]/10 px-4 py-1.5 rounded-full border border-[#F59E0B]/25 inline-flex items-center gap-2">
+            <Award className="w-3.5 h-3.5 text-[#F59E0B]" />
             Verified Concourse Owners
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-[-0.03em] mt-5 text-[#F8FAFC] font-display">
@@ -81,25 +81,25 @@ export const TestimonialsSection = () => {
             <div
               key={idx}
               onMouseMove={handleCardMouseMove}
-              className="p-8 sm:p-10 rounded-2xl bg-[#0E1017] border border-white/10 hover:border-[#D4AF37]/50 transition-all duration-300 flex flex-col justify-between relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] group"
+              className="p-8 sm:p-10 rounded-2xl bg-[#111622] border border-white/10 hover:border-[#F59E0B]/50 transition-all duration-300 flex flex-col justify-between relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.7)] group card-hover"
             >
               {/* Specular Highlight */}
               <div 
                 className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{
-                  background: 'radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 175, 55, 0.08), transparent 40%)'
+                  background: 'radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(245, 158, 11, 0.08), transparent 40%)'
                 }}
               />
 
               <div>
                 {/* Header with Stars and Vehicle Pill */}
                 <div className="flex items-center justify-between mb-5">
-                  <div className="flex items-center gap-1 text-[#D4AF37]">
+                  <div className="flex items-center gap-1 text-[#F59E0B]">
                     {[...Array(item.rating)].map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-current" />
                     ))}
                   </div>
-                  <span className="text-[11px] font-mono text-[#D4AF37] bg-[#D4AF37]/10 px-3 py-1 rounded-full border border-[#D4AF37]/25 flex items-center gap-1.5 font-bold">
+                  <span className="text-[11px] font-mono text-[#F59E0B] bg-[#F59E0B]/10 px-3 py-1 rounded-full border border-[#F59E0B]/25 flex items-center gap-1.5 font-bold">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#10B981]" />
                     Verified Client
                   </span>
@@ -126,7 +126,7 @@ export const TestimonialsSection = () => {
                   <div className="text-xs font-bold text-[#CBD5E1] font-mono">
                     {item.vehicle}
                   </div>
-                  <div className="text-[11px] text-[#D4AF37] font-mono">
+                  <div className="text-[11px] text-[#F59E0B] font-mono">
                     {item.service}
                   </div>
                 </div>

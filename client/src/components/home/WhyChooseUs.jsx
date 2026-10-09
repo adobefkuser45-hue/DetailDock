@@ -55,16 +55,16 @@ export const WhyChooseUs = () => {
   };
 
   return (
-    <section className="py-24 bg-[#08090C] border-t border-white/10 relative overflow-hidden">
+    <section className="py-24 bg-[#0B0E14] border-t border-white/10 relative overflow-hidden">
       {/* Background radial accent */}
-      <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-[#F59E0B]/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] bg-[#D4AF37]/10 px-4 py-1.5 rounded-full border border-[#D4AF37]/25 inline-flex items-center gap-2">
-            <Award className="w-3.5 h-3.5 text-[#D4AF37]" />
+          <span className="text-xs font-bold uppercase tracking-widest text-[#F59E0B] bg-[#F59E0B]/10 px-4 py-1.5 rounded-full border border-[#F59E0B]/25 inline-flex items-center gap-2">
+            <Award className="w-3.5 h-3.5 text-[#F59E0B]" />
             The DetailDock Difference
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-[-0.03em] mt-5 text-[#F8FAFC] font-display">
@@ -83,27 +83,27 @@ export const WhyChooseUs = () => {
               <div 
                 key={idx}
                 onMouseMove={handleCardMouseMove}
-                className="p-8 sm:p-10 rounded-2xl bg-[#0E1017] border border-white/10 hover:border-[#D4AF37]/50 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)]"
+                className="p-8 sm:p-10 rounded-2xl bg-[#111622] border border-white/10 hover:border-[#F59E0B]/50 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.7)] card-hover"
               >
                 {/* Specular Highlight */}
                 <div 
                   className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   style={{
-                    background: 'radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 175, 55, 0.08), transparent 40%)'
+                    background: 'radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(245, 158, 11, 0.08), transparent 40%)'
                   }}
                 />
 
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37] group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#F59E0B] group-hover:scale-110 transition-transform">
                       <IconComponent className="w-6 h-6" />
                     </div>
-                    <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#CBD5E1] px-3 py-1 rounded-full bg-[#151822] border border-white/10">
+                    <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#CBD5E1] px-3 py-1 rounded-full bg-[#161D2A] border border-white/10">
                       {pillar.tag}
                     </span>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-[#D4AF37] transition-colors font-display">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-[#F59E0B] transition-colors font-display">
                     {pillar.title}
                   </h3>
                   <p className="text-sm text-[#94A3B8] leading-relaxed mb-6 font-normal">
@@ -113,14 +113,14 @@ export const WhyChooseUs = () => {
 
                 <div className="pt-6 border-t border-white/10 flex items-center justify-between">
                   <div>
-                    <div className="text-3xl font-black text-[#D4AF37] font-mono tracking-tight">
+                    <div className="text-3xl font-black text-[#F59E0B] font-mono tracking-tight">
                       {pillar.stat}
                     </div>
                     <div className="text-xs text-[#94A3B8] font-medium mt-0.5">
                       {pillar.statLabel}
                     </div>
                   </div>
-                  <div className="w-9 h-9 rounded-full bg-[#151822] border border-white/5 flex items-center justify-center text-[#10B981]">
+                  <div className="w-9 h-9 rounded-full bg-[#161D2A] border border-white/5 flex items-center justify-center text-[#10B981]">
                     <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
                   </div>
                 </div>

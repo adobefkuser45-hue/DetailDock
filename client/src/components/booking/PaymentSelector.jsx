@@ -19,10 +19,10 @@ export const PaymentSelector = ({
   const isStudioPay = paymentConfig.method === 'studio_pay';
 
   return (
-    <div className="p-6 sm:p-7 rounded-2xl bg-[#0E1017] border border-white/10 space-y-5 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
+    <div className="p-6 sm:p-7 rounded-2xl bg-[#111622] border border-white/10 space-y-5 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
       <div className="flex items-center justify-between pb-3 border-b border-white/10">
         <div className="flex items-center gap-2">
-          <CreditCard className="w-4 h-4 text-[#D4AF37]" />
+          <CreditCard className="w-4 h-4 text-[#F59E0B]" />
           <h3 className="text-sm font-bold uppercase tracking-wider text-white font-mono">
             Payment & Settlement Preference
           </h3>
@@ -39,19 +39,19 @@ export const PaymentSelector = ({
           onClick={() => onChange({ method: 'studio_pay', option: 'full' })}
           className={`p-5 rounded-2xl border cursor-pointer transition-all relative tactile-press ${
             isStudioPay
-              ? 'bg-[#151822] border-[#D4AF37] ring-1 ring-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.15)]'
-              : 'bg-[#08090C] border-white/10 hover:border-white/25 hover:bg-[#131620]'
+              ? 'bg-[#161D2A] border-[#F59E0B] ring-1 ring-[#F59E0B] shadow-[0_0_20px_rgba(245,158,11,0.15)]'
+              : 'bg-[#0B0E14] border-white/10 hover:border-white/25 hover:bg-[#161D2A]'
           }`}
         >
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
-              <div className={`p-2.5 rounded-xl ${isStudioPay ? 'bg-[#D4AF37]/15 text-[#D4AF37]' : 'bg-white/5 text-[#94A3B8]'}`}>
+              <div className={`p-2.5 rounded-xl ${isStudioPay ? 'bg-[#F59E0B]/15 text-[#F59E0B]' : 'bg-white/5 text-[#94A3B8]'}`}>
                 <Warehouse className="w-4 h-4" />
               </div>
               <div>
                 <div className="text-sm font-bold text-white flex items-center gap-2 font-display">
                   Pay at Studio Arrival
-                  <span className="text-[10px] font-mono uppercase bg-[#D4AF37]/15 text-[#D4AF37] px-2 py-0.5 rounded font-bold">
+                  <span className="text-[10px] font-mono uppercase bg-[#F59E0B]/15 text-[#F59E0B] px-2 py-0.5 rounded font-bold">
                     Flexible
                   </span>
                 </div>
@@ -61,15 +61,15 @@ export const PaymentSelector = ({
               </div>
             </div>
             <div className={`w-4 h-4 rounded-full border flex items-center justify-center mt-1 ${
-              isStudioPay ? 'border-[#D4AF37] bg-[#D4AF37]' : 'border-slate-600'
+              isStudioPay ? 'border-[#F59E0B] bg-[#F59E0B]' : 'border-slate-600'
             }`}>
-              {isStudioPay && <div className="w-1.5 h-1.5 bg-[#08090C] rounded-full" />}
+              {isStudioPay && <div className="w-1.5 h-1.5 bg-[#0B0E14] rounded-full" />}
             </div>
           </div>
 
           <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
             <span className="text-[#94A3B8]">Due at check-in:</span>
-            <span className="font-black text-[#D4AF37] font-mono">{formattedTotal}</span>
+            <span className="font-black text-[#F59E0B] font-mono">{formattedTotal}</span>
           </div>
         </div>
 
@@ -78,13 +78,13 @@ export const PaymentSelector = ({
           onClick={() => onChange({ method: 'stripe', option: paymentConfig.option || 'deposit' })}
           className={`p-5 rounded-2xl border cursor-pointer transition-all relative tactile-press ${
             isStripe
-              ? 'bg-[#151822] border-[#D4AF37] ring-1 ring-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.15)]'
-              : 'bg-[#08090C] border-white/10 hover:border-white/25 hover:bg-[#131620]'
+              ? 'bg-[#161D2A] border-[#F59E0B] ring-1 ring-[#F59E0B] shadow-[0_0_20px_rgba(245,158,11,0.15)]'
+              : 'bg-[#0B0E14] border-white/10 hover:border-white/25 hover:bg-[#161D2A]'
           }`}
         >
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
-              <div className={`p-2.5 rounded-xl ${isStripe ? 'bg-[#D4AF37]/15 text-[#D4AF37]' : 'bg-white/5 text-[#94A3B8]'}`}>
+              <div className={`p-2.5 rounded-xl ${isStripe ? 'bg-[#F59E0B]/15 text-[#F59E0B]' : 'bg-white/5 text-[#94A3B8]'}`}>
                 <CreditCard className="w-4 h-4" />
               </div>
               <div>
@@ -100,9 +100,9 @@ export const PaymentSelector = ({
               </div>
             </div>
             <div className={`w-4 h-4 rounded-full border flex items-center justify-center mt-1 ${
-              isStripe ? 'border-[#D4AF37] bg-[#D4AF37]' : 'border-slate-600'
+              isStripe ? 'border-[#F59E0B] bg-[#F59E0B]' : 'border-slate-600'
             }`}>
-              {isStripe && <div className="w-1.5 h-1.5 bg-[#08090C] rounded-full" />}
+              {isStripe && <div className="w-1.5 h-1.5 bg-[#0B0E14] rounded-full" />}
             </div>
           </div>
 
@@ -117,8 +117,8 @@ export const PaymentSelector = ({
                 }}
                 className={`py-1.5 px-2.5 rounded-lg border text-center transition-all ${
                   paymentConfig.option === 'deposit'
-                    ? 'bg-[#D4AF37]/20 border-[#D4AF37] text-white font-bold'
-                    : 'bg-[#08090C] border-white/5 text-[#94A3B8]'
+                    ? 'bg-[#F59E0B]/20 border-[#F59E0B] text-white font-bold'
+                    : 'bg-[#0B0E14] border-white/5 text-[#94A3B8]'
                 }`}
               >
                 <div className="font-mono text-white">$50.00 Deposit</div>
@@ -133,12 +133,12 @@ export const PaymentSelector = ({
                 }}
                 className={`py-1.5 px-2.5 rounded-lg border text-center transition-all ${
                   paymentConfig.option === 'full'
-                    ? 'bg-[#D4AF37]/20 border-[#D4AF37] text-white font-bold'
-                    : 'bg-[#08090C] border-white/5 text-[#94A3B8]'
+                    ? 'bg-[#F59E0B]/20 border-[#F59E0B] text-white font-bold'
+                    : 'bg-[#0B0E14] border-white/5 text-[#94A3B8]'
                 }`}
               >
                 <div className="font-mono text-white">Full Settlement</div>
-                <div className="text-[10px] text-[#D4AF37]">{formattedTotal} now</div>
+                <div className="text-[10px] text-[#F59E0B]">{formattedTotal} now</div>
               </button>
             </div>
           )}

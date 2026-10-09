@@ -60,7 +60,7 @@ export const CustomerIntakeStep = ({
   return (
     <form onSubmit={handleFormSubmit} className="space-y-8 text-left">
       <div>
-        <span className="text-xs font-mono font-bold text-[#D4AF37] uppercase tracking-wider">
+        <span className="text-xs font-mono font-bold text-[#F59E0B] uppercase tracking-wider">
           Step 03 of 03
         </span>
         <h2 className="text-2xl sm:text-3xl font-black text-[#F8FAFC] tracking-tight mt-1 font-display">
@@ -82,9 +82,9 @@ export const CustomerIntakeStep = ({
       )}
 
       {/* SECTION 1: VEHICLE DETAILS */}
-      <div className="p-6 sm:p-7 rounded-2xl bg-[#0E1017] border border-white/10 space-y-4 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
+      <div className="p-6 sm:p-7 rounded-2xl bg-[#111622] border border-white/10 space-y-4 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
         <div className="flex items-center gap-2 pb-3 border-b border-white/10">
-          <Car className="w-4 h-4 text-[#D4AF37]" />
+          <Car className="w-4 h-4 text-[#F59E0B]" />
           <h3 className="text-sm font-bold uppercase tracking-wider text-white font-mono">
             Vehicle Specification
           </h3>
@@ -101,8 +101,8 @@ export const CustomerIntakeStep = ({
               placeholder="e.g. Porsche"
               value={formData.vehicleMake || ''}
               onChange={(e) => onChangeForm('vehicleMake', e.target.value)}
-              className={`w-full px-3.5 py-2.5 rounded-xl bg-[#08090C] border text-xs text-white placeholder-[#64748B] focus:outline-none transition-colors ${
-                errors.vehicleMake ? 'border-[#EF4444]' : 'border-white/10 focus:border-[#D4AF37]'
+              className={`w-full px-3.5 py-2.5 rounded-xl bg-[#0B0E14] border text-xs text-white placeholder-[#64748B] focus:outline-none transition-colors ${
+                errors.vehicleMake ? 'border-[#EF4444]' : 'border-white/10 focus:border-[#F59E0B]'
               }`}
             />
             {errors.vehicleMake && <p className="text-[11px] text-[#EF4444] mt-1">{errors.vehicleMake}</p>}
@@ -118,8 +118,8 @@ export const CustomerIntakeStep = ({
               placeholder="e.g. 911 GT3 RS"
               value={formData.vehicleModel || ''}
               onChange={(e) => onChangeForm('vehicleModel', e.target.value)}
-              className={`w-full px-3.5 py-2.5 rounded-xl bg-[#08090C] border text-xs text-white placeholder-[#64748B] focus:outline-none transition-colors ${
-                errors.vehicleModel ? 'border-[#EF4444]' : 'border-white/10 focus:border-[#D4AF37]'
+              className={`w-full px-3.5 py-2.5 rounded-xl bg-[#0B0E14] border text-xs text-white placeholder-[#64748B] focus:outline-none transition-colors ${
+                errors.vehicleModel ? 'border-[#EF4444]' : 'border-white/10 focus:border-[#F59E0B]'
               }`}
             />
             {errors.vehicleModel && <p className="text-[11px] text-[#EF4444] mt-1">{errors.vehicleModel}</p>}
@@ -135,8 +135,8 @@ export const CustomerIntakeStep = ({
               placeholder="e.g. 2024"
               value={formData.vehicleYear || ''}
               onChange={(e) => onChangeForm('vehicleYear', e.target.value)}
-              className={`w-full px-3.5 py-2.5 rounded-xl bg-[#08090C] border text-xs text-white placeholder-[#64748B] focus:outline-none transition-colors ${
-                errors.vehicleYear ? 'border-[#EF4444]' : 'border-white/10 focus:border-[#D4AF37]'
+              className={`w-full px-3.5 py-2.5 rounded-xl bg-[#0B0E14] border text-xs text-white placeholder-[#64748B] focus:outline-none transition-colors ${
+                errors.vehicleYear ? 'border-[#EF4444]' : 'border-white/10 focus:border-[#F59E0B]'
               }`}
             />
             {errors.vehicleYear && <p className="text-[11px] text-[#EF4444] mt-1">{errors.vehicleYear}</p>}
@@ -155,9 +155,9 @@ export const CustomerIntakeStep = ({
                 placeholder="e.g. Shark Blue (Gloss)"
                 value={formData.vehicleColor || ''}
                 onChange={(e) => onChangeForm('vehicleColor', e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#08090C] border border-white/10 text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#D4AF37]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#0B0E14] border border-white/10 text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#F59E0B]"
               />
-              <Palette className="w-4 h-4 text-[#D4AF37] absolute right-3 top-3" />
+              <Palette className="w-4 h-4 text-[#F59E0B] absolute right-3 top-3" />
             </div>
           </div>
 
@@ -172,18 +172,18 @@ export const CustomerIntakeStep = ({
                 placeholder="e.g. TX-DOCK911"
                 value={formData.vehicleLicensePlate || ''}
                 onChange={(e) => onChangeForm('vehicleLicensePlate', e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#08090C] border border-white/10 text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#D4AF37]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#0B0E14] border border-white/10 text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#F59E0B]"
               />
-              <Hash className="w-4 h-4 text-[#D4AF37] absolute right-3 top-3" />
+              <Hash className="w-4 h-4 text-[#F59E0B] absolute right-3 top-3" />
             </div>
           </div>
         </div>
       </div>
 
       {/* SECTION 2: CUSTOMER CONTACT */}
-      <div className="p-6 sm:p-7 rounded-2xl bg-[#0E1017] border border-white/10 space-y-4 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
+      <div className="p-6 sm:p-7 rounded-2xl bg-[#111622] border border-white/10 space-y-4 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
         <div className="flex items-center gap-2 pb-3 border-b border-white/10">
-          <User className="w-4 h-4 text-[#D4AF37]" />
+          <User className="w-4 h-4 text-[#F59E0B]" />
           <h3 className="text-sm font-bold uppercase tracking-wider text-white font-mono">
             Client Contact Information
           </h3>
@@ -200,8 +200,8 @@ export const CustomerIntakeStep = ({
               placeholder="e.g. Alexander Rivera"
               value={formData.customerName || ''}
               onChange={(e) => onChangeForm('customerName', e.target.value)}
-              className={`w-full px-3.5 py-2.5 rounded-xl bg-[#08090C] border text-xs text-white placeholder-[#64748B] focus:outline-none transition-colors ${
-                errors.customerName ? 'border-[#EF4444]' : 'border-white/10 focus:border-[#D4AF37]'
+              className={`w-full px-3.5 py-2.5 rounded-xl bg-[#0B0E14] border text-xs text-white placeholder-[#64748B] focus:outline-none transition-colors ${
+                errors.customerName ? 'border-[#EF4444]' : 'border-white/10 focus:border-[#F59E0B]'
               }`}
             />
             {errors.customerName && <p className="text-[11px] text-[#EF4444] mt-1">{errors.customerName}</p>}
@@ -217,8 +217,8 @@ export const CustomerIntakeStep = ({
               placeholder="e.g. alex@example.com"
               value={formData.customerEmail || ''}
               onChange={(e) => onChangeForm('customerEmail', e.target.value)}
-              className={`w-full px-3.5 py-2.5 rounded-xl bg-[#08090C] border text-xs text-white placeholder-[#64748B] focus:outline-none transition-colors ${
-                errors.customerEmail ? 'border-[#EF4444]' : 'border-white/10 focus:border-[#D4AF37]'
+              className={`w-full px-3.5 py-2.5 rounded-xl bg-[#0B0E14] border text-xs text-white placeholder-[#64748B] focus:outline-none transition-colors ${
+                errors.customerEmail ? 'border-[#EF4444]' : 'border-white/10 focus:border-[#F59E0B]'
               }`}
             />
             {errors.customerEmail && <p className="text-[11px] text-[#EF4444] mt-1">{errors.customerEmail}</p>}
@@ -234,8 +234,8 @@ export const CustomerIntakeStep = ({
               placeholder="e.g. (512) 555-0199"
               value={formData.customerPhone || ''}
               onChange={(e) => onChangeForm('customerPhone', e.target.value)}
-              className={`w-full px-3.5 py-2.5 rounded-xl bg-[#08090C] border text-xs text-white placeholder-[#64748B] focus:outline-none transition-colors ${
-                errors.customerPhone ? 'border-[#EF4444]' : 'border-white/10 focus:border-[#D4AF37]'
+              className={`w-full px-3.5 py-2.5 rounded-xl bg-[#0B0E14] border text-xs text-white placeholder-[#64748B] focus:outline-none transition-colors ${
+                errors.customerPhone ? 'border-[#EF4444]' : 'border-white/10 focus:border-[#F59E0B]'
               }`}
             />
             {errors.customerPhone && <p className="text-[11px] text-[#EF4444] mt-1">{errors.customerPhone}</p>}
@@ -252,7 +252,7 @@ export const CustomerIntakeStep = ({
             placeholder="e.g. Please check clear coat swirl marks under Scangrip lamps on driver side rear quarter panel..."
             value={formData.notes || ''}
             onChange={(e) => onChangeForm('notes', e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-xl bg-[#08090C] border border-white/10 text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#D4AF37]"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-[#0B0E14] border border-white/10 text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#F59E0B]"
           />
         </div>
       </div>
@@ -282,7 +282,7 @@ export const CustomerIntakeStep = ({
           size="lg"
           iconRight={ShieldCheck}
           disabled={isSubmitting}
-          className="glow-gold"
+          className="glow-amber"
         >
           {isSubmitting ? 'Securing Bay Slot...' : 'Confirm & Reserve Slot'}
         </Button>

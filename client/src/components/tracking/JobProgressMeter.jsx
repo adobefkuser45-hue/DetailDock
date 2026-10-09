@@ -37,12 +37,12 @@ export const JobProgressMeter = ({ progress, status }) => {
   }
 
   return (
-    <div className="p-6 sm:p-8 rounded-2xl bg-[#0E1017] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] text-left space-y-6">
+    <div className="p-6 sm:p-8 rounded-2xl bg-[#111622] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] text-left space-y-6">
       
       {/* Header of Meter */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="text-[11px] font-mono uppercase font-bold text-[#D4AF37] tracking-widest">
+          <span className="text-[11px] font-mono uppercase font-bold text-[#F59E0B] tracking-widest">
             Live Telemetry Pipeline
           </span>
           <h3 className="text-xl sm:text-2xl font-black text-white mt-0.5 font-display">
@@ -53,19 +53,19 @@ export const JobProgressMeter = ({ progress, status }) => {
         <div className="flex items-center gap-3 self-start sm:self-auto">
           <div className="text-right">
             <div className="text-xs text-[#94A3B8] font-mono">Stage Progression:</div>
-            <div className="text-xl font-mono font-black text-[#D4AF37]">
+            <div className="text-xl font-mono font-black text-[#F59E0B]">
               {percentage}%
             </div>
           </div>
-          <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37]">
+          <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#F59E0B]">
             {percentage === 100 ? (
               <Award className="w-5 h-5 text-[#10B981]" />
             ) : percentage >= 80 ? (
               <ShieldCheck className="w-5 h-5 text-[#10B981]" />
             ) : percentage >= 60 ? (
-              <Warehouse className="w-5 h-5 text-[#D4AF37] animate-pulse" />
+              <Warehouse className="w-5 h-5 text-[#F59E0B] animate-pulse" />
             ) : (
-              <Clock className="w-5 h-5 text-[#D4AF37]" />
+              <Clock className="w-5 h-5 text-[#F59E0B]" />
             )}
           </div>
         </div>
@@ -74,9 +74,9 @@ export const JobProgressMeter = ({ progress, status }) => {
       {/* Visual Progress Bar with Glow */}
       <div className="relative pt-6 pb-2">
         {/* Track Background Bar */}
-        <div className="h-2 w-full bg-[#08090C] rounded-full overflow-hidden border border-white/10">
+        <div className="h-2 w-full bg-[#0B0E14] rounded-full overflow-hidden border border-white/10">
           <div
-            className="h-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#10B981] transition-all duration-700 ease-out shadow-[0_0_15px_rgba(212,175,55,0.8)]"
+            className="h-full bg-gradient-to-r from-[#F59E0B] via-[#FBBF24] to-[#10B981] transition-all duration-700 ease-out shadow-[0_0_15px_rgba(245,158,11,0.8)]"
             style={{ width: `${percentage}%` }}
           />
         </div>
@@ -94,8 +94,8 @@ export const JobProgressMeter = ({ progress, status }) => {
                     isCompleted
                       ? 'bg-[#10B981] text-white shadow-md'
                       : isCurrent
-                      ? 'bg-[#D4AF37] text-[#08090C] ring-4 ring-[#D4AF37]/25 shadow-lg shadow-[#D4AF37]/40'
-                      : 'bg-[#08090C] text-[#94A3B8] border border-white/10'
+                      ? 'bg-[#F59E0B] text-[#0B0E14] ring-4 ring-[#F59E0B]/25 shadow-lg shadow-[#F59E0B]/40'
+                      : 'bg-[#0B0E14] text-[#94A3B8] border border-white/10'
                   }`}
                 >
                   {isCompleted ? <Check className="w-3.5 h-3.5 stroke-[3]" /> : s.step}
@@ -103,7 +103,7 @@ export const JobProgressMeter = ({ progress, status }) => {
 
                 <div className="mt-2">
                   <div className={`text-[11px] sm:text-xs font-bold leading-tight font-display ${
-                    isCurrent ? 'text-white' : isCompleted ? 'text-[#D4AF37]' : 'text-[#64748B]'
+                    isCurrent ? 'text-white' : isCompleted ? 'text-[#F59E0B]' : 'text-[#64748B]'
                   }`}>
                     {s.label}
                   </div>

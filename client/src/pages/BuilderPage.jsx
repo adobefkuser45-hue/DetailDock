@@ -315,14 +315,14 @@ export const BuilderPage = () => {
   };
 
   return (
-    <div className="w-full bg-[#08090C] text-[#F8FAFC] min-h-screen py-12 lg:py-16">
+    <div className="w-full bg-[#0B0E14] text-[#F8FAFC] min-h-screen py-12 lg:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Page Hero Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-8 border-b border-white/10">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0E1017] border border-white/10 text-xs font-semibold text-[#D4AF37] mb-4">
-              <Gauge className="w-3.5 h-3.5 text-[#D4AF37]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#111622] border border-white/10 text-xs font-semibold text-[#F59E0B] mb-4">
+              <Gauge className="w-3.5 h-3.5 text-[#F59E0B]" />
               <span className="font-mono uppercase tracking-wider">Authoritative Dynamic Configurator</span>
             </div>
             <h1 className="text-3xl sm:text-5xl font-black text-[#F8FAFC] tracking-[-0.03em] font-display">
@@ -336,12 +336,12 @@ export const BuilderPage = () => {
           <div className="flex items-center gap-3 self-start md:self-auto">
             <button
               onClick={handleReset}
-              className="px-4 py-2 text-xs font-semibold rounded-xl bg-[#0E1017] border border-white/10 text-[#94A3B8] hover:text-white hover:border-white/30 transition-all flex items-center gap-1.5 cursor-pointer tactile-press"
+              className="px-4 py-2 text-xs font-semibold rounded-xl bg-[#111622] border border-white/10 text-[#94A3B8] hover:text-white hover:border-white/30 transition-all flex items-center gap-1.5 cursor-pointer tactile-press"
             >
-              <RotateCcw className="w-3.5 h-3.5 text-[#D4AF37]" />
+              <RotateCcw className="w-3.5 h-3.5 text-[#F59E0B]" />
               Reset Config
             </button>
-            <div className="text-xs font-mono text-[#D4AF37] bg-[#D4AF37]/10 px-3.5 py-2 rounded-xl border border-[#D4AF37]/25 flex items-center gap-1.5 font-bold">
+            <div className="text-xs font-mono text-[#F59E0B] bg-[#F59E0B]/10 px-3.5 py-2 rounded-xl border border-[#F59E0B]/25 flex items-center gap-1.5 font-bold">
               <Cpu className="w-3.5 h-3.5" />
               Deterministic Rule Engine
             </div>
@@ -393,11 +393,11 @@ export const BuilderPage = () => {
         </div>
 
         {/* Mobile Sticky Bottom Floating Summary (Shown only on small screens) */}
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 p-4 bg-[#08090C]/95 border-t border-white/10 backdrop-blur-md shadow-2xl">
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 p-4 bg-[#0B0E14]/95 border-t border-white/10 backdrop-blur-md shadow-2xl">
           <div className="max-w-md mx-auto flex items-center justify-between gap-4">
             <div>
               <div className="text-[11px] text-[#94A3B8] uppercase font-bold font-mono">Estimated Total:</div>
-              <div className="text-2xl font-mono font-black text-[#D4AF37]">
+              <div className="text-2xl font-mono font-black text-[#F59E0B]">
                 ${pricingData?.breakdown?.subtotal || (
                   (Number(selectedPackage?.basePrice || 0) * Number(selectedCategory?.priceMultiplier || 1.0)) +
                   selectedAddons.reduce((sum, a) => sum + Number(a.price || 0), 0)
@@ -409,7 +409,7 @@ export const BuilderPage = () => {
               size="md"
               iconRight={ArrowRight}
               onClick={handleProceedToBooking}
-              className="glow-gold-sm"
+              className="glow-amber"
             >
               Reserve Bay Slot
             </Button>

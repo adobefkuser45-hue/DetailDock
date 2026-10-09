@@ -23,16 +23,16 @@ export const JobTelemetryCards = ({ vehicle, schedule, service }) => {
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
       
       {/* POD 1: VEHICLE TELEMETRY */}
-      <div className="p-6 rounded-2xl bg-[#101522] border border-[#1D2536] flex flex-col justify-between">
+      <div className="p-6 rounded-2xl bg-[#111622] border border-white/10 flex flex-col justify-between">
         <div>
-          <div className="flex items-center justify-between pb-3 border-b border-[#1D2536] mb-4">
+          <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-4">
             <div className="flex items-center gap-2">
-              <Car className="w-4 h-4 text-[#38BDF8]" />
+              <Car className="w-4 h-4 text-[#F59E0B]" />
               <span className="text-xs uppercase font-bold text-[#94A3B8] font-mono">
                 Vehicle Spec
               </span>
             </div>
-            <span className="text-[11px] font-mono text-[#38BDF8] bg-[#0284C7]/10 px-2 py-0.5 rounded border border-[#0284C7]/20">
+            <span className="text-[11px] font-mono text-[#F59E0B] bg-[#F59E0B]/10 px-2 py-0.5 rounded border border-[#F59E0B]/20">
               {vehicle?.category || 'Chassis'}
             </span>
           </div>
@@ -61,15 +61,15 @@ export const JobTelemetryCards = ({ vehicle, schedule, service }) => {
           </div>
         </div>
 
-        <div className="pt-4 border-t border-[#1D2536] mt-4 text-[11px] text-[#64748B]">
+        <div className="pt-4 border-t border-white/10 mt-4 text-[11px] text-[#64748B]">
           Surface multi-stage inspection logged
         </div>
       </div>
 
       {/* POD 2: BAY ALLOCATION */}
-      <div className="p-6 rounded-2xl bg-[#101522] border border-[#1D2536] flex flex-col justify-between">
+      <div className="p-6 rounded-2xl bg-[#111622] border border-white/10 flex flex-col justify-between">
         <div>
-          <div className="flex items-center justify-between pb-3 border-b border-[#1D2536] mb-4">
+          <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-4">
             <div className="flex items-center gap-2">
               <Warehouse className="w-4 h-4 text-[#F59E0B]" />
               <span className="text-xs uppercase font-bold text-[#94A3B8] font-mono">
@@ -98,12 +98,12 @@ export const JobTelemetryCards = ({ vehicle, schedule, service }) => {
                 <Clock className="w-3.5 h-3.5 text-[#64748B]" />
                 Slot:
               </span>
-              <span className="font-mono text-[#38BDF8] font-semibold">{schedule?.timeSlot}</span>
+              <span className="font-mono text-[#F59E0B] font-semibold">{schedule?.timeSlot}</span>
             </div>
           </div>
         </div>
 
-        <div className="pt-4 border-t border-[#1D2536] mt-4 flex items-center justify-between text-[11px] text-[#10B981]">
+        <div className="pt-4 border-t border-white/10 mt-4 flex items-center justify-between text-[11px] text-[#10B981]">
           <span className="flex items-center gap-1">
             <Thermometer className="w-3.5 h-3.5" />
             68°F • 45% RH Climate Controlled
@@ -112,9 +112,9 @@ export const JobTelemetryCards = ({ vehicle, schedule, service }) => {
       </div>
 
       {/* POD 3: SERVICE SNAPSHOT */}
-      <div className="p-6 rounded-2xl bg-[#101522] border border-[#1D2536] flex flex-col justify-between">
+      <div className="p-6 rounded-2xl bg-[#111622] border border-white/10 flex flex-col justify-between">
         <div>
-          <div className="flex items-center justify-between pb-3 border-b border-[#1D2536] mb-4">
+          <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-4">
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-[#10B981]" />
               <span className="text-xs uppercase font-bold text-[#94A3B8] font-mono">
@@ -146,9 +146,9 @@ export const JobTelemetryCards = ({ vehicle, schedule, service }) => {
           )}
         </div>
 
-        <div className="pt-4 border-t border-[#1D2536] mt-4 flex items-baseline justify-between">
+        <div className="pt-4 border-t border-white/10 mt-4 flex items-baseline justify-between">
           <span className="text-xs font-bold uppercase text-[#94A3B8]">Total Amount:</span>
-          <span className="text-2xl font-extrabold font-mono text-[#38BDF8]">
+          <span className="text-2xl font-extrabold font-mono text-[#F59E0B]">
             ${Number(service?.totalPrice || 0).toFixed(2)}
           </span>
         </div>

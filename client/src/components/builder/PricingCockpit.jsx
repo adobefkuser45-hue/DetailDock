@@ -43,19 +43,19 @@ export const PricingCockpit = ({
   const displayDuration = pricingData?.breakdown?.formattedDuration || formattedDuration;
 
   return (
-    <div className="rounded-2xl bg-[#0E1017] border border-white/10 p-6 sm:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.7)] sticky top-28 backdrop-blur-2xl hover:border-[#D4AF37]/30 transition-all duration-300">
+    <div className="rounded-2xl bg-[#111622] border border-white/10 p-6 sm:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.7)] sticky top-28 backdrop-blur-2xl hover:border-[#F59E0B]/30 transition-all duration-300">
       {/* Header */}
       <div className="flex items-center justify-between pb-4 border-b border-white/10">
         <div className="flex items-center gap-2.5">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#D4AF37] animate-pulse" />
+          <div className="w-2.5 h-2.5 rounded-full bg-[#F59E0B] animate-pulse" />
           <span className="text-xs font-bold uppercase tracking-widest text-[#F8FAFC] font-mono">
             Pricing Cockpit
           </span>
         </div>
-        <div className="flex items-center gap-1.5 text-[11px] font-mono text-[#D4AF37] bg-[#D4AF37]/10 px-3 py-1 rounded-full border border-[#D4AF37]/25 font-bold">
+        <div className="flex items-center gap-1.5 text-[11px] font-mono text-[#F59E0B] bg-[#F59E0B]/10 px-3 py-1 rounded-full border border-[#F59E0B]/25 font-bold">
           {isCalculating ? (
             <span className="flex items-center gap-1">
-              <RefreshCw className="w-3 h-3 animate-spin text-[#D4AF37]" />
+              <RefreshCw className="w-3 h-3 animate-spin text-[#F59E0B]" />
               Syncing...
             </span>
           ) : (
@@ -74,7 +74,7 @@ export const PricingCockpit = ({
           <span className="text-[#94A3B8]">Chassis Platform:</span>
           <span className="font-bold text-[#F8FAFC] flex items-center gap-1.5 font-display">
             {category?.name || 'Sedan'}
-            <span className="text-[#D4AF37] font-mono text-[11px] bg-[#D4AF37]/10 px-2 py-0.5 rounded border border-[#D4AF37]/20 font-bold">
+            <span className="text-[#F59E0B] font-mono text-[11px] bg-[#F59E0B]/10 px-2 py-0.5 rounded border border-[#F59E0B]/20 font-bold">
               {multiplier}x
             </span>
           </span>
@@ -104,7 +104,7 @@ export const PricingCockpit = ({
               {addons.map((a) => (
                 <div key={a._id || a.slug} className="flex items-center justify-between text-[#94A3B8]">
                   <span className="truncate max-w-[180px]">{a.title}</span>
-                  <span className="font-mono text-[#D4AF37] font-bold flex-shrink-0">+${a.price}</span>
+                  <span className="font-mono text-[#F59E0B] font-bold flex-shrink-0">+${a.price}</span>
                 </div>
               ))}
             </div>
@@ -115,7 +115,7 @@ export const PricingCockpit = ({
       {/* Estimated Duration & Bay Time */}
       <div className="py-4 border-b border-white/10 flex items-center justify-between text-xs">
         <span className="text-[#94A3B8] flex items-center gap-1.5 font-mono">
-          <Clock className="w-4 h-4 text-[#D4AF37]" />
+          <Clock className="w-4 h-4 text-[#F59E0B]" />
           Estimated Bay Time:
         </span>
         <span className="font-mono font-bold text-[#CBD5E1] text-sm">
@@ -135,7 +135,7 @@ export const PricingCockpit = ({
             </div>
           </div>
           <div className="text-right">
-            <div className="text-3xl sm:text-4xl font-black text-[#D4AF37] font-mono tracking-tight">
+            <div className="text-3xl sm:text-4xl font-black text-[#F59E0B] font-mono tracking-tight">
               ${displayTotal}
             </div>
             <div className="text-[10px] text-[#10B981] font-mono font-bold flex items-center justify-end gap-1 mt-0.5">
@@ -153,7 +153,7 @@ export const PricingCockpit = ({
           size="lg"
           iconRight={ArrowRight}
           onClick={onProceed}
-          className="w-full glow-gold shadow-2xl"
+          className="w-full glow-amber shadow-2xl font-bold"
         >
           Proceed to Bay Reservation
         </Button>
