@@ -58,10 +58,22 @@ test.describe.serial('DetailDock End-to-End Atelier Customer & Admin Journey', (
     await continueToSlotBtn.click();
 
     // Step 2: Studio Bay Date & Slot Selection
-    // Select first open bay slot
-    const slotBtn = page.locator('button:has-text("Open"):not([disabled])').first();
-    await expect(slotBtn).toBeVisible({ timeout: 10000 });
-    await slotBtn.click();
+    // If the active date slots are all booked, cycle through upcoming dates until an open bay slot is found
+    const openSlotBtn = page.locator('button:has-text("Open"):not([disabled])').first();
+    const isFirstDateOpen = await openSlotBtn.isVisible({ timeout: 2000 }).catch(() => false);
+    if (!isFirstDateOpen) {
+      const dateButtons = page.locator('div.grid button:has-text("Oct")');
+      const count = await dateButtons.count();
+      for (let i = 1; i < count; i++) {
+        await dateButtons.nth(i).click();
+        await page.waitForTimeout(500);
+        if (await openSlotBtn.isVisible({ timeout: 1500 }).catch(() => false)) {
+          break;
+        }
+      }
+    }
+    await expect(openSlotBtn).toBeVisible({ timeout: 10000 });
+    await openSlotBtn.click();
 
     const continueToIntakeBtn = page.locator('button:has-text("Continue to Vehicle Intake")').first();
     await expect(continueToIntakeBtn).toBeEnabled({ timeout: 5000 });

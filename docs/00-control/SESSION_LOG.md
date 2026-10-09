@@ -338,18 +338,30 @@
   - Client production build (`vite build`) compiled in 483ms with 0 errors.
 - **Status:** Milestone M05 is 100% complete and verified. All 27 tasks (`TASK-000` through `TASK-026`) VERIFIED.
 
+## 2026-10-09 — Session 21: Automated Studio Communications & White-Label Shop Customizer (M06)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- **Action:** Executed Milestone M06 (`TASK-027` through `TASK-032`). Implemented 100% zero-cost client communications suite (1-click WhatsApp Web and native SMS dispatches), phone number sanitization, dynamic executive detailing message templating, live public client notification feed on `/track/:code` with smartphone lockscreen preview, and dynamic studio white-label settings customizer in Admin Portal with full UI shell branding synchronization and MongoDB persistence.
+- **Implemented:**
+  - `server/src/models/Booking.js`: Added `communicationsLog` array tracking channel (`sms`, `whatsapp`, `email`), recipient, message body, and timestamps.
+  - `server/src/services/communicationService.js`: Universal phone sanitization (`sanitizePhoneNumber`), executive message template builder (`buildCommunicationMessage`), and native WhatsApp (`https://wa.me/`) & SMS URI (`sms:`) generators.
+  - `server/src/routes/studioRoutes.js` & `server/src/server.js`: Mounted public `GET /api/v1/studio/settings`.
+  - `server/src/routes/adminRoutes.js` & `server/src/controllers/adminController.js`: Added `getStudioSettings`, `updateStudioSettings`, `getBookingCommunicationLinks`, and `recordDispatchedMessage`. Added automatic communication dispatch logging upon job status advancement.
+  - `server/src/controllers/bookingController.js`: Added automatic initial email/SMS notification logging on booking creation; exposed `communications` log in public `trackBooking` response.
+  - `client/src/context/StudioContext.jsx`: Global studio settings state provider with live data streaming and caching.
+  - `client/src/App.jsx`: Wrapped app in `<StudioProvider>`.
+  - `client/src/components/layout/Navbar.jsx` & `Footer.jsx`: Dynamically bound to `useStudio()` for studio title, phone, address, hours, and active bay count.
+  - `client/src/components/tracking/CommunicationsLogSection.jsx`: Rendered live client dispatch feed with chronological log and interactive smartphone notification lockscreen simulation.
+  - `client/src/pages/TrackJobPage.jsx`: Integrated `CommunicationsLogSection`.
+  - `client/src/components/admin/KanbanBoard.jsx`: Added 1-click WhatsApp and SMS quick actions on Kanban cards.
+  - `client/src/components/admin/BookingDetailModal.jsx`: Direct Client Dispatch Hub with instant WhatsApp & SMS launcher.
+  - `client/src/components/admin/StudioSettingsModal.jsx`: Interactive white-label customizer modal allowing shop owners to edit Studio Name, Phone, Email, Address, Hours, and Bay Capacity with instant MongoDB persistence and reset.
+  - `client/src/pages/AdminPage.jsx`: Integrated "Studio Identity Settings" modal.
+  - `client/src/pages/BookingPage.jsx`: Dynamically rendered live bay capacity and location badge from StudioContext.
+  - `client/src/services/api.js`: Added `getPublicStudioSettings`, `getAdminStudioSettings`, `updateStudioSettings`, `getBookingCommunicationLinks`, and `recordDispatchedMessage`.
+- **Verified:**
+  - `testCommunicationsAndSettings.js`: 6/6 tests passed (100% pass rate).
+  - Full automated backend test suite (155+ checks across pricing, availability, bookings, auth, admin, OWASP, stripe, PDF invoicing, communications) passing with 0 errors.
+  - Playwright E2E Suite (`detaildock.spec.js`): 5/5 tests passed in 27.5s with smart date tab navigation.
+  - Vite client production build: compiled in 581ms with 0 errors.
+  - Live Cloud Production Smoke Test (`testProductionLiveEndpoints.js`): 15/15 checks passed against live Render API (`https://detaildock-api.onrender.com`) and Vercel frontend (`https://client-mauve-zeta-13.vercel.app`).
+- **Status:** Milestone M06 is 100% complete, verified, and deployed. All 33 tasks (`TASK-000` through `TASK-032`) VERIFIED.

@@ -121,6 +121,19 @@ async function testLiveProduction() {
     failed++;
   }
 
+  // 5. Test Live Public Studio Settings API
+  try {
+    console.log('\n--- 5. Testing Live Public Studio Settings API ---');
+    const studioRes = await fetch(`${RENDER_BASE}/studio/settings`);
+    const studioJson = await studioRes.json();
+    assert(studioRes.status === 200, 'Render /studio/settings returns 200 OK');
+    assert(!!studioJson.data?.studioName, `Live Studio Name: ${studioJson.data?.studioName}`);
+    assert(!!studioJson.data?.contactPhone, `Live Concierge Phone: ${studioJson.data?.contactPhone}`);
+  } catch (err) {
+    console.error('  ✗ Studio settings test failed:', err.message);
+    failed++;
+  }
+
   // Cleanup live test booking from Atlas
   if (liveBookingCode) {
     try {
