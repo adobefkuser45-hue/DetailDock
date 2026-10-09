@@ -18,7 +18,7 @@
 ## 2. Current Position
 - **Stage:** `06 Frontend Implementation`
 - **Milestone:** `M03 — Luxury Atelier Frontend & Interactive UI`
-- **Current Task:** `TASK-016 — Smart Package Builder (Vehicle Multipliers, Packages, Addons)`
+- **Current Task:** `TASK-017 — Appointment Booking Flow (Calendar, Time Slots, Vehicle Intake)`
 - **Task Status:** `PROPOSED`
 - **Classification:** `BOUNDED`
 
@@ -45,17 +45,18 @@
   - `TASK-013`: Admin Operations API & Role-Based Auth (36/36 auth & admin tests passed; 115 total tests passing).
   - `TASK-014`: Frontend Foundation, Styling Tokens & Bespoke SVG Logo (Vite production build verified in 493ms).
   - `TASK-015`: Premium Homepage with Scangrip Spotlight, Before/After Slider, Testimonials, Process Timeline (Vite production build verified in 465ms).
+  - `TASK-016`: Smart Package Builder with 3-Step Configurator, Vehicle Multipliers, Addon Toggles, Pricing Cockpit (Vite production build verified in 445ms).
 - **In Progress:**
-  - Ready for TASK-016 (Smart Package Builder with dynamic vehicle multipliers, package selection, addon toggles, and server verification).
+  - Ready for TASK-017 (Appointment Booking Flow with multi-step wizard, studio calendar, real-time dual-bay availability, and intake form).
 - **Blockers:**
   - None.
 
 ---
 
 ## 4. Last Verified
-- **Task:** `TASK-015 — Premium Homepage (Hero, Before/After Slider, Testimonials)`
+- **Task:** `TASK-016 — Smart Package Builder (Vehicle Multipliers, Packages, Addons)`
 - **Date:** 2026-10-09
-- **Evidence Reference:** [VERIFICATION.md#task-015](file:///docs/00-control/VERIFICATION.md#task-015)
+- **Evidence Reference:** [VERIFICATION.md#task-016](file:///docs/00-control/VERIFICATION.md#task-016)
 
 ---
 

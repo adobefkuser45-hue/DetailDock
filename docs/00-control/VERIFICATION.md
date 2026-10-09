@@ -668,6 +668,59 @@ All claims of completion must be verified with concrete evidence before receivin
   - Tested: `testPricingAndAvailability.js`, `testBookingAndTracking.js`, `testAuthAndAdmin.js`.
   - Result: 115 / 115 tests passing (`exit 0`).
 
+---
+
+## TASK-016: Smart Package Builder (Vehicle Multipliers, Packages, Addons)
+
+- **Task ID:** TASK-016
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-09
+- **Classification:** `BOUNDED`
+
+### Acceptance Criteria:
+1. 3-Step Interactive Configurator (`BuilderPage.jsx`):
+   - **Step 1: Vehicle Category Selector (`VehicleSelector.jsx`):** 4 categories (Compact/Sedan 1.0x, Executive/Coupe 1.1x, Compact SUV 1.25x, Full SUV/Truck 1.45x) with dynamic visual cards, icon accents, and multiplier indicators.
+   - **Step 2: Detailing Package Selector (`PackageSelector.jsx`):** 3 tiers (Essential Clean, Signature Multi-Stage Detail, Ultimate 9H Ceramic Shield) displaying base price, multiplier-adjusted price, duration factor, and full included feature checklists.
+   - **Step 3: Optional Atelier Enhancements (`AddonSelector.jsx`):** 5 standalone treatments with toggle switches, added duration pill (`+45m`, `+60m`), and price tag.
+2. Authoritative Real-Time Pricing Summary Cockpit (`PricingCockpit.jsx`):
+   - Integrates `calculatePricing()` from centralized API client (`api.js`) targeting `POST /api/v1/pricing/calculate`.
+   - Real-time display of line-item breakdown: Base Package Price, Vehicle Multiplier, Adjusted Package Subtotal, itemized Addons (+ $), Estimated Bay Time, and Total Investment.
+   - Authoritative verification seal: `Authoritative • Deterministic Rule Engine`.
+3. URL Query Parameter Hydration:
+   - Synchronizes `?category=...` and `?package=...` from query parameters on initial page load, preselecting options if arrived from the Hero Cockpit or Service Grid.
+4. Seamless Flow Handover:
+   - "Proceed to Bay Reservation" action button carries the exact configured state (`category`, `package`, `addons`, and authoritative `pricing`) to `/book` via both React Router navigate state and URL search parameters (`/book?category=...&package=...&addons=...`).
+5. Mobile Responsive Floating Dock:
+   - Sticky summary drawer on small screens ensuring continuous total price visibility and instant action.
+6. Client bundle compilation verified via Vite production build in < 500ms with zero errors.
+
+### Verification Evidence:
+- **Client Build & Bundle Verification:**
+  - Command: `npm run build --prefix client`
+  - Output:
+    ```text
+    > client@0.0.0 build
+    > node ../node_modules/vite/bin/vite.js build
+
+    vite v8.3.4 building client environment for production...
+    transforming...
+    ✓ 1931 modules transformed.
+    rendering chunks...
+    computing gzip size...
+    dist/index.html                   1.01 kB │ gzip:   0.55 kB
+    dist/assets/index-DY85aVPt.css   52.67 kB │ gzip:   9.04 kB
+    dist/assets/index-DpsgQNAk.js   363.90 kB │ gzip: 108.54 kB
+
+    ✓ built in 445ms
+    ```
+  - Exit code: `0`.
+- **Backend Non-Regression Test Results:**
+  - `testPricingAndAvailability.js` (29 tests): Passed (`exit 0`).
+  - `testBookingAndTracking.js` (25 tests): Passed (`exit 0`).
+  - `testAuthAndAdmin.js` (36 tests): Passed (`exit 0`).
+  - Total: 115 / 115 passing tests (`exit 0`).
+
+
 
 
 
