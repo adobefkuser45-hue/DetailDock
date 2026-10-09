@@ -830,6 +830,74 @@ All claims of completion must be verified with concrete evidence before receivin
   - `testAuthAndAdmin.js` (36 tests): Passed (`exit 0`).
   - Total: 115 / 115 passing tests (`exit 0`).
 
+---
+
+## TASK-019: Admin Business Dashboard & Appointment Pipeline Board (/admin/*)
+
+- **Task ID:** TASK-019
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-09
+- **Classification:** `BOUNDED`
+
+### Acceptance Criteria:
+1. Restricted Admin Access Gate (`AdminLogin.jsx`):
+   - Secure login form with email & master security key fields.
+   - 1-click Demo Admin Credentials helper (`admin@detaildock.com` / `DetailDockAdmin2026!`).
+   - JWT token storage in `localStorage` (`detaildock_admin_token`, `detaildock_admin_user`).
+2. Real-Time Studio Business KPIs (`AdminKpiRow.jsx`):
+   - Total Studio Revenue card with formatted currency and MoM growth rate indicator.
+   - Pipeline Bookings volume counter.
+   - Cleanroom Bay Utilization gauge (e.g. 100% active bay load).
+   - Dynamic Average Ticket Size (AOV) calculated from real revenue/booking volume.
+3. Interactive 5-Column Atelier Pipeline Kanban Board (`KanbanBoard.jsx`):
+   - 5 workflow lanes: `1. Requested (Pending)`, `2. Confirmed`, `3. In Cleanroom Bay`, `4. Showroom Ready`, `5. Completed & Released`.
+   - Card summaries displaying booking code, assigned bay (Bay 1/Bay 2), vehicle year/make/model, client name, time slot, and locked price.
+   - Direct 1-click stage advancement buttons ("Confirm Bay", "Stage in Bay", "Mark Ready", "Complete & Release") executing optimistic state updates and backend API transitions (`PATCH /api/v1/admin/bookings/:id/status`).
+4. Full Appointment Inspection & Override Modal (`BookingDetailModal.jsx`):
+   - High-density vehicle specification, customer intake, and financial itemization breakdown.
+   - Status transition dropdown, bay reassignment (Bay 1 / Bay 2), and technician remarks textarea logging into permanent `statusHistory` audit trail.
+   - Direct external link to live public telemetry viewer (`/track/:code`).
+5. Atelier Operations Deck Assembly (`AdminPage.jsx`):
+   - Operations header with real-time bay status, admin profile pill, silent pipeline refresh, and secure sign-out.
+   - Search bar across booking codes, client names, phone numbers, and vehicle models.
+   - Studio bay filter (`All Studio Bays`, `Cleanroom Bay 1`, `Cleanroom Bay 2`).
+   - Cleanroom offline fallback dataset ensuring resilient evaluation in any environment.
+6. Client bundle build verification via Vite production build in < 500ms with zero errors.
+7. Zero lint errors verified via Oxlint.
+8. Full non-regression verification across 115 backend test cases.
+
+### Verification Evidence:
+- **Client Build & Bundle Verification:**
+  - Command: `npm run build --prefix client`
+  - Output:
+    ```text
+    > client@0.0.0 build
+    > node ../node_modules/vite/bin/vite.js build
+
+    vite v8.3.4 building client environment for production...
+    transforming...
+    ✓ 1943 modules transformed.
+    rendering chunks...
+    computing gzip size...
+    dist/index.html                   1.01 kB │ gzip:   0.55 kB
+    dist/assets/index-D1uiWuzM.css   61.02 kB │ gzip:  10.08 kB
+    dist/assets/index-egRJZ6_v.js   443.13 kB │ gzip: 124.06 kB
+
+    ✓ built in 465ms
+    ```
+  - Exit code: `0`.
+- **Linter Verification:**
+  - Command: `node node_modules/oxlint/bin/oxlint client/src`
+  - Output: `Finished in 32ms on 38 files using 12 threads. Found 0 errors.`
+  - Exit code: `0`.
+- **Backend Non-Regression Suite:**
+  - `testPricingAndAvailability.js` (29 tests): Passed (`exit 0`).
+  - `testHttpEndpoints.js` (25 tests): Passed (`exit 0`).
+  - `testBookingAndTracking.js` (25 tests): Passed (`exit 0`).
+  - `testAuthAndAdmin.js` (36 tests): Passed (`exit 0`).
+  - Total: 115 / 115 passing tests (`exit 0`).
+
+
 
 
 
