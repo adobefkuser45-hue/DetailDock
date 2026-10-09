@@ -11,11 +11,14 @@ import {
   Check, 
   AlertTriangle,
   FileDown,
-  CreditCard
+  CreditCard,
+  MessageSquare,
+  Smartphone,
+  MailCheck
 } from 'lucide-react';
 import { Button } from '../common/Button.jsx';
 import { Badge } from '../common/Badge.jsx';
-import { getInvoiceDownloadUrl } from '../../services/api.js';
+import { getInvoiceDownloadUrl, resendBookingReceipt } from '../../services/api.js';
 
 export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdating }) => {
   const [selectedStatus, setSelectedStatus] = useState(booking?.status || 'Pending');
@@ -164,6 +167,51 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
               <p className="text-white italic">"{booking.notes}"</p>
             </div>
           )}
+
+          {/* Direct Client Communications Dispatch Hub */}
+          <div className="p-4 rounded-xl bg-[#161D2E] border border-[#2A364E] space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="text-xs font-bold uppercase text-white tracking-wider flex items-center gap-1.5">
+                <MessageSquare className="w-3.5 h-3.5 text-[#25D366]" />
+                <span>Direct Client Dispatch Hub</span>
+              </div>
+              <span className="text-[11px] font-mono text-[#38BDF8]">
+                {customer.phone || 'No phone'}
+              </span>
+            </div>
+
+            <p className="text-xs text-[#94A3B8]">
+              Instantly notify customer of stage <span className="text-[#38BDF8] font-bold">({booking.status})</span> with 1-click via WhatsApp or SMS:
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+              {customer.phone ? (
+                <a
+                  href={`https://wa.me/${(customer.phone || '').replace(/[^\d]/g, '')}?text=${encodeURIComponent(`DetailDock Atelier: Update on your ${vehicle.year || ''} ${vehicle.make || ''} ${vehicle.model || ''} (Ref: ${booking.bookingCode}). Current status: ${booking.status}. Cleanroom Bay: ${booking.bayNumber || 1}. Track live: https://client-mauve-zeta-13.vercel.app/track/${booking.bookingCode}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-2.5 px-3 rounded-xl bg-[#25D366]/15 hover:bg-[#25D366]/25 border border-[#25D366]/40 text-[#25D366] text-xs font-bold flex items-center justify-center gap-2 transition-colors"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  <span>Send WhatsApp Alert</span>
+                </a>
+              ) : (
+                <div className="text-xs text-[#64748B] p-2 bg-[#090C12] rounded-xl border border-[#1D2536] text-center">
+                  No mobile on file
+                </div>
+              )}
+
+              {customer.phone ? (
+                <a
+                  href={`sms:${(customer.phone || '').replace(/[^\d]/g, '')}?body=${encodeURIComponent(`DetailDock Atelier: Update on your ${vehicle.year || ''} ${vehicle.make || ''} ${vehicle.model || ''} (Ref: ${booking.bookingCode}). Current status: ${booking.status}. Track live: https://client-mauve-zeta-13.vercel.app/track/${booking.bookingCode}`)}`}
+                  className="py-2.5 px-3 rounded-xl bg-[#38BDF8]/15 hover:bg-[#38BDF8]/25 border border-[#38BDF8]/40 text-[#38BDF8] text-xs font-bold flex items-center justify-center gap-2 transition-colors"
+                >
+                  <Smartphone className="w-4 h-4" />
+                  <span>Send SMS Message</span>
+                </a>
+              ) : null}
+            </div>
+          </div>
 
           {/* UPDATE STATUS & SETTLEMENT FORM */}
           <form onSubmit={handleSubmit} className="p-4 rounded-xl bg-[#090C12] border border-[#2A364E] space-y-4">

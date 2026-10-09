@@ -107,6 +107,15 @@ const BookingSchema = new mongoose.Schema({
   adminNotes: { type: String, default: '' },
   cancellationReason: { type: String, default: '' },
 
+  // Communications dispatch log (SMS, WhatsApp, Email)
+  communicationsLog: [{
+    channel: { type: String, enum: ['sms', 'whatsapp', 'email'], required: true },
+    recipient: { type: String, required: true },
+    message: { type: String, required: true },
+    dispatchedAt: { type: Date, default: Date.now },
+    status: { type: String, default: 'dispatched' }
+  }],
+
   // Audit trail
   statusHistory: [{
     status: { type: String, required: true },

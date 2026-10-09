@@ -23,6 +23,7 @@ import { JobProgressMeter } from '../components/tracking/JobProgressMeter.jsx';
 import { JobTelemetryCards } from '../components/tracking/JobTelemetryCards.jsx';
 import { JobAuditTimeline } from '../components/tracking/JobAuditTimeline.jsx';
 import { ReadyPickupBanner } from '../components/tracking/ReadyPickupBanner.jsx';
+import { CommunicationsLogSection } from '../components/tracking/CommunicationsLogSection.jsx';
 import { trackBooking, getInvoiceDownloadUrl, resendBookingReceipt } from '../services/api.js';
 
 export const TrackJobPage = () => {
@@ -307,6 +308,13 @@ export const TrackJobPage = () => {
             {/* Chronological Technician History Audit */}
             <JobAuditTimeline
               timeline={bookingData.timeline}
+            />
+
+            {/* Live Automated Client Notifications & Dispatch Log */}
+            <CommunicationsLogSection
+              communications={bookingData.communications}
+              customerPhone={bookingData.customer?.maskedPhone}
+              bookingCode={bookingData.bookingCode}
             />
 
             {/* Footer Navigation Strip */}

@@ -137,6 +137,22 @@ export const createBooking = asyncHandler(async (req, res) => {
       depositAmount: 0
     },
     notes: notes ? notes.trim() : '',
+    communicationsLog: [
+      {
+        channel: 'email',
+        recipient: customer.email.trim(),
+        message: `Official booking confirmation and preservation invoice dispatched for ${bookingCode}.`,
+        dispatchedAt: new Date(),
+        status: 'dispatched'
+      },
+      {
+        channel: 'sms',
+        recipient: customer.phone.trim(),
+        message: `Studio Bay ${assignedBay} reserved for ${vehicle.year} ${vehicle.make} ${vehicle.model}. Reference: ${bookingCode}.`,
+        dispatchedAt: new Date(),
+        status: 'dispatched'
+      }
+    ],
     statusHistory: [
       {
         status: 'Pending',
@@ -261,6 +277,13 @@ export const trackBooking = asyncHandler(async (req, res) => {
         status: h.status,
         changedAt: h.changedAt,
         note: h.note || ''
+      })),
+      communications: (booking.communicationsLog || []).map((c) => ({
+        channel: c.channel,
+        recipient: c.recipient,
+        message: c.message,
+        dispatchedAt: c.dispatchedAt,
+        status: c.status
       })),
       createdAt: booking.createdAt
     },

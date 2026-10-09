@@ -116,6 +116,10 @@ test.describe.serial('DetailDock End-to-End Atelier Customer & Admin Journey', (
       // Verify Tax Invoice & Invoicing Section
       await expect(page.locator('text=Financial Settlement & Official Invoicing').first()).toBeVisible();
       await expect(page.locator('text=Download Tax Invoice / Receipt (PDF)').first()).toBeVisible();
+
+      // Verify Automated Client Telemetry & Notifications Section
+      await expect(page.locator('text=Automated Client Telemetry & Notifications').first()).toBeVisible();
+      await expect(page.locator('button:has-text("Simulate Phone Notification")').first()).toBeVisible();
     }
   });
 
@@ -144,6 +148,13 @@ test.describe.serial('DetailDock End-to-End Atelier Customer & Admin Journey', (
     // KPI Metric Row
     await expect(page.locator('text=Total Studio Revenue').first()).toBeVisible();
     await expect(page.locator('text=Cleanroom Utilization').first()).toBeVisible();
+
+    // Verify Studio Identity Settings Customizer Modal opens cleanly
+    const settingsBtn = page.locator('button:has-text("Studio Identity Settings")').first();
+    await expect(settingsBtn).toBeVisible();
+    await settingsBtn.click();
+    await expect(page.locator('text=Studio Identity & Location Settings').first()).toBeVisible();
+    await page.locator('button:has-text("Cancel")').first().click();
 
     // Kanban Board
     await expect(page.locator('text=Live Atelier Pipeline Board').first()).toBeVisible();

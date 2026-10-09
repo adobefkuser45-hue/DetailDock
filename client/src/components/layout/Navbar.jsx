@@ -13,10 +13,12 @@ import {
 } from 'lucide-react';
 import { DetailDockLogo } from '../common/DetailDockLogo.jsx';
 import { Button } from '../common/Button.jsx';
+import { useStudio } from '../../context/StudioContext.jsx';
 
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { settings } = useStudio();
 
   const navLinks = [
     { name: 'Services', path: '/#services', icon: Sparkles },
@@ -31,6 +33,15 @@ export const Navbar = () => {
     return location.pathname === path;
   };
 
+  const bayCountText = settings?.maxBayCapacity === 1 
+    ? 'Cleanroom Bay Active' 
+    : `${settings?.maxBayCapacity || 2} Detailing Bays Active`;
+
+  const locationText = `${settings?.address?.city || 'Austin'}, ${settings?.address?.state || 'TX'} Atelier`;
+  const hoursText = `Operating: Mon–Sat ${settings?.operatingHours?.openTime || '09:00 AM'} – ${settings?.operatingHours?.closeTime || '06:00 PM'}`;
+  const phoneText = settings?.contactPhone || '+1 (555) 348-2450';
+  const cleanPhone = phoneText.replace(/[^\d+]/g, '');
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[#1D2536] bg-[#090C12]/85 backdrop-blur-xl transition-all">
       {/* Top Thin Studio Status Bar */}
@@ -41,21 +52,21 @@ export const Navbar = () => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]" />
             </span>
-            Atelier Live: Dual Detailing Bays Active
+            Atelier Live: {bayCountText}
           </span>
           <span className="text-[#2A364E]">•</span>
-          <span>Austin, TX Atelier</span>
+          <span>{locationText}</span>
           <span className="text-[#2A364E]">•</span>
-          <span>Operating: Mon–Sat 09:00 AM – 06:00 PM</span>
+          <span>{hoursText}</span>
         </div>
 
         <div className="flex items-center gap-4 text-[#94A3B8]">
           <a
-            href="tel:+15553482450"
+            href={`tel:${cleanPhone}`}
             className="flex items-center gap-1.5 hover:text-[#38BDF8] transition-colors"
           >
             <PhoneCall className="w-3 h-3 text-[#38BDF8]" />
-            <span>Concierge: +1 (555) 348-2450</span>
+            <span>Concierge: {phoneText}</span>
           </a>
         </div>
       </div>

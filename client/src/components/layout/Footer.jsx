@@ -10,8 +10,16 @@ import {
   ArrowUpRight
 } from 'lucide-react';
 import { DetailDockLogo } from '../common/DetailDockLogo.jsx';
+import { useStudio } from '../../context/StudioContext.jsx';
 
 export const Footer = () => {
+  const { settings } = useStudio();
+  const addressStr = `${settings?.address?.street || '1440 Velocity Way, Suite 100'}, ${settings?.address?.city || 'Austin'}, ${settings?.address?.state || 'TX'} ${settings?.address?.zip || '78701'}`;
+  const phone = settings?.contactPhone || '+1 (555) 348-2450';
+  const cleanPhone = phone.replace(/[^\d+]/g, '');
+  const email = settings?.contactEmail || 'concierge@detaildock.com';
+  const hoursStr = `Mon – Sat: ${settings?.operatingHours?.openTime || '09:00 AM'} – ${settings?.operatingHours?.closeTime || '06:00 PM'} (Closed Sun)`;
+  const studioName = settings?.studioName || 'DetailDock Atelier';
   return (
     <footer className="border-t border-[#1D2536] bg-[#090C12] text-[#94A3B8] text-sm">
       {/* Top Banner Accent Line */}
@@ -104,23 +112,23 @@ export const Footer = () => {
             <div className="space-y-2.5 text-xs">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#38BDF8] flex-shrink-0 mt-0.5" />
-                <span>1440 Velocity Way, Suite 100, Austin, TX 78701</span>
+                <span>{addressStr}</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#38BDF8] flex-shrink-0" />
-                <a href="tel:+15553482450" className="hover:text-white transition-colors">
-                  +1 (555) 348-2450
+                <a href={`tel:${cleanPhone}`} className="hover:text-white transition-colors">
+                  {phone}
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#38BDF8] flex-shrink-0" />
-                <a href="mailto:concierge@detaildock.com" className="hover:text-white transition-colors">
-                  concierge@detaildock.com
+                <a href={`mailto:${email}`} className="hover:text-white transition-colors">
+                  {email}
                 </a>
               </div>
               <div className="flex items-center gap-2.5 text-[#64748B]">
                 <Clock className="w-4 h-4 flex-shrink-0" />
-                <span>Mon – Sat: 09:00 AM – 06:00 PM (Closed Sun)</span>
+                <span>{hoursStr}</span>
               </div>
             </div>
           </div>
@@ -129,7 +137,7 @@ export const Footer = () => {
         {/* Bottom Legal Bar */}
         <div className="mt-12 pt-8 border-t border-[#1D2536] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#64748B]">
           <div className="flex items-center gap-2">
-            <span>DetailDock Atelier © {new Date().getFullYear()}</span>
+            <span>{studioName} © {new Date().getFullYear()}</span>
             <span>•</span>
             <span className="flex items-center gap-1 text-[#94A3B8]">
               <ShieldCheck className="w-3.5 h-3.5 text-[#10B981]" />

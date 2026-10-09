@@ -23,8 +23,10 @@ import {
   calculatePricing,
   createCheckoutSession 
 } from '../services/api.js';
+import { useStudio } from '../context/StudioContext.jsx';
 
 export const BookingPage = () => {
+  const { settings } = useStudio();
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -203,7 +205,9 @@ export const BookingPage = () => {
         <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#101522] border border-[#2A364E] text-xs font-semibold text-[#38BDF8] mb-3">
             <Warehouse className="w-3.5 h-3.5" />
-            <span>Dual Cleanroom Bays • Austin Atelier</span>
+            <span>
+              {settings?.maxBayCapacity === 1 ? 'Single Cleanroom Bay' : `${settings?.maxBayCapacity || 2} Cleanroom Bays`} • {settings?.address?.city || 'Austin'} Atelier
+            </span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold text-[#F8FAFC] tracking-tight">
             Reserve Studio Bay Slot

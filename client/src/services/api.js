@@ -231,3 +231,42 @@ export const resendBookingReceipt = async (bookingCode) => {
   });
   return res;
 };
+
+// -------------------------------------------------------------
+// Studio Configuration & White-Label Customizer
+// -------------------------------------------------------------
+
+export const getPublicStudioSettings = async () => {
+  const res = await request('/studio/settings');
+  return res.data;
+};
+
+export const getAdminStudioSettings = async (token) => {
+  const res = await request('/admin/settings', {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return res.data;
+};
+
+// -------------------------------------------------------------
+// Studio Communications & 1-Click WhatsApp / SMS Quick Actions
+// -------------------------------------------------------------
+
+export const getBookingCommunicationLinks = async (bookingCode, token) => {
+  const cleanedCode = encodeURIComponent(bookingCode.trim().toUpperCase());
+  const res = await request(`/admin/bookings/${cleanedCode}/communication-links`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return res.data;
+};
+
+export const recordDispatchedMessage = async (bookingCode, { channel, message, recipient }, token) => {
+  const cleanedCode = encodeURIComponent(bookingCode.trim().toUpperCase());
+  const res = await request(`/admin/bookings/${cleanedCode}/dispatch-message`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}` },
+    body: JSON.stringify({ channel, message, recipient })
+  });
+  return res.data;
+};
+

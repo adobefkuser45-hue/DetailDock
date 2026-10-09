@@ -37,6 +37,12 @@
 | **TASK-024** | 09 Monetize | Frontend Stripe Checkout & Payment Selector in Booking Flow | `VERIFIED` | TASK-022 | [VERIFICATION.md#task-024](file:///docs/00-control/VERIFICATION.md#task-024) |
 | **TASK-025** | 09 Monetize | Live Tracking & Admin Payment Settlement & Invoice Controls | `VERIFIED` | TASK-023 | [VERIFICATION.md#task-025](file:///docs/00-control/VERIFICATION.md#task-025) |
 | **TASK-026** | 09 Monetize | Full E2E Verification & Cloud Deployment (Render + Vercel) | `VERIFIED` | TASK-025 | [VERIFICATION.md#task-026](file:///docs/00-control/VERIFICATION.md#task-026) |
+| **TASK-027** | 10 Comms | White-Label Studio Settings API & Persistence (`/api/v1/studio/settings`) | `VERIFIED` | TASK-026 | [VERIFICATION.md#task-027](file:///docs/00-control/VERIFICATION.md#task-027) |
+| **TASK-028** | 10 Comms | Studio Communications Engine & 1-Click WhatsApp / SMS Quick Actions | `VERIFIED` | TASK-027 | [VERIFICATION.md#task-028](file:///docs/00-control/VERIFICATION.md#task-028) |
+| **TASK-029** | 10 Comms | Dynamic White-Label Brand Synchronization (Navbar, Footer, Wizard) | `VERIFIED` | TASK-028 | [VERIFICATION.md#task-029](file:///docs/00-control/VERIFICATION.md#task-029) |
+| **TASK-030** | 10 Comms | Live Tracking Portal Client Telemetry Alert & Notification Log | `VERIFIED` | TASK-029 | [VERIFICATION.md#task-030](file:///docs/00-control/VERIFICATION.md#task-030) |
+| **TASK-031** | 10 Comms | Interactive White-Label Studio Customizer Settings in Admin Portal | `VERIFIED` | TASK-030 | [VERIFICATION.md#task-031](file:///docs/00-control/VERIFICATION.md#task-031) |
+| **TASK-032** | 10 Comms | Full E2E Verification & Cloud Deployment (Render + Vercel) | `PROPOSED` | TASK-031 | Pending |
 
 ---
 

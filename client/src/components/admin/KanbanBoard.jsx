@@ -12,7 +12,9 @@ import {
   AlertCircle,
   Eye,
   Check,
-  ChevronRight
+  ChevronRight,
+  MessageSquare,
+  Smartphone
 } from 'lucide-react';
 import { Badge } from '../common/Badge.jsx';
 
@@ -190,6 +192,30 @@ export const KanbanBoard = ({ bookings, onAdvanceStatus, onOpenDetails, isUpdati
                             <div className="w-full py-1 text-center text-[10px] font-mono text-[#10B981] font-semibold bg-[#10B981]/10 rounded border border-[#10B981]/20">
                               ✓ Serialized Release
                             </div>
+                          )}
+
+                          {/* Quick WhatsApp Dispatch Action */}
+                          {customer.phone && (
+                            <a
+                              href={`https://wa.me/${(customer.phone || '').replace(/[^\d]/g, '')}?text=${encodeURIComponent(`DetailDock Atelier: Update on your ${vehicle.year || ''} ${vehicle.make || ''} ${vehicle.model || ''} (Ref: ${booking.bookingCode}). Current status: ${booking.status}. Track live: https://client-mauve-zeta-13.vercel.app/track/${booking.bookingCode}`)}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-1.5 rounded-lg bg-[#101522] border border-[#25D366]/40 text-[#25D366] hover:bg-[#25D366]/10 transition-colors"
+                              title="Send WhatsApp Client Alert"
+                            >
+                              <MessageSquare className="w-3.5 h-3.5" />
+                            </a>
+                          )}
+
+                          {/* Quick SMS Dispatch Action */}
+                          {customer.phone && (
+                            <a
+                              href={`sms:${(customer.phone || '').replace(/[^\d]/g, '')}?body=${encodeURIComponent(`DetailDock Atelier: Update on your ${vehicle.year || ''} ${vehicle.make || ''} ${vehicle.model || ''} (Ref: ${booking.bookingCode}). Current status: ${booking.status}. Track live: https://client-mauve-zeta-13.vercel.app/track/${booking.bookingCode}`)}`}
+                              className="p-1.5 rounded-lg bg-[#101522] border border-[#38BDF8]/40 text-[#38BDF8] hover:bg-[#38BDF8]/10 transition-colors"
+                              title="Send SMS Carrier Alert"
+                            >
+                              <Smartphone className="w-3.5 h-3.5" />
+                            </a>
                           )}
 
                           {/* Quick Details View Button */}

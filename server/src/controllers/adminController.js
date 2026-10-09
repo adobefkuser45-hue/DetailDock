@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import { Booking } from '../models/Booking.js';
 import { StudioSetting } from '../models/StudioSetting.js';
 import { normalizeDateRange } from '../services/availabilityService.js';
+import { generateCommunicationLinks, buildCommunicationMessage } from '../services/communicationService.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
 import { AppError } from '../utils/AppError.js';
 
@@ -212,6 +213,19 @@ export const updateBookingStatus = asyncHandler(async (req, res) => {
     note: note || `Status transitioned from ${previousStatus} to ${status}.`
   });
 
+  // Automatically record communication dispatch if status transitioned
+  if (previousStatus !== status) {
+    if (!booking.communicationsLog) booking.communicationsLog = [];
+    const autoChannel = (status === 'Ready' || status === 'Completed') ? 'whatsapp' : 'sms';
+    booking.communicationsLog.push({
+      channel: autoChannel,
+      recipient: booking.customer?.phone || booking.customer?.email,
+      message: `Status transitioned to '${status}' in Cleanroom Bay ${booking.bayNumber}. Telemetry updated.`,
+      dispatchedAt: new Date(),
+      status: 'dispatched'
+    });
+  }
+
   await booking.save();
 
   res.status(200).json({
@@ -293,3 +307,100 @@ export const updateStudioSettings = asyncHandler(async (req, res) => {
     message: 'Studio settings updated successfully.'
   });
 });
+
+/**
+ * @desc Get current studio configuration
+ * @route GET /api/v1/admin/settings
+ * @access Admin
+ */
+export const getStudioSettings = asyncHandler(async (req, res) => {
+  let settings = await StudioSetting.findOne();
+  if (!settings) {
+    settings = await StudioSetting.create({
+      studioName: 'DetailDock Luxury Atelier',
+      contactPhone: '+1 (555) 348-2450',
+      contactEmail: 'concierge@detaildock.com',
+      address: {
+        street: '1440 Velocity Way, Suite 100',
+        city: 'Austin',
+        state: 'TX',
+        zip: '78701'
+      },
+      operatingHours: {
+        openTime: '09:00 AM',
+        closeTime: '06:00 PM',
+        slotIntervalMinutes: 120
+      },
+      maxBayCapacity: 2
+    });
+  }
+
+  res.status(200).json({
+    success: true,
+    data: settings,
+    message: 'Studio settings retrieved successfully.'
+  });
+});
+
+/**
+ * @desc Generate real-time WhatsApp & SMS communication dispatch links for a booking
+ * @route GET /api/v1/admin/bookings/:code/communication-links
+ * @access Admin
+ */
+export const getBookingCommunicationLinks = asyncHandler(async (req, res) => {
+  const { code } = req.params;
+  const booking = await Booking.findOne({ bookingCode: code.toUpperCase() });
+  if (!booking) {
+    throw new AppError(`Booking ${code} not found.`, 404, 'BOOKING_NOT_FOUND');
+  }
+
+  const studioSettings = await StudioSetting.findOne();
+  const clientUrl = process.env.CLIENT_URL || 'https://client-mauve-zeta-13.vercel.app';
+  const links = generateCommunicationLinks(booking, studioSettings, clientUrl);
+
+  res.status(200).json({
+    success: true,
+    data: links,
+    message: 'Communication links generated successfully.'
+  });
+});
+
+/**
+ * @desc Record a communication dispatch in booking history
+ * @route POST /api/v1/admin/bookings/:code/dispatch-message
+ * @access Admin
+ */
+export const recordDispatchedMessage = asyncHandler(async (req, res) => {
+  const { code } = req.params;
+  const { channel, message, recipient } = req.body;
+
+  if (!channel || !message) {
+    throw new AppError('Channel and message text are required.', 400, 'MISSING_PAYLOAD');
+  }
+
+  const booking = await Booking.findOne({ bookingCode: code.toUpperCase() });
+  if (!booking) {
+    throw new AppError(`Booking ${code} not found.`, 404, 'BOOKING_NOT_FOUND');
+  }
+
+  const logEntry = {
+    channel,
+    recipient: recipient || booking.customer?.phone || booking.customer?.email,
+    message,
+    dispatchedAt: new Date(),
+    status: 'dispatched'
+  };
+
+  if (!booking.communicationsLog) {
+    booking.communicationsLog = [];
+  }
+  booking.communicationsLog.push(logEntry);
+  await booking.save();
+
+  res.status(200).json({
+    success: true,
+    data: logEntry,
+    message: `Message dispatched via ${channel} and recorded in audit log.`
+  });
+});
+
