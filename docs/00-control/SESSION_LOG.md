@@ -297,6 +297,28 @@
   - Client production build: Vite compiled production bundle in 519ms (`exit 0`).
 - **Next Step:** Proceed to TASK-021 (Preview & Production Deployment to Vercel, Render, and Cloudinary).
 
+## 2026-10-09 — Session 19: Preview & Production Deployment to Vercel & Render (TASK-021)
+
+- **Action:** Executed TASK-021. Configured and executed full cloud production deployment of DetailDock across Render (Express.js REST API with live Atlas MongoDB connection) and Vercel (Vite React Client Single Page Application).
+- **Implemented:**
+  - `srv-db4bs9vlk1mc73fhjong` (Render Web Service):
+    - Configured Node.js web service at `https://detaildock-api.onrender.com`.
+    - Wired production environment variables: `NODE_ENV=production`, `PORT=5000`, `MONGODB_URI` (Atlas cluster), `JWT_SECRET`, `JWT_EXPIRES_IN=7d`, `CLIENT_URL=*`, and Cloudinary CDN credentials.
+    - Live health check verified at `https://detaildock-api.onrender.com/api/v1/health` (`database.status: 'Connected'`).
+  - `client/vercel.json` & Vercel Production Deployment:
+    - Added SPA rewrite configuration routing all paths to `/index.html`.
+    - Deployed client via Vercel CLI to production URL `https://client-mauve-zeta-13.vercel.app`.
+    - Baked in production backend API endpoint: `VITE_API_URL=https://detaildock-api.onrender.com/api/v1`.
+    - Verified HTTP 200 response with public access.
+  - Live End-to-End Production Smoke Test Suite:
+    - Catalog query (`/services`), pricing calculation (`/pricing/calculate`), appointment booking (`/bookings`), public telemetry tracking (`/bookings/track/:code`), admin authentication (`/auth/login`), and admin pipeline query (`/admin/bookings`) all passing 100% against live production URLs.
+- **Verified:**
+  - Render API Service: `https://detaildock-api.onrender.com` (Live, 200 OK).
+  - Vercel Frontend: `https://client-mauve-zeta-13.vercel.app` (Live, 200 OK).
+  - Cross-origin communication (CORS) verified between Vercel and Render.
+  - All 22 tasks (`TASK-000` through `TASK-021`) across Milestones M01-M04 are now 100% VERIFIED.
+- **Status:** Project is fully launched and production-ready.
+
 
 
 

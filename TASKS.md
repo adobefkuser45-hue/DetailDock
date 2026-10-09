@@ -31,7 +31,7 @@
 | **TASK-018** | 06 Frontend | Live Customer Job Tracking Portal (`/track/:code`) | `VERIFIED` | TASK-017 | [VERIFICATION.md#task-018](file:///docs/00-control/VERIFICATION.md#task-018) |
 | **TASK-019** | 06 Frontend | Admin Business Dashboard & Appointment Pipeline Board | `VERIFIED` | TASK-013 | [VERIFICATION.md#task-019](file:///docs/00-control/VERIFICATION.md#task-019) |
 | **TASK-020** | 07 QA | E2E Testing (Playwright), Security Audit & Local SEO Schema | `VERIFIED` | TASK-019 | [VERIFICATION.md#task-020](file:///docs/00-control/VERIFICATION.md#task-020) |
-| **TASK-021** | 08 Deploy | Preview & Production Deployment (Vercel + Render + Cloudinary) | `PROPOSED` | TASK-020 | Production URLs |
+| **TASK-021** | 08 Deploy | Preview & Production Deployment (Vercel + Render + Cloudinary) | `VERIFIED` | TASK-020 | [VERIFICATION.md#task-021](file:///docs/00-control/VERIFICATION.md#task-021) |
 
 ---
 

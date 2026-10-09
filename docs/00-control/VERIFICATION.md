@@ -962,6 +962,89 @@ All claims of completion must be verified with concrete evidence before receivin
 - **SEO & Structured Metadata:**
   - File: `client/index.html` verified with `schema.org/AutoRepair` JSON-LD specification.
 
+---
+
+## TASK-021: Preview & Production Deployment (Vercel + Render + Cloudinary)
+
+- **Task ID:** TASK-021
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-09
+- **Classification:** `ARCHITECTURAL`
+
+### Acceptance Criteria:
+1. Express.js REST API backend deployed to Render Web Service (`https://detaildock-api.onrender.com`):
+   - Service ID: `srv-db4bs9vlk1mc73fhjong`.
+   - Node runtime with start command `npm start --workspace=server`.
+   - Connected live to MongoDB Atlas cluster `cluster0.na6yl4b.mongodb.net/detaildock`.
+   - Environment variables wired: `NODE_ENV=production`, `PORT=5000`, `MONGODB_URI`, `JWT_SECRET`, `JWT_EXPIRES_IN=7d`, `CLIENT_URL=*`, and full Cloudinary credentials.
+   - Status: `live` verified with 200 OK health check (`/api/v1/health`).
+2. Vite React client deployed to Vercel production (`https://client-mauve-zeta-13.vercel.app`):
+   - Project: `adobe12/client`.
+   - Deployment ID: `dpl_BKiNiRyca62Sw4ub9RXbxR2coQNb`.
+   - Ready state: `READY`.
+   - Production URL: `https://client-mauve-zeta-13.vercel.app`.
+   - Configured with `client/vercel.json` SPA client-side routing rewrites (`/(.*)` -> `/index.html`).
+   - Wired to live Render API via baked `VITE_API_URL=https://detaildock-api.onrender.com/api/v1`.
+3. Live cross-origin communication (CORS) verified between Vercel and Render (`access-control-allow-origin: *`).
+4. End-to-end live production smoke test script passing across:
+   - Live Catalog Fetch (`GET /api/v1/services`).
+   - Authoritative Price Calculation (`POST /api/v1/pricing/calculate`).
+   - Live Appointment Reservation (`POST /api/v1/bookings`).
+   - Public Job Tracking Telemetry (`GET /api/v1/bookings/track/:code`).
+   - Admin JWT Authentication (`POST /api/v1/auth/login`).
+   - Admin Bookings Pipeline Query (`GET /api/v1/admin/bookings`).
+   - Vercel Frontend HTTP 200 Response.
+
+### Verification Evidence:
+- **Render Backend Live Health Check:**
+  - Command: `Invoke-RestMethod -Uri "https://detaildock-api.onrender.com/api/v1/health" -Method Get`
+  - Output:
+    ```json
+    {
+      "success": true,
+      "message": "DetailDock API Service is healthy and operational.",
+      "database": {
+        "status": "Connected",
+        "connected": true
+      },
+      "environment": "production",
+      "timestamp": "2026-10-09T10:15:28.532Z"
+    }
+    ```
+  - Exit code: `0`.
+- **Vercel Production Frontend Deployment:**
+  - Deployment: `https://client-mauve-zeta-13.vercel.app`
+  - HTTP Status: `200 OK`
+  - Server: `Vercel`
+  - Content-Type: `text/html; charset=utf-8`
+- **End-to-End Production Smoke Test Suite:**
+  - Output:
+    ```text
+    --- 1. Testing Live Catalog ---
+    Services Count: 3
+    First Service: Essential Clean Base Price: $149
+
+    --- 2. Testing Authoritative Pricing Engine ---
+    Calculated Total: $548.9 Duration: 284 mins
+
+    --- 3. Testing Live Appointment Booking ---
+    Booking Confirmed! Code: DD-9UBLDH | Assigned Bay: 1
+
+    --- 4. Testing Public Telemetry Job Tracking ---
+    Tracking Status: Pending | Progress: Appointment Requested | Masked Phone: ***-***-2201
+
+    --- 5. Testing Admin Authentication & Deck ---
+    Admin Auth Success! Role: admin
+    Admin Bookings Count in DB: 8
+
+    --- 6. Testing Frontend Vercel Production Web App ---
+    Vercel Frontend HTTP Status: 200 (Server: Vercel)
+
+    🎉 ALL LIVE PRODUCTION SMOKE CHECKS PASSED WITH 100% SUCCESS!
+    ```
+  - Exit code: `0`.
+
+
 
 
 
