@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 48" fill="none">
+  <defs>
+    <linearGradient id="logoShieldGrad" x1="6" y1="4" x2="42" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#090C12"/>
+    </linearGradient>
+    <linearGradient id="logoCyanBeam" x1="12" y1="10" x2="36" y2="38" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="50%" stop-color="#0284C7"/>
+      <stop offset="100%" stop-color="#0369A1"/>
+    </linearGradient>
+    <linearGradient id="logoGoldSheen" x1="20" y1="12" x2="38" y2="28" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FDE047"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <filter id="logoGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Emblem Icon -->
+  <g transform="translate(0, 0)">
+    <!-- Outer Precision Shield -->
+    <path d="M24 3L41 11V26C41 35.5 33.7 42.8 24 45C14.3 42.8 7 35.5 7 26V11L24 3Z" 
+          fill="url(#logoShieldGrad)" 
+          stroke="#2A364E" 
+          stroke-width="1.5" />
+
+    <!-- Inner Cyan Frame -->
+    <path d="M24 6.5L38 13V25.5C38 33.5 32 39.5 24 41.5C16 39.5 10 33.5 10 25.5V13L24 6.5Z" 
+          stroke="#38BDF8" 
+          stroke-opacity="0.3" 
+          stroke-width="1" />
+
+    <!-- Monogram D: Left Pillar -->
+    <path d="M16 14C16 13.4 16.4 13 17 13H20C20.6 13 21 13.4 21 14V34C21 34.6 20.6 35 20 35H17C16.4 35 16 34.6 16 34V14Z" 
+          fill="#F8FAFC" />
+
+    <!-- Monogram D: Aerodynamic Speed Wing -->
+    <path d="M21 13H27C32.5 13 36 17 36 24C36 31 32.5 35 27 35H21V30.5H26.5C29.5 30.5 31.5 28 31.5 24C31.5 20 29.5 17.5 26.5 17.5H21V13Z" 
+          fill="url(#logoCyanBeam)" 
+          filter="url(#logoGlow)" />
+
+    <!-- Precision Sparkle -->
+    <path d="M24 20L25.5 24L29.5 25.5L25.5 27L24 31L22.5 27L18.5 25.5L22.5 24L24 20Z" 
+          fill="url(#logoGoldSheen)" />
+  </g>
+
+  <!-- Typography Wordmark -->
+  <g transform="translate(56, 0)">
+    <text x="0" y="27" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="22" letter-spacing="-0.5" fill="#F8FAFC">
+      Detail<tspan fill="#38BDF8">Dock</tspan>
+    </text>
+    <text x="0" y="38" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="600" font-size="9" letter-spacing="2.2" fill="#94A3B8">
+      SMART AUTO ATELIER
+    </text>
+  </g>
+</svg>

@@ -566,6 +566,49 @@ All claims of completion must be verified with concrete evidence before receivin
   - `npm run build --prefix client`: Production bundle built in 402ms (`exit 0`).
   - **Grand Total: 115 / 115 Automated Tests Passing (100% Pass Rate).**
 
+---
+
+## TASK-014: Frontend Foundation, Styling Tokens & Bespoke SVG Logo
+
+- **Task ID:** TASK-014
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-09
+- **Classification:** `BOUNDED`
+
+### Acceptance Criteria:
+1. Luxury automotive styling tokens configured in `client/src/index.css` matching `docs/03-design/DESIGN.md` (Obsidian chassis `#090C12`, Surface card `#101522`, Elevated `#161D2E`, Electric Cyan `#38BDF8`, Amber Gold `#F59E0B`, Emerald `#10B981`).
+2. Bespoke code-native vector SVG logo (`DetailDockLogo.jsx`, `client/public/logo.svg`, `client/public/favicon.svg`) created with 100% original geometry, zero trademark risk (ADR-004 compliant).
+3. Google Fonts (`Plus Jakarta Sans` and `JetBrains Mono`) linked with preconnect in `client/index.html`.
+4. Responsive application layout shell (`Layout.jsx`, `Navbar.jsx`, `Footer.jsx`) with live studio status banner, cleanroom bay availability indicator, mobile drawer, and concierge links.
+5. Centralized API client service (`client/src/services/api.js`) created connecting to all 15 backend endpoints.
+6. Common UI component primitives (`Button.jsx`, `Badge.jsx`, `LoadingSpinner.jsx`) implemented.
+7. React Router v7 configured in `App.jsx` with routes (`/`, `/builder`, `/book`, `/track`, `/track/:code`, `/admin`).
+8. Client production build (`npm run build --prefix client`) builds in < 500ms with zero errors.
+
+### Verification Evidence:
+- **Client Build & Bundle Verification:**
+  - Command: `npm run build --prefix client`
+  - Output:
+    ```text
+    > client@0.0.0 build
+    > node ../node_modules/vite/bin/vite.js build
+
+    vite v8.3.4 building client environment for production...
+    transforming...
+    ✓ 1919 modules transformed.
+    rendering chunks...
+    computing gzip size...
+    dist/index.html                   1.01 kB │ gzip:  0.55 kB
+    dist/assets/index-vUpJVmpV.css   36.57 kB │ gzip:  7.13 kB
+    dist/assets/index-Cx_PyJ85.js   304.12 kB │ gzip: 93.49 kB
+    ✓ built in 493ms
+    ```
+  - Exit code: `0`.
+- **Backend API Integration Check:**
+  - Command: `node server/src/scripts/testHttpEndpoints.js`
+  - Output: 25 / 25 HTTP REST endpoint tests passed (`exit 0`).
+  - Database status: `Connected` to MongoDB Atlas cluster `cluster0.na6yl4b.mongodb.net`.
+
 
 
 
