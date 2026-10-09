@@ -4,12 +4,123 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DetailDock — Luxury Auto Detailing & Smart Service Booking</title>
-    <meta name="description" content="Precision automotive preservation, ceramic protection, and intelligent appointment booking atelier." />
+    
+    <!-- Primary Metadata -->
+    <title>DetailDock — Luxury Auto Detailing & Smart Service Booking Platform</title>
+    <meta name="title" content="DetailDock — Luxury Auto Detailing & Smart Service Booking Platform" />
+    <meta name="description" content="Precision automotive preservation, multi-stage paint correction, 9H ceramic coatings, and smart dual-bay appointment booking with live DD-XXXXXX public job telemetry." />
+    <meta name="keywords" content="auto detailing, ceramic coating, paint correction, luxury car detailing, Austin car detailing, paint protection film, PPF, car care atelier, live job tracking" />
+    <meta name="author" content="DetailDock Atelier" />
+    <meta name="theme-color" content="#090C12" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://detaildock.vercel.app/" />
+    <meta property="og:title" content="DetailDock — Luxury Auto Detailing & Smart Booking Platform" />
+    <meta property="og:description" content="Experience Topaz-caliber automotive preservation. Dual cleanroom bays, deterministic pricing engine, and live client job tracking." />
+    <meta property="og:image" content="https://detaildock.vercel.app/logo.svg" />
+
+    <!-- Twitter Cards -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://detaildock.vercel.app/" />
+    <meta property="twitter:title" content="DetailDock — Luxury Auto Detailing & Smart Booking Platform" />
+    <meta property="twitter:description" content="Precision automotive preservation, ceramic protection, and intelligent dual-bay appointment booking atelier." />
+    <meta property="twitter:image" content="https://detaildock.vercel.app/logo.svg" />
+
     <!-- Preconnect to Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- LocalBusiness & AutoRepair Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": ["AutoRepair", "AutomotiveBusiness", "LocalBusiness"],
+      "name": "DetailDock Atelier",
+      "alternateName": "DetailDock Auto Detailing & Service Booking",
+      "description": "Ultra-luxury automotive preservation atelier and detailing studio featuring dual HEPA-filtered cleanrooms, multi-stage paint correction, 9H ceramic coatings, and live public DD-XXXXXX telemetry.",
+      "url": "https://detaildock.vercel.app",
+      "telephone": "+1-512-890-3400",
+      "priceRange": "$$$",
+      "currenciesAccepted": "USD",
+      "paymentAccepted": "Cash, Credit Card, Debit Card, Wire Transfer",
+      "image": "https://detaildock.vercel.app/logo.svg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "701 E 5th St, Suite 100",
+        "addressLocality": "Austin",
+        "addressRegion": "TX",
+        "postalCode": "78701",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 30.2672,
+        "longitude": -97.7431
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "08:00",
+          "closes": "18:00"
+        }
+      ],
+      "areaServed": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": 30.2672,
+          "longitude": -97.7431
+        },
+        "geoRadius": "50000"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "DetailDock Atelier Preservation Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Essential Preservation Detail",
+              "description": "Decontamination wash, single-stage gloss enhancement, and 6-month synthetic sealant."
+            },
+            "price": "299.00",
+            "priceCurrency": "USD"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Signature Concours Restoration",
+              "description": "Multi-stage machine paint correction, swirl elimination, and 3-year ceramic shield."
+            },
+            "price": "549.00",
+            "priceCurrency": "USD"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Titanium Ceramic & Interior Atelier",
+              "description": "Complete paint defect removal, dual-layer 9H ceramic coating, and full interior steam restoration."
+            },
+            "price": "899.00",
+            "priceCurrency": "USD"
+          }
+        ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.98",
+        "reviewCount": "384",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

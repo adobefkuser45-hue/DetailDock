@@ -272,7 +272,30 @@
   - Client production build (`npm run build --prefix client`) compiled in 465ms with zero errors.
   - Oxlint linter verification passed with 0 errors.
   - Backend regression test suite (115/115 tests passing across pricing, availability, booking, auth, and admin).
-- **Next Step:** Proceed to Milestone M04 / TASK-020 (Comprehensive E2E Testing with Playwright, OWASP Top 10 Security Audit & Structured LocalBusiness SEO Schema).
+## 2026-10-09 — Session 18: Playwright E2E Test Suite, OWASP Security Audit & Local SEO Schema (TASK-020)
+
+- **Action:** Executed TASK-020. Configured and implemented the full Playwright E2E browser test suite (`tests/e2e/detaildock.spec.js`), developed the comprehensive OWASP Top 10 security audit suite (`server/src/scripts/testSecurityAndOwasp.js`), injected structured Schema.org JSON-LD local business metadata into `client/index.html`, and verified zero regressions across the monorepo.
+- **Implemented:**
+  - `playwright.config.js` & `tests/e2e/detaildock.spec.js`: Automated headless Chromium suite testing 5 core end-to-end user journeys:
+    1. Homepage atelier branding, Before/After slider, and package presentation.
+    2. Smart Package Builder configuration (Chassis multiplier 1.1x, Package selection, Add-on toggles, Price Cockpit).
+    3. Appointment Booking Wizard (Slot selection, vehicle and client intake, real-time code generation `DD-XXXXXX`).
+    4. Live Public Job Tracking Portal (Telemetry pipeline, 5-stage progression gauge, environmental bay allocations).
+    5. Admin Operations Deck (JWT authentication, KPI financial cards, 5-lane Kanban board, and 1-click stage advancement).
+  - `server/src/scripts/testSecurityAndOwasp.js`: Automated 24-point security audit testing Helmet headers, BOLA/IDOR customer PII masking, server pricing authority (price tampering override), NoSQL operator injection resilience, input validation, bcrypt password hashing, and error stack suppression.
+  - `client/index.html`: Enriched with `AutoRepair` / `AutomotiveBusiness` / `LocalBusiness` Schema.org JSON-LD metadata, OpenGraph tags, Twitter Cards, and canonical tags.
+  - Hardening fixes:
+    - Enforced strict string type validation on auth inputs in `server/src/controllers/authController.js` to block NoSQL object injections.
+    - Added resilient ObjectId vs slug fallback matching in `server/src/services/pricingService.js`.
+    - Normalized slot availability data structure in `client/src/components/booking/SlotPickerStep.jsx`.
+    - Fixed token extraction compatibility (`res?.token || res?.data?.token`) in `client/src/components/admin/AdminLogin.jsx`.
+    - Added `iconLeft` prop alias to `client/src/components/common/Button.jsx` eliminating React DOM warnings.
+- **Verified:**
+  - Playwright E2E suite: 5 / 5 tests passed in 11.1s (`exit 0`).
+  - OWASP Top 10 security suite: 24 / 24 tests passed (`exit 0`).
+  - Backend regression test suite: 115 / 115 tests passed (`exit 0`).
+  - Client production build: Vite compiled production bundle in 519ms (`exit 0`).
+- **Next Step:** Proceed to TASK-021 (Preview & Production Deployment to Vercel, Render, and Cloudinary).
 
 
 

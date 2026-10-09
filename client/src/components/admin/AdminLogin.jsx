@@ -27,8 +27,10 @@ export const AdminLogin = ({ onLoginSuccess }) => {
 
     try {
       const res = await login({ email: email.trim(), password });
-      if (res && res.data && res.data.token) {
-        onLoginSuccess(res.data.token, res.data.user);
+      const authToken = res?.token || res?.data?.token;
+      const user = res?.data?.user || res?.user;
+      if (authToken) {
+        onLoginSuccess(authToken, user);
       } else {
         throw new Error('Authentication succeeded but token was missing.');
       }

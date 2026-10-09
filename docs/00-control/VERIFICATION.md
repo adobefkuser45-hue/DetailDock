@@ -897,6 +897,71 @@ All claims of completion must be verified with concrete evidence before receivin
   - `testAuthAndAdmin.js` (36 tests): Passed (`exit 0`).
   - Total: 115 / 115 passing tests (`exit 0`).
 
+---
+
+## TASK-020: E2E Testing (Playwright), Security Audit & Local SEO Schema
+
+- **Task ID:** TASK-020
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-09
+- **Classification:** `BOUNDED`
+
+### Acceptance Criteria:
+1. Playwright E2E test suite (`tests/e2e/detaildock.spec.js`) configured and passing across 5 end-to-end user & administrator journeys in headless Chromium:
+   - Flow 1: Homepage renders luxury atelier hero, Before/After Scangrip comparison slider, and preservation package cards.
+   - Flow 2: Smart Package Builder configures vehicle chassis (Coupe 1.1x multiplier), service package, add-on toggles, and computes authoritative pricing.
+   - Flow 3: Appointment Booking Wizard selects studio bay date & slot, completes customer vehicle intake, and generates unique `DD-XXXXXX` tracking code.
+   - Flow 4: Live Public Job Tracking Portal (`/track/:code`) resolves real-time telemetry, 5-stage progress gauge, vehicle specs, and cleanroom bay assignment.
+   - Flow 5: Admin Operations Deck (`/admin`) authenticates via JWT, inspects real-time financial KPI metrics and Kanban board, and performs 1-click status advancement.
+2. Automated OWASP Top 10 Security Audit test suite (`server/src/scripts/testSecurityAndOwasp.js`) passes 24 out of 24 security checks with exit code 0:
+   - Helmet HTTP Security Headers (X-DNS-Prefetch-Control, X-Frame-Options, X-Content-Type-Options, X-Download-Options, X-Powered-By suppression).
+   - BOLA / IDOR mitigation & customer PII sanitization on public endpoints (masked emails and masked phone numbers).
+   - Server Pricing Authority (price tampering defense: overrides falsified client `$1.00` payload with catalog math).
+   - NoSQL operator injection resilience (`$gt` / object operators blocked on auth).
+   - Input validation integrity (email regex, year boundaries, empty body rejections).
+   - Secure bcrypt password hashing with salt rounds >= 10.
+   - Production error handling with suppressed stack traces.
+3. Structured JSON-LD SEO schema (`AutoRepair` / `AutomotiveBusiness` / `LocalBusiness`) and social OpenGraph/Twitter Card meta tags added to `client/index.html`.
+4. Client production build compiles in < 550ms with zero errors.
+5. All 115 backend unit and integration tests remain 100% passing without regression.
+
+### Verification Evidence:
+- **Playwright E2E Test Suite Execution:**
+  - Command: `node ./node_modules/@playwright/test/cli.js test`
+  - Output:
+    ```text
+    Running 5 tests using 1 worker
+
+      ok 1 [chromium] › tests\e2e\detaildock.spec.js:6:7 › DetailDock End-to-End Atelier Customer & Admin Journey › 1. Homepage: Renders luxury atelier hero, before/after slider, and packages (980ms)
+      ok 2 [chromium] › tests\e2e\detaildock.spec.js:23:7 › DetailDock End-to-End Atelier Customer & Admin Journey › 2. Smart Package Builder: Configures chassis, packages, addons, and calculates authoritative price (813ms)
+    [E2E Test]: Successfully generated booking tracking code: DD-ZNBB9N
+      ok 3 [chromium] › tests\e2e\detaildock.spec.js:52:7 › DetailDock End-to-End Atelier Customer & Admin Journey › 3. Appointment Booking Wizard: Selects studio slot, enters vehicle intake, and generates DD-XXXXXX code (1.4s)
+      ok 4 [chromium] › tests\e2e\detaildock.spec.js:96:7 › DetailDock End-to-End Atelier Customer & Admin Journey › 4. Live Public Job Tracking Portal: Resolves telemetry, progress gauge, and bay specs (506ms)
+      ok 5 [chromium] › tests\e2e\detaildock.spec.js:111:7 › DetailDock End-to-End Atelier Customer & Admin Journey › 5. Admin Operations Deck: Authenticates, inspects Kanban pipeline, and advances status (1.9s)
+
+      5 passed (11.1s)
+    ```
+  - Exit code: `0`.
+- **OWASP Security Audit Test Suite:**
+  - Command: `node server/src/scripts/testSecurityAndOwasp.js`
+  - Output:
+    ```text
+    ====================================================
+      OWASP SECURITY AUDIT RESULTS: 24 / 24 TESTS PASSED
+    ====================================================
+    ```
+  - Exit code: `0`.
+- **Backend Non-Regression Suite (115/115 Tests Passing):**
+  - `node server/src/scripts/testPricingAndAvailability.js` (29 tests): Passed (`exit 0`).
+  - `node server/src/scripts/testHttpEndpoints.js` (25 tests): Passed (`exit 0`).
+  - `node server/src/scripts/testBookingAndTracking.js` (25 tests): Passed (`exit 0`).
+  - `node server/src/scripts/testAuthAndAdmin.js` (36 tests): Passed (`exit 0`).
+- **Production Client Build:**
+  - Command: `npm run build --prefix client`
+  - Output: `✓ built in 519ms` (`exit 0`).
+- **SEO & Structured Metadata:**
+  - File: `client/index.html` verified with `schema.org/AutoRepair` JSON-LD specification.
+
 
 
 

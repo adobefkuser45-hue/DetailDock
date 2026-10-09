@@ -32,6 +32,8 @@ Thumbs.db
 !.vscode/settings.json
 .idea/
 
-# Testing coverage
+# Testing coverage & reports
 coverage/
 .nyc_output/
+test-results/
+playwright-report/

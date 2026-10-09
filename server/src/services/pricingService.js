@@ -130,8 +130,12 @@ export const calculatePricing = async ({
   addonIds = [],
   addonSlugs = []
 }) => {
-  const categoryIdentifier = vehicleCategoryId || vehicleCategorySlug;
-  const packageIdentifier = packageId || packageSlug;
+  const categoryIdentifier = (vehicleCategoryId && mongoose.Types.ObjectId.isValid(vehicleCategoryId)) 
+    ? vehicleCategoryId 
+    : (vehicleCategorySlug || vehicleCategoryId);
+  const packageIdentifier = (packageId && mongoose.Types.ObjectId.isValid(packageId)) 
+    ? packageId 
+    : (packageSlug || packageId);
   const combinedAddons = [
     ...(Array.isArray(addonIds) ? addonIds : [addonIds].filter(Boolean)),
     ...(Array.isArray(addonSlugs) ? addonSlugs : [addonSlugs].filter(Boolean))

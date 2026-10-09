@@ -53,6 +53,12 @@ export const SlotPickerStep = ({
   const [slotsData, setSlotsData] = useState([]);
   const [isLoadingSlots, setIsLoadingSlots] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
+  // Initialize default date in parent if not set
+  useEffect(() => {
+    if (!selectedDate && activeDate) {
+      onSelectDate(activeDate);
+    }
+  }, [selectedDate, activeDate, onSelectDate]);
 
   // Fetch slot availability whenever activeDate changes
   useEffect(() => {
@@ -63,10 +69,26 @@ export const SlotPickerStep = ({
         setErrorMsg(null);
         const data = await getAvailability(activeDate);
         if (isMounted && data && Array.isArray(data.slots)) {
-          setSlotsData(data.slots);
+          const normalizedSlots = data.slots.map(s => {
+            const time = s.timeSlot || s.time;
+            const availableCount = typeof s.availableBays === 'number' 
+              ? s.availableBays 
+              : (typeof s.availableCount === 'number' ? s.availableCount : (Array.isArray(s.availableBays) ? s.availableBays.length : 2));
+            const availableBaysList = Array.isArray(s.availableBays) 
+              ? s.availableBays 
+              : (s.suggestedBay ? [s.suggestedBay] : [1, 2]);
+            return {
+              time,
+              timeSlot: time,
+              availableCount,
+              availableBays: availableBaysList,
+              isAvailable: s.isAvailable !== false && availableCount > 0
+            };
+          });
+          setSlotsData(normalizedSlots);
           // If previously selected slot is not available on this day, clear it
           if (selectedSlot) {
-            const currentSlot = data.slots.find(s => s.time === selectedSlot);
+            const currentSlot = normalizedSlots.find(s => s.time === selectedSlot || s.timeSlot === selectedSlot);
             if (!currentSlot || !currentSlot.isAvailable) {
               onSelectSlot(null);
             }
@@ -160,13 +182,13 @@ export const SlotPickerStep = ({
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {slotsData.map((slot) => {
+          {slotsData.map((slot, index) => {
             const isSelected = selectedSlot === slot.time;
             const isAvailable = slot.isAvailable;
 
             return (
               <button
-                key={slot.time}
+                key={`${slot.time}-${index}`}
                 type="button"
                 disabled={!isAvailable}
                 onClick={() => onSelectSlot(slot.time)}

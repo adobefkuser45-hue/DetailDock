@@ -30,7 +30,7 @@
 | **TASK-017** | 06 Frontend | Appointment Booking Flow (Calendar, Time Slots, Vehicle Intake) | `VERIFIED` | TASK-016 | [VERIFICATION.md#task-017](file:///docs/00-control/VERIFICATION.md#task-017) |
 | **TASK-018** | 06 Frontend | Live Customer Job Tracking Portal (`/track/:code`) | `VERIFIED` | TASK-017 | [VERIFICATION.md#task-018](file:///docs/00-control/VERIFICATION.md#task-018) |
 | **TASK-019** | 06 Frontend | Admin Business Dashboard & Appointment Pipeline Board | `VERIFIED` | TASK-013 | [VERIFICATION.md#task-019](file:///docs/00-control/VERIFICATION.md#task-019) |
-| **TASK-020** | 07 QA | E2E Testing (Playwright), Security Audit & Local SEO Schema | `PROPOSED` | TASK-019 | Automated Test Suite |
+| **TASK-020** | 07 QA | E2E Testing (Playwright), Security Audit & Local SEO Schema | `VERIFIED` | TASK-019 | [VERIFICATION.md#task-020](file:///docs/00-control/VERIFICATION.md#task-020) |
 | **TASK-021** | 08 Deploy | Preview & Production Deployment (Vercel + Render + Cloudinary) | `PROPOSED` | TASK-020 | Production URLs |
 
 ---

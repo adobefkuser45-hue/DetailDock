@@ -15,6 +15,10 @@ export const login = asyncHandler(async (req, res) => {
     throw new AppError('Please provide both an email address and password.', 400, 'MISSING_CREDENTIALS');
   }
 
+  if (typeof email !== 'string' || typeof password !== 'string') {
+    throw new AppError('Email and password must be valid strings.', 400, 'INVALID_CREDENTIALS_FORMAT');
+  }
+
   const normalizedEmail = email.toLowerCase().trim();
   const user = await User.findOne({ email: normalizedEmail }).select('+password');
 

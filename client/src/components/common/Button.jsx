@@ -11,13 +11,15 @@ export const Button = ({
   size = 'md',
   isLoading = false,
   disabled = false,
-  icon: Icon,
+  icon,
+  iconLeft,
   iconRight: IconRight,
   className = '',
   onClick,
   type = 'button',
   ...props
 }) => {
+  const Icon = icon || iconLeft;
   const baseStyles = 'inline-flex items-center justify-center font-bold tracking-tight rounded-xl transition-all duration-200 select-none focus:outline-none focus:ring-2 focus:ring-[#38BDF8]/50 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer active:scale-[0.98]';
 
   const variants = {
