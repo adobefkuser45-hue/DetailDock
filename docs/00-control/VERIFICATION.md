@@ -405,6 +405,77 @@ All claims of completion must be verified with concrete evidence before receivin
     ```
   - Exit code: `0`.
 
+---
+
+## TASK-012: Booking Submission & Public Status Tracking API
+
+- **Task ID:** TASK-012
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-09
+- **Classification:** `BOUNDED`
+
+### Acceptance Criteria:
+1. Online appointment booking endpoint `POST /api/v1/bookings` receives customer, vehicle, package, and add-on preferences.
+2. Validates email format, manufacturing year (1920 to currentYear+2), and required fields.
+3. Automatically queries slot capacity via `verifySlotAvailability` to prevent over-capacity bookings and assigns dynamic bay numbers (Bay 1 or Bay 2).
+4. Rejects over-capacity slot submissions with HTTP 409 Conflict (`SLOT_CAPACITY_EXCEEDED`).
+5. Freezes authoritative pricing snapshot, customer snapshot, and package snapshot into immutable document.
+6. Generates collision-resistant uppercase tracking code (e.g. `DD-TJBGVK`).
+7. Public job tracking endpoint `GET /api/v1/bookings/track/:code` allows prefix-agnostic, case-insensitive lookups while masking customer PII (`a***r@testluxury.com`, `***-***-1234`).
+8. Automated end-to-end booking and tracking test suite passes with 100% success rate.
+
+### Verification Evidence:
+- **Booking & Tracking Integration Test:**
+  - Command: `node server/src/scripts/testBookingAndTracking.js`
+  - Output:
+    ```text
+    ====================================================
+       DETAILDOCK BOOKING & TRACKING ENDPOINTS TEST     
+    ====================================================
+    [DetailDock DB]: MongoDB Atlas Connected successfully -> Host: ac-11dnu91-shard-00-00.na6yl4b.mongodb.net
+    --- 1. POST /api/v1/bookings (Create First Booking) ---
+      ✅ [PASS] Booking 1 returns 201 Created
+      ✅ [PASS] Response envelope has success: true
+      ✅ [PASS] Generated valid tracking code format: DD-TJBGVK
+      ✅ [PASS] First booking assigned to Bay 1
+      ✅ [PASS] Initial status is Pending
+      ✅ [PASS] Authoritative total price is accurately calculated as $803.90
+    --- 2. GET /api/v1/bookings/track/DD-TJBGVK ---
+      ✅ [PASS] Tracking endpoint returns 200 OK
+      ✅ [PASS] Booking code matches queried code
+      ✅ [PASS] Status is Pending
+      ✅ [PASS] Progress current step is 1 (Appointment Requested)
+      ✅ [PASS] Customer email is privacy-masked: a***r@testluxury.com
+      ✅ [PASS] Customer phone is privacy-masked: ***-***-1234
+      ✅ [PASS] Vehicle details present
+      ✅ [PASS] Pricing snapshot preserved at $803.90
+      ✅ [PASS] Timeline history entry present
+    --- 3. GET /api/v1/bookings/track/ (Prefix-agnostic lookup) ---
+      ✅ [PASS] Case-insensitive lookup without DD- prefix returns 200 OK
+      ✅ [PASS] Resolved exact booking record
+    --- 4. POST /api/v1/bookings (Fill Bay 2 in Same Slot) ---
+      ✅ [PASS] Booking 2 returns 201 Created
+      ✅ [PASS] Second booking assigned to Bay 2
+    --- 5. POST /api/v1/bookings (Attempt 3rd Booking in Full Slot) ---
+      ✅ [PASS] Over-capacity booking rejected with HTTP 409 Conflict
+      ✅ [PASS] Error code matches SLOT_CAPACITY_EXCEEDED
+    --- 6. Error Handling: Invalid Email Format ---
+      ✅ [PASS] Rejects invalid email with 400 Bad Request
+      ✅ [PASS] Error code is INVALID_EMAIL_FORMAT
+    --- 7. Error Handling: Non-existent Tracking Code ---
+      ✅ [PASS] Non-existent code returns 404 Not Found
+      ✅ [PASS] Error code is BOOKING_NOT_FOUND
+      Cleaned up temporary test bookings.
+    ====================================================
+      BOOKING RESULTS: 25 / 25 TESTS PASSED
+    ====================================================
+    ```
+  - Exit code: `0`.
+- **Regression Suite:**
+  - `testPricingAndAvailability.js`: 29 / 29 tests passed (`exit 0`).
+  - `testHttpEndpoints.js`: 25 / 25 tests passed (`exit 0`).
+  - `npm run build --prefix client`: Production bundle built in 431ms (`exit 0`).
+
 
 
 

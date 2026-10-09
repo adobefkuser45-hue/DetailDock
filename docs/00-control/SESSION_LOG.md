@@ -144,6 +144,26 @@
   - Client build verified (`npm run build --prefix client` passed in 748ms).
 - **Next Step:** Proceed to TASK-012 (Booking Submission & Public Status Tracking API).
 
+## 2026-10-09 — Session 10: Booking Submission & Public Status Tracking API (TASK-012)
+
+- **Action:** Executed TASK-012. Built the customer booking creation endpoint (`POST /api/v1/bookings`) with authoritative server-side pricing snapshots and double-booking slot protection, plus the privacy-safe public status tracking endpoint (`GET /api/v1/bookings/track/:code`).
+- **Implemented:**
+  - `server/src/utils/bookingCode.js`: Crypto-random unique booking code generator (`DD-XXXXXX`), collision retry mechanism, and privacy masking for email and phone numbers.
+  - `server/src/controllers/bookingController.js`: Complete booking workflow controller managing input validation, slot bay capacity verification, server price freezing, unique code assignment, and public tracking timeline projections.
+  - `server/src/routes/bookingRoutes.js`: Express route handler for `/api/v1/bookings` mounted in `server.js`.
+  - `server/src/scripts/testBookingAndTracking.js`: Automated integration test verifying full booking creation lifecycle, bay allocation, double-booking rejection (409 Conflict), prefix-agnostic tracking lookup, and error validation.
+- **Verified:**
+  - `testBookingAndTracking.js`: 25 / 25 tests passed (100% pass rate). Verified:
+    - Booking creation with Porsche 911 GT3 RS + Ceramic Shield + 2 add-ons ($803.90) assigned to Bay 1.
+    - Public tracking lookup via code `DD-TJBGVK` with privacy masking (`a***r@testluxury.com`, `***-***-1234`).
+    - Case-insensitive, prefix-agnostic lookup (e.g. `tjbgvk`).
+    - Concurrency test: Bay 2 fills cleanly; 3rd booking in same slot rejected with HTTP 409 (`SLOT_CAPACITY_EXCEEDED`).
+    - Input validation: invalid email rejected with HTTP 400 (`INVALID_EMAIL_FORMAT`); non-existent code rejected with HTTP 404 (`BOOKING_NOT_FOUND`).
+  - Zero regression: All 29 pricing/availability tests and all 25 HTTP REST tests pass (`exit 0`).
+  - Client build verified (`npm run build --prefix client` passed in 431ms).
+- **Next Step:** Proceed to TASK-013 (Admin Operations API & Role-Based Auth).
+
+
 
 
 

@@ -18,7 +18,7 @@
 ## 2. Current Position
 - **Stage:** `05 Development & Implementation`
 - **Milestone:** `M02 — Core Engine & Full-Stack Implementation`
-- **Current Task:** `TASK-012 — Booking Submission & Public Status Tracking API`
+- **Current Task:** `TASK-013 — Admin Operations API & Role-Based Auth (JWT)`
 - **Task Status:** `PROPOSED`
 - **Classification:** `BOUNDED`
 
@@ -41,22 +41,23 @@
   - `TASK-009`: Express Server Core, Security Middleware & Live MongoDB Atlas Connection (`readyState: 1` verified).
   - `TASK-010`: Mongoose Schemas & Verified Seed Data on Atlas (4 Categories, 3 Packages, 5 Add-ons, Studio Settings, Users).
   - `TASK-011`: Authoritative Pricing Engine & Slot Availability API (29/29 service tests, 25/25 HTTP tests passed).
+  - `TASK-012`: Booking Submission & Public Status Tracking API (25/25 integration tests passed, zero regressions).
 - **In Progress:**
-  - Pricing calculation and bay slot availability engine verified. Ready for TASK-012 (Booking Submission & Public Status Tracking API).
+  - Booking creation with slot concurrency protection and tracking API verified. Ready for TASK-013 (Admin Operations API & Role-Based Auth).
 - **Blockers:**
   - None.
 
 ---
 
 ## 4. Last Verified
-- **Task:** `TASK-011 — Authoritative Pricing Engine & Slot Availability API`
+- **Task:** `TASK-012 — Booking Submission & Public Status Tracking API`
 - **Date:** 2026-10-09
-- **Evidence Reference:** [VERIFICATION.md#task-011](file:///docs/00-control/VERIFICATION.md#task-011)
+- **Evidence Reference:** [VERIFICATION.md#task-012](file:///docs/00-control/VERIFICATION.md#task-012)
 
 ---
 
 ## 5. Currently Working On
-Pricing engine and slot availability endpoints fully implemented and verified against MongoDB Atlas. Proceeding to TASK-012 to implement the customer booking submission endpoint (with server pricing validation and concurrency protection) and the public status tracking API.
+Customer booking creation and public status tracking endpoints fully implemented and verified against MongoDB Atlas. Proceeding to TASK-013 to implement admin authentication (JWT), secure operations routes, and appointment workflow status transitions.
 
 
 
