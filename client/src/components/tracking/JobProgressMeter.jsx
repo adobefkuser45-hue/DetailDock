@@ -28,8 +28,8 @@ export const JobProgressMeter = ({ progress, status }) => {
         <div className="w-12 h-12 rounded-full bg-[#EF4444]/20 flex items-center justify-center text-[#EF4444] mx-auto mb-3">
           <AlertTriangle className="w-6 h-6" />
         </div>
-        <h3 className="text-lg font-bold text-[#FCA5A5]">Appointment Cancelled</h3>
-        <p className="text-xs text-[#94A3B8] mt-1">
+        <h3 className="text-lg font-bold text-[#FCA5A5] font-display">Appointment Cancelled</h3>
+        <p className="text-xs text-[#94A3B8] mt-1 font-normal">
           This booking has been cancelled. Please contact the studio atelier if you require assistance.
         </p>
       </div>
@@ -37,35 +37,35 @@ export const JobProgressMeter = ({ progress, status }) => {
   }
 
   return (
-    <div className="p-6 sm:p-8 rounded-2xl bg-[#101522] border border-[#2A364E] shadow-xl text-left space-y-6">
+    <div className="p-6 sm:p-8 rounded-2xl bg-[#0E1017] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] text-left space-y-6">
       
       {/* Header of Meter */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="text-[11px] font-mono uppercase font-bold text-[#38BDF8] tracking-widest">
+          <span className="text-[11px] font-mono uppercase font-bold text-[#D4AF37] tracking-widest">
             Live Telemetry Pipeline
           </span>
-          <h3 className="text-xl sm:text-2xl font-extrabold text-white mt-0.5">
+          <h3 className="text-xl sm:text-2xl font-black text-white mt-0.5 font-display">
             {progress?.statusLabel || status}
           </h3>
         </div>
 
-        <div className="flex items-center gap-2 self-start sm:self-auto">
+        <div className="flex items-center gap-3 self-start sm:self-auto">
           <div className="text-right">
-            <div className="text-xs text-[#94A3B8]">Stage Progression:</div>
-            <div className="text-lg font-mono font-extrabold text-[#38BDF8]">
+            <div className="text-xs text-[#94A3B8] font-mono">Stage Progression:</div>
+            <div className="text-xl font-mono font-black text-[#D4AF37]">
               {percentage}%
             </div>
           </div>
-          <div className="w-10 h-10 rounded-xl bg-[#0284C7]/20 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8]">
+          <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37]">
             {percentage === 100 ? (
               <Award className="w-5 h-5 text-[#10B981]" />
             ) : percentage >= 80 ? (
               <ShieldCheck className="w-5 h-5 text-[#10B981]" />
             ) : percentage >= 60 ? (
-              <Warehouse className="w-5 h-5 text-[#F59E0B] animate-pulse" />
+              <Warehouse className="w-5 h-5 text-[#D4AF37] animate-pulse" />
             ) : (
-              <Clock className="w-5 h-5 text-[#38BDF8]" />
+              <Clock className="w-5 h-5 text-[#D4AF37]" />
             )}
           </div>
         </div>
@@ -74,9 +74,9 @@ export const JobProgressMeter = ({ progress, status }) => {
       {/* Visual Progress Bar with Glow */}
       <div className="relative pt-6 pb-2">
         {/* Track Background Bar */}
-        <div className="h-2 w-full bg-[#161D2E] rounded-full overflow-hidden border border-[#1D2536]">
+        <div className="h-2 w-full bg-[#08090C] rounded-full overflow-hidden border border-white/10">
           <div
-            className="h-full bg-gradient-to-r from-[#0284C7] via-[#38BDF8] to-[#10B981] transition-all duration-700 ease-out shadow-[0_0_12px_rgba(56,189,248,0.8)]"
+            className="h-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#10B981] transition-all duration-700 ease-out shadow-[0_0_15px_rgba(212,175,55,0.8)]"
             style={{ width: `${percentage}%` }}
           />
         </div>
@@ -90,24 +90,24 @@ export const JobProgressMeter = ({ progress, status }) => {
             return (
               <div key={s.step} className="flex flex-col items-center text-center">
                 <div
-                  className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs font-mono font-bold transition-all ${
+                  className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs font-mono font-black transition-all ${
                     isCompleted
                       ? 'bg-[#10B981] text-white shadow-md'
                       : isCurrent
-                      ? 'bg-[#0284C7] text-white ring-4 ring-[#0284C7]/30 shadow-lg shadow-[#0284C7]'
-                      : 'bg-[#161D2E] text-[#64748B] border border-[#1D2536]'
+                      ? 'bg-[#D4AF37] text-[#08090C] ring-4 ring-[#D4AF37]/25 shadow-lg shadow-[#D4AF37]/40'
+                      : 'bg-[#08090C] text-[#94A3B8] border border-white/10'
                   }`}
                 >
                   {isCompleted ? <Check className="w-3.5 h-3.5 stroke-[3]" /> : s.step}
                 </div>
 
                 <div className="mt-2">
-                  <div className={`text-[11px] sm:text-xs font-bold leading-tight ${
-                    isCurrent ? 'text-white' : isCompleted ? 'text-[#38BDF8]' : 'text-[#64748B]'
+                  <div className={`text-[11px] sm:text-xs font-bold leading-tight font-display ${
+                    isCurrent ? 'text-white' : isCompleted ? 'text-[#D4AF37]' : 'text-[#64748B]'
                   }`}>
                     {s.label}
                   </div>
-                  <div className="hidden sm:block text-[10px] text-[#64748B] mt-0.5 max-w-[90px] mx-auto">
+                  <div className="hidden sm:block text-[10px] text-[#64748B] mt-0.5 max-w-[90px] mx-auto font-sans">
                     {s.desc}
                   </div>
                 </div>

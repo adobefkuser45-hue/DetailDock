@@ -45,23 +45,32 @@ const TESTIMONIALS = [
 ];
 
 export const TestimonialsSection = () => {
+  const handleCardMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  };
+
   return (
-    <section className="py-20 bg-[#090C12] border-t border-[#1D2536] relative overflow-hidden">
+    <section className="py-24 bg-[#08090C] border-t border-white/10 relative overflow-hidden">
       {/* Subtle radial glow */}
-      <div className="absolute top-1/2 left-1/3 w-80 h-80 bg-[#F59E0B]/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/3 w-80 h-80 bg-[#D4AF37]/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#F59E0B] bg-[#F59E0B]/10 px-3.5 py-1.5 rounded-full border border-[#F59E0B]/20 inline-flex items-center gap-1.5">
-            <Award className="w-3.5 h-3.5" />
-            Verified Atelier Owners
+          <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] bg-[#D4AF37]/10 px-4 py-1.5 rounded-full border border-[#D4AF37]/25 inline-flex items-center gap-2">
+            <Award className="w-3.5 h-3.5 text-[#D4AF37]" />
+            Verified Concourse Owners
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mt-4 text-[#F8FAFC]">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-[-0.03em] mt-5 text-[#F8FAFC] font-display">
             Trusted by Discerning Supercar & Performance Drivers
           </h2>
-          <p className="text-sm sm:text-base text-[#94A3B8] mt-3">
+          <p className="text-sm sm:text-base text-[#94A3B8] mt-3 font-normal">
             Read real feedback from vehicle owners who demand surgical precision, documented gloss levels, and zero compromise.
           </p>
         </div>
@@ -71,66 +80,59 @@ export const TestimonialsSection = () => {
           {TESTIMONIALS.map((item, idx) => (
             <div
               key={idx}
-              className="p-8 rounded-2xl bg-[#101522] border border-[#1D2536] hover:border-[#F59E0B]/40 transition-all flex flex-col justify-between"
+              onMouseMove={handleCardMouseMove}
+              className="p-8 sm:p-10 rounded-2xl bg-[#0E1017] border border-white/10 hover:border-[#D4AF37]/50 transition-all duration-300 flex flex-col justify-between relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] group"
             >
+              {/* Specular Highlight */}
+              <div 
+                className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  background: 'radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 175, 55, 0.08), transparent 40%)'
+                }}
+              />
+
               <div>
                 {/* Header with Stars and Vehicle Pill */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-1 text-[#F59E0B]">
+                <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center gap-1 text-[#D4AF37]">
                     {[...Array(item.rating)].map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-current" />
                     ))}
                   </div>
-                  <span className="text-[11px] font-mono text-[#38BDF8] bg-[#0284C7]/10 px-2.5 py-1 rounded-full border border-[#0284C7]/20 flex items-center gap-1">
-                    <CheckCircle2 className="w-3 h-3 text-[#10B981]" />
-                    Verified Service
+                  <span className="text-[11px] font-mono text-[#D4AF37] bg-[#D4AF37]/10 px-3 py-1 rounded-full border border-[#D4AF37]/25 flex items-center gap-1.5 font-bold">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#10B981]" />
+                    Verified Client
                   </span>
                 </div>
 
                 {/* Quote Text */}
-                <p className="text-sm sm:text-base text-[#E2E8F0] leading-relaxed mb-6 italic">
+                <p className="text-sm sm:text-base text-[#E2E8F0] leading-relaxed mb-6 italic font-normal">
                   "{item.quote}"
                 </p>
               </div>
 
               {/* Author & Vehicle Details */}
-              <div className="pt-4 border-t border-[#1D2536] flex items-center justify-between">
+              <div className="pt-6 border-t border-white/10 flex items-center justify-between">
                 <div>
-                  <div className="font-bold text-[#F8FAFC] text-sm">
+                  <div className="font-bold text-[#F8FAFC] text-sm font-display">
                     {item.author}
                   </div>
-                  <div className="text-xs text-[#94A3B8] mt-0.5">
-                    {item.vehicle} • <span className="text-[#64748B]">{item.paintColor}</span>
+                  <div className="text-xs text-[#94A3B8]">
+                    {item.location}
                   </div>
                 </div>
 
                 <div className="text-right">
-                  <div className="text-[11px] font-mono text-[#94A3B8]">
-                    {item.location}
+                  <div className="text-xs font-bold text-[#CBD5E1] font-mono">
+                    {item.vehicle}
                   </div>
-                  <div className="text-[11px] text-[#F59E0B] font-semibold mt-0.5">
-                    {item.service.split('+')[0]}
+                  <div className="text-[11px] text-[#D4AF37] font-mono">
+                    {item.service}
                   </div>
                 </div>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Atelier Guarantee Bar */}
-        <div className="mt-12 p-6 rounded-2xl bg-[#161D2E] border border-[#2A364E] flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-[#10B981]/15 border border-[#10B981]/30 flex items-center justify-center text-[#10B981] flex-shrink-0">
-              <ShieldCheck className="w-6 h-6" />
-            </div>
-            <div>
-              <div className="text-base font-bold text-white">100% Paint Defect Elimination Guarantee</div>
-              <div className="text-xs text-[#94A3B8]">If you are not satisfied during the final Scangrip inspection, we repolish at no charge.</div>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#38BDF8] bg-[#101522] px-4 py-2 rounded-xl border border-[#1D2536]">
-            5.0 / 5.0 RATING • 140+ VEHICLES PROTECTED
-          </div>
         </div>
 
       </div>

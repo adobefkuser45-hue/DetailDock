@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { 
   Calendar, 
   Clock, 
-  CheckCircle2, 
   ArrowRight, 
   ArrowLeft, 
   ShieldCheck, 
@@ -53,56 +52,45 @@ export const SlotPickerStep = ({
   const [slotsData, setSlotsData] = useState([]);
   const [isLoadingSlots, setIsLoadingSlots] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
-  // Initialize default date in parent if not set
+
   useEffect(() => {
     if (!selectedDate && activeDate) {
       onSelectDate(activeDate);
     }
-  }, [selectedDate, activeDate, onSelectDate]);
+  }, [activeDate, selectedDate, onSelectDate]);
 
-  // Fetch slot availability whenever activeDate changes
   useEffect(() => {
     let isMounted = true;
+
     const fetchSlots = async () => {
+      if (!activeDate) return;
+      setIsLoadingSlots(true);
+      setErrorMsg(null);
+
       try {
-        setIsLoadingSlots(true);
-        setErrorMsg(null);
-        const data = await getAvailability(activeDate);
-        if (isMounted && data && Array.isArray(data.slots)) {
-          const normalizedSlots = data.slots.map(s => {
-            const time = s.timeSlot || s.time;
-            const availableCount = typeof s.availableBays === 'number' 
-              ? s.availableBays 
-              : (typeof s.availableCount === 'number' ? s.availableCount : (Array.isArray(s.availableBays) ? s.availableBays.length : 2));
-            const availableBaysList = Array.isArray(s.availableBays) 
-              ? s.availableBays 
-              : (s.suggestedBay ? [s.suggestedBay] : [1, 2]);
-            return {
-              time,
-              timeSlot: time,
-              availableCount,
-              availableBays: availableBaysList,
-              isAvailable: s.isAvailable !== false && availableCount > 0
-            };
-          });
-          setSlotsData(normalizedSlots);
-          // If previously selected slot is not available on this day, clear it
-          if (selectedSlot) {
-            const currentSlot = normalizedSlots.find(s => s.time === selectedSlot || s.timeSlot === selectedSlot);
-            if (!currentSlot || !currentSlot.isAvailable) {
-              onSelectSlot(null);
-            }
+        const res = await getAvailability(activeDate);
+        if (isMounted) {
+          if (res?.data?.slots) {
+            setSlotsData(res.data.slots);
+          } else if (Array.isArray(res?.slots)) {
+            setSlotsData(res.slots);
+          } else {
+            setSlotsData([
+              { time: '08:00 AM', isAvailable: true, availableCount: 2, availableBays: [1, 2] },
+              { time: '10:30 AM', isAvailable: true, availableCount: 1, availableBays: [1] },
+              { time: '01:30 PM', isAvailable: true, availableCount: 2, availableBays: [1, 2] },
+              { time: '04:00 PM', isAvailable: true, availableCount: 1, availableBays: [2] }
+            ]);
           }
         }
       } catch (err) {
         if (isMounted) {
-          console.warn('Using baseline availability slots:', err.message);
-          // Fallback realistic slots
+          console.warn('Availability check fallback:', err.message);
           setSlotsData([
-            { time: '09:00 AM', totalCapacity: 2, bookedCount: 0, availableCount: 2, availableBays: [1, 2], isAvailable: true },
-            { time: '11:00 AM', totalCapacity: 2, bookedCount: 1, availableCount: 1, availableBays: [2], isAvailable: true },
-            { time: '01:00 PM', totalCapacity: 2, bookedCount: 0, availableCount: 2, availableBays: [1, 2], isAvailable: true },
-            { time: '03:00 PM', totalCapacity: 2, bookedCount: 1, availableCount: 1, availableBays: [1], isAvailable: true }
+            { time: '08:00 AM', isAvailable: true, availableCount: 2, availableBays: [1, 2] },
+            { time: '10:30 AM', isAvailable: true, availableCount: 1, availableBays: [1] },
+            { time: '01:30 PM', isAvailable: true, availableCount: 2, availableBays: [1, 2] },
+            { time: '04:00 PM', isAvailable: true, availableCount: 1, availableBays: [2] }
           ]);
         }
       } finally {
@@ -117,26 +105,27 @@ export const SlotPickerStep = ({
   const handleDateClick = (dateStr) => {
     setActiveDate(dateStr);
     onSelectDate(dateStr);
+    onSelectSlot('');
   };
 
   return (
     <div className="space-y-8 text-left">
       <div>
-        <span className="text-xs font-mono font-bold text-[#38BDF8] uppercase tracking-wider">
+        <span className="text-xs font-mono font-bold text-[#D4AF37] uppercase tracking-wider">
           Step 02 of 03
         </span>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F8FAFC] tracking-tight mt-1">
-          Dual Cleanroom Bay & Date Scheduling
+        <h2 className="text-2xl sm:text-3xl font-black text-[#F8FAFC] tracking-tight mt-1 font-display">
+          Select Date & Cleanroom Bay Slot
         </h2>
-        <p className="text-sm text-[#94A3B8] mt-1">
-          Select an appointment date and reserved slot. Our studio operates two climate-controlled bays to provide 100% focused attention.
+        <p className="text-sm text-[#94A3B8] mt-1 font-normal">
+          Pick an intake date to inspect live capacity across our climate-controlled dual cleanroom bays.
         </p>
       </div>
 
-      {/* Date Picker Carousel / Strip */}
+      {/* Date Carousel */}
       <div className="space-y-3">
-        <label className="text-xs font-bold uppercase text-[#94A3B8] tracking-wider block">
-          1. Choose Reservation Date
+        <label className="text-xs font-bold uppercase text-[#94A3B8] tracking-wider block font-mono">
+          1. Select Intake Date
         </label>
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
           {availableDates.map((d) => {
@@ -146,19 +135,19 @@ export const SlotPickerStep = ({
                 key={d.dateStr}
                 type="button"
                 onClick={() => handleDateClick(d.dateStr)}
-                className={`p-3.5 rounded-xl border text-center transition-all ${
+                className={`p-3.5 rounded-2xl border text-center transition-all cursor-pointer tactile-press ${
                   isSelected
-                    ? 'bg-[#0284C7]/20 border-[#38BDF8] text-white shadow-lg shadow-[#0284C7]/20 ring-1 ring-[#38BDF8]'
-                    : 'bg-[#101522] border-[#1D2536] text-[#94A3B8] hover:border-[#2A364E] hover:text-white'
+                    ? 'bg-[#151822] border-[#D4AF37] text-white shadow-[0_0_20px_rgba(212,175,55,0.18)] ring-1 ring-[#D4AF37]'
+                    : 'bg-[#0E1017] border-white/10 text-[#94A3B8] hover:border-white/25 hover:text-white'
                 }`}
               >
-                <div className="text-[11px] font-mono uppercase text-[#38BDF8] font-bold">
+                <div className="text-[11px] font-mono uppercase text-[#D4AF37] font-bold">
                   {d.weekday}
                 </div>
-                <div className="text-xl font-extrabold text-white my-0.5">
+                <div className="text-xl font-black text-white my-0.5 font-display">
                   {d.dayNum}
                 </div>
-                <div className="text-[10px] text-[#64748B]">
+                <div className="text-[10px] text-[#94A3B8] font-mono">
                   {d.monthName}
                 </div>
               </button>
@@ -170,12 +159,12 @@ export const SlotPickerStep = ({
       {/* Time Slot Grid */}
       <div className="space-y-3 pt-2">
         <div className="flex items-center justify-between">
-          <label className="text-xs font-bold uppercase text-[#94A3B8] tracking-wider block">
+          <label className="text-xs font-bold uppercase text-[#94A3B8] tracking-wider block font-mono">
             2. Select Bay Slot for {activeDate}
           </label>
           {isLoadingSlots && (
-            <span className="text-xs text-[#38BDF8] flex items-center gap-1 font-mono">
-              <RefreshCw className="w-3 h-3 animate-spin" />
+            <span className="text-xs text-[#D4AF37] flex items-center gap-1 font-mono">
+              <RefreshCw className="w-3 h-3 animate-spin text-[#D4AF37]" />
               Checking live bay sensors...
             </span>
           )}
@@ -183,50 +172,53 @@ export const SlotPickerStep = ({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {slotsData.map((slot, index) => {
-            const isSelected = selectedSlot === slot.time;
-            const isAvailable = slot.isAvailable;
+            const slotTime = slot.timeSlot || slot.time;
+            const isSelected = selectedSlot === slotTime;
+            const isAvailable = Boolean(slot.isAvailable);
+            const openBaysCount = typeof slot.availableBays === 'number' ? slot.availableBays : (slot.availableCount || 0);
 
             return (
               <button
-                key={`${slot.time}-${index}`}
+                key={`${slotTime}-${index}`}
+                data-testid={`bay-slot-${index}`}
                 type="button"
                 disabled={!isAvailable}
-                onClick={() => onSelectSlot(slot.time)}
-                className={`p-4 rounded-xl border text-left transition-all relative ${
+                onClick={() => onSelectSlot(slotTime)}
+                className={`p-4 rounded-xl border text-left transition-all relative tactile-press ${
                   !isAvailable
-                    ? 'bg-[#101522]/40 border-[#1D2536]/50 opacity-50 cursor-not-allowed'
+                    ? 'bg-[#0E1017]/40 border-white/5 opacity-50 cursor-not-allowed'
                     : isSelected
-                    ? 'bg-[#161D2E] border-[#38BDF8] shadow-lg shadow-[#0284C7]/20 ring-2 ring-[#38BDF8]'
-                    : 'bg-[#101522] border-[#1D2536] hover:border-[#2A364E] hover:bg-[#131A2B]'
+                    ? 'bg-[#151822] border-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.18)] ring-1 ring-[#D4AF37] cursor-pointer'
+                    : 'bg-[#0E1017] border-white/10 hover:border-white/25 hover:bg-[#131620] cursor-pointer'
                 }`}
               >
                 {/* Time */}
                 <div className="flex items-center justify-between mb-2">
-                  <div className="text-base font-extrabold font-mono text-white flex items-center gap-1.5">
-                    <Clock className="w-4 h-4 text-[#38BDF8]" />
-                    {slot.time}
+                  <div className="text-base font-black font-mono text-white flex items-center gap-1.5">
+                    <Clock className="w-4 h-4 text-[#D4AF37]" />
+                    {slotTime}
                   </div>
                   {isSelected && (
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#38BDF8] shadow-md shadow-[#38BDF8]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37] shadow-md shadow-[#D4AF37]" />
                   )}
                 </div>
 
                 {/* Capacity Status */}
                 <div className="text-xs">
                   {isAvailable ? (
-                    slot.availableCount === 2 ? (
-                      <span className="text-[#10B981] font-semibold flex items-center gap-1">
+                    openBaysCount >= 2 ? (
+                      <span className="text-[#10B981] font-semibold flex items-center gap-1 font-mono">
                         <Warehouse className="w-3.5 h-3.5" />
-                        Dual Bays Open (Bay 1 & 2)
+                        Dual Bays Open (1 & 2)
                       </span>
                     ) : (
-                      <span className="text-[#F59E0B] font-semibold flex items-center gap-1">
+                      <span className="text-[#D4AF37] font-semibold flex items-center gap-1 font-mono">
                         <Warehouse className="w-3.5 h-3.5" />
-                        1 Bay Open ({slot.availableBays[0] === 1 ? 'Bay 1' : 'Bay 2'})
+                        1 Bay Open ({slot.suggestedBay ? `Bay ${slot.suggestedBay}` : 'Bay 1'})
                       </span>
                     )
                   ) : (
-                    <span className="text-[#EF4444] font-semibold">
+                    <span className="text-[#EF4444] font-semibold font-mono">
                       Fully Booked
                     </span>
                   )}
@@ -239,13 +231,13 @@ export const SlotPickerStep = ({
 
       {/* Selected Slot Confirmation Strip */}
       {selectedSlot && (
-        <div className="p-4 rounded-xl bg-[#0284C7]/10 border border-[#38BDF8]/30 flex items-center justify-between text-xs">
+        <div className="p-4 rounded-xl bg-[#0E1017] border border-[#D4AF37]/30 flex items-center justify-between text-xs">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#0284C7]/20 flex items-center justify-center text-[#38BDF8]">
+            <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[#D4AF37]">
               <Calendar className="w-4 h-4" />
             </div>
             <div>
-              <div className="font-bold text-white">
+              <div className="font-bold text-white font-display">
                 Scheduled Slot: {activeDate} at {selectedSlot}
               </div>
               <div className="text-[#94A3B8]">
@@ -260,7 +252,7 @@ export const SlotPickerStep = ({
       )}
 
       {/* Wizard Action Buttons */}
-      <div className="flex items-center justify-between pt-6 border-t border-[#1D2536]">
+      <div className="flex items-center justify-between pt-6 border-t border-white/10">
         <Button
           variant="secondary"
           size="md"
@@ -276,7 +268,7 @@ export const SlotPickerStep = ({
           iconRight={ArrowRight}
           disabled={!selectedSlot}
           onClick={onNext}
-          className="glow-cyan"
+          className="glow-gold"
         >
           Continue to Vehicle Intake
         </Button>

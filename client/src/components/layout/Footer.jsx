@@ -7,7 +7,10 @@ import {
   Clock, 
   ShieldCheck, 
   Sparkles,
-  ArrowUpRight
+  ArrowUpRight,
+  Award,
+  Compass,
+  CheckCircle2
 } from 'lucide-react';
 import { DetailDockLogo } from '../common/DetailDockLogo.jsx';
 import { useStudio } from '../../context/StudioContext.jsx';
@@ -15,66 +18,75 @@ import { useStudio } from '../../context/StudioContext.jsx';
 export const Footer = () => {
   const { settings } = useStudio();
   const addressStr = `${settings?.address?.street || '1440 Velocity Way, Suite 100'}, ${settings?.address?.city || 'Austin'}, ${settings?.address?.state || 'TX'} ${settings?.address?.zip || '78701'}`;
-  const phone = settings?.contactPhone || '+1 (555) 348-2450';
+  const phone = settings?.contactPhone || '+1 (512) 842-9210';
   const cleanPhone = phone.replace(/[^\d+]/g, '');
   const email = settings?.contactEmail || 'concierge@detaildock.com';
   const hoursStr = `Mon – Sat: ${settings?.operatingHours?.openTime || '09:00 AM'} – ${settings?.operatingHours?.closeTime || '06:00 PM'} (Closed Sun)`;
-  const studioName = settings?.studioName || 'DetailDock Atelier';
-  return (
-    <footer className="border-t border-[#1D2536] bg-[#090C12] text-[#94A3B8] text-sm">
-      {/* Top Banner Accent Line */}
-      <div className="h-1 bg-gradient-to-r from-[#0284C7] via-[#38BDF8] to-[#F59E0B]" />
+  const studioName = settings?.studioName || 'DetailDock Concourse Atelier';
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+  return (
+    <footer className="border-t border-[#1B1E28] bg-[#060709] text-[#94A3B8] text-sm relative overflow-hidden">
+      {/* Top Concourse Liquid Gold Hairline */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-[#D4AF37]/60 to-transparent" />
+
+      {/* Grand Architectural Background Watermark */}
+      <div className="absolute top-12 left-0 right-0 pointer-events-none select-none overflow-hidden flex justify-center opacity-40">
+        <span className="text-[12vw] font-black tracking-tighter uppercase whitespace-nowrap text-white/[0.02]">
+          DETAILDOCK ATELIER
+        </span>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Brand Info */}
+          
+          {/* Brand Info & Mission */}
           <div className="space-y-4">
             <DetailDockLogo size="md" />
             <p className="text-xs text-[#94A3B8] leading-relaxed pr-4">
-              Precision automotive preservation atelier. Combining master multi-stage paint correction, pro-grade 9H ceramic coatings, and an intelligent double-bay service booking system.
+              Concourse-grade automotive preservation studio. Master multi-stage rotary compounding, certified 9H ceramic glass shields, and sterile cleanroom execution guarded by authoritative server pricing.
             </p>
-            <div className="flex items-center gap-2 pt-2 text-[11px] font-semibold text-[#34D399]">
-              <span className="w-2 h-2 rounded-full bg-[#10B981]" />
-              <span>Climate-Controlled Cleanroom Bays</span>
+            <div className="flex items-center gap-2 pt-2 text-[11px] font-mono font-bold text-[#D4AF37]">
+              <Compass className="w-3.5 h-3.5 text-[#D4AF37]" />
+              <span>30.2672° N, 97.7431° W • Austin Cleanroom</span>
             </div>
           </div>
 
-          {/* Service Packages */}
+          {/* Preservation Packages */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#F8FAFC]">
+            <h4 className="text-xs font-black uppercase tracking-widest text-[#F8FAFC]">
               Preservation Packages
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link to="/builder" className="hover:text-[#38BDF8] transition-colors flex items-center justify-between group">
-                  <span>Essential Clean & Decon</span>
-                  <span className="text-[#64748B] group-hover:text-[#38BDF8] font-mono">$149+</span>
+                <Link to="/builder?package=essential-clean" className="hover:text-[#D4AF37] transition-colors flex items-center justify-between group">
+                  <span className="text-[#CBD5E1]">Essential Clean & Decon</span>
+                  <span className="text-[#64748B] group-hover:text-[#D4AF37] font-mono">$149+</span>
                 </Link>
               </li>
               <li>
-                <Link to="/builder" className="hover:text-[#38BDF8] transition-colors flex items-center justify-between group">
-                  <span>Signature Multi-Stage Detail</span>
-                  <span className="text-[#64748B] group-hover:text-[#38BDF8] font-mono">$289+</span>
+                <Link to="/builder?package=signature-detail" className="hover:text-[#D4AF37] transition-colors flex items-center justify-between group">
+                  <span className="text-[#CBD5E1]">Signature Multi-Stage Detail</span>
+                  <span className="text-[#64748B] group-hover:text-[#D4AF37] font-mono">$289+</span>
                 </Link>
               </li>
               <li>
-                <Link to="/builder" className="hover:text-[#38BDF8] transition-colors flex items-center justify-between group">
-                  <span>Ultimate 9H Ceramic Shield</span>
-                  <span className="text-[#F59E0B] font-mono font-bold">$499+</span>
+                <Link to="/builder?package=ceramic-shield" className="hover:text-[#D4AF37] transition-colors flex items-center justify-between group">
+                  <span className="text-[#CBD5E1]">Ultimate 9H Ceramic Shield</span>
+                  <span className="text-[#D4AF37] font-mono font-bold">$499+</span>
                 </Link>
               </li>
               <li>
-                <Link to="/builder" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1 text-[#38BDF8] pt-1">
-                  <span>Custom Configurator</span>
+                <Link to="/builder" className="hover:text-[#F8FAFC] transition-colors flex items-center gap-1 text-[#D4AF37] pt-1 font-semibold">
+                  <span>Open Configurator</span>
                   <ArrowUpRight className="w-3 h-3" />
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Quick Links */}
+          {/* Client Workflows */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#F8FAFC]">
+            <h4 className="text-xs font-black uppercase tracking-widest text-[#F8FAFC]">
               Client Workflows
             </h4>
             <ul className="space-y-2 text-xs">
@@ -89,6 +101,14 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/garage" className="hover:text-[#F8FAFC] transition-colors flex items-center gap-1.5">
+                  <span>Customer Atelier Garage</span>
+                  <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/30">
+                    VIP
+                  </span>
+                </Link>
+              </li>
+              <li>
                 <Link to="/track" className="hover:text-[#F8FAFC] transition-colors">
                   Live Job Tracker (DD-XXXXXX)
                 </Link>
@@ -96,7 +116,7 @@ export const Footer = () => {
               <li>
                 <Link to="/admin" className="hover:text-[#F8FAFC] transition-colors flex items-center gap-1.5">
                   <span>Studio Operations Admin</span>
-                  <span className="text-[10px] px-1.5 py-0.2 rounded bg-[#161D2E] text-[#94A3B8] border border-[#2A364E]">
+                  <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-[#1C202C] text-[#94A3B8] border border-[#262B3A]">
                     STAFF
                   </span>
                 </Link>
@@ -104,24 +124,24 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Atelier Contact & Hours */}
+          {/* Atelier Contact & Studio Info */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#F8FAFC]">
+            <h4 className="text-xs font-black uppercase tracking-widest text-[#F8FAFC]">
               Atelier Location & Concierge
             </h4>
             <div className="space-y-2.5 text-xs">
               <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#38BDF8] flex-shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-[#D4AF37] flex-shrink-0 mt-0.5" />
                 <span>{addressStr}</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-[#38BDF8] flex-shrink-0" />
-                <a href={`tel:${cleanPhone}`} className="hover:text-white transition-colors">
+                <Phone className="w-4 h-4 text-[#D4AF37] flex-shrink-0" />
+                <a href={`tel:${cleanPhone}`} className="hover:text-white transition-colors font-mono">
                   {phone}
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-[#38BDF8] flex-shrink-0" />
+                <Mail className="w-4 h-4 text-[#D4AF37] flex-shrink-0" />
                 <a href={`mailto:${email}`} className="hover:text-white transition-colors">
                   {email}
                 </a>
@@ -134,8 +154,25 @@ export const Footer = () => {
           </div>
         </div>
 
+        {/* Industry Accreditation Badge Strip */}
+        <div className="mt-12 py-5 px-6 rounded-2xl bg-[#0B0C10] border border-[#1B1E28] flex flex-wrap items-center justify-between gap-4 text-xs">
+          <div className="flex items-center gap-2 text-[#CBD5E1] font-medium">
+            <Award className="w-4 h-4 text-[#D4AF37]" />
+            <span className="font-bold text-[#F8FAFC]">Atelier Accreditations:</span>
+            <span>Rupes BigFoot Certified</span>
+            <span className="text-[#3A4154]">•</span>
+            <span>Modesta Japanese Glass Coating Partner</span>
+            <span className="text-[#3A4154]">•</span>
+            <span>IDA Certified Facility</span>
+          </div>
+          <div className="flex items-center gap-2 text-[#34D399] font-mono text-[11px]">
+            <CheckCircle2 className="w-3.5 h-3.5" />
+            <span>ISO-6 Sterile Detailing Bays Verified</span>
+          </div>
+        </div>
+
         {/* Bottom Legal Bar */}
-        <div className="mt-12 pt-8 border-t border-[#1D2536] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#64748B]">
+        <div className="mt-8 pt-6 border-t border-[#1B1E28] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#64748B]">
           <div className="flex items-center gap-2">
             <span>{studioName} © {new Date().getFullYear()}</span>
             <span>•</span>
@@ -146,7 +183,7 @@ export const Footer = () => {
           </div>
 
           <div className="flex items-center gap-6">
-            <span className="text-[11px]">Server Verified: MongoDB Atlas + Express + React 19</span>
+            <span className="text-[11px] font-mono">Server Verified: MongoDB Atlas + Express + React 19</span>
           </div>
         </div>
       </div>

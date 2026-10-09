@@ -1,29 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  /* Surfaces & Backgrounds */
-  --bg-canvas: #090C12;           /* Deepest Obsidian chassis */
-  --bg-surface: #101522;          /* Detailing bay / card surface */
-  --bg-elevated: #161D2E;         /* Modals, drawers, active cards */
-  --bg-subtle: #1F273B;           /* Hover states, active tabs */
+  /* Surfaces & Backgrounds (Obsidian Nero & Cleanroom Titanium) */
+  --bg-canvas: #08090C;           /* Deepest Obsidian Nero - zero cartoonish blue tint */
+  --bg-surface: #0E1017;          /* Cleanroom Surface / Studio bay plate */
+  --bg-elevated: #151822;         /* Elevated Concourse Cards & Modals */
+  --bg-subtle: #1C202C;           /* Hover states, active tabs */
 
   /* Hairlines & Borders */
-  --border-subtle: #1D2536;       /* Subtle section dividers */
-  --border-muted: #2A364E;        /* Card borders & inputs */
-  --border-active: #38BDF8;       /* Active selection border (Electric Cyan) */
+  --border-subtle: #1B1E28;       /* Subtle section dividers */
+  --border-muted: #262B3A;        /* Card borders & inputs */
+  --border-active: #D4AF37;       /* Concourse Champagne Gold */
 
   /* Typography */
   --text-primary: #F8FAFC;        /* Crisp Titanium White */
   --text-secondary: #94A3B8;      /* Technical Slate */
-  --text-muted: #64748B;          /* Helper text & timestamps */
+  --text-muted: #64748B;          /* Subdued helper text & timestamps */
 
-  /* Accents */
-  --accent-cyan: #0284C7;         /* Azure / Cyan Base */
-  --accent-cyan-light: #38BDF8;   /* Electric Neon Cyan */
-  --accent-amber: #F59E0B;        /* Warm Ceramic Amber */
-  --accent-gold: #D4AF37;         /* Imperial Detail Gold */
-  --accent-emerald: #10B981;      /* Ready / Confirmed Emerald */
-  --accent-rose: #EF4444;         /* Alert / Cancelled */
+  /* Authentic Luxury Accents */
+  --accent-gold: #D4AF37;         /* Liquid Champagne Gold (Primary luxury metallic) */
+  --accent-gold-light: #E5C07B;   /* Radiant Specular Gold */
+  --accent-gold-deep: #B8860B;    /* Deep Bronze Amber */
+  --accent-titanium: #CBD5E1;     /* Brushed Titanium */
+  --accent-emerald: #10B981;      /* Cleanroom Bay Active / 9H Certified */
+  --accent-rose: #EF4444;         /* Service Alert / Cancelled */
 }
 
 * {
@@ -44,10 +44,10 @@ code, pre, .font-mono {
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* Custom Luxury Scrollbar */
+/* Concourse Luxury Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
   background: var(--bg-canvas);
@@ -57,48 +57,86 @@ code, pre, .font-mono {
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-cyan-light);
+  background: var(--accent-gold);
 }
 
-/* Glassmorphism & Atelier Surfaces */
-.glass-panel {
-  background: rgba(16, 21, 34, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-subtle);
+/* Liquid Glass Refraction (Anti-AI Slop) */
+.liquid-glass {
+  background: rgba(14, 16, 23, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-.glass-panel-elevated {
-  background: rgba(22, 29, 46, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-muted);
+.liquid-glass-elevated {
+  background: rgba(21, 24, 34, 0.85);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 20px 40px -15px rgba(0, 0, 0, 0.7);
 }
 
-/* Precision Glow Effects */
-.glow-cyan {
-  box-shadow: 0 0 25px -5px rgba(56, 189, 248, 0.25);
+/* Specular Light & Luxury Glow */
+.glow-gold {
+  box-shadow: 0 0 30px -5px rgba(212, 175, 55, 0.22);
 }
 
-.glow-cyan-sm {
-  box-shadow: 0 0 12px -2px rgba(56, 189, 248, 0.3);
+.glow-gold-sm {
+  box-shadow: 0 0 14px -2px rgba(212, 175, 55, 0.28);
 }
 
-.glow-amber {
-  box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.25);
+.specular-sheen {
+  position: relative;
+  overflow: hidden;
 }
 
-/* Hairline dividers & Card Borders */
-.hairline-border {
-  border: 1px solid var(--border-subtle);
+.specular-sheen::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.04) 50%,
+    transparent 60%
+  );
+  pointer-events: none;
+  transform: rotate(25deg);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.hairline-border-hover:hover {
-  border-color: rgba(56, 189, 248, 0.4);
+.specular-sheen:hover::after {
+  transform: rotate(25deg) translate(30%, 30%);
+}
+
+/* Tactile Spring Physics (Emil Kowalski + Jakub Krehel) */
+.spring-snap {
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tactile-press {
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s ease;
+}
+
+.tactile-press:active {
+  transform: scale(0.98);
 }
 
 /* Selection Color */
 ::selection {
-  background-color: rgba(56, 189, 248, 0.3);
+  background-color: rgba(212, 175, 55, 0.35);
   color: #FFFFFF;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

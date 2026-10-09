@@ -9,7 +9,7 @@ import { CTASection } from '../components/home/CTASection.jsx';
 
 export const HomePage = () => {
   return (
-    <div className="w-full bg-[#090C12] text-[#F8FAFC]">
+    <div className="w-full bg-[#08090C] text-[#F8FAFC]">
       {/* 1. Hero with Instant Estimator Cockpit & Scangrip Beam */}
       <HeroSection />
 

@@ -6,7 +6,6 @@ import {
   Radio, 
   CheckCircle2, 
   Thermometer, 
-  Eye, 
   Award 
 } from 'lucide-react';
 
@@ -46,23 +45,32 @@ const PILLARS = [
 ];
 
 export const WhyChooseUs = () => {
+  const handleCardMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  };
+
   return (
-    <section className="py-20 bg-[#090C12] border-t border-[#1D2536] relative overflow-hidden">
+    <section className="py-24 bg-[#08090C] border-t border-white/10 relative overflow-hidden">
       {/* Background radial accent */}
-      <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-[#0284C7]/5 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#38BDF8] bg-[#38BDF8]/10 px-3.5 py-1.5 rounded-full border border-[#38BDF8]/20 inline-flex items-center gap-1.5">
-            <Award className="w-3.5 h-3.5" />
+          <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] bg-[#D4AF37]/10 px-4 py-1.5 rounded-full border border-[#D4AF37]/25 inline-flex items-center gap-2">
+            <Award className="w-3.5 h-3.5 text-[#D4AF37]" />
             The DetailDock Difference
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mt-4 text-[#F8FAFC]">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-[-0.03em] mt-5 text-[#F8FAFC] font-display">
             Engineered Detailing. Zero Compromises.
           </h2>
-          <p className="text-sm sm:text-base text-[#94A3B8] mt-3">
+          <p className="text-sm sm:text-base text-[#94A3B8] mt-3 font-normal">
             Most detailing shops operate in open garages with unpredictable scheduling. We engineered our atelier around sterile cleanroom conditions and transparent full-stack software.
           </p>
         </div>
@@ -74,36 +82,45 @@ export const WhyChooseUs = () => {
             return (
               <div 
                 key={idx}
-                className="p-8 rounded-2xl bg-[#101522] border border-[#1D2536] hover:border-[#38BDF8]/40 transition-all flex flex-col justify-between group"
+                onMouseMove={handleCardMouseMove}
+                className="p-8 sm:p-10 rounded-2xl bg-[#0E1017] border border-white/10 hover:border-[#D4AF37]/50 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)]"
               >
+                {/* Specular Highlight */}
+                <div 
+                  className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    background: 'radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 175, 55, 0.08), transparent 40%)'
+                  }}
+                />
+
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-[#0284C7]/15 border border-[#0284C7]/30 flex items-center justify-center text-[#38BDF8] group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37] group-hover:scale-110 transition-transform">
                       <IconComponent className="w-6 h-6" />
                     </div>
-                    <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#94A3B8] px-2.5 py-1 rounded bg-[#161D2E] border border-[#1D2536]">
+                    <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#CBD5E1] px-3 py-1 rounded-full bg-[#151822] border border-white/10">
                       {pillar.tag}
                     </span>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-[#38BDF8] transition-colors">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-[#D4AF37] transition-colors font-display">
                     {pillar.title}
                   </h3>
-                  <p className="text-sm text-[#94A3B8] leading-relaxed mb-6">
+                  <p className="text-sm text-[#94A3B8] leading-relaxed mb-6 font-normal">
                     {pillar.desc}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-[#1D2536] flex items-center justify-between">
+                <div className="pt-6 border-t border-white/10 flex items-center justify-between">
                   <div>
-                    <div className="text-2xl font-extrabold text-[#38BDF8] font-mono">
+                    <div className="text-3xl font-black text-[#D4AF37] font-mono tracking-tight">
                       {pillar.stat}
                     </div>
-                    <div className="text-xs text-[#64748B] font-semibold">
+                    <div className="text-xs text-[#94A3B8] font-medium mt-0.5">
                       {pillar.statLabel}
                     </div>
                   </div>
-                  <div className="w-8 h-8 rounded-full bg-[#161D2E] flex items-center justify-center text-[#94A3B8] group-hover:text-[#38BDF8] transition-colors">
+                  <div className="w-9 h-9 rounded-full bg-[#151822] border border-white/5 flex items-center justify-center text-[#10B981]">
                     <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
                   </div>
                 </div>

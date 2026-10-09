@@ -49,6 +49,7 @@
 | **TASK-036** | 13 DVI | Digital Vehicle Inspection (DVI) & Paint Health Telemetry | `VERIFIED` | TASK-035 | [VERIFICATION.md#task-036](file:///docs/00-control/VERIFICATION.md#task-036) |
 | **TASK-037** | 14 Garage | Customer Account, Authentication & Personal Atelier Garage | `VERIFIED` | TASK-036 | [VERIFICATION.md#task-037](file:///docs/00-control/VERIFICATION.md#task-037) |
 | **TASK-038** | 15 Deploy | Full E2E Playwright Verification, Security Scan & Cloud Deploy | `VERIFIED` | TASK-037 | [VERIFICATION.md#task-038](file:///docs/00-control/VERIFICATION.md#task-038) |
+| **TASK-039** | 16 Atelier UI | Concourse Atelier v2.0 Luxury UI/UX Overhaul & 6-Zone Radar | `VERIFIED` | TASK-038 | [VERIFICATION.md#task-039](file:///docs/00-control/VERIFICATION.md#task-039) |
 
 ---
 

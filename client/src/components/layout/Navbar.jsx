@@ -10,7 +10,8 @@ import {
   Sparkles, 
   ArrowRight, 
   PhoneCall,
-  Car
+  Car,
+  Compass
 } from 'lucide-react';
 import { DetailDockLogo } from '../common/DetailDockLogo.jsx';
 import { Button } from '../common/Button.jsx';
@@ -37,66 +38,55 @@ export const Navbar = () => {
 
   const bayCountText = settings?.maxBayCapacity === 1 
     ? 'Cleanroom Bay Active' 
-    : `${settings?.maxBayCapacity || 2} Detailing Bays Active`;
+    : `${settings?.maxBayCapacity || 2} Bays Active`;
 
-  const locationText = `${settings?.address?.city || 'Austin'}, ${settings?.address?.state || 'TX'} Atelier`;
-  const hoursText = `Operating: Mon–Sat ${settings?.operatingHours?.openTime || '09:00 AM'} – ${settings?.operatingHours?.closeTime || '06:00 PM'}`;
-  const phoneText = settings?.contactPhone || '+1 (555) 348-2450';
+  const locationText = `${settings?.address?.city || 'Austin'}, ${settings?.address?.state || 'TX'}`;
+  const phoneText = settings?.contactPhone || '+1 (512) 842-9210';
   const cleanPhone = phoneText.replace(/[^\d+]/g, '');
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[#1D2536] bg-[#090C12]/85 backdrop-blur-xl transition-all">
-      {/* Top Thin Studio Status Bar */}
-      <div className="hidden lg:flex items-center justify-between px-8 py-1.5 text-[11px] font-semibold tracking-wider uppercase border-b border-[#1D2536]/60 bg-[#101522]/40 text-[#94A3B8]">
-        <div className="flex items-center gap-3">
-          <span className="flex items-center gap-1.5 text-[#34D399]">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]" />
+    <header className="sticky top-0 z-50 w-full pt-2 sm:pt-3 pb-2 px-3 sm:px-6 max-w-7xl mx-auto transition-all">
+      {/* Floating Dynamic Island "Atelier Dock" */}
+      <div className="liquid-glass rounded-2xl px-4 sm:px-6 py-2.5 flex items-center justify-between border border-white/10 shadow-[0_20px_45px_-12px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.12)]">
+        
+        {/* Brand Logo & Micro Bay Badge */}
+        <div className="flex items-center gap-4">
+          <Link to="/" className="flex items-center focus:outline-none">
+            <DetailDockLogo size="md" />
+          </Link>
+
+          {/* Micro Status Chip (Desktop) */}
+          <div className="hidden xl:flex items-center gap-2 pl-3 border-l border-[#262B3A] text-[11px] font-mono text-[#94A3B8]">
+            <span className="flex items-center gap-1.5 text-[#34D399]">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]" />
+              </span>
+              {bayCountText}
             </span>
-            Atelier Live: {bayCountText}
-          </span>
-          <span className="text-[#2A364E]">•</span>
-          <span>{locationText}</span>
-          <span className="text-[#2A364E]">•</span>
-          <span>{hoursText}</span>
+            <span className="text-[#3A4154]">•</span>
+            <span>{locationText}</span>
+          </div>
         </div>
 
-        <div className="flex items-center gap-4 text-[#94A3B8]">
-          <a
-            href={`tel:${cleanPhone}`}
-            className="flex items-center gap-1.5 hover:text-[#38BDF8] transition-colors"
-          >
-            <PhoneCall className="w-3 h-3 text-[#38BDF8]" />
-            <span>Concierge: {phoneText}</span>
-          </a>
-        </div>
-      </div>
-
-      {/* Main Navigation Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
-        {/* Brand Logo */}
-        <Link to="/" className="flex items-center focus:outline-none">
-          <DetailDockLogo size="md" />
-        </Link>
-
-        {/* Desktop Nav Links */}
-        <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+        {/* Center Navigation Links */}
+        <nav className="hidden md:flex items-center gap-1 lg:gap-1.5 bg-[#08090C]/60 p-1 rounded-xl border border-[#1E2330]">
           {navLinks.map((item) => {
             const active = isActive(item.path);
             return (
               <Link
                 key={item.name}
                 to={item.path}
-                className={`relative px-3.5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${
+                className={`relative px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 flex items-center gap-2 ${
                   active
-                    ? 'text-[#38BDF8] bg-[#38BDF8]/10 border border-[#38BDF8]/30 shadow-sm'
-                    : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#161D2E]/60'
+                    ? 'text-[#F8FAFC] bg-[#D4AF37]/20 border border-[#D4AF37]/50 shadow-sm text-shadow-sm'
+                    : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#151822]/80'
                 }`}
               >
-                {item.name}
+                <item.icon className={`w-3.5 h-3.5 ${active ? 'text-[#D4AF37]' : 'text-[#64748B]'}`} />
+                <span>{item.name}</span>
                 {item.highlight && (
-                  <span className="px-1.5 py-0.2 rounded text-[10px] font-extrabold uppercase bg-[#0284C7] text-white">
+                  <span className="px-1 py-0.2 rounded text-[9px] font-black uppercase bg-[#D4AF37] text-[#08090C]">
                     PRO
                   </span>
                 )}
@@ -105,14 +95,23 @@ export const Navbar = () => {
           })}
         </nav>
 
-        {/* Action Buttons */}
+        {/* Action Buttons & Concierge Hotline */}
         <div className="hidden sm:flex items-center gap-3">
+          <a
+            href={`tel:${cleanPhone}`}
+            className="hidden lg:flex items-center gap-1.5 text-xs font-medium text-[#94A3B8] hover:text-[#D4AF37] transition-colors py-1.5 px-2.5 rounded-lg hover:bg-[#151822]"
+            title="Call Concierge"
+          >
+            <PhoneCall className="w-3.5 h-3.5 text-[#D4AF37]" />
+            <span className="font-mono text-[11px]">{phoneText}</span>
+          </a>
+
           <Link to="/track">
             <Button
-              variant="secondary"
+              variant="outline"
               size="sm"
               icon={Search}
-              className="hidden lg:inline-flex"
+              className="text-xs py-1.5"
             >
               Track Job
             </Button>
@@ -123,7 +122,7 @@ export const Navbar = () => {
               variant="primary"
               size="sm"
               iconRight={ArrowRight}
-              className="glow-cyan-sm"
+              className="glow-gold-sm text-xs py-1.5"
             >
               Configure Service
             </Button>
@@ -134,7 +133,7 @@ export const Navbar = () => {
         <div className="flex md:hidden items-center gap-2">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#161D2E] focus:outline-none"
+            className="p-2 rounded-lg text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#151822] focus:outline-none"
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -142,44 +141,46 @@ export const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer (Liquid Dropdown) */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-[#1D2536] bg-[#090C12] px-4 pt-4 pb-6 space-y-3">
-          <div className="flex items-center justify-between pb-3 mb-2 border-b border-[#1D2536] text-xs text-[#94A3B8]">
-            <span className="flex items-center gap-1.5 text-[#34D399]">
+        <div className="md:hidden mt-2 liquid-glass-elevated rounded-2xl p-5 space-y-4 border border-white/10 animate-fadeIn">
+          <div className="flex items-center justify-between pb-3 border-b border-[#262B3A] text-xs text-[#94A3B8]">
+            <span className="flex items-center gap-1.5 text-[#34D399] font-mono">
               <span className="w-2 h-2 rounded-full bg-[#10B981]" />
-              Bays Active (2/2)
+              {bayCountText}
             </span>
-            <span>Austin, TX</span>
+            <span className="font-mono">{locationText}</span>
           </div>
 
-          {navLinks.map((item) => (
-            <Link
-              key={item.name}
-              to={item.path}
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-semibold text-[#94A3B8] hover:text-white hover:bg-[#161D2E] transition-colors"
-            >
-              <div className="flex items-center gap-2.5">
-                <item.icon className="w-4 h-4 text-[#38BDF8]" />
-                <span>{item.name}</span>
-              </div>
-              {item.highlight && (
-                <span className="px-1.5 py-0.5 rounded text-[10px] font-bold uppercase bg-[#0284C7] text-white">
-                  PRO
-                </span>
-              )}
-            </Link>
-          ))}
+          <div className="grid grid-cols-1 gap-1">
+            {navLinks.map((item) => (
+              <Link
+                key={item.name}
+                to={item.path}
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-bold text-[#CBD5E1] hover:text-white hover:bg-[#1C202C] transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <item.icon className="w-4 h-4 text-[#D4AF37]" />
+                  <span>{item.name}</span>
+                </div>
+                {item.highlight && (
+                  <span className="px-1.5 py-0.5 rounded text-[10px] font-black uppercase bg-[#D4AF37] text-[#08090C]">
+                    PRO
+                  </span>
+                )}
+              </Link>
+            ))}
+          </div>
 
-          <div className="pt-3 border-t border-[#1D2536] space-y-2">
+          <div className="pt-3 border-t border-[#262B3A] space-y-2">
             <Link to="/builder" onClick={() => setMobileMenuOpen(false)} className="block">
               <Button variant="primary" size="md" className="w-full">
                 Configure Detailing Package
               </Button>
             </Link>
             <Link to="/track" onClick={() => setMobileMenuOpen(false)} className="block">
-              <Button variant="secondary" size="md" className="w-full">
+              <Button variant="outline" size="md" className="w-full">
                 Track Existing Job
               </Button>
             </Link>

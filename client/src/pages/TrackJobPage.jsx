@@ -8,14 +8,13 @@ import {
   CheckCircle2, 
   Copy, 
   Check, 
-  ExternalLink,
-  Car,
+  ExternalLink, 
   RotateCcw,
-  Sparkles,
-  AlertCircle,
-  CreditCard,
-  FileDown,
-  MailCheck
+  Sparkles, 
+  AlertCircle, 
+  CreditCard, 
+  FileDown, 
+  MailCheck 
 } from 'lucide-react';
 import { Button } from '../components/common/Button.jsx';
 import { Badge } from '../components/common/Badge.jsx';
@@ -55,7 +54,6 @@ export const TrackJobPage = () => {
     }
   };
 
-  // Search by code function
   const executeTrack = async (searchCode) => {
     const clean = searchCode?.trim();
     if (!clean) return;
@@ -83,7 +81,6 @@ export const TrackJobPage = () => {
     executeTrack(inputCode);
   };
 
-  // Auto-search if code is present in URL
   useEffect(() => {
     if (urlCode) {
       setInputCode(urlCode);
@@ -100,19 +97,19 @@ export const TrackJobPage = () => {
   };
 
   return (
-    <div className="w-full bg-[#090C12] text-[#F8FAFC] min-h-screen py-12 lg:py-16">
+    <div className="w-full bg-[#08090C] text-[#F8FAFC] min-h-screen py-12 lg:py-16">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         {/* Page Header */}
         <div className="text-center max-w-2xl mx-auto">
-          <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#38BDF8] bg-[#38BDF8]/10 px-3.5 py-1.5 rounded-full border border-[#38BDF8]/20 inline-flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5" />
+          <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D4AF37] bg-[#D4AF37]/10 px-3.5 py-1.5 rounded-full border border-[#D4AF37]/25 inline-flex items-center gap-2">
+            <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
             Live Client Telemetry Portal
           </span>
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-[#F8FAFC] tracking-tight mt-3">
+          <h1 className="text-3xl sm:text-5xl font-black text-[#F8FAFC] tracking-[-0.03em] mt-3 font-display">
             Track Vehicle Treatment
           </h1>
-          <p className="text-sm sm:text-base text-[#94A3B8] mt-2">
+          <p className="text-sm sm:text-base text-[#94A3B8] mt-2 font-normal">
             Inspect real-time cleanroom bay status, paint correction progression, and technician inspection notes using your unique 6-character booking code.
           </p>
         </div>
@@ -121,16 +118,16 @@ export const TrackJobPage = () => {
         <div className="max-w-2xl mx-auto">
           <form 
             onSubmit={handleFormSubmit}
-            className="p-3 sm:p-4 rounded-2xl bg-[#101522] border-2 border-[#1D2536] shadow-2xl flex flex-col sm:flex-row gap-3"
+            className="p-3 sm:p-4 rounded-2xl bg-[#0E1017] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] flex flex-col sm:flex-row gap-3 hover:border-[#D4AF37]/30 transition-all"
           >
             <div className="relative flex-1">
-              <Search className="w-5 h-5 text-[#64748B] absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Search className="w-5 h-5 text-[#94A3B8] absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={inputCode}
                 onChange={(e) => setInputCode(e.target.value.toUpperCase())}
                 placeholder="Enter Code e.g. DD-XXXXXX"
-                className="w-full bg-[#161D2E] border border-[#2A364E] focus:border-[#38BDF8] rounded-xl pl-11 pr-4 py-3 text-sm font-mono text-[#F8FAFC] placeholder-[#64748B] uppercase tracking-wider focus:outline-none focus:ring-1 focus:ring-[#38BDF8]"
+                className="w-full bg-[#08090C] border border-white/10 focus:border-[#D4AF37] rounded-xl pl-11 pr-4 py-3 text-sm font-mono text-[#F8FAFC] placeholder-[#64748B] uppercase tracking-wider focus:outline-none focus:ring-1 focus:ring-[#D4AF37]"
               />
             </div>
             <Button
@@ -139,14 +136,14 @@ export const TrackJobPage = () => {
               size="md"
               isLoading={loading}
               iconRight={ArrowRight}
-              className="glow-cyan-sm"
+              className="glow-gold-sm"
             >
               Track Vehicle
             </Button>
           </form>
 
           {/* Quick Demo Code Suggestion Helper */}
-          <div className="mt-3 flex items-center justify-center gap-2 text-xs text-[#64748B]">
+          <div className="mt-3 flex items-center justify-center gap-2 text-xs text-[#64748B] font-mono">
             <span>Need a code to test?</span>
             <button
               type="button"
@@ -154,12 +151,12 @@ export const TrackJobPage = () => {
                 setInputCode('DD-DEMO01');
                 executeTrack('DD-DEMO01');
               }}
-              className="text-[#38BDF8] hover:underline font-mono"
+              className="text-[#D4AF37] hover:underline font-bold cursor-pointer"
             >
               Try DD-DEMO01
             </button>
             <span>•</span>
-            <Link to="/book" className="text-[#94A3B8] hover:underline">
+            <Link to="/book" className="text-[#94A3B8] hover:underline font-sans">
               Create New Booking
             </Link>
           </div>
@@ -181,18 +178,18 @@ export const TrackJobPage = () => {
           <div className="space-y-8 animate-fadeIn">
             
             {/* Top Bar with Tracking Code & Status Pill */}
-            <div className="p-6 sm:p-8 rounded-2xl bg-[#101522] border-2 border-[#1D2536] shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-left">
+            <div className="p-6 sm:p-8 rounded-2xl bg-[#0E1017] border border-[#D4AF37]/50 shadow-[0_20px_50px_rgba(212,175,55,0.15)] flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-left">
               <div>
-                <div className="text-xs uppercase font-bold text-[#64748B] font-mono tracking-wider">
+                <div className="text-xs uppercase font-bold text-[#94A3B8] font-mono tracking-wider">
                   Vehicle Appointment Code
                 </div>
                 <div className="flex items-center gap-3 mt-1">
-                  <span className="text-3xl sm:text-4xl font-black font-mono text-[#38BDF8] tracking-widest">
+                  <span className="text-3xl sm:text-4xl font-black font-mono text-[#D4AF37] tracking-widest drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">
                     {bookingData.bookingCode}
                   </span>
                   <button
                     onClick={handleCopyCode}
-                    className="p-2 rounded-xl bg-[#161D2E] border border-[#2A364E] text-[#94A3B8] hover:text-[#38BDF8] transition-colors"
+                    className="p-2 rounded-xl bg-white/5 border border-white/10 text-[#CBD5E1] hover:text-[#D4AF37] hover:border-[#D4AF37]/50 transition-colors cursor-pointer tactile-press"
                     title="Copy code"
                   >
                     {copied ? <Check className="w-4 h-4 text-[#10B981]" /> : <Copy className="w-4 h-4" />}
@@ -225,20 +222,20 @@ export const TrackJobPage = () => {
             />
 
             {/* Financial Settlement & Tax Invoicing Section */}
-            <div className="p-6 rounded-2xl bg-[#101522] border-2 border-[#1D2536] shadow-xl text-left space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#1D2536]">
+            <div className="p-6 sm:p-7 rounded-2xl bg-[#0E1017] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] text-left space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
                 <div className="flex items-center gap-2">
-                  <CreditCard className="w-4 h-4 text-[#38BDF8]" />
-                  <h3 className="text-sm font-bold uppercase tracking-wider text-white">
+                  <CreditCard className="w-4 h-4 text-[#D4AF37]" />
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-white font-mono">
                     Financial Settlement & Official Invoicing
                   </h3>
                 </div>
-                <span className={`px-2.5 py-1 rounded-full text-[11px] font-mono font-bold uppercase w-fit ${
+                <span className={`px-3 py-1 rounded-full text-[11px] font-mono font-bold uppercase w-fit ${
                   bookingData.payment?.status === 'paid'
                     ? 'bg-[#10B981]/15 text-[#34D399] border border-[#10B981]/30'
                     : bookingData.payment?.status === 'deposit_paid'
-                    ? 'bg-[#0284C7]/15 text-[#38BDF8] border border-[#0284C7]/30'
-                    : 'bg-[#F59E0B]/15 text-[#FBBF24] border border-[#F59E0B]/30'
+                    ? 'bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/30'
+                    : 'bg-white/5 text-[#CBD5E1] border border-white/10'
                 }`}>
                   {bookingData.payment?.status === 'paid'
                     ? 'Paid in Full'
@@ -249,23 +246,23 @@ export const TrackJobPage = () => {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                <div className="p-3.5 rounded-xl bg-[#090C12] border border-[#1D2536]">
-                  <span className="text-[#64748B] block text-[11px]">Authoritative Total:</span>
-                  <span className="text-base font-extrabold text-[#38BDF8] font-mono">
+                <div className="p-3.5 rounded-xl bg-[#08090C] border border-white/10">
+                  <span className="text-[#94A3B8] block text-[11px] font-mono">Authoritative Total:</span>
+                  <span className="text-base font-black text-white font-mono">
                     ${Number(bookingData.service?.totalPrice || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
                   </span>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-[#090C12] border border-[#1D2536]">
-                  <span className="text-[#64748B] block text-[11px]">Settlement Method:</span>
-                  <span className="text-sm font-semibold text-white capitalize">
+                <div className="p-3.5 rounded-xl bg-[#08090C] border border-white/10">
+                  <span className="text-[#94A3B8] block text-[11px] font-mono">Settlement Method:</span>
+                  <span className="text-sm font-semibold text-white capitalize font-display">
                     {bookingData.payment?.method === 'stripe' ? 'Online Card (Stripe)' : 'Pay on Arrival'}
                   </span>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-[#090C12] border border-[#1D2536]">
-                  <span className="text-[#64748B] block text-[11px]">Amount Settled:</span>
-                  <span className="text-base font-extrabold text-[#34D399] font-mono">
+                <div className="p-3.5 rounded-xl bg-[#08090C] border border-white/10">
+                  <span className="text-[#94A3B8] block text-[11px] font-mono">Amount Settled:</span>
+                  <span className="text-base font-black text-[#10B981] font-mono">
                     ${Number(bookingData.payment?.amountPaid || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
                   </span>
                 </div>
@@ -283,7 +280,7 @@ export const TrackJobPage = () => {
                     variant="outline"
                     size="sm"
                     icon={FileDown}
-                    className="w-full sm:w-auto text-xs border-[#38BDF8]/40 text-[#38BDF8] hover:bg-[#38BDF8]/10"
+                    className="w-full sm:w-auto text-xs border-[#D4AF37]/40 text-[#D4AF37] hover:bg-[#D4AF37]/10"
                   >
                     Download Tax Invoice / Receipt (PDF)
                   </Button>
@@ -298,51 +295,29 @@ export const TrackJobPage = () => {
                   disabled={resendingEmail}
                   className="w-full sm:w-auto text-xs text-[#94A3B8] hover:text-white"
                 >
-                  {resendingEmail ? 'Sending...' : 'Resend Receipt to My Email'}
+                  {resendingEmail ? 'Transmitting...' : 'Resend Email Receipt'}
                 </Button>
 
                 {emailNotice && (
-                  <span className="text-xs text-[#34D399] font-medium">{emailNotice}</span>
+                  <span className="text-xs text-[#10B981] font-mono font-medium">{emailNotice}</span>
                 )}
               </div>
             </div>
 
-            {/* Official Digital Ceramic Coating Warranty Certificate */}
-            <WarrantyCertificateSection booking={bookingData} />
-
-            {/* Digital Vehicle Inspection (DVI) & Paint Health Telemetry */}
+            {/* Digital Vehicle Inspection (DVI) & Paint Health Report */}
             <VehicleInspectionCard booking={bookingData} />
 
-            {/* Chronological Technician History Audit */}
+            {/* Official Digital Ceramic Coating Warranty Section */}
+            <WarrantyCertificateSection booking={bookingData} />
+
+            {/* Client Communications & Status Updates Log */}
+            <CommunicationsLogSection communications={bookingData.communications} />
+
+            {/* Chronological Audit Log Timeline */}
             <JobAuditTimeline
-              timeline={bookingData.timeline}
+              auditLogs={bookingData.auditLogs}
+              createdAt={bookingData.createdAt}
             />
-
-            {/* Live Automated Client Notifications & Dispatch Log */}
-            <CommunicationsLogSection
-              communications={bookingData.communications}
-              customerPhone={bookingData.customer?.maskedPhone}
-              bookingCode={bookingData.bookingCode}
-            />
-
-            {/* Footer Navigation Strip */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-[#1D2536] text-xs text-[#94A3B8]">
-              <div>
-                Questions regarding treatment? Call concierge at <span className="text-white font-mono">(512) 555-DOCK</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Link to="/book">
-                  <Button variant="secondary" size="md">
-                    Book Another Bay Slot
-                  </Button>
-                </Link>
-                <Link to="/">
-                  <Button variant="ghost" size="md">
-                    Return to Atelier Home
-                  </Button>
-                </Link>
-              </div>
-            </div>
 
           </div>
         )}

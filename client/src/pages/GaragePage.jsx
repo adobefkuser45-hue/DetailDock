@@ -234,135 +234,136 @@ export const GaragePage = () => {
   // If Not Authenticated: Render High-Fidelity Login / Register Portal
   if (!token || !currentUser) {
     return (
-      <div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto flex flex-col justify-center">
-        {/* Header Intro */}
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#38BDF8]/10 border border-[#38BDF8]/30 text-[#38BDF8] text-xs font-semibold uppercase tracking-wider mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            Customer Atelier Portal
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#F8FAFC] tracking-tight">
-            Personal Garage & Service Concierge
-          </h1>
-          <p className="mt-3 text-base text-[#94A3B8] max-w-xl mx-auto">
-            Manage your personal vehicle fleet, track live detailing telemetry, review paint health inspections, and download official 9H ceramic warranty certificates.
-          </p>
-        </div>
-
-        {/* Auth Box */}
-        <div className="bg-[#0F1420] border border-[#1D2536] rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
-          {/* Subtle Accent Glow */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#0284C7]/5 rounded-full blur-3xl pointer-events-none" />
-
-          {/* Quick Demo Customer Pill */}
-          <div className="mb-6 p-4 rounded-xl bg-[#161D2E]/90 border border-[#2A364E] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-            <div>
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#38BDF8]">
-                <Key className="w-3.5 h-3.5" />
-                1-Click Client Experience Demo
-              </div>
-              <p className="text-xs text-[#94A3B8] mt-0.5">
-                Test with pre-configured client: <span className="text-[#F8FAFC] font-medium">alex@example.com</span> (Porsche 911 GT3)
-              </p>
+      <div className="w-full bg-[#08090C] text-[#F8FAFC] min-h-screen py-16 px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
+        <div className="max-w-4xl mx-auto w-full">
+          {/* Header Intro */}
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0E1017] border border-white/10 text-[#D4AF37] text-xs font-semibold uppercase tracking-wider mb-4 font-mono">
+              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+              Customer Atelier Portal
             </div>
-            <button
-              type="button"
-              onClick={handleDemoLogin}
-              className="text-xs font-bold text-[#F8FAFC] bg-[#0284C7] hover:bg-[#0369A1] px-3.5 py-2 rounded-lg transition-colors flex items-center gap-1.5 shrink-0"
-            >
-              Fill Demo Credentials
-            </button>
+            <h1 className="text-3xl sm:text-5xl font-black text-[#F8FAFC] tracking-[-0.03em] font-display">
+              Personal Garage & Service Concierge
+            </h1>
+            <p className="mt-3 text-base text-[#94A3B8] max-w-xl mx-auto font-normal">
+              Manage your personal vehicle fleet, track live detailing telemetry, review paint health inspections, and download official 9H ceramic warranty certificates.
+            </p>
           </div>
 
-          {/* Auth Tabs */}
-          <div className="flex border-b border-[#1D2536] mb-6">
-            <button
-              onClick={() => { setAuthMode('login'); setAuthError(''); }}
-              className={`pb-3 px-4 font-bold text-sm transition-all border-b-2 flex items-center gap-2 ${
-                authMode === 'login'
-                  ? 'border-[#38BDF8] text-[#38BDF8]'
-                  : 'border-transparent text-[#94A3B8] hover:text-[#F8FAFC]'
-              }`}
-            >
-              <LogIn className="w-4 h-4" />
-              Sign In to Garage
-            </button>
-            <button
-              onClick={() => { setAuthMode('register'); setAuthError(''); }}
-              className={`pb-3 px-4 font-bold text-sm transition-all border-b-2 flex items-center gap-2 ${
-                authMode === 'register'
-                  ? 'border-[#38BDF8] text-[#38BDF8]'
-                  : 'border-transparent text-[#94A3B8] hover:text-[#F8FAFC]'
-              }`}
-            >
-              <User className="w-4 h-4" />
-              Register Account (Free)
-            </button>
-          </div>
+          {/* Auth Box */}
+          <div className="bg-[#0E1017] border border-white/10 rounded-2xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative overflow-hidden">
+            {/* Subtle Accent Glow */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#D4AF37]/5 rounded-full blur-3xl pointer-events-none" />
 
-          {/* Feedback error */}
-          {authError && (
-            <div className="mb-6 p-3.5 rounded-lg bg-[#EF4444]/10 border border-[#EF4444]/30 text-[#EF4444] text-xs flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 shrink-0" />
-              <span>{authError}</span>
+            {/* Quick Demo Customer Pill */}
+            <div className="mb-6 p-4 rounded-xl bg-[#08090C] border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div>
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D4AF37] font-mono">
+                  <Key className="w-3.5 h-3.5" />
+                  1-Click Client Experience Demo
+                </div>
+                <p className="text-xs text-[#94A3B8] mt-0.5 font-sans">
+                  Test with pre-configured client: <span className="text-[#F8FAFC] font-medium">alex@example.com</span> (Porsche 911 GT3)
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={handleDemoLogin}
+                className="text-xs font-bold text-[#08090C] bg-[#D4AF37] hover:bg-[#E2C366] px-3.5 py-2 rounded-lg transition-colors flex items-center gap-1.5 shrink-0 cursor-pointer font-mono tactile-press"
+              >
+                Fill Demo Credentials
+              </button>
             </div>
-          )}
 
-          {/* Login Form */}
-          {authMode === 'login' ? (
-            <form onSubmit={handleLoginSubmit} className="space-y-4">
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={authEmail}
-                  onChange={(e) => setAuthEmail(e.target.value)}
-                  placeholder="e.g. alex@example.com"
-                  className="w-full bg-[#161D2E] border border-[#2A364E] focus:border-[#38BDF8] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
-                />
-              </div>
+            {/* Auth Tabs */}
+            <div className="flex border-b border-white/10 mb-6 font-mono">
+              <button
+                onClick={() => { setAuthMode('login'); setAuthError(''); }}
+                className={`pb-3 px-4 font-bold text-sm transition-all border-b-2 flex items-center gap-2 cursor-pointer ${
+                  authMode === 'login'
+                    ? 'border-[#D4AF37] text-[#D4AF37]'
+                    : 'border-transparent text-[#94A3B8] hover:text-[#F8FAFC]'
+                }`}
+              >
+                <LogIn className="w-4 h-4" />
+                Sign In to Garage
+              </button>
+              <button
+                onClick={() => { setAuthMode('register'); setAuthError(''); }}
+                className={`pb-3 px-4 font-bold text-sm transition-all border-b-2 flex items-center gap-2 cursor-pointer ${
+                  authMode === 'register'
+                    ? 'border-[#D4AF37] text-[#D4AF37]'
+                    : 'border-transparent text-[#94A3B8] hover:text-[#F8FAFC]'
+                }`}
+              >
+                <User className="w-4 h-4" />
+                Register Account (Free)
+              </button>
+            </div>
 
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  required
-                  value={authPassword}
-                  onChange={(e) => setAuthPassword(e.target.value)}
-                  placeholder="••••••••••••"
-                  className="w-full bg-[#161D2E] border border-[#2A364E] focus:border-[#38BDF8] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
-                />
+            {/* Feedback error */}
+            {authError && (
+              <div className="mb-6 p-3.5 rounded-lg bg-[#EF4444]/10 border border-[#EF4444]/30 text-[#EF4444] text-xs flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                <span>{authError}</span>
               </div>
+            )}
 
-              <div className="pt-2">
-                <Button
-                  type="submit"
-                  variant="primary"
-                  size="lg"
-                  className="w-full glow-cyan-sm"
-                  disabled={authLoading}
-                >
-                  {authLoading ? (
-                    <span className="flex items-center gap-2">
-                      <LoadingSpinner size="sm" /> Authenticating...
-                    </span>
-                  ) : (
-                    'Access Customer Garage'
-                  )}
-                </Button>
-              </div>
-            </form>
-          ) : (
+            {/* Login Form */}
+            {authMode === 'login' ? (
+              <form onSubmit={handleLoginSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5 font-mono">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    value={authEmail}
+                    onChange={(e) => setAuthEmail(e.target.value)}
+                    placeholder="e.g. alex@example.com"
+                    className="w-full bg-[#08090C] border border-white/10 focus:border-[#D4AF37] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5 font-mono">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    required
+                    value={authPassword}
+                    onChange={(e) => setAuthPassword(e.target.value)}
+                    placeholder="••••••••••••"
+                    className="w-full bg-[#08090C] border border-white/10 focus:border-[#D4AF37] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
+                  />
+                </div>
+
+                <div className="pt-2">
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    size="lg"
+                    className="w-full glow-gold-sm"
+                    disabled={authLoading}
+                  >
+                    {authLoading ? (
+                      <span className="flex items-center gap-2">
+                        <LoadingSpinner size="sm" /> Authenticating...
+                      </span>
+                    ) : (
+                      'Access Customer Garage'
+                    )}
+                  </Button>
+                </div>
+              </form>
+            ) : (
             /* Register Form */
             <form onSubmit={handleRegisterSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5 font-mono">
                     Full Name
                   </label>
                   <input
@@ -371,11 +372,11 @@ export const GaragePage = () => {
                     value={authName}
                     onChange={(e) => setAuthName(e.target.value)}
                     placeholder="Christian Vance"
-                    className="w-full bg-[#161D2E] border border-[#2A364E] focus:border-[#38BDF8] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
+                    className="w-full bg-[#08090C] border border-white/10 focus:border-[#D4AF37] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5 font-mono">
                     Phone Number
                   </label>
                   <input
@@ -384,13 +385,13 @@ export const GaragePage = () => {
                     value={authPhone}
                     onChange={(e) => setAuthPhone(e.target.value)}
                     placeholder="+1 (512) 555-0199"
-                    className="w-full bg-[#161D2E] border border-[#2A364E] focus:border-[#38BDF8] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
+                    className="w-full bg-[#08090C] border border-white/10 focus:border-[#D4AF37] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5 font-mono">
                   Email Address
                 </label>
                 <input
@@ -399,12 +400,12 @@ export const GaragePage = () => {
                   value={authEmail}
                   onChange={(e) => setAuthEmail(e.target.value)}
                   placeholder="vance@atelier.com"
-                  className="w-full bg-[#161D2E] border border-[#2A364E] focus:border-[#38BDF8] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
+                  className="w-full bg-[#08090C] border border-white/10 focus:border-[#D4AF37] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5 font-mono">
                   Password (Min 6 Characters)
                 </label>
                 <input
@@ -414,7 +415,7 @@ export const GaragePage = () => {
                   value={authPassword}
                   onChange={(e) => setAuthPassword(e.target.value)}
                   placeholder="••••••••••••"
-                  className="w-full bg-[#161D2E] border border-[#2A364E] focus:border-[#38BDF8] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
+                  className="w-full bg-[#08090C] border border-white/10 focus:border-[#D4AF37] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
                 />
               </div>
 
@@ -423,7 +424,7 @@ export const GaragePage = () => {
                   type="submit"
                   variant="primary"
                   size="lg"
-                  className="w-full glow-cyan-sm"
+                  className="w-full glow-gold-sm"
                   disabled={authLoading}
                 >
                   {authLoading ? (
@@ -439,6 +440,7 @@ export const GaragePage = () => {
           )}
         </div>
       </div>
+    </div>
     );
   }
 
@@ -446,142 +448,144 @@ export const GaragePage = () => {
   const warrantyCount = bookings.filter(b => b.warrantyCertificate?.issued).length;
 
   return (
-    <div className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
-      {/* Toast Feedback Banner */}
-      {actionSuccess && (
-        <div className="p-4 rounded-xl bg-[#10B981]/15 border border-[#10B981]/40 text-[#34D399] text-sm flex items-center justify-between animate-fadeIn">
-          <div className="flex items-center gap-2.5">
-            <CheckCircle2 className="w-5 h-5 shrink-0" />
-            <span className="font-medium">{actionSuccess}</span>
+    <div className="w-full bg-[#08090C] text-[#F8FAFC] min-h-screen py-10 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto space-y-8">
+        {/* Toast Feedback Banner */}
+        {actionSuccess && (
+          <div className="p-4 rounded-xl bg-[#10B981]/15 border border-[#10B981]/40 text-[#34D399] text-sm flex items-center justify-between animate-fadeIn">
+            <div className="flex items-center gap-2.5">
+              <CheckCircle2 className="w-5 h-5 shrink-0" />
+              <span className="font-medium">{actionSuccess}</span>
+            </div>
+            <button onClick={() => setActionSuccess('')} className="text-[#34D399] hover:text-white cursor-pointer">
+              <X className="w-4 h-4" />
+            </button>
           </div>
-          <button onClick={() => setActionSuccess('')} className="text-[#34D399] hover:text-white">
-            <X className="w-4 h-4" />
+        )}
+
+        {/* Header Profile Bar */}
+        <div className="bg-[#0E1017] border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative overflow-hidden">
+          <div className="flex items-center gap-5">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#D4AF37] to-[#B8860B] flex items-center justify-center text-[#08090C] text-2xl font-black shadow-lg font-mono">
+              {currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'C'}
+            </div>
+            <div>
+              <div className="flex items-center gap-3 flex-wrap">
+                <h1 className="text-2xl sm:text-3xl font-black text-[#F8FAFC] font-display">
+                  {currentUser.name}
+                </h1>
+                <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/30 font-mono">
+                  Atelier VIP Client
+                </span>
+              </div>
+              <p className="text-sm text-[#94A3B8] mt-1 flex items-center gap-3 font-normal">
+                <span>{currentUser.email}</span>
+                {currentUser.phone && (
+                  <>
+                    <span className="text-white/20">•</span>
+                    <span>{currentUser.phone}</span>
+                  </>
+                )}
+              </p>
+            </div>
+          </div>
+
+          {/* Quick Actions & Logout */}
+          <div className="flex items-center gap-3 w-full md:w-auto justify-end">
+            <Button
+              variant="secondary"
+              size="sm"
+              icon={RefreshCw}
+              onClick={() => fetchGarage(token)}
+              disabled={loadingGarage}
+              className="border-white/10 hover:border-white/25"
+            >
+              Refresh
+            </Button>
+            <Button
+              variant="danger"
+              size="sm"
+              icon={LogOut}
+              onClick={handleLogout}
+            >
+              Sign Out
+            </Button>
+          </div>
+        </div>
+
+        {/* Summary KPI Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="bg-[#0E1017] border border-white/10 rounded-xl p-5 flex items-center justify-between shadow-lg">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider text-[#94A3B8] font-mono">Saved Vehicles</p>
+              <p className="text-2xl font-black text-[#F8FAFC] mt-1 font-mono">{savedVehicles.length}</p>
+            </div>
+            <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37]">
+              <Car className="w-6 h-6" />
+            </div>
+          </div>
+
+          <div className="bg-[#0E1017] border border-white/10 rounded-xl p-5 flex items-center justify-between shadow-lg">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider text-[#94A3B8] font-mono">Service Bookings</p>
+              <p className="text-2xl font-black text-[#F8FAFC] mt-1 font-mono">{bookings.length}</p>
+            </div>
+            <div className="w-12 h-12 rounded-xl bg-[#10B981]/15 border border-[#10B981]/30 flex items-center justify-center text-[#10B981]">
+              <Calendar className="w-6 h-6" />
+            </div>
+          </div>
+
+          <div className="bg-[#0E1017] border border-white/10 rounded-xl p-5 flex items-center justify-between shadow-lg">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider text-[#94A3B8] font-mono">Active 9H Warranties</p>
+              <p className="text-2xl font-black text-[#D4AF37] mt-1 font-mono">{warrantyCount}</p>
+            </div>
+            <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37]">
+              <Award className="w-6 h-6" />
+            </div>
+          </div>
+        </div>
+
+        {/* Tab Selectors */}
+        <div className="flex border-b border-white/10 gap-4 font-mono">
+          <button
+            onClick={() => setActiveTab('vehicles')}
+            className={`pb-3 px-4 font-bold text-sm transition-all border-b-2 flex items-center gap-2 cursor-pointer ${
+              activeTab === 'vehicles'
+                ? 'border-[#D4AF37] text-[#D4AF37]'
+                : 'border-transparent text-[#94A3B8] hover:text-[#F8FAFC]'
+            }`}
+          >
+            <Car className="w-4 h-4" />
+            My Vehicle Fleet ({savedVehicles.length})
+          </button>
+          <button
+            onClick={() => setActiveTab('bookings')}
+            className={`pb-3 px-4 font-bold text-sm transition-all border-b-2 flex items-center gap-2 cursor-pointer ${
+              activeTab === 'bookings'
+                ? 'border-[#D4AF37] text-[#D4AF37]'
+                : 'border-transparent text-[#94A3B8] hover:text-[#F8FAFC]'
+            }`}
+          >
+            <Calendar className="w-4 h-4" />
+            Concierge Bookings & History ({bookings.length})
           </button>
         </div>
-      )}
-
-      {/* Header Profile Bar */}
-      <div className="bg-[#0F1420] border border-[#1D2536] rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xl relative overflow-hidden">
-        <div className="flex items-center gap-5">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0284C7] to-[#0369A1] flex items-center justify-center text-white text-2xl font-black shadow-lg">
-            {currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'C'}
-          </div>
-          <div>
-            <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#F8FAFC]">
-                {currentUser.name}
-              </h1>
-              <span className="px-2.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-[#38BDF8]/10 text-[#38BDF8] border border-[#38BDF8]/30">
-                Atelier VIP Client
-              </span>
-            </div>
-            <p className="text-sm text-[#94A3B8] mt-1 flex items-center gap-3">
-              <span>{currentUser.email}</span>
-              {currentUser.phone && (
-                <>
-                  <span className="text-[#2A364E]">•</span>
-                  <span>{currentUser.phone}</span>
-                </>
-              )}
-            </p>
-          </div>
-        </div>
-
-        {/* Quick Actions & Logout */}
-        <div className="flex items-center gap-3 w-full md:w-auto justify-end">
-          <Button
-            variant="secondary"
-            size="sm"
-            icon={RefreshCw}
-            onClick={() => fetchGarage(token)}
-            disabled={loadingGarage}
-          >
-            Refresh
-          </Button>
-          <Button
-            variant="danger"
-            size="sm"
-            icon={LogOut}
-            onClick={handleLogout}
-          >
-            Sign Out
-          </Button>
-        </div>
-      </div>
-
-      {/* Summary KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-[#0F1420] border border-[#1D2536] rounded-xl p-5 flex items-center justify-between">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-wider text-[#94A3B8]">Saved Vehicles</p>
-            <p className="text-2xl font-black text-[#F8FAFC] mt-1">{savedVehicles.length}</p>
-          </div>
-          <div className="w-12 h-12 rounded-xl bg-[#0284C7]/15 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8]">
-            <Car className="w-6 h-6" />
-          </div>
-        </div>
-
-        <div className="bg-[#0F1420] border border-[#1D2536] rounded-xl p-5 flex items-center justify-between">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-wider text-[#94A3B8]">Service Bookings</p>
-            <p className="text-2xl font-black text-[#F8FAFC] mt-1">{bookings.length}</p>
-          </div>
-          <div className="w-12 h-12 rounded-xl bg-[#10B981]/15 border border-[#10B981]/30 flex items-center justify-center text-[#34D399]">
-            <Calendar className="w-6 h-6" />
-          </div>
-        </div>
-
-        <div className="bg-[#0F1420] border border-[#1D2536] rounded-xl p-5 flex items-center justify-between">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-wider text-[#94A3B8]">Active 9H Warranties</p>
-            <p className="text-2xl font-black text-[#F8FAFC] mt-1">{warrantyCount}</p>
-          </div>
-          <div className="w-12 h-12 rounded-xl bg-[#F59E0B]/15 border border-[#F59E0B]/30 flex items-center justify-center text-[#F59E0B]">
-            <Award className="w-6 h-6" />
-          </div>
-        </div>
-      </div>
-
-      {/* Tab Selectors */}
-      <div className="flex border-b border-[#1D2536] gap-4">
-        <button
-          onClick={() => setActiveTab('vehicles')}
-          className={`pb-3 px-4 font-bold text-sm transition-all border-b-2 flex items-center gap-2 ${
-            activeTab === 'vehicles'
-              ? 'border-[#38BDF8] text-[#38BDF8]'
-              : 'border-transparent text-[#94A3B8] hover:text-[#F8FAFC]'
-          }`}
-        >
-          <Car className="w-4 h-4" />
-          My Vehicle Fleet ({savedVehicles.length})
-        </button>
-        <button
-          onClick={() => setActiveTab('bookings')}
-          className={`pb-3 px-4 font-bold text-sm transition-all border-b-2 flex items-center gap-2 ${
-            activeTab === 'bookings'
-              ? 'border-[#38BDF8] text-[#38BDF8]'
-              : 'border-transparent text-[#94A3B8] hover:text-[#F8FAFC]'
-          }`}
-        >
-          <Calendar className="w-4 h-4" />
-          Concierge Bookings & History ({bookings.length})
-        </button>
-      </div>
 
       {/* Tab 1: Saved Vehicles */}
       {activeTab === 'vehicles' && (
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-xl font-bold text-[#F8FAFC]">Personal Fleet</h2>
-              <p className="text-xs text-[#94A3B8] mt-0.5">Vehicles saved for rapid 1-click package configuration & priority bay scheduling.</p>
+              <h2 className="text-xl font-bold text-[#F8FAFC] font-display">Personal Fleet</h2>
+              <p className="text-xs text-[#94A3B8] mt-0.5 font-normal">Vehicles saved for rapid 1-click package configuration & priority bay scheduling.</p>
             </div>
             <Button
               variant="primary"
               size="sm"
               icon={Plus}
               onClick={() => setIsAddVehicleOpen(true)}
-              className="glow-cyan-sm"
+              className="glow-gold-sm"
             >
               Add Vehicle
             </Button>
@@ -590,10 +594,10 @@ export const GaragePage = () => {
           {loadingGarage ? (
             <div className="py-12 flex justify-center"><LoadingSpinner size="lg" /></div>
           ) : savedVehicles.length === 0 ? (
-            <div className="bg-[#0F1420] border border-[#1D2536] rounded-2xl p-10 text-center">
+            <div className="bg-[#0E1017] border border-white/10 rounded-2xl p-10 text-center shadow-lg">
               <Car className="w-12 h-12 text-[#94A3B8] mx-auto mb-3 opacity-60" />
-              <h3 className="text-lg font-bold text-[#F8FAFC]">No vehicles in your garage yet</h3>
-              <p className="text-sm text-[#94A3B8] mt-1 max-w-md mx-auto">
+              <h3 className="text-lg font-bold text-[#F8FAFC] font-display">No vehicles in your garage yet</h3>
+              <p className="text-sm text-[#94A3B8] mt-1 max-w-md mx-auto font-normal">
                 Save your car details once to auto-apply chassis multipliers and configure appointments in seconds.
               </p>
               <div className="mt-5">
@@ -602,6 +606,7 @@ export const GaragePage = () => {
                   size="md"
                   icon={Plus}
                   onClick={() => setIsAddVehicleOpen(true)}
+                  className="glow-gold-sm"
                 >
                   Add Your First Vehicle
                 </Button>
@@ -612,43 +617,43 @@ export const GaragePage = () => {
               {savedVehicles.map((vehicle) => (
                 <div
                   key={vehicle._id}
-                  className="bg-[#0F1420] border border-[#1D2536] hover:border-[#38BDF8]/40 transition-all rounded-2xl p-6 shadow-md flex flex-col justify-between group"
+                  className="bg-[#0E1017] border border-white/10 hover:border-[#D4AF37]/50 transition-all rounded-2xl p-6 shadow-[0_15px_40px_rgba(0,0,0,0.5)] flex flex-col justify-between group relative overflow-hidden"
                 >
                   <div>
                     <div className="flex items-start justify-between gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-[#161D2E] border border-[#2A364E] flex items-center justify-center text-[#38BDF8]">
+                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37]">
                         <Car className="w-5 h-5" />
                       </div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#161D2E] text-[#94A3B8] border border-[#2A364E]">
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-[#08090C] text-[#CBD5E1] border border-white/10">
                         {vehicle.categorySlug || 'sedan'}
                       </span>
                     </div>
 
                     <div className="mt-4">
-                      <h3 className="text-lg font-black text-[#F8FAFC]">
+                      <h3 className="text-lg font-black text-[#F8FAFC] font-display">
                         {vehicle.year} {vehicle.make} {vehicle.model}
                       </h3>
                       {vehicle.licensePlate && (
                         <p className="text-xs text-[#94A3B8] mt-1 font-mono tracking-wider">
-                          Plate: <span className="text-[#F8FAFC]">{vehicle.licensePlate}</span>
+                          Plate: <span className="text-[#D4AF37] font-bold">{vehicle.licensePlate}</span>
                         </p>
                       )}
                     </div>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-[#1D2536] flex items-center justify-between gap-2">
+                  <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between gap-2">
                     <Button
                       variant="primary"
                       size="sm"
                       iconRight={ArrowRight}
                       onClick={() => navigate(`/builder?category=${vehicle.categorySlug || 'sedan'}`)}
-                      className="text-xs py-1.5"
+                      className="text-xs py-1.5 glow-gold-sm"
                     >
                       Book Detailing
                     </Button>
                     <button
                       onClick={() => handleRemoveVehicle(vehicle._id)}
-                      className="p-2 text-[#94A3B8] hover:text-[#EF4444] rounded-lg hover:bg-[#EF4444]/10 transition-colors"
+                      className="p-2 text-[#94A3B8] hover:text-[#EF4444] rounded-lg hover:bg-[#EF4444]/10 transition-colors cursor-pointer"
                       title="Remove Vehicle"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -783,6 +788,7 @@ export const GaragePage = () => {
           )}
         </div>
       )}
+      </div>
 
       {/* Add Vehicle Modal */}
       {isAddVehicleOpen && (

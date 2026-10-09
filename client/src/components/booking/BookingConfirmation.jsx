@@ -4,21 +4,16 @@ import {
   CheckCircle2, 
   Copy, 
   Check, 
-  ArrowRight, 
   Calendar, 
   Warehouse, 
   Car, 
-  ShieldCheck, 
   MapPin, 
-  Clock, 
   ExternalLink,
   FileDown,
   MailCheck,
-  CreditCard,
-  DollarSign
+  CreditCard
 } from 'lucide-react';
 import { Button } from '../common/Button.jsx';
-import { Badge } from '../common/Badge.jsx';
 import { getInvoiceDownloadUrl, resendBookingReceipt } from '../../services/api.js';
 
 export const BookingConfirmation = ({ booking }) => {
@@ -64,115 +59,115 @@ export const BookingConfirmation = ({ booking }) => {
       
       {/* Success Badge & Header */}
       <div>
-        <div className="w-16 h-16 rounded-2xl bg-[#10B981]/20 border border-[#10B981]/40 flex items-center justify-center text-[#10B981] mx-auto mb-4 shadow-xl shadow-[#10B981]/15 animate-bounce">
+        <div className="w-16 h-16 rounded-2xl bg-[#10B981]/15 border border-[#10B981]/30 flex items-center justify-center text-[#10B981] mx-auto mb-4 shadow-xl shadow-[#10B981]/15">
           <CheckCircle2 className="w-8 h-8" />
         </div>
-        <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#10B981] bg-[#10B981]/10 px-3 py-1 rounded-full border border-[#10B981]/20">
+        <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#10B981] bg-[#10B981]/10 px-3.5 py-1 rounded-full border border-[#10B981]/25">
           Bay Capacity Reserved
         </span>
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-[#F8FAFC] tracking-tight mt-3">
+        <h2 className="text-3xl sm:text-4xl font-black text-[#F8FAFC] tracking-[-0.03em] mt-3 font-display">
           Appointment Confirmed & Secured
         </h2>
-        <p className="text-sm text-[#94A3B8] max-w-xl mx-auto mt-2">
+        <p className="text-sm text-[#94A3B8] max-w-xl mx-auto mt-2 font-normal">
           Your vehicle has been allotted dedicated time in our climate-controlled atelier. A transactional receipt has been dispatched.
         </p>
       </div>
 
       {/* Signature Tracking Code Card */}
-      <div className="p-8 rounded-3xl bg-[#101522] border-2 border-[#38BDF8] shadow-2xl shadow-[#0284C7]/20 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-48 h-48 bg-[#0284C7]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="p-8 sm:p-10 rounded-3xl bg-[#0E1017] border border-[#D4AF37] shadow-[0_0_50px_rgba(212,175,55,0.2)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-[#D4AF37]/5 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="text-xs uppercase font-bold text-[#94A3B8] tracking-widest font-mono mb-2">
+        <div className="text-xs uppercase font-bold text-[#D4AF37] tracking-widest font-mono mb-2">
           Your Public Telemetry Tracking Code
         </div>
 
         {/* Large Prominent Code Display */}
-        <div className="flex items-center justify-center gap-3 my-4">
-          <span className="text-4xl sm:text-5xl font-black font-mono text-[#38BDF8] tracking-widest drop-shadow-[0_0_20px_rgba(56,189,248,0.4)]">
+        <div className="flex items-center justify-center gap-3 my-5">
+          <span className="text-4xl sm:text-6xl font-black font-mono text-[#D4AF37] tracking-widest drop-shadow-[0_0_25px_rgba(212,175,55,0.4)]">
             {bookingCode}
           </span>
           <button
             onClick={handleCopy}
-            className="p-2.5 rounded-xl bg-[#161D2E] border border-[#2A364E] text-[#94A3B8] hover:text-[#38BDF8] hover:border-[#38BDF8] transition-all"
+            className="p-3 rounded-xl bg-white/5 border border-white/10 text-[#CBD5E1] hover:text-[#D4AF37] hover:border-[#D4AF37]/50 transition-all cursor-pointer tactile-press"
             title="Copy Tracking Code"
           >
             {copied ? <Check className="w-5 h-5 text-[#10B981]" /> : <Copy className="w-5 h-5" />}
           </button>
         </div>
 
-        <p className="text-xs text-[#64748B] max-w-md mx-auto mb-6">
+        <p className="text-xs text-[#94A3B8] max-w-md mx-auto mb-8 font-normal">
           Bookmark or save this code. You can view real-time stage transitions (Intake, Decon, Machine Polish, Infrared Cure, Showroom Ready) at any time.
         </p>
 
         {/* Slot & Bay Badges */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-[#1D2536] text-left text-xs">
-          <div className="p-3.5 rounded-xl bg-[#090C12] border border-[#1D2536]">
-            <div className="text-[#64748B] flex items-center gap-1.5 mb-1">
-              <Calendar className="w-3.5 h-3.5 text-[#38BDF8]" />
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-white/10 text-left text-xs font-mono">
+          <div className="p-4 rounded-xl bg-[#08090C] border border-white/10">
+            <div className="text-[#94A3B8] flex items-center gap-1.5 mb-1">
+              <Calendar className="w-3.5 h-3.5 text-[#D4AF37]" />
               Scheduled Slot
             </div>
-            <div className="font-bold text-white">{scheduledDate}</div>
-            <div className="text-[11px] font-mono text-[#38BDF8]">{scheduledTimeSlot}</div>
+            <div className="font-bold text-white font-sans">{scheduledDate}</div>
+            <div className="text-[11px] font-mono text-[#D4AF37] font-bold">{scheduledTimeSlot}</div>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-[#090C12] border border-[#1D2536]">
-            <div className="text-[#64748B] flex items-center gap-1.5 mb-1">
-              <Warehouse className="w-3.5 h-3.5 text-[#F59E0B]" />
+          <div className="p-4 rounded-xl bg-[#08090C] border border-white/10">
+            <div className="text-[#94A3B8] flex items-center gap-1.5 mb-1">
+              <Warehouse className="w-3.5 h-3.5 text-[#D4AF37]" />
               Assigned Bay
             </div>
-            <div className="font-bold text-white">Cleanroom Bay {assignedBay}</div>
-            <div className="text-[11px] text-[#10B981]">HEPA Positive Pressure</div>
+            <div className="font-bold text-white font-sans">Cleanroom Bay {assignedBay}</div>
+            <div className="text-[11px] text-[#10B981] font-bold">HEPA Positive Pressure</div>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-[#090C12] border border-[#1D2536]">
-            <div className="text-[#64748B] flex items-center gap-1.5 mb-1">
-              <Car className="w-3.5 h-3.5 text-[#10B981]" />
+          <div className="p-4 rounded-xl bg-[#08090C] border border-white/10">
+            <div className="text-[#94A3B8] flex items-center gap-1.5 mb-1">
+              <Car className="w-3.5 h-3.5 text-[#D4AF37]" />
               Vehicle
             </div>
-            <div className="font-bold text-white truncate">{vehicle.year} {vehicle.make} {vehicle.model}</div>
-            <div className="text-[11px] text-[#64748B]">{vehicle.color || 'Standard Finish'}</div>
+            <div className="font-bold text-white truncate font-sans">{vehicle.year} {vehicle.make} {vehicle.model}</div>
+            <div className="text-[11px] text-[#94A3B8]">{vehicle.color || 'Standard Finish'}</div>
           </div>
         </div>
       </div>
 
       {/* Payment & Invoicing Overview Strip */}
-      <div className="p-6 rounded-2xl bg-[#101522] border border-[#1D2536] text-left text-xs space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#1D2536]">
+      <div className="p-6 sm:p-7 rounded-2xl bg-[#0E1017] border border-white/10 text-left text-xs space-y-4 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
           <div className="flex items-center gap-2">
-            <CreditCard className="w-4 h-4 text-[#38BDF8]" />
-            <h4 className="font-bold uppercase tracking-wider text-white">
+            <CreditCard className="w-4 h-4 text-[#D4AF37]" />
+            <h4 className="font-bold uppercase tracking-wider text-white font-mono">
               Settlement & Official Documentation
             </h4>
           </div>
-          <span className={`px-2.5 py-1 rounded-full text-[11px] font-mono font-bold uppercase w-fit ${
+          <span className={`px-3 py-1 rounded-full text-[11px] font-mono font-bold uppercase w-fit ${
             payment.status === 'paid'
               ? 'bg-[#10B981]/15 text-[#34D399] border border-[#10B981]/30'
               : payment.status === 'deposit_paid'
-              ? 'bg-[#0284C7]/15 text-[#38BDF8] border border-[#0284C7]/30'
-              : 'bg-[#F59E0B]/15 text-[#FBBF24] border border-[#F59E0B]/30'
+              ? 'bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/30'
+              : 'bg-white/5 text-[#CBD5E1] border border-white/10'
           }`}>
             {payment.status === 'paid' ? 'Paid in Full' : payment.status === 'deposit_paid' ? 'Deposit Received' : 'Pay at Studio Arrival'}
           </span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-[#94A3B8]">
-          <div className="p-3 rounded-xl bg-[#090C12] border border-[#1D2536]">
-            <span className="text-[#64748B] block text-[11px]">Authorized Total:</span>
-            <span className="text-sm font-extrabold text-white font-mono">
+          <div className="p-3.5 rounded-xl bg-[#08090C] border border-white/10">
+            <span className="text-[#94A3B8] block text-[11px] font-mono">Authorized Total:</span>
+            <span className="text-base font-black text-white font-mono">
               ${Number(totalPrice).toLocaleString('en-US', { minimumFractionDigits: 2 })}
             </span>
           </div>
 
-          <div className="p-3 rounded-xl bg-[#090C12] border border-[#1D2536]">
-            <span className="text-[#64748B] block text-[11px]">Payment Method:</span>
-            <span className="text-sm font-semibold text-white capitalize">
+          <div className="p-3.5 rounded-xl bg-[#08090C] border border-white/10">
+            <span className="text-[#94A3B8] block text-[11px] font-mono">Payment Method:</span>
+            <span className="text-base font-bold text-white capitalize font-display">
               {payment.method === 'stripe' ? 'Online Card (Stripe)' : 'Pay on Arrival'}
             </span>
           </div>
 
-          <div className="p-3 rounded-xl bg-[#090C12] border border-[#1D2536]">
-            <span className="text-[#64748B] block text-[11px]">Amount Settled:</span>
-            <span className="text-sm font-extrabold text-[#34D399] font-mono">
+          <div className="p-3.5 rounded-xl bg-[#08090C] border border-white/10">
+            <span className="text-[#94A3B8] block text-[11px] font-mono">Amount Settled:</span>
+            <span className="text-base font-black text-[#10B981] font-mono">
               ${Number(payment.amountPaid || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
             </span>
           </div>
@@ -190,7 +185,7 @@ export const BookingConfirmation = ({ booking }) => {
               variant="outline"
               size="sm"
               icon={FileDown}
-              className="w-full sm:w-auto text-xs border-[#38BDF8]/40 hover:bg-[#38BDF8]/10 text-[#38BDF8]"
+              className="w-full sm:w-auto text-xs border-[#D4AF37]/40 hover:bg-[#D4AF37]/10 text-[#D4AF37]"
             >
               Download Tax Invoice / Receipt (PDF)
             </Button>
@@ -209,25 +204,25 @@ export const BookingConfirmation = ({ booking }) => {
           </Button>
 
           {emailStatus && (
-            <span className="text-xs text-[#34D399] font-medium">{emailStatus}</span>
+            <span className="text-xs text-[#10B981] font-medium font-mono">{emailStatus}</span>
           )}
         </div>
       </div>
 
       {/* Concierge Intake Instructions */}
-      <div className="p-6 rounded-2xl bg-[#101522] border border-[#1D2536] text-left text-xs space-y-3">
-        <h4 className="font-bold uppercase tracking-wider text-white flex items-center gap-2">
-          <MapPin className="w-4 h-4 text-[#38BDF8]" />
+      <div className="p-6 sm:p-7 rounded-2xl bg-[#0E1017] border border-white/10 text-left text-xs space-y-3 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
+        <h4 className="font-bold uppercase tracking-wider text-white flex items-center gap-2 font-mono">
+          <MapPin className="w-4 h-4 text-[#D4AF37]" />
           Drop-Off & Intake Instructions
         </h4>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-[#94A3B8] pt-2">
           <div>
-            <div className="font-semibold text-white">Atelier Location:</div>
+            <div className="font-bold text-white font-display">Atelier Location:</div>
             <div>DetailDock Cleanroom Studio</div>
             <div>2400 E 5th St, Austin, TX 78702</div>
           </div>
           <div>
-            <div className="font-semibold text-white">Arrival Protocol:</div>
+            <div className="font-bold text-white font-display">Arrival Protocol:</div>
             <div>Please arrive 10 minutes prior to your slot ({scheduledTimeSlot}). Direct bay check-in via concierge iPad terminal.</div>
           </div>
         </div>
@@ -240,7 +235,7 @@ export const BookingConfirmation = ({ booking }) => {
             variant="primary"
             size="lg"
             iconRight={ExternalLink}
-            className="w-full sm:w-auto glow-cyan shadow-xl shadow-[#0284C7]/20"
+            className="w-full sm:w-auto glow-gold shadow-2xl"
           >
             Launch Live Vehicle Telemetry
           </Button>
@@ -250,7 +245,7 @@ export const BookingConfirmation = ({ booking }) => {
           <Button
             variant="secondary"
             size="lg"
-            className="w-full sm:w-auto"
+            className="w-full sm:w-auto border-white/10 hover:border-[#D4AF37]/50"
           >
             Return to Homepage
           </Button>

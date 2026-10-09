@@ -198,21 +198,21 @@ export const BookingPage = () => {
   };
 
   return (
-    <div className="w-full bg-[#090C12] text-[#F8FAFC] min-h-screen py-12 lg:py-16">
+    <div className="w-full bg-[#08090C] text-[#F8FAFC] min-h-screen py-12 lg:py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Header */}
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#101522] border border-[#2A364E] text-xs font-semibold text-[#38BDF8] mb-3">
-            <Warehouse className="w-3.5 h-3.5" />
-            <span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0E1017] border border-white/10 text-xs font-semibold text-[#D4AF37] mb-4">
+            <Warehouse className="w-3.5 h-3.5 text-[#D4AF37]" />
+            <span className="font-mono">
               {settings?.maxBayCapacity === 1 ? 'Single Cleanroom Bay' : `${settings?.maxBayCapacity || 2} Cleanroom Bays`} • {settings?.address?.city || 'Austin'} Atelier
             </span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-[#F8FAFC] tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-black text-[#F8FAFC] tracking-[-0.03em] font-display">
             Reserve Studio Bay Slot
           </h1>
-          <p className="text-sm text-[#94A3B8] mt-2">
+          <p className="text-sm text-[#94A3B8] mt-2 font-normal">
             Capacity-guarded scheduling ensuring your vehicle receives sterile bay isolation, dedicated technicians, and zero double booking.
           </p>
         </div>
@@ -222,9 +222,9 @@ export const BookingPage = () => {
           <div className="max-w-3xl mx-auto mb-12">
             <div className="flex items-center justify-between relative">
               {/* Connecting background bar */}
-              <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 h-[2px] bg-[#1D2536] -z-0" />
+              <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 h-[2px] bg-white/10 -z-0" />
               <div 
-                className="absolute top-1/2 left-0 -translate-y-1/2 h-[2px] bg-[#38BDF8] transition-all duration-300 -z-0" 
+                className="absolute top-1/2 left-0 -translate-y-1/2 h-[2px] bg-[#D4AF37] shadow-[0_0_12px_rgba(212,175,55,0.7)] transition-all duration-300 -z-0" 
                 style={{ width: currentStep === 1 ? '0%' : currentStep === 2 ? '50%' : '100%' }}
               />
 
@@ -237,18 +237,18 @@ export const BookingPage = () => {
                 const isCurrent = currentStep === item.step;
 
                 return (
-                  <div key={item.step} className="flex flex-col items-center bg-[#090C12] px-3 z-10">
-                    <div className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-extrabold font-mono transition-all ${
+                  <div key={item.step} className="flex flex-col items-center bg-[#08090C] px-3 z-10">
+                    <div className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-black font-mono transition-all ${
                       isPassed
                         ? 'bg-[#10B981] text-white shadow-md'
                         : isCurrent
-                        ? 'bg-[#0284C7] text-white ring-4 ring-[#0284C7]/20 shadow-lg shadow-[#0284C7]/40'
-                        : 'bg-[#161D2E] text-[#64748B] border border-[#1D2536]'
+                        ? 'bg-[#D4AF37] text-[#08090C] ring-4 ring-[#D4AF37]/20 shadow-lg shadow-[#D4AF37]/40'
+                        : 'bg-[#0E1017] text-[#94A3B8] border border-white/10'
                     }`}>
                       {isPassed ? <Check className="w-4 h-4 stroke-[3]" /> : item.step}
                     </div>
-                    <span className={`text-xs mt-2 font-medium ${
-                      isCurrent ? 'text-white font-bold' : isPassed ? 'text-[#38BDF8]' : 'text-[#64748B]'
+                    <span className={`text-xs mt-2 font-medium font-mono ${
+                      isCurrent ? 'text-white font-bold' : isPassed ? 'text-[#D4AF37]' : 'text-[#64748B]'
                     }`}>
                       {item.label}
                     </span>

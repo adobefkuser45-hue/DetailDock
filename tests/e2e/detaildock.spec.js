@@ -8,16 +8,16 @@ test.describe.serial('DetailDock End-to-End Atelier Customer & Admin Journey', (
 
     // Check title & branding
     await expect(page).toHaveTitle(/DetailDock/i);
-    await expect(page.locator('text=Preserve Perfection').first()).toBeVisible();
+    await expect(page.locator('text=Concourse Perfection').first()).toBeVisible();
 
     // Check live studio pill
-    await expect(page.locator('text=DUAL BAYS ACTIVE').first()).toBeVisible();
+    await expect(page.locator('text=DUAL CLEANROOM BAYS ACTIVE').first()).toBeVisible();
 
     // Check Before/After Slider & Gloss Meter
     await expect(page.locator('text=Gloss Meter').first()).toBeVisible();
 
     // Check Preservation Packages Grid Section
-    await expect(page.locator('text=Precision Preservation Packages').first()).toBeVisible();
+    await expect(page.locator('text=Asymmetric Concourse Bento').first()).toBeVisible();
   });
 
   test('2. Smart Package Builder: Configures chassis, packages, addons, and calculates authoritative price', async ({ page }) => {
@@ -58,25 +58,22 @@ test.describe.serial('DetailDock End-to-End Atelier Customer & Admin Journey', (
     await continueToSlotBtn.click();
 
     // Step 2: Studio Bay Date & Slot Selection
-    // If the active date slots are all booked, cycle through upcoming dates until an open bay slot is found
-    const openSlotBtn = page.locator('button:has-text("Open"):not([disabled])').first();
-    const isFirstDateOpen = await openSlotBtn.isVisible({ timeout: 2000 }).catch(() => false);
-    if (!isFirstDateOpen) {
-      const dateButtons = page.locator('div.grid button:has-text("Oct")');
-      const count = await dateButtons.count();
-      for (let i = 1; i < count; i++) {
-        await dateButtons.nth(i).click();
-        await page.waitForTimeout(500);
-        if (await openSlotBtn.isVisible({ timeout: 1500 }).catch(() => false)) {
-          break;
-        }
+    const baySlotBtn = page.locator('[data-testid^="bay-slot-"]:not([disabled])').first();
+    const isFirstDateReady = await baySlotBtn.isVisible({ timeout: 4000 }).catch(() => false);
+    if (!isFirstDateReady) {
+      const nextDateBtn = page.locator('div.grid button').nth(1);
+      if (await nextDateBtn.isVisible()) {
+        await nextDateBtn.click();
       }
     }
-    await expect(openSlotBtn).toBeVisible({ timeout: 10000 });
-    await openSlotBtn.click();
+    await baySlotBtn.waitFor({ state: 'visible', timeout: 15000 });
+    await baySlotBtn.click();
+
+    // Verify scheduled slot indicator appears before proceeding
+    await expect(page.locator('text=Scheduled Slot:').first()).toBeVisible({ timeout: 10000 });
 
     const continueToIntakeBtn = page.locator('button:has-text("Continue to Vehicle Intake")').first();
-    await expect(continueToIntakeBtn).toBeEnabled({ timeout: 5000 });
+    await expect(continueToIntakeBtn).toBeEnabled({ timeout: 10000 });
     await continueToIntakeBtn.click();
 
     // Step 3: Vehicle & Customer Intake Form
@@ -91,7 +88,7 @@ test.describe.serial('DetailDock End-to-End Atelier Customer & Admin Journey', (
     // Verify Payment Preference Selection Component
     await expect(page.locator('text=Payment & Settlement Preference').first()).toBeVisible();
     await expect(page.locator('text=Pay at Studio Arrival').first()).toBeVisible();
-    await expect(page.locator('text=Online Card Payment').first()).toBeVisible();
+    await expect(page.locator('text=Online Card Settlement').first()).toBeVisible();
 
     // Submit Booking
     const submitBtn = page.locator('button:has-text("Confirm & Reserve Slot")').first();

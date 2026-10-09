@@ -315,20 +315,20 @@ export const BuilderPage = () => {
   };
 
   return (
-    <div className="w-full bg-[#090C12] text-[#F8FAFC] min-h-screen py-12 lg:py-16">
+    <div className="w-full bg-[#08090C] text-[#F8FAFC] min-h-screen py-12 lg:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Page Hero Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-8 border-b border-[#1D2536]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-8 border-b border-white/10">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#101522] border border-[#2A364E] text-xs font-semibold text-[#38BDF8] mb-3">
-              <Gauge className="w-3.5 h-3.5" />
-              <span>Authoritative Dynamic Configurator</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0E1017] border border-white/10 text-xs font-semibold text-[#D4AF37] mb-4">
+              <Gauge className="w-3.5 h-3.5 text-[#D4AF37]" />
+              <span className="font-mono uppercase tracking-wider">Authoritative Dynamic Configurator</span>
             </div>
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-[#F8FAFC] tracking-tight">
+            <h1 className="text-3xl sm:text-5xl font-black text-[#F8FAFC] tracking-[-0.03em] font-display">
               Smart Package Builder
             </h1>
-            <p className="text-sm sm:text-base text-[#94A3B8] max-w-2xl mt-2">
+            <p className="text-sm sm:text-base text-[#94A3B8] max-w-2xl mt-2 font-normal">
               Select your vehicle body style to apply server-side surface area multipliers, pick your preservation tier, and customize with bespoke studio enhancements.
             </p>
           </div>
@@ -336,12 +336,12 @@ export const BuilderPage = () => {
           <div className="flex items-center gap-3 self-start md:self-auto">
             <button
               onClick={handleReset}
-              className="px-3.5 py-2 text-xs font-semibold rounded-xl bg-[#101522] border border-[#1D2536] text-[#94A3B8] hover:text-white hover:border-[#2A364E] transition-all flex items-center gap-1.5"
+              className="px-4 py-2 text-xs font-semibold rounded-xl bg-[#0E1017] border border-white/10 text-[#94A3B8] hover:text-white hover:border-white/30 transition-all flex items-center gap-1.5 cursor-pointer tactile-press"
             >
-              <RotateCcw className="w-3.5 h-3.5" />
+              <RotateCcw className="w-3.5 h-3.5 text-[#D4AF37]" />
               Reset Config
             </button>
-            <div className="text-xs font-mono text-[#38BDF8] bg-[#0284C7]/15 px-3 py-2 rounded-xl border border-[#0284C7]/30 flex items-center gap-1.5">
+            <div className="text-xs font-mono text-[#D4AF37] bg-[#D4AF37]/10 px-3.5 py-2 rounded-xl border border-[#D4AF37]/25 flex items-center gap-1.5 font-bold">
               <Cpu className="w-3.5 h-3.5" />
               Deterministic Rule Engine
             </div>
@@ -393,11 +393,11 @@ export const BuilderPage = () => {
         </div>
 
         {/* Mobile Sticky Bottom Floating Summary (Shown only on small screens) */}
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 p-4 bg-[#090C12]/95 border-t border-[#1D2536] backdrop-blur-md shadow-2xl">
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 p-4 bg-[#08090C]/95 border-t border-white/10 backdrop-blur-md shadow-2xl">
           <div className="max-w-md mx-auto flex items-center justify-between gap-4">
             <div>
-              <div className="text-[11px] text-[#94A3B8] uppercase font-bold">Estimated Total:</div>
-              <div className="text-2xl font-mono font-extrabold text-[#38BDF8]">
+              <div className="text-[11px] text-[#94A3B8] uppercase font-bold font-mono">Estimated Total:</div>
+              <div className="text-2xl font-mono font-black text-[#D4AF37]">
                 ${pricingData?.breakdown?.subtotal || (
                   (Number(selectedPackage?.basePrice || 0) * Number(selectedCategory?.priceMultiplier || 1.0)) +
                   selectedAddons.reduce((sum, a) => sum + Number(a.price || 0), 0)
@@ -409,7 +409,7 @@ export const BuilderPage = () => {
               size="md"
               iconRight={ArrowRight}
               onClick={handleProceedToBooking}
-              className="glow-cyan-sm"
+              className="glow-gold-sm"
             >
               Reserve Bay Slot
             </Button>
