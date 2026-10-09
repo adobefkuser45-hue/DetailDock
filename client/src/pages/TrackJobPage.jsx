@@ -24,6 +24,8 @@ import { JobTelemetryCards } from '../components/tracking/JobTelemetryCards.jsx'
 import { JobAuditTimeline } from '../components/tracking/JobAuditTimeline.jsx';
 import { ReadyPickupBanner } from '../components/tracking/ReadyPickupBanner.jsx';
 import { CommunicationsLogSection } from '../components/tracking/CommunicationsLogSection.jsx';
+import { WarrantyCertificateSection } from '../components/tracking/WarrantyCertificateSection.jsx';
+import { VehicleInspectionCard } from '../components/tracking/VehicleInspectionCard.jsx';
 import { trackBooking, getInvoiceDownloadUrl, resendBookingReceipt } from '../services/api.js';
 
 export const TrackJobPage = () => {
@@ -304,6 +306,12 @@ export const TrackJobPage = () => {
                 )}
               </div>
             </div>
+
+            {/* Official Digital Ceramic Coating Warranty Certificate */}
+            <WarrantyCertificateSection booking={bookingData} />
+
+            {/* Digital Vehicle Inspection (DVI) & Paint Health Telemetry */}
+            <VehicleInspectionCard booking={bookingData} />
 
             {/* Chronological Technician History Audit */}
             <JobAuditTimeline

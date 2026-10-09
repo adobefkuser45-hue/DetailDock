@@ -43,6 +43,12 @@
 | **TASK-030** | 10 Comms | Live Tracking Portal Client Telemetry Alert & Notification Log | `VERIFIED` | TASK-029 | [VERIFICATION.md#task-030](file:///docs/00-control/VERIFICATION.md#task-030) |
 | **TASK-031** | 10 Comms | Interactive White-Label Studio Customizer Settings in Admin Portal | `VERIFIED` | TASK-030 | [VERIFICATION.md#task-031](file:///docs/00-control/VERIFICATION.md#task-031) |
 | **TASK-032** | 10 Comms | Full E2E Verification & Cloud Deployment (Render + Vercel) | `VERIFIED` | TASK-031 | [VERIFICATION.md#task-032](file:///docs/00-control/VERIFICATION.md#task-032) |
+| **TASK-033** | 11 Catalog | Admin Service Catalog & Pricing Editor API (CRUD & Multipliers) | `VERIFIED` | TASK-032 | [VERIFICATION.md#task-033](file:///docs/00-control/VERIFICATION.md#task-033) |
+| **TASK-034** | 11 Catalog | Interactive Admin Service & Pricing Management UI | `VERIFIED` | TASK-033 | [VERIFICATION.md#task-034](file:///docs/00-control/VERIFICATION.md#task-034) |
+| **TASK-035** | 12 Warranty | Digital Ceramic Warranty Certificate Engine (Vector PDF & Portal) | `VERIFIED` | TASK-034 | [VERIFICATION.md#task-035](file:///docs/00-control/VERIFICATION.md#task-035) |
+| **TASK-036** | 13 DVI | Digital Vehicle Inspection (DVI) & Paint Health Telemetry | `VERIFIED` | TASK-035 | [VERIFICATION.md#task-036](file:///docs/00-control/VERIFICATION.md#task-036) |
+| **TASK-037** | 14 Garage | Customer Account, Authentication & Personal Atelier Garage | `VERIFIED` | TASK-036 | [VERIFICATION.md#task-037](file:///docs/00-control/VERIFICATION.md#task-037) |
+| **TASK-038** | 15 Deploy | Full E2E Playwright Verification, Security Scan & Cloud Deploy | `VERIFIED` | TASK-037 | [VERIFICATION.md#task-038](file:///docs/00-control/VERIFICATION.md#task-038) |
 
 ---
 

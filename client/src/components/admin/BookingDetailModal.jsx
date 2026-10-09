@@ -14,11 +14,20 @@ import {
   CreditCard,
   MessageSquare,
   Smartphone,
-  MailCheck
+  MailCheck,
+  Award,
+  Microscope,
+  Gauge
 } from 'lucide-react';
 import { Button } from '../common/Button.jsx';
 import { Badge } from '../common/Badge.jsx';
-import { getInvoiceDownloadUrl, resendBookingReceipt } from '../../services/api.js';
+import { 
+  getInvoiceDownloadUrl, 
+  getWarrantyDownloadUrl, 
+  resendBookingReceipt,
+  issueWarrantyCertificate,
+  updateInspectionData
+} from '../../services/api.js';
 
 export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdating }) => {
   const [selectedStatus, setSelectedStatus] = useState(booking?.status || 'Pending');
@@ -27,7 +36,55 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
   const [paymentStatus, setPaymentStatus] = useState(booking?.payment?.status || 'unpaid');
   const [paymentMethod, setPaymentMethod] = useState(booking?.payment?.method || 'studio_pay');
 
+  const [isIssuingWarranty, setIsIssuingWarranty] = useState(false);
+  const [warrantySuccess, setWarrantySuccess] = useState(null);
+  const [isSavingDvi, setIsSavingDvi] = useState(false);
+  const [dviSuccess, setDviSuccess] = useState(null);
+  const [dviData, setDviData] = useState({
+    clearCoatDepthMicrons: booking.inspectionData?.intakeInspection?.clearCoatDepthMicrons || 118,
+    finalGlossUnits: booking.inspectionData?.completionInspection?.finalGlossUnits || 98.4,
+    swirlDefectEliminationPercent: booking.inspectionData?.completionInspection?.swirlDefectEliminationPercent || 95
+  });
+
   if (!booking) return null;
+
+  const handleIssueWarranty = async () => {
+    try {
+      setIsIssuingWarranty(true);
+      const token = localStorage.getItem('detaildock_admin_token');
+      const cert = await issueWarrantyCertificate(booking._id, {
+        warrantyPeriodYears: 3
+      }, token);
+      setWarrantySuccess(cert.certificateNumber);
+      setTimeout(() => setWarrantySuccess(null), 4000);
+    } catch (err) {
+      alert(`Error issuing warranty: ${err.message}`);
+    } finally {
+      setIsIssuingWarranty(false);
+    }
+  };
+
+  const handleSaveDvi = async () => {
+    try {
+      setIsSavingDvi(true);
+      const token = localStorage.getItem('detaildock_admin_token');
+      await updateInspectionData(booking._id, {
+        intakeInspection: {
+          clearCoatDepthMicrons: Number(dviData.clearCoatDepthMicrons)
+        },
+        completionInspection: {
+          finalGlossUnits: Number(dviData.finalGlossUnits),
+          swirlDefectEliminationPercent: Number(dviData.swirlDefectEliminationPercent)
+        }
+      }, token);
+      setDviSuccess(true);
+      setTimeout(() => setDviSuccess(null), 3000);
+    } catch (err) {
+      alert(`Error saving DVI: ${err.message}`);
+    } finally {
+      setIsSavingDvi(false);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -210,6 +267,90 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
                   <span>Send SMS Message</span>
                 </a>
               ) : null}
+            </div>
+          </div>
+
+          {/* DIGITAL CERAMIC WARRANTY & DVI INSPECTION TOOLS */}
+          <div className="p-4 rounded-xl bg-[#090C12] border border-[#1E293B] space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="text-xs font-bold uppercase text-[#D97706] flex items-center gap-2">
+                <Award className="w-4 h-4" />
+                <span>Ceramic Coating Warranty & DVI Inspection</span>
+              </div>
+              {booking.warrantyCertificate?.certificateNumber && (
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#10B981]/20 text-[#10B981] border border-[#10B981]/30">
+                  {booking.warrantyCertificate.certificateNumber}
+                </span>
+              )}
+            </div>
+
+            {/* DVI Telemetry Inputs */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label className="text-[10px] text-[#94A3B8] block mb-1">Intake Depth (µm)</label>
+                <input
+                  type="number"
+                  value={dviData.clearCoatDepthMicrons}
+                  onChange={(e) => setDviData({ ...dviData, clearCoatDepthMicrons: e.target.value })}
+                  className="w-full bg-[#161D2E] border border-[#1D2536] rounded-lg px-2.5 py-1.5 text-xs text-white font-mono"
+                />
+              </div>
+              <div>
+                <label className="text-[10px] text-[#94A3B8] block mb-1">Final Gloss (GU)</label>
+                <input
+                  type="number"
+                  step="0.1"
+                  value={dviData.finalGlossUnits}
+                  onChange={(e) => setDviData({ ...dviData, finalGlossUnits: e.target.value })}
+                  className="w-full bg-[#161D2E] border border-[#1D2536] rounded-lg px-2.5 py-1.5 text-xs text-white font-mono"
+                />
+              </div>
+              <div>
+                <label className="text-[10px] text-[#94A3B8] block mb-1">Defect Elim (%)</label>
+                <input
+                  type="number"
+                  value={dviData.swirlDefectEliminationPercent}
+                  onChange={(e) => setDviData({ ...dviData, swirlDefectEliminationPercent: e.target.value })}
+                  className="w-full bg-[#161D2E] border border-[#1D2536] rounded-lg px-2.5 py-1.5 text-xs text-white font-mono"
+                />
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-[#1E293B]">
+              <button
+                type="button"
+                onClick={handleSaveDvi}
+                disabled={isSavingDvi}
+                className="px-3 py-1.5 rounded-lg bg-[#38BDF8]/20 hover:bg-[#38BDF8]/30 text-[#38BDF8] border border-[#38BDF8]/40 text-xs font-bold flex items-center gap-1.5 transition"
+              >
+                <Microscope className="w-3.5 h-3.5" />
+                {isSavingDvi ? 'Saving DVI...' : dviSuccess ? 'DVI Saved!' : 'Save DVI Telemetry'}
+              </button>
+
+              <div className="flex items-center gap-2">
+                {booking.warrantyCertificate?.certificateNumber && (
+                  <a
+                    href={getWarrantyDownloadUrl(booking.bookingCode)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                    className="px-3 py-1.5 rounded-lg bg-[#161D2E] border border-[#2A364E] text-[#F59E0B] hover:text-white text-xs font-bold flex items-center gap-1 transition"
+                  >
+                    <FileDown className="w-3.5 h-3.5" />
+                    PDF
+                  </a>
+                )}
+                <button
+                  type="button"
+                  onClick={handleIssueWarranty}
+                  disabled={isIssuingWarranty}
+                  className="px-3.5 py-1.5 rounded-lg bg-[#D97706] hover:bg-[#B45309] text-white text-xs font-bold flex items-center gap-1.5 transition shadow"
+                >
+                  <Award className="w-3.5 h-3.5" />
+                  {isIssuingWarranty ? 'Generating...' : warrantySuccess ? `Issued ${warrantySuccess}` : 'Issue 3-Yr Warranty'}
+                </button>
+              </div>
             </div>
           </div>
 

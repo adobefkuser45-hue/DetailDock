@@ -1,4 +1,5 @@
 import { User } from '../models/User.js';
+import { Booking } from '../models/Booking.js';
 import { signToken } from '../middleware/authMiddleware.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
 import { AppError } from '../utils/AppError.js';
@@ -122,3 +123,93 @@ export const getMe = asyncHandler(async (req, res) => {
     message: 'Current user profile retrieved successfully.'
   });
 });
+
+/**
+ * @desc Get customer personal atelier garage and booking history
+ * @route GET /api/v1/auth/customer/garage
+ * @access Customer / Authenticated
+ */
+export const getCustomerGarage = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  if (!user) {
+    throw new AppError('User profile not found.', 404, 'USER_NOT_FOUND');
+  }
+
+  // Find all past and active bookings matching this user's email
+  const bookings = await Booking.find({
+    'customer.email': user.email.toLowerCase()
+  }).sort({ scheduledDate: -1, createdAt: -1 });
+
+  res.status(200).json({
+    success: true,
+    data: {
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        role: user.role,
+        savedVehicles: user.savedVehicles || []
+      },
+      bookings
+    },
+    message: 'Customer garage retrieved successfully.'
+  });
+});
+
+/**
+ * @desc Add vehicle to customer garage
+ * @route POST /api/v1/auth/customer/vehicles
+ * @access Customer / Authenticated
+ */
+export const addSavedVehicle = asyncHandler(async (req, res) => {
+  const { make, model, year, categorySlug, licensePlate } = req.body;
+  if (!make || !model || !year) {
+    throw new AppError('Make, model, and year are required to save a vehicle.', 400, 'MISSING_VEHICLE_FIELDS');
+  }
+
+  const user = await User.findById(req.user._id);
+  if (!user) {
+    throw new AppError('User not found.', 404, 'USER_NOT_FOUND');
+  }
+
+  if (!user.savedVehicles) user.savedVehicles = [];
+  user.savedVehicles.push({
+    make: make.trim(),
+    model: model.trim(),
+    year: Number(year),
+    categorySlug: categorySlug || 'sedan',
+    licensePlate: licensePlate ? licensePlate.trim() : ''
+  });
+
+  await user.save();
+
+  res.status(201).json({
+    success: true,
+    data: user.savedVehicles,
+    message: 'Vehicle saved to personal garage.'
+  });
+});
+
+/**
+ * @desc Remove vehicle from customer garage
+ * @route DELETE /api/v1/auth/customer/vehicles/:vehicleId
+ * @access Customer / Authenticated
+ */
+export const removeSavedVehicle = asyncHandler(async (req, res) => {
+  const { vehicleId } = req.params;
+  const user = await User.findById(req.user._id);
+  if (!user) {
+    throw new AppError('User not found.', 404, 'USER_NOT_FOUND');
+  }
+
+  user.savedVehicles = user.savedVehicles.filter(v => v._id.toString() !== vehicleId);
+  await user.save();
+
+  res.status(200).json({
+    success: true,
+    data: user.savedVehicles,
+    message: 'Vehicle removed from garage.'
+  });
+});
+

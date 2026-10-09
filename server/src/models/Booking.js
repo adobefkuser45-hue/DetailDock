@@ -107,6 +107,39 @@ const BookingSchema = new mongoose.Schema({
   adminNotes: { type: String, default: '' },
   cancellationReason: { type: String, default: '' },
 
+  // Digital Ceramic Coating Warranty Certificate
+  warrantyCertificate: {
+    certificateNumber: { type: String, default: null, index: true },
+    issuedAt: { type: Date, default: null },
+    coatingType: { type: String, default: '9H Multi-Layer Matrix Nano-Ceramic' },
+    hardnessRating: { type: String, default: '9H Pencil Hardness (Certified ISO 15184)' },
+    warrantyPeriodYears: { type: Number, default: 3 },
+    expiresAt: { type: Date, default: null },
+    certifiedTechnicianName: { type: String, default: 'Master Surface Specialist' },
+    warrantyStatus: { type: String, enum: ['Active', 'Void', 'Expired', 'Pending_Inspection'], default: 'Active' },
+    securityHash: { type: String, default: null }
+  },
+
+  // Digital Vehicle Inspection (DVI) & Paint Health Telemetry
+  inspectionData: {
+    intakeInspection: {
+      clearCoatDepthMicrons: { type: Number, default: 118 },
+      swirlSeverity: { type: String, enum: ['Minimal', 'Minor', 'Moderate', 'Heavy', 'Severe'], default: 'Moderate' },
+      paintCondition: { type: String, default: 'Factory Clear Coat with wash-induced marring' },
+      rockChipsDetected: { type: Number, default: 2 },
+      wheelBrakeDust: { type: String, enum: ['Clean', 'Light', 'Moderate', 'Heavy'], default: 'Moderate' },
+      inspectedAt: { type: Date, default: null }
+    },
+    completionInspection: {
+      finalGlossUnits: { type: Number, default: 98 },
+      swirlDefectEliminationPercent: { type: Number, default: 95 },
+      finalClearCoatDepthMicrons: { type: Number, default: 115 },
+      finishQuality: { type: String, default: 'Concours Show-Car Mirror Refinement' },
+      inspectionNotes: { type: String, default: 'Two-stage compound and micro-finishing polish completed. 9H ceramic shield thermally cured.' },
+      completedAt: { type: Date, default: null }
+    }
+  },
+
   // Communications dispatch log (SMS, WhatsApp, Email)
   communicationsLog: [{
     channel: { type: String, enum: ['sms', 'whatsapp', 'email'], required: true },

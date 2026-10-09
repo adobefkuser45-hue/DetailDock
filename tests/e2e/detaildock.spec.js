@@ -132,10 +132,14 @@ test.describe.serial('DetailDock End-to-End Atelier Customer & Admin Journey', (
       // Verify Automated Client Telemetry & Notifications Section
       await expect(page.locator('text=Automated Client Telemetry & Notifications').first()).toBeVisible();
       await expect(page.locator('button:has-text("Simulate Phone Notification")').first()).toBeVisible();
+
+      // Verify Digital Vehicle Inspection (DVI) & Paint Telemetry Card
+      await expect(page.locator('text=Digital Vehicle Inspection (DVI)').first()).toBeVisible();
+      await expect(page.locator('text=Clear Coat Depth').first()).toBeVisible();
     }
   });
 
-  test('5. Admin Operations Deck: Authenticates, inspects Kanban pipeline, and advances status', async ({ page }) => {
+  test('5. Admin Operations Deck: Authenticates, inspects Kanban pipeline, and operates Catalog Cockpit', async ({ page }) => {
     await page.goto('/admin');
 
     // Wait for either the admin command deck (if already logged in) or the login form
@@ -161,6 +165,16 @@ test.describe.serial('DetailDock End-to-End Atelier Customer & Admin Journey', (
     await expect(page.locator('text=Total Studio Revenue').first()).toBeVisible();
     await expect(page.locator('text=Cleanroom Utilization').first()).toBeVisible();
 
+    // Verify Catalog & Pricing Cockpit Modal opens cleanly
+    const catalogBtn = page.locator('button:has-text("Catalog & Pricing")').first();
+    await expect(catalogBtn).toBeVisible();
+    await catalogBtn.click();
+    await expect(page.locator('text=Service Catalog & Pricing Cockpit').first()).toBeVisible();
+    await expect(page.locator('button:has-text("Preservation Packages")').first()).toBeVisible();
+    await expect(page.locator('button:has-text("Add-on Enhancements")').first()).toBeVisible();
+    await expect(page.locator('button:has-text("Chassis Multipliers")').first()).toBeVisible();
+    await page.locator('button[aria-label="Close catalog modal"]').first().click();
+
     // Verify Studio Identity Settings Customizer Modal opens cleanly
     const settingsBtn = page.locator('button:has-text("Studio Identity Settings")').first();
     await expect(settingsBtn).toBeVisible();
@@ -182,4 +196,54 @@ test.describe.serial('DetailDock End-to-End Atelier Customer & Admin Journey', (
       await expect(page.locator('text=2. Confirmed').first()).toBeVisible();
     }
   });
+
+  test('6. Customer Atelier Garage: Authenticates VIP client, inspects fleet, and adds saved vehicle', async ({ page }) => {
+    await page.goto('/garage');
+
+    // Verify Header
+    await expect(page.locator('text=Customer Atelier Portal').first()).toBeVisible();
+    await expect(page.locator('text=Personal Garage & Service Concierge').first()).toBeVisible();
+
+    // Click 1-Click Demo Credentials
+    const fillDemoBtn = page.locator('button:has-text("Fill Demo Credentials")').first();
+    await expect(fillDemoBtn).toBeVisible();
+    await fillDemoBtn.click();
+
+    // Submit Customer Authentication
+    const submitAuthBtn = page.locator('button:has-text("Access Customer Garage")').first();
+    await expect(submitAuthBtn).toBeVisible();
+    await submitAuthBtn.click();
+
+    // Verify Authenticated Client Profile
+    await expect(page.locator('text=Atelier VIP Client').first()).toBeVisible({ timeout: 10000 });
+    await expect(page.locator('text=Alex Vance').first()).toBeVisible();
+
+    // Verify Saved Vehicles Fleet
+    await expect(page.locator('text=My Vehicle Fleet').first()).toBeVisible();
+    await expect(page.locator('text=Porsche').first()).toBeVisible();
+
+    // Test Adding a Vehicle to Personal Fleet
+    const addVehicleBtn = page.locator('button:has-text("Add Vehicle")').first();
+    await expect(addVehicleBtn).toBeVisible();
+    await addVehicleBtn.click();
+
+    await expect(page.locator('text=Add Vehicle to Garage').first()).toBeVisible();
+    await page.locator('input[placeholder="e.g. Porsche"]').fill('BMW');
+    await page.locator('input[placeholder="e.g. 911 GT3"]').fill('M4 Competition');
+    await page.locator('input[placeholder="e.g. DOCK-911"]').fill('M4-TRACK');
+
+    const saveVehicleBtn = page.locator('button:has-text("Save Vehicle")').first();
+    await expect(saveVehicleBtn).toBeVisible();
+    await saveVehicleBtn.click();
+
+    // Verify new vehicle card rendered in fleet
+    await expect(page.locator('text=M4 Competition').first()).toBeVisible({ timeout: 10000 });
+
+    // Switch to Concierge Bookings & History Tab
+    const bookingsTab = page.locator('button:has-text("Concierge Bookings & History")').first();
+    await expect(bookingsTab).toBeVisible();
+    await bookingsTab.click();
+    await expect(page.locator('text=Service Bookings').first()).toBeVisible();
+  });
 });
+

@@ -6,7 +6,8 @@ import {
   Search, 
   Warehouse, 
   ExternalLink,
-  Building2 
+  Building2,
+  SlidersHorizontal 
 } from 'lucide-react';
 import { Button } from '../components/common/Button.jsx';
 import { LoadingSpinner } from '../components/common/LoadingSpinner.jsx';
@@ -15,6 +16,7 @@ import { AdminKpiRow } from '../components/admin/AdminKpiRow.jsx';
 import { KanbanBoard } from '../components/admin/KanbanBoard.jsx';
 import { BookingDetailModal } from '../components/admin/BookingDetailModal.jsx';
 import { StudioSettingsModal } from '../components/admin/StudioSettingsModal.jsx';
+import { CatalogManagerModal } from '../components/admin/CatalogManagerModal.jsx';
 import { getAdminStats, getAdminBookings, updateBookingStatus } from '../services/api.js';
 
 // Fallback demo bookings for offline preview
@@ -195,6 +197,7 @@ export const AdminPage = () => {
   const [isUpdatingId, setIsUpdatingId] = useState(null);
   const [lastRefreshedAt, setLastRefreshedAt] = useState(() => new Date());
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+  const [catalogModalOpen, setCatalogModalOpen] = useState(false);
 
   // Handle Login
   const handleLoginSuccess = (newToken, user) => {
@@ -484,6 +487,16 @@ export const AdminPage = () => {
           <Button
             variant="outline"
             size="sm"
+            onClick={() => setCatalogModalOpen(true)}
+            iconLeft={SlidersHorizontal}
+            className="text-xs border-[#10B981]/40 text-[#10B981] hover:bg-[#10B981]/10"
+          >
+            Catalog & Pricing Cockpit
+          </Button>
+
+          <Button
+            variant="outline"
+            size="sm"
             onClick={handleLogout}
             iconLeft={LogOut}
             className="text-xs border-[#EF4444]/40 text-[#FCA5A5] hover:bg-[#EF4444]/15"
@@ -571,6 +584,14 @@ export const AdminPage = () => {
         isOpen={settingsModalOpen}
         onClose={() => setSettingsModalOpen(false)}
         token={token}
+      />
+
+      {/* Service Catalog & Pricing Manager Modal */}
+      <CatalogManagerModal
+        isOpen={catalogModalOpen}
+        onClose={() => setCatalogModalOpen(false)}
+        token={token}
+        onCatalogUpdated={() => loadDashboardData(true)}
       />
 
     </div>

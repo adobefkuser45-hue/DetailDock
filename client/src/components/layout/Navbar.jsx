@@ -7,9 +7,10 @@ import {
   Wrench, 
   Search, 
   Shield, 
-  Sparkles,
-  ArrowRight,
-  PhoneCall
+  Sparkles, 
+  ArrowRight, 
+  PhoneCall,
+  Car
 } from 'lucide-react';
 import { DetailDockLogo } from '../common/DetailDockLogo.jsx';
 import { Button } from '../common/Button.jsx';
@@ -24,6 +25,7 @@ export const Navbar = () => {
     { name: 'Services', path: '/#services', icon: Sparkles },
     { name: 'Smart Builder', path: '/builder', icon: Wrench, highlight: true },
     { name: 'Schedule Bay', path: '/book', icon: Calendar },
+    { name: 'Garage', path: '/garage', icon: Car },
     { name: 'Track Job', path: '/track', icon: Search },
     { name: 'Admin Portal', path: '/admin', icon: Shield }
   ];

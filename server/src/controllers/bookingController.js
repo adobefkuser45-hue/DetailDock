@@ -13,6 +13,8 @@ import { asyncHandler } from '../utils/asyncHandler.js';
 import { AppError } from '../utils/AppError.js';
 import { invoiceService } from '../services/invoiceService.js';
 import { emailService } from '../services/emailService.js';
+import { warrantyService } from '../services/warrantyService.js';
+import { StudioSetting } from '../models/StudioSetting.js';
 
 const STATUS_PROGRESSION = {
   'Pending': { step: 1, label: 'Appointment Requested', percentage: 20 },
@@ -348,5 +350,35 @@ export const resendBookingReceipt = asyncHandler(async (req, res) => {
     message: `Receipt dispatched to ${booking.customer.email}.`,
     data: result
   });
+});
+
+/**
+ * @desc Stream vector PDF ceramic warranty certificate directly to client
+ * @route GET /api/v1/bookings/:code/warranty
+ * @access Public
+ */
+export const downloadWarrantyCertificate = asyncHandler(async (req, res) => {
+  let { code } = req.params;
+  if (!code) {
+    throw new AppError('Booking reference code is required.', 400, 'MISSING_BOOKING_CODE');
+  }
+
+  code = code.trim().toUpperCase();
+  const searchPattern = code.startsWith('DD-') ? `^${code}$` : `^(DD-)?${code}$`;
+
+  const booking = await Booking.findOne({
+    bookingCode: new RegExp(searchPattern, 'i')
+  });
+
+  if (!booking) {
+    throw new AppError(`No booking found with reference code '${code}'.`, 404, 'BOOKING_NOT_FOUND');
+  }
+
+  const studioSettings = await StudioSetting.findOne();
+
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', `attachment; filename="DetailDock_Ceramic_Warranty_${booking.bookingCode}.pdf"`);
+
+  warrantyService.generateWarrantyPdf(booking, res, studioSettings || {});
 });
 

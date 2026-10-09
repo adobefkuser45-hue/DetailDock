@@ -270,3 +270,138 @@ export const recordDispatchedMessage = async (bookingCode, { channel, message, r
   return res.data;
 };
 
+// -------------------------------------------------------------
+// Service Catalog & Pricing Management
+// -------------------------------------------------------------
+
+export const getAdminCatalog = async (token) => {
+  const res = await request('/admin/catalog', {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return res.data;
+};
+
+export const createAdminPackage = async (payload, token) => {
+  const res = await request('/admin/catalog/packages', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}` },
+    body: JSON.stringify(payload)
+  });
+  return res.data;
+};
+
+export const updateAdminPackage = async (id, payload, token) => {
+  const res = await request(`/admin/catalog/packages/${id}`, {
+    method: 'PUT',
+    headers: { Authorization: `Bearer ${token}` },
+    body: JSON.stringify(payload)
+  });
+  return res.data;
+};
+
+export const toggleAdminPackage = async (id, token) => {
+  const res = await request(`/admin/catalog/packages/${id}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return res.data;
+};
+
+export const createAdminAddon = async (payload, token) => {
+  const res = await request('/admin/catalog/addons', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}` },
+    body: JSON.stringify(payload)
+  });
+  return res.data;
+};
+
+export const updateAdminAddon = async (id, payload, token) => {
+  const res = await request(`/admin/catalog/addons/${id}`, {
+    method: 'PUT',
+    headers: { Authorization: `Bearer ${token}` },
+    body: JSON.stringify(payload)
+  });
+  return res.data;
+};
+
+export const toggleAdminAddon = async (id, token) => {
+  const res = await request(`/admin/catalog/addons/${id}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return res.data;
+};
+
+export const updateAdminVehicleCategory = async (id, payload, token) => {
+  const res = await request(`/admin/catalog/categories/${id}`, {
+    method: 'PUT',
+    headers: { Authorization: `Bearer ${token}` },
+    body: JSON.stringify(payload)
+  });
+  return res.data;
+};
+
+export const resetAdminCatalog = async (token) => {
+  const res = await request('/admin/catalog/reset', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return res.data;
+};
+
+// -------------------------------------------------------------
+// Ceramic Coating Warranty & DVI Inspection
+// -------------------------------------------------------------
+
+export const getWarrantyDownloadUrl = (bookingCode) => {
+  const cleanedCode = encodeURIComponent(bookingCode.trim().toUpperCase());
+  return `${API_BASE}/bookings/${cleanedCode}/warranty`;
+};
+
+export const issueWarrantyCertificate = async (bookingId, payload, token) => {
+  const res = await request(`/admin/bookings/${bookingId}/issue-warranty`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}` },
+    body: JSON.stringify(payload)
+  });
+  return res.data;
+};
+
+export const updateInspectionData = async (bookingId, payload, token) => {
+  const res = await request(`/admin/bookings/${bookingId}/inspection`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}` },
+    body: JSON.stringify(payload)
+  });
+  return res.data;
+};
+
+// -------------------------------------------------------------
+// Customer Garage & Saved Vehicles
+// -------------------------------------------------------------
+
+export const getCustomerGarage = async (token) => {
+  const res = await request('/auth/customer/garage', {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return res.data;
+};
+
+export const addSavedVehicle = async (vehicleData, token) => {
+  const res = await request('/auth/customer/vehicles', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}` },
+    body: JSON.stringify(vehicleData)
+  });
+  return res.data;
+};
+
+export const removeSavedVehicle = async (vehicleId, token) => {
+  const res = await request(`/auth/customer/vehicles/${vehicleId}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return res.data;
+};
+

@@ -3,7 +3,8 @@ import {
   createBooking, 
   trackBooking,
   getBookingInvoice,
-  resendBookingReceipt
+  resendBookingReceipt,
+  downloadWarrantyCertificate
 } from '../controllers/bookingController.js';
 
 const router = express.Router();
@@ -16,6 +17,9 @@ router.get('/track/:code', trackBooking);
 
 // Public PDF Invoice / Receipt Download
 router.get('/:code/invoice', getBookingInvoice);
+
+// Public PDF Ceramic Coating Warranty Certificate Download
+router.get('/:code/warranty', downloadWarrantyCertificate);
 
 // Resend transactional email receipt
 router.post('/:code/resend-receipt', resendBookingReceipt);

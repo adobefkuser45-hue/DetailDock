@@ -365,3 +365,40 @@
   - Vite client production build: compiled in 581ms with 0 errors.
   - Live Cloud Production Smoke Test (`testProductionLiveEndpoints.js`): 15/15 checks passed against live Render API (`https://detaildock-api.onrender.com`) and Vercel frontend (`https://client-mauve-zeta-13.vercel.app`).
 - **Status:** Milestone M06 is 100% complete, verified, and deployed. All 33 tasks (`TASK-000` through `TASK-032`) VERIFIED.
+
+## 2026-10-09 — Session 22: Commercial Studio Expansion Suite (M07)
+
+- **Action:** Executed Milestone M07 (`TASK-033` through `TASK-038`). Delivered the complete Commercial Studio Expansion Suite, elevating DetailDock to an enterprise-grade SaaS auto detailing platform with zero ongoing subscription costs.
+- **Implemented:**
+  - **Admin Service Catalog & Pricing Editor API (FR-21, FR-22):**
+    - `server/src/config/defaultCatalog.js`: Factory baseline for packages, add-ons, and chassis multipliers.
+    - `server/src/controllers/adminController.js` & `server/src/routes/adminRoutes.js`: Endpoints for `getCatalog`, `createPackage`, `updatePackage`, `togglePackage`, `createAddon`, `updateAddon`, `toggleAddon`, `updateVehicleCategory`, and `resetCatalogToDefaults`.
+    - `client/src/components/admin/CatalogManagerModal.jsx`: 3-tab cockpit for direct editing of prices, duration, features, and chassis multipliers with instant MongoDB Atlas persistence.
+    - `client/src/pages/AdminPage.jsx`: Integrated "Catalog & Pricing" cockpit launcher button.
+  - **Digital Ceramic Coating Warranty Certificate Engine:**
+    - `server/src/services/warrantyService.js`: High-resolution vector PDF certificate generator (`pdfkit`) in landscape A4 with double gold borders, official 9H nano-ceramic seal, serial numbers (`CCW-YYYY-XXXX`), and security hash.
+    - `server/src/controllers/adminController.js`: `POST /api/v1/admin/bookings/:id/issue-warranty`.
+    - `server/src/controllers/bookingController.js`: Streaming download endpoint `GET /api/v1/bookings/:code/warranty`.
+    - `client/src/components/tracking/WarrantyCertificateSection.jsx`: Diploma certificate presentation with 1-click PDF download link.
+    - `client/src/pages/TrackJobPage.jsx`: Mounted `WarrantyCertificateSection`.
+  - **Digital Vehicle Inspection (DVI) & Paint Health Telemetry:**
+    - `server/src/models/Booking.js`: Added `inspectionData` subdocument schema for intake (clear coat depth µm, swirl severity, rock chips) and completion (gloss units GU, defect elimination %).
+    - `server/src/controllers/adminController.js`: `POST /api/v1/admin/bookings/:id/inspection`.
+    - `client/src/components/tracking/VehicleInspectionCard.jsx`: Telemetry card on live tracking portal displaying ultrasonic depth sensor readings and gloss recovery progression.
+    - `client/src/components/admin/BookingDetailModal.jsx`: Added DVI inspection logging inputs and 1-click Ceramic Warranty issuance trigger.
+  - **Customer Account Portal & Personal Atelier Garage:**
+    - `server/src/controllers/authController.js` & `server/src/routes/authRoutes.js`: Customer garage endpoints (`/auth/customer/garage`, `POST /auth/customer/vehicles`, `DELETE /auth/customer/vehicles/:id`).
+    - `client/src/pages/GaragePage.jsx`: Personal customer concierge garage with 1-click VIP demo credentials (`alex@example.com` / `CustomerPass2026!`), vehicle fleet management, 1-click "Book Detailing for this Car" linking to `/builder?category=...`, and service booking history with live tracking, PDF invoices, and Ceramic Warranty downloads.
+    - `client/src/App.jsx`: Mounted `/garage` route.
+    - `client/src/components/layout/Navbar.jsx`: Added "Garage" navigation pill.
+- **Verified:**
+  - `testCatalogManagement.js`: 8 / 8 automated tests passed (100% pass rate).
+  - `testExpansionSuite.js`: 6 / 6 automated tests passed (100% pass rate).
+  - `testSecurityAndOwasp.js`: 24 / 24 security tests passed.
+  - `testAuthAndAdmin.js`: 36 / 36 auth and admin tests passed.
+  - `testPaymentHttpEndpoints.js`: 22 / 22 HTTP tests passed.
+  - `Playwright E2E` (`detaildock.spec.js`): 6 / 6 end-to-end tests passed in 15.7s (Homepage, Builder, Booking, Live Tracking with DVI, Admin Operations Deck with Catalog Cockpit, and Customer Atelier Garage).
+  - Vite client production build: compiled in 575ms with 0 errors.
+  - Total automated tests passing: 165+ checks across all endpoints and flows with 100% pass rate.
+- **Status:** Milestone M07 is 100% complete and verified. All 38 tasks (`TASK-000` through `TASK-038`) VERIFIED.
+

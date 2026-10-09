@@ -1,8 +1,13 @@
 import mongoose from 'mongoose';
 import { Booking } from '../models/Booking.js';
 import { StudioSetting } from '../models/StudioSetting.js';
+import { ServicePackage } from '../models/ServicePackage.js';
+import { Addon } from '../models/Addon.js';
+import { VehicleCategory } from '../models/VehicleCategory.js';
+import { DEFAULT_CATEGORIES, DEFAULT_PACKAGES, DEFAULT_ADDONS } from '../config/defaultCatalog.js';
 import { normalizeDateRange } from '../services/availabilityService.js';
 import { generateCommunicationLinks, buildCommunicationMessage } from '../services/communicationService.js';
+import { warrantyService } from '../services/warrantyService.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
 import { AppError } from '../utils/AppError.js';
 
@@ -401,6 +406,330 @@ export const recordDispatchedMessage = asyncHandler(async (req, res) => {
     success: true,
     data: logEntry,
     message: `Message dispatched via ${channel} and recorded in audit log.`
+  });
+});
+
+/**
+ * @desc Get complete service catalog (packages, addons, vehicle categories)
+ * @route GET /api/v1/admin/catalog
+ * @access Admin
+ */
+export const getCatalog = asyncHandler(async (req, res) => {
+  const [packages, addons, categories] = await Promise.all([
+    ServicePackage.find().sort({ displayOrder: 1, createdAt: 1 }),
+    Addon.find().sort({ displayOrder: 1, createdAt: 1 }),
+    VehicleCategory.find().sort({ displayOrder: 1, createdAt: 1 })
+  ]);
+
+  res.status(200).json({
+    success: true,
+    data: {
+      packages,
+      addons,
+      categories
+    },
+    message: 'Catalog retrieved successfully.'
+  });
+});
+
+/**
+ * @desc Create new service package
+ * @route POST /api/v1/admin/catalog/packages
+ * @access Admin
+ */
+export const createPackage = asyncHandler(async (req, res) => {
+  const { title, tagline, description, basePrice, baseDurationMinutes, category, includedFeatures, isPopular, displayOrder } = req.body;
+  if (!title || basePrice === undefined || !baseDurationMinutes) {
+    throw new AppError('Package title, base price, and base duration are required.', 400, 'MISSING_PACKAGE_FIELDS');
+  }
+
+  const slug = req.body.slug || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  const existing = await ServicePackage.findOne({ slug });
+  if (existing) {
+    throw new AppError(`A package with slug '${slug}' already exists.`, 409, 'SLUG_CONFLICT');
+  }
+
+  const newPkg = await ServicePackage.create({
+    title,
+    slug,
+    tagline: tagline || '',
+    description: description || title,
+    basePrice: Number(basePrice),
+    baseDurationMinutes: Number(baseDurationMinutes),
+    category: category || 'full',
+    includedFeatures: Array.isArray(includedFeatures) ? includedFeatures : (includedFeatures ? [includedFeatures] : []),
+    isPopular: !!isPopular,
+    displayOrder: displayOrder !== undefined ? Number(displayOrder) : 10,
+    isActive: true
+  });
+
+  res.status(201).json({
+    success: true,
+    data: newPkg,
+    message: 'Service package created successfully.'
+  });
+});
+
+/**
+ * @desc Update service package
+ * @route PUT /api/v1/admin/catalog/packages/:id
+ * @access Admin
+ */
+export const updatePackage = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const updates = { ...req.body };
+  if (updates.basePrice !== undefined) updates.basePrice = Number(updates.basePrice);
+  if (updates.baseDurationMinutes !== undefined) updates.baseDurationMinutes = Number(updates.baseDurationMinutes);
+  if (updates.displayOrder !== undefined) updates.displayOrder = Number(updates.displayOrder);
+
+  const updatedPkg = await ServicePackage.findByIdAndUpdate(id, updates, { new: true, runValidators: true });
+  if (!updatedPkg) {
+    throw new AppError(`Service package with ID ${id} not found.`, 404, 'PACKAGE_NOT_FOUND');
+  }
+
+  res.status(200).json({
+    success: true,
+    data: updatedPkg,
+    message: 'Service package updated successfully.'
+  });
+});
+
+/**
+ * @desc Toggle / Deactivate service package
+ * @route DELETE /api/v1/admin/catalog/packages/:id
+ * @access Admin
+ */
+export const deletePackage = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const pkg = await ServicePackage.findById(id);
+  if (!pkg) {
+    throw new AppError(`Service package with ID ${id} not found.`, 404, 'PACKAGE_NOT_FOUND');
+  }
+
+  pkg.isActive = !pkg.isActive;
+  await pkg.save();
+
+  res.status(200).json({
+    success: true,
+    data: pkg,
+    message: `Package ${pkg.isActive ? 'activated' : 'deactivated'} successfully.`
+  });
+});
+
+/**
+ * @desc Create new add-on
+ * @route POST /api/v1/admin/catalog/addons
+ * @access Admin
+ */
+export const createAddon = asyncHandler(async (req, res) => {
+  const { title, description, price, durationMinutes, iconName, displayOrder } = req.body;
+  if (!title || price === undefined) {
+    throw new AppError('Add-on title and price are required.', 400, 'MISSING_ADDON_FIELDS');
+  }
+
+  const slug = req.body.slug || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  const existing = await Addon.findOne({ slug });
+  if (existing) {
+    throw new AppError(`An add-on with slug '${slug}' already exists.`, 409, 'SLUG_CONFLICT');
+  }
+
+  const newAddon = await Addon.create({
+    title,
+    slug,
+    description: description || '',
+    price: Number(price),
+    durationMinutes: Number(durationMinutes || 30),
+    iconName: iconName || 'Sparkles',
+    displayOrder: displayOrder !== undefined ? Number(displayOrder) : 10,
+    isActive: true
+  });
+
+  res.status(201).json({
+    success: true,
+    data: newAddon,
+    message: 'Add-on created successfully.'
+  });
+});
+
+/**
+ * @desc Update add-on
+ * @route PUT /api/v1/admin/catalog/addons/:id
+ * @access Admin
+ */
+export const updateAddon = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const updates = { ...req.body };
+  if (updates.price !== undefined) updates.price = Number(updates.price);
+  if (updates.durationMinutes !== undefined) updates.durationMinutes = Number(updates.durationMinutes);
+
+  const updatedAddon = await Addon.findByIdAndUpdate(id, updates, { new: true, runValidators: true });
+  if (!updatedAddon) {
+    throw new AppError(`Add-on with ID ${id} not found.`, 404, 'ADDON_NOT_FOUND');
+  }
+
+  res.status(200).json({
+    success: true,
+    data: updatedAddon,
+    message: 'Add-on updated successfully.'
+  });
+});
+
+/**
+ * @desc Toggle / Deactivate add-on
+ * @route DELETE /api/v1/admin/catalog/addons/:id
+ * @access Admin
+ */
+export const deleteAddon = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const addon = await Addon.findById(id);
+  if (!addon) {
+    throw new AppError(`Add-on with ID ${id} not found.`, 404, 'ADDON_NOT_FOUND');
+  }
+
+  addon.isActive = !addon.isActive;
+  await addon.save();
+
+  res.status(200).json({
+    success: true,
+    data: addon,
+    message: `Add-on ${addon.isActive ? 'activated' : 'deactivated'} successfully.`
+  });
+});
+
+/**
+ * @desc Update vehicle category multipliers
+ * @route PUT /api/v1/admin/catalog/categories/:id
+ * @access Admin
+ */
+export const updateVehicleCategory = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const updates = { ...req.body };
+  if (updates.priceMultiplier !== undefined) updates.priceMultiplier = Number(updates.priceMultiplier);
+  if (updates.durationMultiplier !== undefined) updates.durationMultiplier = Number(updates.durationMultiplier);
+
+  const updatedCat = await VehicleCategory.findByIdAndUpdate(id, updates, { new: true, runValidators: true });
+  if (!updatedCat) {
+    throw new AppError(`Vehicle category with ID ${id} not found.`, 404, 'CATEGORY_NOT_FOUND');
+  }
+
+  res.status(200).json({
+    success: true,
+    data: updatedCat,
+    message: 'Vehicle category updated successfully.'
+  });
+});
+
+/**
+ * @desc Reset catalog to factory defaults
+ * @route POST /api/v1/admin/catalog/reset
+ * @access Admin
+ */
+export const resetCatalogToDefaults = asyncHandler(async (req, res) => {
+  await Promise.all([
+    VehicleCategory.deleteMany({}),
+    ServicePackage.deleteMany({}),
+    Addon.deleteMany({})
+  ]);
+
+  const [categories, packages, addons] = await Promise.all([
+    VehicleCategory.insertMany(DEFAULT_CATEGORIES),
+    ServicePackage.insertMany(DEFAULT_PACKAGES),
+    Addon.insertMany(DEFAULT_ADDONS)
+  ]);
+
+  res.status(200).json({
+    success: true,
+    data: { categories, packages, addons },
+    message: 'Service catalog successfully reset to factory defaults.'
+  });
+});
+
+/**
+ * @desc Issue / Regenerate official Ceramic Coating Warranty Certificate
+ * @route POST /api/v1/admin/bookings/:id/issue-warranty
+ * @access Admin
+ */
+export const issueWarrantyCertificate = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const booking = await Booking.findById(id);
+  if (!booking) {
+    throw new AppError(`Booking ${id} not found.`, 404, 'BOOKING_NOT_FOUND');
+  }
+
+  const certificateNumber = warrantyService.generateCertificateNumber(booking.bookingCode);
+  const securityHash = warrantyService.generateSecurityHash(booking);
+
+  booking.warrantyCertificate = {
+    certificateNumber,
+    issuedAt: new Date(),
+    coatingType: req.body.coatingType || '9H Multi-Layer Matrix Nano-Ceramic',
+    hardnessRating: req.body.hardnessRating || '9H Pencil Hardness (Certified ISO 15184)',
+    warrantyPeriodYears: Number(req.body.warrantyPeriodYears || 3),
+    expiresAt: new Date(Date.now() + Number(req.body.warrantyPeriodYears || 3) * 365 * 24 * 60 * 60 * 1000),
+    certifiedTechnicianName: req.body.certifiedTechnicianName || 'Marcus Vance (Master Specialist)',
+    warrantyStatus: 'Active',
+    securityHash
+  };
+
+  // Add communication log
+  if (!booking.communicationsLog) booking.communicationsLog = [];
+  booking.communicationsLog.push({
+    channel: 'email',
+    recipient: booking.customer.email,
+    message: `Official Ceramic Warranty Certificate ${certificateNumber} issued for ${booking.vehicle?.year} ${booking.vehicle?.make} ${booking.vehicle?.model}.`,
+    dispatchedAt: new Date(),
+    status: 'dispatched'
+  });
+
+  await booking.save();
+
+  res.status(200).json({
+    success: true,
+    data: booking.warrantyCertificate,
+    message: `Ceramic Warranty Certificate ${certificateNumber} successfully issued!`
+  });
+});
+
+/**
+ * @desc Update Digital Vehicle Inspection (DVI) telemetry
+ * @route POST /api/v1/admin/bookings/:id/inspection
+ * @access Admin
+ */
+export const updateInspectionData = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const booking = await Booking.findById(id);
+  if (!booking) {
+    throw new AppError(`Booking ${id} not found.`, 404, 'BOOKING_NOT_FOUND');
+  }
+
+  const { intakeInspection, completionInspection } = req.body;
+
+  if (!booking.inspectionData) {
+    booking.inspectionData = {};
+  }
+
+  if (intakeInspection) {
+    booking.inspectionData.intakeInspection = {
+      ...(booking.inspectionData.intakeInspection || {}),
+      ...intakeInspection,
+      inspectedAt: new Date()
+    };
+  }
+
+  if (completionInspection) {
+    booking.inspectionData.completionInspection = {
+      ...(booking.inspectionData.completionInspection || {}),
+      ...completionInspection,
+      completedAt: new Date()
+    };
+  }
+
+  await booking.save();
+
+  res.status(200).json({
+    success: true,
+    data: booking.inspectionData,
+    message: 'Digital vehicle inspection data saved successfully.'
   });
 });
 
