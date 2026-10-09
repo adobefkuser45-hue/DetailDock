@@ -18,7 +18,7 @@
 ## 2. Current Position
 - **Stage:** `05 Development & Implementation`
 - **Milestone:** `M02 — Core Engine & Full-Stack Implementation`
-- **Current Task:** `TASK-011 — Authoritative Pricing Engine & Slot Availability API`
+- **Current Task:** `TASK-012 — Booking Submission & Public Status Tracking API`
 - **Task Status:** `PROPOSED`
 - **Classification:** `BOUNDED`
 
@@ -40,22 +40,23 @@
   - `TASK-008`: Project Scaffolding Monorepo (Client Vite + Server Express) with verified build and health check.
   - `TASK-009`: Express Server Core, Security Middleware & Live MongoDB Atlas Connection (`readyState: 1` verified).
   - `TASK-010`: Mongoose Schemas & Verified Seed Data on Atlas (4 Categories, 3 Packages, 5 Add-ons, Studio Settings, Users).
+  - `TASK-011`: Authoritative Pricing Engine & Slot Availability API (29/29 service tests, 25/25 HTTP tests passed).
 - **In Progress:**
-  - Database schemas and catalog seeded. Ready for TASK-011 (Authoritative Pricing Engine & Slot Availability API).
+  - Pricing calculation and bay slot availability engine verified. Ready for TASK-012 (Booking Submission & Public Status Tracking API).
 - **Blockers:**
   - None.
 
 ---
 
 ## 4. Last Verified
-- **Task:** `TASK-010 — Mongoose Models & Realistic Luxury Detailing Seed Data`
+- **Task:** `TASK-011 — Authoritative Pricing Engine & Slot Availability API`
 - **Date:** 2026-10-09
-- **Evidence Reference:** [VERIFICATION.md#task-010](file:///docs/00-control/VERIFICATION.md#task-010)
+- **Evidence Reference:** [VERIFICATION.md#task-011](file:///docs/00-control/VERIFICATION.md#task-011)
 
 ---
 
 ## 5. Currently Working On
-Database models and luxury automotive seed catalog verified in MongoDB Atlas. Proceeding to TASK-011 to implement the core business pricing calculation engine service and the slot availability endpoint with bay capacity verification.
+Pricing engine and slot availability endpoints fully implemented and verified against MongoDB Atlas. Proceeding to TASK-012 to implement the customer booking submission endpoint (with server pricing validation and concurrency protection) and the public status tracking API.
 
 
 

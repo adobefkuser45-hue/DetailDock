@@ -11,6 +11,12 @@ import { connectDB } from './config/db.js';
 import { apiLimiter } from './middleware/rateLimitMiddleware.js';
 import { errorMiddleware } from './middleware/errorMiddleware.js';
 
+import serviceRoutes from './routes/serviceRoutes.js';
+import addonRoutes from './routes/addonRoutes.js';
+import vehicleRoutes from './routes/vehicleRoutes.js';
+import pricingRoutes from './routes/pricingRoutes.js';
+import availabilityRoutes from './routes/availabilityRoutes.js';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -59,6 +65,13 @@ app.get('/api/v1/health', (req, res) => {
   });
 });
 
+// API v1 Routes
+app.use('/api/v1/services', serviceRoutes);
+app.use('/api/v1/addons', addonRoutes);
+app.use('/api/v1/vehicles', vehicleRoutes);
+app.use('/api/v1/pricing', pricingRoutes);
+app.use('/api/v1/availability', availabilityRoutes);
+
 // Fallback 404 Route
 app.use((req, res) => {
   res.status(404).json({
@@ -74,13 +87,19 @@ app.use((req, res) => {
 app.use(errorMiddleware);
 
 // Initialize DB and start listening
-const startServer = async () => {
+export const startServer = async (port = PORT) => {
   await connectDB();
-  app.listen(PORT, () => {
-    console.log(`[DetailDock API]: Server listening on http://localhost:${PORT}`);
+  return app.listen(port, () => {
+    console.log(`[DetailDock API]: Server listening on http://localhost:${port}`);
   });
 };
 
-startServer();
+import { pathToFileURL } from 'url';
+
+const isDirectRun = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
+
+if (isDirectRun) {
+  startServer();
+}
 
 export default app;

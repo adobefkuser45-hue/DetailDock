@@ -126,6 +126,25 @@
   - `node server/src/scripts/verifyDb.js` confirmed: 4 Categories, 3 Packages, 5 Add-ons, Studio Settings, 2 Users.
 - **Next Step:** Proceed to TASK-011 (Authoritative Pricing Engine & Slot Availability API).
 
+## 2026-10-09 — Session 09: Authoritative Pricing Engine & Slot Availability API (TASK-011)
+
+- **Action:** Executed TASK-011. Built the authoritative server-side pricing engine (`pricingService.js`) and dual-bay slot availability engine (`availabilityService.js`), along with service catalog controllers and REST API routes under `/api/v1/`.
+- **Implemented:**
+  - `server/src/services/pricingService.js`: Authoritative calculation service enforcing $\text{Subtotal} = (\text{BasePackage} \times \text{Multiplier}) + \sum \text{Addons}$ with duration estimation and duration formatter.
+  - `server/src/services/availabilityService.js`: Calendar slot availability and concurrency protection engine calculating available bays per 120-minute slot, respecting working days and blackout dates.
+  - `server/src/controllers/serviceController.js`: Catalog controllers for packages, single package by slug, add-ons, and vehicle categories.
+  - `server/src/controllers/pricingController.js`: POST calculation endpoint handler.
+  - `server/src/controllers/availabilityController.js`: Availability and studio info endpoints handler.
+  - `server/src/routes/*.js`: Express route handlers mounted on `/api/v1/services`, `/api/v1/addons`, `/api/v1/vehicles`, `/api/v1/pricing`, and `/api/v1/availability`.
+  - `server/src/scripts/testPricingAndAvailability.js`: Unit and concurrency simulation test suite.
+  - `server/src/scripts/testHttpEndpoints.js`: Integration HTTP test suite verifying all REST routes over live HTTP server.
+- **Verified:**
+  - `testPricingAndAvailability.js`: 29 / 29 tests passed (100% pass rate) verifying multipliers, add-on additions, and slot capacity guards with HTTP 409 exception handling.
+  - `testHttpEndpoints.js`: 25 / 25 HTTP tests passed (100% pass rate) verifying status codes, envelopes, and input validation.
+  - Client build verified (`npm run build --prefix client` passed in 748ms).
+- **Next Step:** Proceed to TASK-012 (Booking Submission & Public Status Tracking API).
+
+
 
 
 

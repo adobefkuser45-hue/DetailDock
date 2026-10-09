@@ -282,6 +282,129 @@ All claims of completion must be verified with concrete evidence before receivin
     ```
   - Exit code `0`.
 
+---
+
+## TASK-011: Authoritative Pricing Engine & Slot Availability API
+
+- **Task ID:** TASK-011
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-09
+- **Classification:** `BOUNDED`
+
+### Acceptance Criteria:
+1. Authoritative Pricing Engine service (`server/src/services/pricingService.js`) computes accurate line-item and total pricing using DB data and vehicle category multipliers:
+   $$\text{Subtotal} = (\text{BasePackagePrice} \times \text{Multiplier}) + \sum \text{AddonPrices}$$
+2. Rejects invalid or nonexistent vehicle categories, packages, or addons with appropriate HTTP 400 / 404 errors.
+3. Availability Engine service (`server/src/services/availabilityService.js`) generates operating slots, evaluates weekly working days and blackout dates, and enforces maximum bay capacity ($2$ concurrent vehicles).
+4. Double-booking prevention guard (`verifySlotAvailability`) throws `409 Conflict` (`SLOT_CAPACITY_EXCEEDED`) when slot bay capacity is exceeded.
+5. Controllers and Express routes mounted under `/api/v1/services`, `/api/v1/addons`, `/api/v1/vehicles`, `/api/v1/pricing`, and `/api/v1/availability`.
+6. Complete automated test suites pass with 100% success rate.
+
+### Verification Evidence:
+- **Pricing & Availability Engine Unit & Concurrency Test:**
+  - Command: `node server/src/scripts/testPricingAndAvailability.js`
+  - Output:
+    ```text
+    ====================================================
+       DETAILDOCK PRICING & AVAILABILITY ENGINE TEST    
+    ====================================================
+    [DetailDock DB]: MongoDB Atlas Connected successfully -> Host: ac-11dnu91-shard-00-00.na6yl4b.mongodb.net
+    --- 1. CATALOG VERIFICATION ---
+      ✅ [PASS] Active Vehicle Categories found: 4
+      ✅ [PASS] Active Service Packages found: 3
+      ✅ [PASS] Active Addons found: 5
+      ✅ [PASS] Studio Max Bay Capacity is 2
+    --- 2. PRICING ENGINE: SEDAN + CERAMIC SHIELD (NO ADDONS) ---
+      Package: Ultimate 9H Ceramic Shield ($499)
+      Total: $499, Duration: 4 hrs 30 mins
+      ✅ [PASS] Sedan Ceramic Shield subtotal is $499.00
+      ✅ [PASS] Sedan Ceramic Shield total is $499.00
+      ✅ [PASS] Multiplier applied is 1.0
+    --- 3. PRICING ENGINE: FULL SUV + SIGNATURE DETAIL + 2 ADDONS ---
+      Package: Signature Multi-Stage Detail ($419.05)
+      Addons: Engine Bay Steam Decontamination ($75), Wheel Barrel & Caliper Ceramic Coating ($180)
+      Total: $674.05, Duration: 5 hrs 24 mins
+      ✅ [PASS] Full SUV Signature Detail package price is $419.05
+      ✅ [PASS] Addons subtotal is $255.00
+      ✅ [PASS] Total price is $674.05
+      ✅ [PASS] 2 addons accurately resolved
+      ✅ [PASS] Rejects nonexistent addon with 404 ADDON_NOT_FOUND
+      ✅ [PASS] Nonexistent addon error triggered
+    --- 4. AVAILABILITY ENGINE: THURSDAY 2026-10-15 ---
+      Status: isOpen = true, Day: Thursday
+      Available slots count: 4
+      ✅ [PASS] Studio is open on Thursday
+      ✅ [PASS] Standard 4 time slots generated (9AM, 11AM, 1PM, 3PM)
+      ✅ [PASS] Slot maxCapacity is 2
+      ✅ [PASS] Slot 0 is available
+    --- 5. AVAILABILITY ENGINE: CLOSED SUNDAY 2026-10-18 ---
+      Status: isOpen = false, Day: Sunday, Reason: Studio is closed on Sundays.
+      ✅ [PASS] Studio is closed on Sunday
+      ✅ [PASS] No slots generated on closed day
+    --- 6. DOUBLE-BOOKING & BAY CAPACITY CONCURRENCY TEST ---
+      ✅ [PASS] Slot is initially open
+      ✅ [PASS] First booking assigned to Bay 1
+      ✅ [PASS] Slot is still open with 1 bay left
+      ✅ [PASS] Second booking assigned to Bay 2
+      ✅ [PASS] Booked count is 2/2
+      ✅ [PASS] Available bays is 0
+      ✅ [PASS] Slot marked as not available
+      ✅ [PASS] Capacity guard properly threw HTTP 409 (SLOT_CAPACITY_EXCEEDED)
+      ✅ [PASS] Error code matches SLOT_CAPACITY_EXCEEDED
+      ✅ [PASS] Attempting to book a 3rd bay was successfully blocked
+      Cleaned up temporary concurrency test records.
+    ====================================================
+      TEST RESULTS: 29 / 29 TESTS PASSED
+    ====================================================
+    ```
+  - Exit code: `0`.
+- **HTTP REST Endpoints Integration Test:**
+  - Command: `node server/src/scripts/testHttpEndpoints.js`
+  - Output:
+    ```text
+    ====================================================
+           DETAILDOCK HTTP REST ENDPOINTS TEST          
+    ====================================================
+    --- 1. GET /api/v1/health ---
+      ✅ [PASS] Health endpoint returns 200 OK
+      ✅ [PASS] Database status is Connected
+    --- 2. GET /api/v1/services ---
+      ✅ [PASS] Services endpoint returns 200 OK
+      ✅ [PASS] Response envelope has success: true
+      ✅ [PASS] Returned 3 packages
+      ✅ [PASS] Package objects contain slug
+    --- 3. GET /api/v1/services/ceramic-shield ---
+      ✅ [PASS] Single service endpoint returns 200 OK
+      ✅ [PASS] Ceramic shield base price is 499
+    --- 4. GET /api/v1/addons ---
+      ✅ [PASS] Addons endpoint returns 200 OK
+      ✅ [PASS] Returned 5 addons
+    --- 5. GET /api/v1/vehicles/categories ---
+      ✅ [PASS] Vehicle categories endpoint returns 200 OK
+      ✅ [PASS] Returned 4 vehicle categories
+    --- 6. POST /api/v1/pricing/calculate ---
+      ✅ [PASS] Pricing calculation returns 200 OK
+      ✅ [PASS] Package subtotal is $186.25 (149 * 1.25)
+      ✅ [PASS] Addons subtotal is $55.00
+      ✅ [PASS] Total calculated price is $241.25
+    --- 7. GET /api/v1/availability?date=2026-10-15 ---
+      ✅ [PASS] Availability returns 200 OK
+      ✅ [PASS] Availability isOpen is true
+      ✅ [PASS] 4 slots returned
+      ✅ [PASS] 2 available bays per slot initially
+    --- 8. GET /api/v1/availability/studio-info ---
+      ✅ [PASS] Studio info returns 200 OK
+      ✅ [PASS] Studio name is correct
+      ✅ [PASS] Studio bay capacity is 2
+    --- 9. Error Handling: Invalid Date Format ---
+      ✅ [PASS] Rejects invalid date format with 400 Bad Request
+      ✅ [PASS] Error code is INVALID_DATE_FORMAT
+    ====================================================
+      HTTP RESULTS: 25 / 25 TESTS PASSED
+    ====================================================
+    ```
+  - Exit code: `0`.
+
 
 
 

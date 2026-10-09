@@ -21,7 +21,7 @@
 | **TASK-008** | 05 Dev | Project Scaffolding (Client Vite + Server Express Monorepo) | `VERIFIED` | TASK-007 | [VERIFICATION.md#task-008](file:///docs/00-control/VERIFICATION.md#task-008) |
 | **TASK-009** | 05 Dev | Express Server Setup, Security Middleware & Atlas DB Connection | `VERIFIED` | TASK-008 | [VERIFICATION.md#task-009](file:///docs/00-control/VERIFICATION.md#task-009) |
 | **TASK-010** | 05 Dev | Mongoose Models & Realistic Luxury Detailing Seed Data | `VERIFIED` | TASK-009 | [VERIFICATION.md#task-010](file:///docs/00-control/VERIFICATION.md#task-010) |
-| **TASK-011** | 05 Dev | Authoritative Pricing Engine & Slot Availability API | `PROPOSED` | TASK-010 | `server/src/services/pricingService.js` |
+| **TASK-011** | 05 Dev | Authoritative Pricing Engine & Slot Availability API | `VERIFIED` | TASK-010 | [VERIFICATION.md#task-011](file:///docs/00-control/VERIFICATION.md#task-011) |
 | **TASK-012** | 05 Dev | Booking Submission & Public Status Tracking API | `PROPOSED` | TASK-011 | `server/src/routes/bookingRoutes.js` |
 | **TASK-013** | 05 Dev | Admin Operations API & Role-Based Auth (JWT) | `PROPOSED` | TASK-012 | `server/src/routes/adminRoutes.js` |
 | **TASK-014** | 06 Frontend | Frontend Foundation, Styling Tokens & Bespoke SVG Logo | `PROPOSED` | TASK-008 | `client/src/` |
