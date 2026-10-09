@@ -476,6 +476,96 @@ All claims of completion must be verified with concrete evidence before receivin
   - `testHttpEndpoints.js`: 25 / 25 tests passed (`exit 0`).
   - `npm run build --prefix client`: Production bundle built in 431ms (`exit 0`).
 
+---
+
+## TASK-013: Admin Operations API & Role-Based Auth (JWT)
+
+- **Task ID:** TASK-013
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-09
+- **Classification:** `BOUNDED`
+
+### Acceptance Criteria:
+1. User & Admin login endpoint `POST /api/v1/auth/login` verifies bcrypt password hashes and issues signed JWT tokens with user roles (`admin`, `customer`).
+2. Authentication middleware `protect` validates Bearer tokens, token expiration, and active user state.
+3. Role-based access control middleware `restrictTo('admin')` blocks unauthorized customers (HTTP 403 Forbidden) and unauthenticated requests (HTTP 401 Unauthorized) from administrative endpoints.
+4. Admin bookings list `GET /api/v1/admin/bookings` supports filtering (status, date, bay, search), pagination, and computes status badge counts for the Kanban board header (`Pending`, `Confirmed`, `In Bay`, `Ready`, `Completed`, `Cancelled`).
+5. Status transition endpoint `PATCH /api/v1/admin/bookings/:id/status` executes lifecycle state changes, records actor name, timestamp, and transition note in immutable audit trail.
+6. Admin dashboard overview `GET /api/v1/admin/dashboard/stats` aggregates total bookings, active jobs, today's schedule, and gross revenue.
+7. Customer self-registration endpoint `POST /api/v1/auth/register` creates customer accounts with hashed passwords and returns active JWT.
+8. Automated auth & admin operations test suite passes with 100% success rate.
+
+### Verification Evidence:
+- **Auth & Admin Operations Integration Test:**
+  - Command: `node server/src/scripts/testAuthAndAdmin.js`
+  - Output:
+    ```text
+    ====================================================
+       DETAILDOCK AUTH & ADMIN OPERATIONS API TEST      
+    ====================================================
+    --- 1. POST /api/v1/auth/login (Admin Credentials) ---
+      ✅ [PASS] Admin login returns 200 OK
+      ✅ [PASS] Admin JWT token received
+      ✅ [PASS] User role is admin
+    --- 2. POST /api/v1/auth/login (Customer Credentials) ---
+      ✅ [PASS] Customer login returns 200 OK
+      ✅ [PASS] User role is customer
+    --- 3. POST /api/v1/auth/login (Bad Password) ---
+      ✅ [PASS] Bad credentials rejected with 401 Unauthorized
+      ✅ [PASS] Error code is INVALID_CREDENTIALS
+    --- 4. GET /api/v1/auth/me (Protected Route) ---
+      ✅ [PASS] Protected profile check returns 200 OK
+      ✅ [PASS] Returns logged in admin profile
+    --- 5. RBAC Protection on Admin Endpoints ---
+      ✅ [PASS] Request without token rejected with 401 Unauthorized
+      ✅ [PASS] Customer token accessing admin route rejected with 403 Forbidden
+      ✅ [PASS] Error code is FORBIDDEN
+    --- 6. Setting Up Test Booking for Pipeline Workflow ---
+      ✅ [PASS] Test booking created successfully
+    --- 7. GET /api/v1/admin/bookings (Admin Authorized) ---
+      ✅ [PASS] Admin can list bookings
+      ✅ [PASS] Status counts summary present for Kanban header
+      ✅ [PASS] Pending status count is 1
+      ✅ [PASS] Created test booking found in list
+    --- 8. PATCH /api/v1/admin/bookings/:id/status (Pending -> Confirmed) ---
+      ✅ [PASS] Status update to Confirmed returns 200 OK
+      ✅ [PASS] Booking status is now Confirmed
+      ✅ [PASS] Admin notes updated
+      ✅ [PASS] Status history audit trail incremented to 2
+    --- 9. PATCH /api/v1/admin/bookings/:id/status (Confirmed -> In Bay) ---
+      ✅ [PASS] Lookup by bookingCode for status update returns 200 OK
+      ✅ [PASS] Booking status is now In Bay
+    --- 10. PATCH /api/v1/admin/bookings/:id/status (In Bay -> Ready) ---
+      ✅ [PASS] Status update to Ready returns 200 OK
+      ✅ [PASS] Booking status is now Ready
+    --- 11. PATCH /api/v1/admin/bookings/:id/status (Ready -> Completed) ---
+      ✅ [PASS] Status update to Completed returns 200 OK
+      ✅ [PASS] Booking status is now Completed
+    --- 12. Invalid Status Rejection ---
+      ✅ [PASS] Invalid status rejected with 400 Bad Request
+      ✅ [PASS] Error code is INVALID_STATUS
+    --- 13. GET /api/v1/admin/dashboard/stats ---
+      ✅ [PASS] Dashboard stats returns 200 OK
+      ✅ [PASS] Total bookings counted: 1
+      ✅ [PASS] Total revenue accumulated: $317.9
+      ✅ [PASS] Recent bookings list populated
+    --- 14. POST /api/v1/auth/register ---
+      ✅ [PASS] Customer registration returns 201 Created
+      ✅ [PASS] Registered user assigned customer role
+      ✅ [PASS] Returns active JWT token upon registration
+      Cleaned up temporary test records.
+    ====================================================
+      AUTH & ADMIN RESULTS: 36 / 36 TESTS PASSED
+    ====================================================
+    ```
+  - Exit code: `0`.
+- **Regression Suite Across Entire Backend:**
+  - `testPricingAndAvailability.js`: 29 / 29 tests passed (`exit 0`).
+  - `testHttpEndpoints.js`: 25 / 25 tests passed (`exit 0`).
+  - `testBookingAndTracking.js`: 25 / 25 tests passed (`exit 0`).
+  - `npm run build --prefix client`: Production bundle built in 402ms (`exit 0`).
+  - **Grand Total: 115 / 115 Automated Tests Passing (100% Pass Rate).**
+
 
 
 

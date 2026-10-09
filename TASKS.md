@@ -23,7 +23,7 @@
 | **TASK-010** | 05 Dev | Mongoose Models & Realistic Luxury Detailing Seed Data | `VERIFIED` | TASK-009 | [VERIFICATION.md#task-010](file:///docs/00-control/VERIFICATION.md#task-010) |
 | **TASK-011** | 05 Dev | Authoritative Pricing Engine & Slot Availability API | `VERIFIED` | TASK-010 | [VERIFICATION.md#task-011](file:///docs/00-control/VERIFICATION.md#task-011) |
 | **TASK-012** | 05 Dev | Booking Submission & Public Status Tracking API | `VERIFIED` | TASK-011 | [VERIFICATION.md#task-012](file:///docs/00-control/VERIFICATION.md#task-012) |
-| **TASK-013** | 05 Dev | Admin Operations API & Role-Based Auth (JWT) | `PROPOSED` | TASK-012 | `server/src/routes/adminRoutes.js` |
+| **TASK-013** | 05 Dev | Admin Operations API & Role-Based Auth (JWT) | `VERIFIED` | TASK-012 | [VERIFICATION.md#task-013](file:///docs/00-control/VERIFICATION.md#task-013) |
 | **TASK-014** | 06 Frontend | Frontend Foundation, Styling Tokens & Bespoke SVG Logo | `PROPOSED` | TASK-008 | `client/src/` |
 | **TASK-015** | 06 Frontend | Premium Homepage (Hero, Before/After Slider, Testimonials) | `PROPOSED` | TASK-014 | `client/src/pages/HomePage.jsx` |
 | **TASK-016** | 06 Frontend | Smart Package Builder (Vehicle Multipliers, Packages, Addons) | `PROPOSED` | TASK-015 | `client/src/pages/BuilderPage.jsx` |

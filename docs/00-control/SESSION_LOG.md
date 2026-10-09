@@ -163,6 +163,26 @@
   - Client build verified (`npm run build --prefix client` passed in 431ms).
 - **Next Step:** Proceed to TASK-013 (Admin Operations API & Role-Based Auth).
 
+## 2026-10-09 — Session 11: Admin Operations API & Role-Based Auth (JWT) (TASK-013)
+
+- **Action:** Executed TASK-013. Implemented JWT authentication (`authController.js`), role-based protection middleware (`authMiddleware.js`), and complete administrative operations API (`adminController.js`, `adminRoutes.js`) for appointments pipeline management, status transitions, Kanban badge aggregation, and business metric reporting.
+- **Implemented:**
+  - `server/src/middleware/authMiddleware.js`: JWT token signing, `protect` Bearer validation, and `restrictTo('admin')` role enforcement.
+  - `server/src/controllers/authController.js`: Customer and admin authentication (`/login`, `/register`, `/me`).
+  - `server/src/controllers/adminController.js`: Pipeline operations (`/bookings`), status state transition engine with audit trails (`/bookings/:id/status`), dashboard metrics aggregation (`/dashboard/stats`), and studio settings management (`/settings`).
+  - `server/src/routes/authRoutes.js` and `server/src/routes/adminRoutes.js`: Express route handlers mounted in `server.js`.
+  - `server/src/scripts/testAuthAndAdmin.js`: Complete 36-test automated suite covering login, token verification, RBAC guards (401/403), pipeline filtering, full lifecycle status transitions (`Pending` ➔ `Confirmed` ➔ `In Bay` ➔ `Ready` ➔ `Completed`), invalid status handling, and stats.
+- **Verified:**
+  - `testAuthAndAdmin.js`: 36 / 36 tests passed (100% pass rate).
+  - Regression test suites across all backend services:
+    - `testPricingAndAvailability.js`: 29 / 29 passed.
+    - `testHttpEndpoints.js`: 25 / 25 passed.
+    - `testBookingAndTracking.js`: 25 / 25 passed.
+    - Total: 115 / 115 tests passing across entire backend service layer!
+  - Client production build verified (`npm run build --prefix client` passed in 402ms).
+- **Next Step:** Transition to Milestone M03 (Frontend Implementation) starting with TASK-014 (Frontend Foundation, Styling Tokens & Bespoke SVG Logo).
+
+
 
 
 

@@ -17,6 +17,8 @@ import vehicleRoutes from './routes/vehicleRoutes.js';
 import pricingRoutes from './routes/pricingRoutes.js';
 import availabilityRoutes from './routes/availabilityRoutes.js';
 import bookingRoutes from './routes/bookingRoutes.js';
+import authRoutes from './routes/authRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -73,6 +75,8 @@ app.use('/api/v1/vehicles', vehicleRoutes);
 app.use('/api/v1/pricing', pricingRoutes);
 app.use('/api/v1/availability', availabilityRoutes);
 app.use('/api/v1/bookings', bookingRoutes);
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/admin', adminRoutes);
 
 // Fallback 404 Route
 app.use((req, res) => {
