@@ -183,6 +183,27 @@ export const updateBookingStatus = asyncHandler(async (req, res) => {
     booking.cancellationReason = cancellationReason;
   }
 
+  // Handle payment status and settlement updates
+  if (req.body.paymentStatus !== undefined) {
+    if (['unpaid', 'deposit_paid', 'paid', 'refunded', 'waived'].includes(req.body.paymentStatus)) {
+      booking.payment.status = req.body.paymentStatus;
+      if (req.body.paymentStatus === 'paid') {
+        booking.payment.paidAt = new Date();
+        if (!booking.payment.amountPaid || booking.payment.amountPaid === 0) {
+          booking.payment.amountPaid = booking.totalPrice;
+        }
+      }
+    }
+  }
+
+  if (req.body.paymentMethod !== undefined) {
+    booking.payment.method = req.body.paymentMethod;
+  }
+
+  if (req.body.amountPaid !== undefined) {
+    booking.payment.amountPaid = Number(req.body.amountPaid);
+  }
+
   // Record audit history entry
   booking.statusHistory.push({
     status: status,

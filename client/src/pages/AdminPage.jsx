@@ -311,7 +311,7 @@ export const AdminPage = () => {
   };
 
   // Update Status from Inspection Modal
-  const handleModalStatusUpdate = async (booking, newStatus, customNote, newBayNumber) => {
+  const handleModalStatusUpdate = async (booking, newStatus, customNote, newBayNumber, paymentUpdates = {}) => {
     const bookingId = booking._id || booking.id || booking.bookingCode;
     setIsUpdatingId(bookingId);
 
@@ -321,6 +321,11 @@ export const AdminPage = () => {
       status: newStatus,
       bayNumber: newBayNumber,
       adminNotes: customNote,
+      payment: {
+        ...(booking.payment || {}),
+        status: paymentUpdates.paymentStatus || booking.payment?.status || 'unpaid',
+        method: paymentUpdates.paymentMethod || booking.payment?.method || 'studio_pay'
+      },
       statusHistory: [
         ...(booking.statusHistory || []),
         {
@@ -344,7 +349,9 @@ export const AdminPage = () => {
           status: newStatus,
           note: customNote,
           adminNotes: customNote,
-          bayNumber: newBayNumber
+          bayNumber: newBayNumber,
+          paymentStatus: paymentUpdates.paymentStatus,
+          paymentMethod: paymentUpdates.paymentMethod
         },
         token
       );

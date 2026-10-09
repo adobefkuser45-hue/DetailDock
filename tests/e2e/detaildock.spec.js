@@ -76,6 +76,11 @@ test.describe.serial('DetailDock End-to-End Atelier Customer & Admin Journey', (
     await page.locator('input[placeholder="e.g. alex@example.com"]').fill('christian.vance@luxuryholding.com');
     await page.locator('input[placeholder="e.g. (512) 555-0199"]').fill('(512) 782-9901');
 
+    // Verify Payment Preference Selection Component
+    await expect(page.locator('text=Payment & Settlement Preference').first()).toBeVisible();
+    await expect(page.locator('text=Pay at Studio Arrival').first()).toBeVisible();
+    await expect(page.locator('text=Online Card Payment').first()).toBeVisible();
+
     // Submit Booking
     const submitBtn = page.locator('button:has-text("Confirm & Reserve Slot")').first();
     await expect(submitBtn).toBeVisible();
@@ -84,6 +89,9 @@ test.describe.serial('DetailDock End-to-End Atelier Customer & Admin Journey', (
     // Step 4: Booking Confirmation Screen
     const confirmationHeader = page.locator('text=Appointment Confirmed & Secured').first();
     await expect(confirmationHeader).toBeVisible({ timeout: 15000 });
+
+    // Verify PDF Invoice Download Button
+    await expect(page.locator('text=Download Tax Invoice / Receipt (PDF)').first()).toBeVisible();
 
     // Extract generated DD-XXXXXX tracking code
     const pageText = await page.innerText('body');
@@ -105,6 +113,9 @@ test.describe.serial('DetailDock End-to-End Atelier Customer & Admin Journey', (
       await expect(page.locator('text=Live Telemetry Pipeline').first()).toBeVisible();
       await expect(page.locator('text=Vehicle Spec').first()).toBeVisible();
       await expect(page.locator('text=Cleanroom Bay').first()).toBeVisible();
+      // Verify Tax Invoice & Invoicing Section
+      await expect(page.locator('text=Financial Settlement & Official Invoicing').first()).toBeVisible();
+      await expect(page.locator('text=Download Tax Invoice / Receipt (PDF)').first()).toBeVisible();
     }
   });
 

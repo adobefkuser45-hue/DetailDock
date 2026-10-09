@@ -20,7 +20,8 @@ import {
   getServices, 
   getAddons, 
   createBooking, 
-  calculatePricing 
+  calculatePricing,
+  createCheckoutSession 
 } from '../services/api.js';
 
 export const BookingPage = () => {
@@ -36,6 +37,9 @@ export const BookingPage = () => {
   const [pkg, setPkg] = useState(location.state?.package || null);
   const [addons, setAddons] = useState(location.state?.addons || []);
   const [pricing, setPricing] = useState(location.state?.pricing || null);
+
+  // Payment Selection State
+  const [paymentConfig, setPaymentConfig] = useState({ method: 'studio_pay', option: 'full' });
 
   // Scheduling State
   const [selectedDate, setSelectedDate] = useState('');
@@ -149,12 +153,36 @@ export const BookingPage = () => {
         addonSlugs: addons.map(a => a.slug),
         scheduledDate: selectedDate,
         scheduledTimeSlot: selectedSlot,
+        paymentMethod: paymentConfig.method,
         notes: formData.notes?.trim() || undefined
       };
 
       const res = await createBooking(payload);
       if (res && res.data) {
-        setConfirmedBooking(res.data);
+        const bookingData = { ...res.data };
+
+        // If Stripe payment selected, initiate checkout session
+        if (paymentConfig.method === 'stripe') {
+          try {
+            const checkoutRes = await createCheckoutSession({
+              bookingCode: bookingData.bookingCode,
+              payFull: paymentConfig.option === 'full',
+              depositAmount: 50
+            });
+            if (checkoutRes?.url) {
+              bookingData.checkoutUrl = checkoutRes.url;
+              bookingData.payment = {
+                ...bookingData.payment,
+                status: paymentConfig.option === 'full' ? 'paid' : 'deposit_paid',
+                amountPaid: checkoutRes.amount
+              };
+            }
+          } catch (payErr) {
+            console.warn('Stripe checkout session initialization note:', payErr.message);
+          }
+        }
+
+        setConfirmedBooking(bookingData);
         setCurrentStep(4);
       } else {
         throw new Error('Unexpected server response format');
@@ -254,6 +282,9 @@ export const BookingPage = () => {
             <CustomerIntakeStep
               formData={formData}
               onChangeForm={handleFormChange}
+              totalPrice={pricing?.summary?.totalPrice || pkg?.basePrice || 0}
+              paymentConfig={paymentConfig}
+              onChangePayment={setPaymentConfig}
               onSubmit={handleFinalSubmit}
               onBack={() => setCurrentStep(2)}
               isSubmitting={isSubmitting}

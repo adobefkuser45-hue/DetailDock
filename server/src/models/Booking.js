@@ -81,6 +81,28 @@ const BookingSchema = new mongoose.Schema({
     index: true
   },
 
+  // Payment transaction & invoicing snapshot
+  payment: {
+    status: {
+      type: String,
+      enum: ['unpaid', 'deposit_paid', 'paid', 'refunded', 'waived'],
+      default: 'unpaid',
+      index: true
+    },
+    method: {
+      type: String,
+      enum: ['stripe', 'studio_pay', 'cash', 'card_present', 'unselected'],
+      default: 'unselected'
+    },
+    stripePaymentIntentId: { type: String, default: null, index: true },
+    stripeCheckoutSessionId: { type: String, default: null, index: true },
+    amountPaid: { type: Number, default: 0 },
+    depositAmount: { type: Number, default: 0 },
+    currency: { type: String, default: 'usd' },
+    receiptUrl: { type: String, default: null },
+    paidAt: { type: Date, default: null }
+  },
+
   notes: { type: String, default: '' },
   adminNotes: { type: String, default: '' },
   cancellationReason: { type: String, default: '' },

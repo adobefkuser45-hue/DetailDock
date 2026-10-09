@@ -11,16 +11,23 @@ import {
   ShieldCheck, 
   MapPin, 
   Clock, 
-  ExternalLink 
+  ExternalLink,
+  FileDown,
+  MailCheck,
+  CreditCard,
+  DollarSign
 } from 'lucide-react';
 import { Button } from '../common/Button.jsx';
 import { Badge } from '../common/Badge.jsx';
+import { getInvoiceDownloadUrl, resendBookingReceipt } from '../../services/api.js';
 
 export const BookingConfirmation = ({ booking }) => {
   const [copied, setCopied] = useState(false);
+  const [resendingEmail, setResendingEmail] = useState(false);
+  const [emailStatus, setEmailStatus] = useState(null);
 
   const bookingCode = booking?.bookingCode || 'DD-SAMPLE';
-  const assignedBay = booking?.assignedBay || 1;
+  const assignedBay = booking?.assignedBayNumber || booking?.assignedBay || 1;
   const scheduledDate = booking?.scheduledDate ? new Date(booking.scheduledDate).toLocaleDateString('en-US', {
     weekday: 'long',
     year: 'numeric',
@@ -29,12 +36,27 @@ export const BookingConfirmation = ({ booking }) => {
   }) : 'Scheduled Date';
   const scheduledTimeSlot = booking?.scheduledTimeSlot || '09:00 AM';
   const vehicle = booking?.vehicle || {};
-  const pricing = booking?.pricingSnapshot || {};
+  const totalPrice = booking?.totalPrice || 0;
+  const payment = booking?.payment || { status: 'unpaid', method: 'studio_pay', amountPaid: 0 };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(bookingCode);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleResendReceipt = async () => {
+    try {
+      setResendingEmail(true);
+      setEmailStatus(null);
+      await resendBookingReceipt(bookingCode);
+      setEmailStatus('Receipt emailed successfully!');
+      setTimeout(() => setEmailStatus(null), 4000);
+    } catch (err) {
+      setEmailStatus('Failed to send receipt. Please try again.');
+    } finally {
+      setResendingEmail(false);
+    }
   };
 
   return (
@@ -52,7 +74,7 @@ export const BookingConfirmation = ({ booking }) => {
           Appointment Confirmed & Secured
         </h2>
         <p className="text-sm text-[#94A3B8] max-w-xl mx-auto mt-2">
-          Your vehicle has been allotted dedicated time in our climate-controlled atelier. A confirmation receipt has been dispatched.
+          Your vehicle has been allotted dedicated time in our climate-controlled atelier. A transactional receipt has been dispatched.
         </p>
       </div>
 
@@ -113,6 +135,85 @@ export const BookingConfirmation = ({ booking }) => {
         </div>
       </div>
 
+      {/* Payment & Invoicing Overview Strip */}
+      <div className="p-6 rounded-2xl bg-[#101522] border border-[#1D2536] text-left text-xs space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#1D2536]">
+          <div className="flex items-center gap-2">
+            <CreditCard className="w-4 h-4 text-[#38BDF8]" />
+            <h4 className="font-bold uppercase tracking-wider text-white">
+              Settlement & Official Documentation
+            </h4>
+          </div>
+          <span className={`px-2.5 py-1 rounded-full text-[11px] font-mono font-bold uppercase w-fit ${
+            payment.status === 'paid'
+              ? 'bg-[#10B981]/15 text-[#34D399] border border-[#10B981]/30'
+              : payment.status === 'deposit_paid'
+              ? 'bg-[#0284C7]/15 text-[#38BDF8] border border-[#0284C7]/30'
+              : 'bg-[#F59E0B]/15 text-[#FBBF24] border border-[#F59E0B]/30'
+          }`}>
+            {payment.status === 'paid' ? 'Paid in Full' : payment.status === 'deposit_paid' ? 'Deposit Received' : 'Pay at Studio Arrival'}
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-[#94A3B8]">
+          <div className="p-3 rounded-xl bg-[#090C12] border border-[#1D2536]">
+            <span className="text-[#64748B] block text-[11px]">Authorized Total:</span>
+            <span className="text-sm font-extrabold text-white font-mono">
+              ${Number(totalPrice).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+            </span>
+          </div>
+
+          <div className="p-3 rounded-xl bg-[#090C12] border border-[#1D2536]">
+            <span className="text-[#64748B] block text-[11px]">Payment Method:</span>
+            <span className="text-sm font-semibold text-white capitalize">
+              {payment.method === 'stripe' ? 'Online Card (Stripe)' : 'Pay on Arrival'}
+            </span>
+          </div>
+
+          <div className="p-3 rounded-xl bg-[#090C12] border border-[#1D2536]">
+            <span className="text-[#64748B] block text-[11px]">Amount Settled:</span>
+            <span className="text-sm font-extrabold text-[#34D399] font-mono">
+              ${Number(payment.amountPaid || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+            </span>
+          </div>
+        </div>
+
+        {/* Invoice & Email Action Buttons */}
+        <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
+          <a
+            href={getInvoiceDownloadUrl(bookingCode)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto"
+          >
+            <Button
+              variant="outline"
+              size="sm"
+              icon={FileDown}
+              className="w-full sm:w-auto text-xs border-[#38BDF8]/40 hover:bg-[#38BDF8]/10 text-[#38BDF8]"
+            >
+              Download Tax Invoice / Receipt (PDF)
+            </Button>
+          </a>
+
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            icon={MailCheck}
+            onClick={handleResendReceipt}
+            disabled={resendingEmail}
+            className="w-full sm:w-auto text-xs text-[#94A3B8] hover:text-white"
+          >
+            {resendingEmail ? 'Transmitting...' : 'Resend Email Receipt'}
+          </Button>
+
+          {emailStatus && (
+            <span className="text-xs text-[#34D399] font-medium">{emailStatus}</span>
+          )}
+        </div>
+      </div>
+
       {/* Concierge Intake Instructions */}
       <div className="p-6 rounded-2xl bg-[#101522] border border-[#1D2536] text-left text-xs space-y-3">
         <h4 className="font-bold uppercase tracking-wider text-white flex items-center gap-2">
@@ -141,7 +242,7 @@ export const BookingConfirmation = ({ booking }) => {
             iconRight={ExternalLink}
             className="w-full sm:w-auto glow-cyan shadow-xl shadow-[#0284C7]/20"
           >
-            Track Your Vehicle Live
+            Launch Live Vehicle Telemetry
           </Button>
         </Link>
 

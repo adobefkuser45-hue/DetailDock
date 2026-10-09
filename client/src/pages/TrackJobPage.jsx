@@ -12,7 +12,10 @@ import {
   Car,
   RotateCcw,
   Sparkles,
-  AlertCircle
+  AlertCircle,
+  CreditCard,
+  FileDown,
+  MailCheck
 } from 'lucide-react';
 import { Button } from '../components/common/Button.jsx';
 import { Badge } from '../components/common/Badge.jsx';
@@ -20,7 +23,7 @@ import { JobProgressMeter } from '../components/tracking/JobProgressMeter.jsx';
 import { JobTelemetryCards } from '../components/tracking/JobTelemetryCards.jsx';
 import { JobAuditTimeline } from '../components/tracking/JobAuditTimeline.jsx';
 import { ReadyPickupBanner } from '../components/tracking/ReadyPickupBanner.jsx';
-import { trackBooking } from '../services/api.js';
+import { trackBooking, getInvoiceDownloadUrl, resendBookingReceipt } from '../services/api.js';
 
 export const TrackJobPage = () => {
   const { code: urlCode } = useParams();
@@ -31,6 +34,23 @@ export const TrackJobPage = () => {
   const [bookingData, setBookingData] = useState(null);
   const [error, setError] = useState(null);
   const [copied, setCopied] = useState(false);
+  const [resendingEmail, setResendingEmail] = useState(false);
+  const [emailNotice, setEmailNotice] = useState(null);
+
+  const handleResendReceipt = async () => {
+    if (!bookingData?.bookingCode) return;
+    try {
+      setResendingEmail(true);
+      setEmailNotice(null);
+      await resendBookingReceipt(bookingData.bookingCode);
+      setEmailNotice('Receipt sent to customer email!');
+      setTimeout(() => setEmailNotice(null), 4000);
+    } catch (err) {
+      setEmailNotice('Could not send receipt. Please contact studio.');
+    } finally {
+      setResendingEmail(false);
+    }
+  };
 
   // Search by code function
   const executeTrack = async (searchCode) => {
@@ -200,6 +220,89 @@ export const TrackJobPage = () => {
               schedule={bookingData.schedule}
               service={bookingData.service}
             />
+
+            {/* Financial Settlement & Tax Invoicing Section */}
+            <div className="p-6 rounded-2xl bg-[#101522] border-2 border-[#1D2536] shadow-xl text-left space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#1D2536]">
+                <div className="flex items-center gap-2">
+                  <CreditCard className="w-4 h-4 text-[#38BDF8]" />
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-white">
+                    Financial Settlement & Official Invoicing
+                  </h3>
+                </div>
+                <span className={`px-2.5 py-1 rounded-full text-[11px] font-mono font-bold uppercase w-fit ${
+                  bookingData.payment?.status === 'paid'
+                    ? 'bg-[#10B981]/15 text-[#34D399] border border-[#10B981]/30'
+                    : bookingData.payment?.status === 'deposit_paid'
+                    ? 'bg-[#0284C7]/15 text-[#38BDF8] border border-[#0284C7]/30'
+                    : 'bg-[#F59E0B]/15 text-[#FBBF24] border border-[#F59E0B]/30'
+                }`}>
+                  {bookingData.payment?.status === 'paid'
+                    ? 'Paid in Full'
+                    : bookingData.payment?.status === 'deposit_paid'
+                    ? 'Deposit Paid'
+                    : 'Due at Studio Arrival'}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                <div className="p-3.5 rounded-xl bg-[#090C12] border border-[#1D2536]">
+                  <span className="text-[#64748B] block text-[11px]">Authoritative Total:</span>
+                  <span className="text-base font-extrabold text-[#38BDF8] font-mono">
+                    ${Number(bookingData.service?.totalPrice || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                  </span>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-[#090C12] border border-[#1D2536]">
+                  <span className="text-[#64748B] block text-[11px]">Settlement Method:</span>
+                  <span className="text-sm font-semibold text-white capitalize">
+                    {bookingData.payment?.method === 'stripe' ? 'Online Card (Stripe)' : 'Pay on Arrival'}
+                  </span>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-[#090C12] border border-[#1D2536]">
+                  <span className="text-[#64748B] block text-[11px]">Amount Settled:</span>
+                  <span className="text-base font-extrabold text-[#34D399] font-mono">
+                    ${Number(bookingData.payment?.amountPaid || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                  </span>
+                </div>
+              </div>
+
+              {/* Action Buttons for Invoice & Email */}
+              <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
+                <a
+                  href={getInvoiceDownloadUrl(bookingData.bookingCode)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto"
+                >
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    icon={FileDown}
+                    className="w-full sm:w-auto text-xs border-[#38BDF8]/40 text-[#38BDF8] hover:bg-[#38BDF8]/10"
+                  >
+                    Download Tax Invoice / Receipt (PDF)
+                  </Button>
+                </a>
+
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  icon={MailCheck}
+                  onClick={handleResendReceipt}
+                  disabled={resendingEmail}
+                  className="w-full sm:w-auto text-xs text-[#94A3B8] hover:text-white"
+                >
+                  {resendingEmail ? 'Sending...' : 'Resend Receipt to My Email'}
+                </Button>
+
+                {emailNotice && (
+                  <span className="text-xs text-[#34D399] font-medium">{emailNotice}</span>
+                )}
+              </div>
+            </div>
 
             {/* Chronological Technician History Audit */}
             <JobAuditTimeline

@@ -22,13 +22,13 @@ export default defineConfig({
   ],
   webServer: [
     {
-      command: 'npm run start --workspace=server',
+      command: 'node server/src/server.js',
       port: 5000,
       timeout: 30000,
       reuseExistingServer: true
     },
     {
-      command: 'npm run dev:client',
+      command: 'node node_modules/vite/bin/vite.js client',
       port: 5173,
       timeout: 30000,
       reuseExistingServer: true

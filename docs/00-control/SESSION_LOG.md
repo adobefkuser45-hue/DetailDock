@@ -317,7 +317,26 @@
   - Vercel Frontend: `https://client-mauve-zeta-13.vercel.app` (Live, 200 OK).
   - Cross-origin communication (CORS) verified between Vercel and Render.
   - All 22 tasks (`TASK-000` through `TASK-021`) across Milestones M01-M04 are now 100% VERIFIED.
-- **Status:** Project is fully launched and production-ready.
+## 2026-10-09 — Session 20: Commercial Monetization & Automated Invoicing Engine (M05)
+
+- **Action:** Executed Milestone M05 (`TASK-022` through `TASK-026`). Integrated Stripe Payment Gateway (Card Payments, Reservation Deposits, Pay at Studio), Cryptographic Webhook Handler, Automated Transactional Email Receipts with luxury dark HTML template, and Server-Side Vector PDF Invoice Generation with direct streaming downloads.
+- **Implemented:**
+  - `server/src/services/stripeService.js`: Authoritative Stripe engine handling PaymentIntents, Checkout Sessions, and cryptographic signature validation with fallback simulation.
+  - `server/src/controllers/paymentController.js` & `server/src/routes/paymentRoutes.js`: Endpoints for `create-intent`, `create-checkout-session`, `confirm-studio-pay`, and `webhook`.
+  - `server/src/services/invoiceService.js`: High-resolution vector PDF invoice and official tax receipt generator utilizing PDFKit with client metadata, itemized service lines, and financial summaries.
+  - `server/src/services/emailService.js`: Transactional email dispatcher with dark-mode atelier HTML template and live tracking link CTA.
+  - `server/src/controllers/bookingController.js`: Added `GET /api/v1/bookings/:code/invoice` streaming download and `POST /api/v1/bookings/:code/resend-receipt`.
+  - `client/src/components/booking/PaymentSelector.jsx`: Interactive payment preferences component (Pay at Studio vs Online Card via Stripe with Full / Deposit toggle).
+  - `client/src/components/booking/BookingConfirmation.jsx`: Integrated settlement overview, direct PDF invoice download button, and email receipt resend button.
+  - `client/src/pages/TrackJobPage.jsx`: Added Financial Settlement and Tax Invoice download section.
+  - `client/src/components/admin/BookingDetailModal.jsx` & `KanbanBoard.jsx`: Integrated payment status badges (`Paid`, `Deposit`, `Unpaid`) and admin settlement controls.
+- **Verified:**
+  - `testPaymentsAndWebhooks.js`: 14 / 14 tests passed (100% pass rate).
+  - `testPaymentHttpEndpoints.js`: 22 / 22 HTTP tests passed (100% pass rate).
+  - Full Backend Test Suite (150 tests across pricing, availability, bookings, auth, admin, OWASP security, payments, invoicing) passing with 0 errors.
+  - Playwright E2E Suite (`detaildock.spec.js`): 5 / 5 tests passed in 13.8s in headless Chromium.
+  - Client production build (`vite build`) compiled in 483ms with 0 errors.
+- **Status:** Milestone M05 is 100% complete and verified. All 27 tasks (`TASK-000` through `TASK-026`) VERIFIED.
 
 
 

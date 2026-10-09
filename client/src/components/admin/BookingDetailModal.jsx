@@ -9,25 +9,34 @@ import {
   ShieldCheck, 
   FileText, 
   Check, 
-  AlertTriangle 
+  AlertTriangle,
+  FileDown,
+  CreditCard
 } from 'lucide-react';
 import { Button } from '../common/Button.jsx';
 import { Badge } from '../common/Badge.jsx';
+import { getInvoiceDownloadUrl } from '../../services/api.js';
 
 export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdating }) => {
   const [selectedStatus, setSelectedStatus] = useState(booking?.status || 'Pending');
   const [adminNote, setAdminNote] = useState('');
   const [bayNumber, setBayNumber] = useState(booking?.bayNumber || 1);
+  const [paymentStatus, setPaymentStatus] = useState(booking?.payment?.status || 'unpaid');
+  const [paymentMethod, setPaymentMethod] = useState(booking?.payment?.method || 'studio_pay');
 
   if (!booking) return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdateStatus(booking, selectedStatus, adminNote, bayNumber);
+    onUpdateStatus(booking, selectedStatus, adminNote, bayNumber, {
+      paymentStatus,
+      paymentMethod
+    });
   };
 
   const vehicle = booking.vehicle || {};
   const customer = booking.customer || {};
+  const payment = booking.payment || {};
   const scheduledDate = booking.scheduledDate ? new Date(booking.scheduledDate).toLocaleDateString('en-US', {
     weekday: 'short',
     month: 'short',
@@ -46,6 +55,15 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
               {booking.bookingCode}
             </span>
             <Badge status={booking.status} size="md" />
+            <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase ${
+              paymentStatus === 'paid' 
+                ? 'bg-[#10B981]/20 text-[#34D399] border border-[#10B981]/40'
+                : paymentStatus === 'deposit_paid'
+                ? 'bg-[#0284C7]/20 text-[#38BDF8] border border-[#0284C7]/40'
+                : 'bg-[#F59E0B]/20 text-[#FBBF24] border border-[#F59E0B]/40'
+            }`}>
+              {paymentStatus === 'paid' ? 'Paid' : paymentStatus === 'deposit_paid' ? 'Deposit' : 'Unpaid'}
+            </span>
           </div>
 
           <button
@@ -106,9 +124,21 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
 
           {/* Pricing & Service Breakdown */}
           <div className="p-4 rounded-xl bg-[#161D2E] border border-[#1D2536] space-y-2">
-            <div className="font-bold text-white uppercase text-[11px] text-[#94A3B8] mb-2">
-              Financial Breakdown
+            <div className="flex items-center justify-between pb-1 border-b border-[#1D2536]">
+              <div className="font-bold text-white uppercase text-[11px] text-[#94A3B8]">
+                Financial Breakdown & Settlement
+              </div>
+              <a
+                href={getInvoiceDownloadUrl(booking.bookingCode)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#38BDF8] hover:underline flex items-center gap-1 text-[11px] font-semibold"
+              >
+                <FileDown className="w-3.5 h-3.5" />
+                <span>Download PDF Invoice</span>
+              </a>
             </div>
+
             <div className="flex justify-between text-[#94A3B8]">
               <span>Package: {booking.packageSnapshot?.title || 'Selected Detail'}</span>
               <span className="font-mono text-white">${Number(booking.packageSnapshot?.calculatedPrice || booking.packageSnapshot?.basePrice || 0).toFixed(2)}</span>
@@ -120,7 +150,7 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
               </div>
             ))}
             <div className="pt-2 border-t border-[#1D2536] flex justify-between font-bold text-white text-sm">
-              <span>Total Invoice:</span>
+              <span>Total Invoice Amount:</span>
               <span className="font-mono text-[#38BDF8] text-base">${Number(booking.totalPrice || 0).toFixed(2)}</span>
             </div>
           </div>
@@ -135,10 +165,10 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
             </div>
           )}
 
-          {/* UPDATE STATUS & NOTE FORM */}
+          {/* UPDATE STATUS & SETTLEMENT FORM */}
           <form onSubmit={handleSubmit} className="p-4 rounded-xl bg-[#090C12] border border-[#2A364E] space-y-4">
             <div className="text-xs font-bold uppercase text-[#38BDF8] tracking-wider">
-              Update Appointment Stage & Log Technician Remarks
+              Update Appointment Stage & Payment Settlement
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -175,6 +205,42 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
               </div>
             </div>
 
+            {/* Payment Settlement Controls */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+              <div>
+                <label className="text-[11px] text-[#94A3B8] block mb-1">
+                  Payment Status:
+                </label>
+                <select
+                  value={paymentStatus}
+                  onChange={(e) => setPaymentStatus(e.target.value)}
+                  className="w-full px-3 py-2 rounded-xl bg-[#161D2E] border border-[#1D2536] text-white focus:outline-none focus:border-[#38BDF8]"
+                >
+                  <option value="unpaid">Unpaid / Due on Arrival</option>
+                  <option value="deposit_paid">Deposit Paid ($50.00)</option>
+                  <option value="paid">Paid in Full</option>
+                  <option value="refunded">Refunded</option>
+                  <option value="waived">Waived / VIP</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="text-[11px] text-[#94A3B8] block mb-1">
+                  Settlement Method:
+                </label>
+                <select
+                  value={paymentMethod}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  className="w-full px-3 py-2 rounded-xl bg-[#161D2E] border border-[#1D2536] text-white focus:outline-none focus:border-[#38BDF8]"
+                >
+                  <option value="studio_pay">Pay at Studio Arrival</option>
+                  <option value="stripe">Online Card (Stripe)</option>
+                  <option value="card_present">Card Present (POS Terminal)</option>
+                  <option value="cash">Cash / Direct Settlement</option>
+                </select>
+              </div>
+            </div>
+
             <div>
               <label className="text-[11px] text-[#94A3B8] block mb-1">
                 Technician Inspection Remark (Logged in Audit History):
@@ -195,7 +261,7 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
               isLoading={isUpdating}
               className="w-full glow-cyan-sm"
             >
-              Save Stage Transition & Audit Trail
+              Save Stage Transition & Settlement
             </Button>
           </form>
 

@@ -13,10 +13,14 @@ import {
   Palette
 } from 'lucide-react';
 import { Button } from '../common/Button.jsx';
+import { PaymentSelector } from './PaymentSelector.jsx';
 
 export const CustomerIntakeStep = ({
   formData,
   onChangeForm,
+  totalPrice,
+  paymentConfig,
+  onChangePayment,
   onSubmit,
   onBack,
   isSubmitting,
@@ -253,6 +257,13 @@ export const CustomerIntakeStep = ({
           />
         </div>
       </div>
+
+      {/* SECTION 3: PAYMENT PREFERENCE & STRIPE SETTLEMENT */}
+      <PaymentSelector
+        totalPrice={totalPrice}
+        paymentConfig={paymentConfig}
+        onChange={onChangePayment}
+      />
 
       {/* Confirmation Submit Strip */}
       <div className="flex items-center justify-between pt-4 border-t border-[#1D2536]">

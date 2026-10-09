@@ -98,9 +98,20 @@ export const KanbanBoard = ({ bookings, onAdvanceStatus, onOpenDetails, isUpdati
                             >
                               {booking.bookingCode}
                             </button>
-                            <span className="text-[11px] font-mono font-bold text-[#F59E0B] bg-[#F59E0B]/10 px-2 py-0.5 rounded">
-                              Bay {booking.bayNumber || 1}
-                            </span>
+                            <div className="flex items-center gap-1.5">
+                              <span className={`text-[10px] font-mono font-bold uppercase px-1.5 py-0.5 rounded ${
+                                booking.payment?.status === 'paid'
+                                  ? 'bg-[#10B981]/20 text-[#34D399] border border-[#10B981]/30'
+                                  : booking.payment?.status === 'deposit_paid'
+                                  ? 'bg-[#0284C7]/20 text-[#38BDF8] border border-[#0284C7]/30'
+                                  : 'bg-[#F59E0B]/20 text-[#FBBF24] border border-[#F59E0B]/30'
+                              }`}>
+                                {booking.payment?.status === 'paid' ? 'Paid' : booking.payment?.status === 'deposit_paid' ? 'Deposit' : 'Unpaid'}
+                              </span>
+                              <span className="text-[11px] font-mono font-bold text-[#F59E0B] bg-[#F59E0B]/10 px-2 py-0.5 rounded">
+                                Bay {booking.bayNumber || 1}
+                              </span>
+                            </div>
                           </div>
 
                           {/* Vehicle Info */}

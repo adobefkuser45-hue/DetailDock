@@ -190,3 +190,44 @@ export const updateStudioSettings = async (settingsData, token) => {
   });
   return res.data;
 };
+
+// -------------------------------------------------------------
+// Payments & Invoicing
+// -------------------------------------------------------------
+
+export const createPaymentIntent = async ({ bookingCode, payFull = true, depositAmount = 50 }) => {
+  const res = await request('/payments/create-intent', {
+    method: 'POST',
+    body: JSON.stringify({ bookingCode, payFull, depositAmount })
+  });
+  return res.data;
+};
+
+export const createCheckoutSession = async ({ bookingCode, payFull = true, depositAmount = 50 }) => {
+  const res = await request('/payments/create-checkout-session', {
+    method: 'POST',
+    body: JSON.stringify({ bookingCode, payFull, depositAmount })
+  });
+  return res.data;
+};
+
+export const confirmStudioPayment = async (bookingCode) => {
+  const res = await request('/payments/confirm-studio-pay', {
+    method: 'POST',
+    body: JSON.stringify({ bookingCode })
+  });
+  return res.data;
+};
+
+export const getInvoiceDownloadUrl = (bookingCode) => {
+  const cleanedCode = encodeURIComponent(bookingCode.trim().toUpperCase());
+  return `${API_BASE}/bookings/${cleanedCode}/invoice`;
+};
+
+export const resendBookingReceipt = async (bookingCode) => {
+  const cleanedCode = encodeURIComponent(bookingCode.trim().toUpperCase());
+  const res = await request(`/bookings/${cleanedCode}/resend-receipt`, {
+    method: 'POST'
+  });
+  return res;
+};

@@ -11,6 +11,8 @@ import {
 } from '../utils/bookingCode.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
 import { AppError } from '../utils/AppError.js';
+import { invoiceService } from '../services/invoiceService.js';
+import { emailService } from '../services/emailService.js';
 
 const STATUS_PROGRESSION = {
   'Pending': { step: 1, label: 'Appointment Requested', percentage: 20 },
@@ -36,6 +38,7 @@ export const createBooking = asyncHandler(async (req, res) => {
     addonSlugs = [],
     scheduledDate,
     scheduledTimeSlot,
+    paymentMethod = 'studio_pay',
     notes
   } = req.body;
 
@@ -127,15 +130,26 @@ export const createBooking = asyncHandler(async (req, res) => {
     scheduledTimeSlot: scheduledTimeSlot.trim(),
     bayNumber: assignedBay,
     status: 'Pending',
+    payment: {
+      status: 'unpaid',
+      method: paymentMethod || 'studio_pay',
+      amountPaid: 0,
+      depositAmount: 0
+    },
     notes: notes ? notes.trim() : '',
     statusHistory: [
       {
         status: 'Pending',
         changedAt: new Date(),
         changedBy: customer.name.trim(),
-        note: 'Appointment booking requested online via DetailDock Atelier.'
+        note: `Appointment booking requested online via DetailDock Atelier. Payment option: ${paymentMethod || 'Pay at Studio'}.`
       }
     ]
+  });
+
+  // Non-blocking transactional email receipt dispatch
+  emailService.sendBookingConfirmationReceipt(newBooking).catch((emailErr) => {
+    console.warn(`[BookingController]: Receipt email warning: ${emailErr.message}`);
   });
 
   res.status(201).json({
@@ -144,6 +158,7 @@ export const createBooking = asyncHandler(async (req, res) => {
       bookingCode: newBooking.bookingCode,
       id: newBooking._id,
       status: newBooking.status,
+      payment: newBooking.payment,
       assignedBayNumber: newBooking.bayNumber,
       scheduledDate: dateStr,
       scheduledTimeSlot: newBooking.scheduledTimeSlot,
@@ -235,6 +250,13 @@ export const trackBooking = asyncHandler(async (req, res) => {
         totalPrice: booking.totalPrice,
         totalDurationMinutes: booking.totalDurationMinutes
       },
+      payment: {
+        status: booking.payment?.status || 'unpaid',
+        method: booking.payment?.method || 'studio_pay',
+        amountPaid: booking.payment?.amountPaid || 0,
+        depositAmount: booking.payment?.depositAmount || 0,
+        paidAt: booking.payment?.paidAt || null
+      },
       timeline: booking.statusHistory.map((h) => ({
         status: h.status,
         changedAt: h.changedAt,
@@ -245,3 +267,63 @@ export const trackBooking = asyncHandler(async (req, res) => {
     message: 'Booking details retrieved successfully.'
   });
 });
+
+/**
+ * @desc Stream vector PDF invoice / official receipt
+ * @route GET /api/v1/bookings/:code/invoice
+ * @access Public
+ */
+export const getBookingInvoice = asyncHandler(async (req, res) => {
+  let { code } = req.params;
+  if (!code) {
+    throw new AppError('Booking reference code is required.', 400, 'MISSING_BOOKING_CODE');
+  }
+
+  code = code.trim().toUpperCase();
+  const searchPattern = code.startsWith('DD-') ? `^${code}$` : `^(DD-)?${code}$`;
+
+  const booking = await Booking.findOne({
+    bookingCode: new RegExp(searchPattern, 'i')
+  });
+
+  if (!booking) {
+    throw new AppError(`No booking found with reference code '${code}'.`, 404, 'BOOKING_NOT_FOUND');
+  }
+
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', `attachment; filename="DetailDock_Invoice_${booking.bookingCode}.pdf"`);
+
+  invoiceService.generateInvoicePdf(booking, res);
+});
+
+/**
+ * @desc Resend transactional email receipt to customer
+ * @route POST /api/v1/bookings/:code/resend-receipt
+ * @access Public
+ */
+export const resendBookingReceipt = asyncHandler(async (req, res) => {
+  let { code } = req.params;
+  if (!code) {
+    throw new AppError('Booking reference code is required.', 400, 'MISSING_BOOKING_CODE');
+  }
+
+  code = code.trim().toUpperCase();
+  const searchPattern = code.startsWith('DD-') ? `^${code}$` : `^(DD-)?${code}$`;
+
+  const booking = await Booking.findOne({
+    bookingCode: new RegExp(searchPattern, 'i')
+  });
+
+  if (!booking) {
+    throw new AppError(`No booking found with reference code '${code}'.`, 404, 'BOOKING_NOT_FOUND');
+  }
+
+  const result = await emailService.sendBookingConfirmationReceipt(booking);
+
+  res.status(200).json({
+    success: true,
+    message: `Receipt dispatched to ${booking.customer.email}.`,
+    data: result
+  });
+});
+
