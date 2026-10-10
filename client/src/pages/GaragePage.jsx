@@ -617,7 +617,7 @@ export const GaragePage = () => {
 
         {/* Summary KPI Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-[#111622] border border-white/10 rounded-xl p-5 flex items-center justify-between shadow-lg">
+          <div className="bg-[#111622] border border-white/10 hover:border-[#F59E0B]/30 transition-all rounded-2xl p-5 flex items-center justify-between shadow-lg">
             <div>
               <p className="text-xs font-bold uppercase tracking-wider text-[#94A3B8] font-mono">Saved Vehicles</p>
               <p className="text-2xl font-black text-[#F8FAFC] mt-1 font-mono">{savedVehicles.length}</p>
@@ -627,7 +627,7 @@ export const GaragePage = () => {
             </div>
           </div>
 
-          <div className="bg-[#111622] border border-white/10 rounded-xl p-5 flex items-center justify-between shadow-lg">
+          <div className="bg-[#111622] border border-white/10 hover:border-[#10B981]/30 transition-all rounded-2xl p-5 flex items-center justify-between shadow-lg">
             <div>
               <p className="text-xs font-bold uppercase tracking-wider text-[#94A3B8] font-mono">Service Bookings</p>
               <p className="text-2xl font-black text-[#F8FAFC] mt-1 font-mono">{bookings.length}</p>
@@ -637,7 +637,7 @@ export const GaragePage = () => {
             </div>
           </div>
 
-          <div className="bg-[#111622] border border-white/10 rounded-xl p-5 flex items-center justify-between shadow-lg">
+          <div className="bg-[#111622] border border-white/10 hover:border-[#F59E0B]/30 transition-all rounded-2xl p-5 flex items-center justify-between shadow-lg">
             <div>
               <p className="text-xs font-bold uppercase tracking-wider text-[#94A3B8] font-mono">Active 9H Warranties</p>
               <p className="text-2xl font-black text-[#F59E0B] mt-1 font-mono">{warrantyCount}</p>
@@ -778,11 +778,11 @@ export const GaragePage = () => {
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-xl font-bold text-[#F8FAFC]">Service Bookings</h2>
-              <p className="text-xs text-[#94A3B8] mt-0.5">Live status, invoice receipts, and ceramic coating quality certificates.</p>
+              <h2 className="text-xl font-bold text-[#F8FAFC] font-display">Service Bookings</h2>
+              <p className="text-xs text-[#94A3B8] mt-0.5 font-normal">Live status, invoice receipts, and ceramic coating quality certificates.</p>
             </div>
             <Link to="/builder">
-              <Button variant="primary" size="sm" iconRight={ArrowRight}>
+              <Button variant="primary" size="sm" iconRight={ArrowRight} className="glow-amber">
                 Schedule New Bay
               </Button>
             </Link>
@@ -791,16 +791,23 @@ export const GaragePage = () => {
           {loadingGarage ? (
             <div className="py-12 flex justify-center"><LoadingSpinner size="lg" /></div>
           ) : bookings.length === 0 ? (
-            <div className="bg-[#111622] border border-white/10 rounded-2xl p-10 text-center">
-              <Calendar className="w-12 h-12 text-[#94A3B8] mx-auto mb-3 opacity-60" />
-              <h3 className="text-lg font-bold text-[#F8FAFC]">No detailing reservations found</h3>
-              <p className="text-sm text-[#94A3B8] mt-1 max-w-md mx-auto">
-                Once you book a bespoke detailing session using this email ({currentUser.email}), it will instantly appear in your personal concierge ledger.
+            <div className="bg-[#111622] border border-white/10 rounded-2xl p-10 sm:p-12 text-center shadow-[0_20px_50px_rgba(0,0,0,0.6)] space-y-4 max-w-2xl mx-auto">
+              <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#F59E0B] mx-auto">
+                <Calendar className="w-7 h-7" />
+              </div>
+              <h3 className="text-xl font-bold text-[#F8FAFC] font-display">No detailing reservations found</h3>
+              <p className="text-sm text-[#94A3B8] max-w-lg mx-auto font-normal leading-relaxed">
+                Once you book a bespoke detailing session using your client email (<span className="text-[#F8FAFC] font-medium">{currentUser.email}</span>), it will automatically archive here with live stage telemetry, DVI paint inspections, and serialized 9H warranty certificates.
               </p>
-              <div className="mt-5">
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
                 <Link to="/builder">
-                  <Button variant="primary" size="md" iconRight={ArrowRight}>
+                  <Button variant="primary" size="md" iconRight={ArrowRight} className="w-full sm:w-auto glow-amber">
                     Configure Detailing Package
+                  </Button>
+                </Link>
+                <Link to="/track/DD-DEMO01">
+                  <Button variant="secondary" size="md" icon={ExternalLink} className="w-full sm:w-auto border-white/10 text-[#CBD5E1] hover:text-white">
+                    Explore Demo Telemetry (DD-DEMO01)
                   </Button>
                 </Link>
               </div>
@@ -810,45 +817,46 @@ export const GaragePage = () => {
               {bookings.map((booking) => {
                 const isPaid = booking.payment?.status === 'paid';
                 const hasWarranty = booking.warrantyCertificate?.issued;
+                const totalAmt = booking.pricing?.totalPrice ?? booking.totalPrice ?? 0;
 
                 return (
                   <div
                     key={booking._id}
-                    className="bg-[#111622] border border-white/10 rounded-2xl p-5 sm:p-6 shadow-md flex flex-col lg:flex-row lg:items-center justify-between gap-6"
+                    className="bg-[#111622] border border-white/10 hover:border-[#F59E0B]/30 transition-all rounded-2xl p-5 sm:p-6 shadow-[0_15px_40px_rgba(0,0,0,0.5)] flex flex-col lg:flex-row lg:items-center justify-between gap-6"
                   >
                     {/* Booking Meta */}
                     <div className="space-y-2">
                       <div className="flex items-center gap-3 flex-wrap">
-                        <span className="font-mono font-bold text-[#F59E0B] text-sm">
+                        <span className="font-mono font-bold text-[#F59E0B] text-sm tracking-wider">
                           {booking.bookingCode}
                         </span>
                         <Badge status={booking.status} size="sm" />
-                        <span className={`px-2 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider ${
+                        <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider font-mono ${
                           isPaid ? 'bg-[#10B981]/15 text-[#34D399] border border-[#10B981]/30' : 'bg-[#F59E0B]/15 text-[#F59E0B] border border-[#F59E0B]/30'
                         }`}>
                           {isPaid ? 'Paid in Full' : 'Payment Due at Studio'}
                         </span>
                       </div>
 
-                      <h3 className="text-lg font-extrabold text-[#F8FAFC]">
-                        {booking.servicePackage?.title || 'Detailing Service'}
+                      <h3 className="text-lg font-extrabold text-[#F8FAFC] font-display">
+                        {booking.servicePackage?.title || 'Signature Detailing & Preservation'}
                       </h3>
 
                       <p className="text-xs text-[#94A3B8] flex items-center gap-2 flex-wrap">
                         <span>Chassis: <strong className="text-[#F8FAFC]">{booking.vehicle?.year} {booking.vehicle?.make} {booking.vehicle?.model}</strong></span>
-                        <span className="text-[#2A364E]">•</span>
+                        <span className="text-white/20">•</span>
                         <span>Date: <strong className="text-[#F8FAFC]">{booking.scheduledDate ? new Date(booking.scheduledDate).toLocaleDateString() : 'TBD'}</strong></span>
-                        <span className="text-[#2A364E]">•</span>
-                        <span>Bay: <strong className="text-[#F8FAFC]">{booking.baySlot || 'Bay 1'}</strong></span>
-                        <span className="text-[#2A364E]">•</span>
-                        <span>Total: <strong className="text-[#34D399] font-mono text-sm">${booking.pricing?.totalPrice?.toFixed(2) || '0.00'}</strong></span>
+                        <span className="text-white/20">•</span>
+                        <span>Bay: <strong className="text-[#F8FAFC]">Bay {booking.baySlot || booking.bayNumber || 1}</strong></span>
+                        <span className="text-white/20">•</span>
+                        <span>Total: <strong className="text-[#10B981] font-mono text-sm">${Number(totalAmt).toFixed(2)}</strong></span>
                       </p>
                     </div>
 
                     {/* Action Hub */}
                     <div className="flex items-center gap-2 flex-wrap shrink-0">
                       <Link to={`/track/${booking.bookingCode}`}>
-                        <Button variant="secondary" size="sm" icon={ExternalLink}>
+                        <Button variant="outline" size="sm" icon={ExternalLink} className="text-xs border-[#F59E0B]/40 text-[#F59E0B] hover:bg-[#F59E0B]/10">
                           Track Live
                         </Button>
                       </Link>
@@ -860,7 +868,7 @@ export const GaragePage = () => {
                         rel="noreferrer"
                         className="inline-flex"
                       >
-                        <Button variant="secondary" size="sm" icon={FileText}>
+                        <Button variant="secondary" size="sm" icon={FileText} className="text-xs border-white/10 hover:border-white/25">
                           Invoice PDF
                         </Button>
                       </a>
@@ -873,7 +881,7 @@ export const GaragePage = () => {
                           rel="noreferrer"
                           className="inline-flex"
                         >
-                          <Button variant="gold" size="sm" icon={Award}>
+                          <Button variant="primary" size="sm" icon={Award} className="text-xs glow-amber">
                             Warranty PDF
                           </Button>
                         </a>
@@ -881,9 +889,9 @@ export const GaragePage = () => {
 
                       {/* Rebook */}
                       <Link
-                        to={`/builder?package=${booking.servicePackage?.slug || ''}&category=${booking.vehicleCategory?.slug || ''}`}
+                        to={`/builder?category=${booking.vehicle?.categorySlug || 'sedan'}`}
                       >
-                        <Button variant="ghost" size="sm" iconRight={ArrowRight}>
+                        <Button variant="ghost" size="sm" iconRight={ArrowRight} className="text-xs text-[#CBD5E1] hover:text-white">
                           Rebook
                         </Button>
                       </Link>
@@ -900,21 +908,21 @@ export const GaragePage = () => {
       {/* Add Vehicle Modal */}
       {isAddVehicleOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-[#0F1420] border border-[#1D2536] rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative">
+          <div className="bg-[#0B0E14] border border-white/10 rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-[0_25px_60px_rgba(0,0,0,0.9)] relative">
             <button
               onClick={() => setIsAddVehicleOpen(false)}
-              className="absolute top-5 right-5 text-[#94A3B8] hover:text-[#F8FAFC]"
+              className="absolute top-5 right-5 text-[#94A3B8] hover:text-[#F8FAFC] transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-[#0284C7]/20 border border-[#38BDF8]/40 flex items-center justify-center text-[#38BDF8]">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-xl bg-[#F59E0B]/15 border border-[#F59E0B]/30 flex items-center justify-center text-[#F59E0B]">
                 <Car className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-[#F8FAFC]">Add Vehicle to Garage</h3>
-                <p className="text-xs text-[#94A3B8]">Personal fleet configuration</p>
+                <h3 className="text-lg font-bold text-[#F8FAFC] font-display">Add Vehicle to Garage</h3>
+                <p className="text-xs text-[#94A3B8]">Personal fleet configuration & paint specs</p>
               </div>
             </div>
 
@@ -927,32 +935,32 @@ export const GaragePage = () => {
             <form onSubmit={handleAddVehicle} className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1">Make</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1 font-mono">Make</label>
                   <input
                     type="text"
                     required
                     placeholder="e.g. Porsche"
                     value={newVehicle.make}
                     onChange={(e) => setNewVehicle({ ...newVehicle, make: e.target.value })}
-                    className="w-full bg-[#161D2E] border border-[#2A364E] focus:border-[#38BDF8] rounded-xl px-3.5 py-2 text-sm text-[#F8FAFC] outline-none"
+                    className="w-full bg-[#111622] border border-white/10 focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/50 rounded-xl px-3.5 py-2.5 text-sm text-[#F8FAFC] placeholder-[#64748B] outline-none transition-colors"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1">Model</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1 font-mono">Model</label>
                   <input
                     type="text"
                     required
                     placeholder="e.g. 911 GT3"
                     value={newVehicle.model}
                     onChange={(e) => setNewVehicle({ ...newVehicle, model: e.target.value })}
-                    className="w-full bg-[#161D2E] border border-[#2A364E] focus:border-[#38BDF8] rounded-xl px-3.5 py-2 text-sm text-[#F8FAFC] outline-none"
+                    className="w-full bg-[#111622] border border-white/10 focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/50 rounded-xl px-3.5 py-2.5 text-sm text-[#F8FAFC] placeholder-[#64748B] outline-none transition-colors"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1">Year</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1 font-mono">Year</label>
                   <input
                     type="number"
                     required
@@ -960,40 +968,40 @@ export const GaragePage = () => {
                     max={new Date().getFullYear() + 1}
                     value={newVehicle.year}
                     onChange={(e) => setNewVehicle({ ...newVehicle, year: e.target.value })}
-                    className="w-full bg-[#161D2E] border border-[#2A364E] focus:border-[#38BDF8] rounded-xl px-3.5 py-2 text-sm text-[#F8FAFC] outline-none"
+                    className="w-full bg-[#111622] border border-white/10 focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/50 rounded-xl px-3.5 py-2.5 text-sm text-[#F8FAFC] placeholder-[#64748B] outline-none transition-colors"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1">License Plate</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1 font-mono">License Plate</label>
                   <input
                     type="text"
                     placeholder="e.g. DOCK-911"
                     value={newVehicle.licensePlate}
                     onChange={(e) => setNewVehicle({ ...newVehicle, licensePlate: e.target.value })}
-                    className="w-full bg-[#161D2E] border border-[#2A364E] focus:border-[#38BDF8] rounded-xl px-3.5 py-2 text-sm text-[#F8FAFC] outline-none"
+                    className="w-full bg-[#111622] border border-white/10 focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/50 rounded-xl px-3.5 py-2.5 text-sm text-[#F8FAFC] placeholder-[#64748B] outline-none transition-colors"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1">Chassis Category</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1 font-mono">Chassis Category</label>
                 <select
                   value={newVehicle.categorySlug}
                   onChange={(e) => setNewVehicle({ ...newVehicle, categorySlug: e.target.value })}
-                  className="w-full bg-[#161D2E] border border-[#2A364E] focus:border-[#38BDF8] rounded-xl px-3.5 py-2 text-sm text-[#F8FAFC] outline-none"
+                  className="w-full bg-[#111622] border border-white/10 focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/50 rounded-xl px-3.5 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
                 >
                   {categories.length > 0 ? (
                     categories.map((c) => (
-                      <option key={c._id} value={c.slug}>
+                      <option key={c._id} value={c.slug} className="bg-[#111622] text-[#F8FAFC]">
                         {c.name} ({c.priceMultiplier}x Multiplier)
                       </option>
                     ))
                   ) : (
                     <>
-                      <option value="sedan">Compact / Sedan (1.0x)</option>
-                      <option value="executive-coupe">Executive / Coupe (1.1x)</option>
-                      <option value="compact-suv">Compact SUV / Crossover (1.25x)</option>
-                      <option value="full-suv">Full-Size SUV / Truck (1.45x)</option>
+                      <option value="sedan" className="bg-[#111622] text-[#F8FAFC]">Compact / Sedan (1.0x)</option>
+                      <option value="executive-coupe" className="bg-[#111622] text-[#F8FAFC]">Executive / Coupe (1.1x)</option>
+                      <option value="compact-suv" className="bg-[#111622] text-[#F8FAFC]">Compact SUV / Crossover (1.25x)</option>
+                      <option value="full-suv" className="bg-[#111622] text-[#F8FAFC]">Full-Size SUV / Truck (1.45x)</option>
                     </>
                   )}
                 </select>
@@ -1004,7 +1012,7 @@ export const GaragePage = () => {
                   type="button"
                   variant="secondary"
                   size="md"
-                  className="flex-1"
+                  className="flex-1 border-white/10 text-[#CBD5E1] hover:text-white"
                   onClick={() => setIsAddVehicleOpen(false)}
                 >
                   Cancel
@@ -1013,7 +1021,7 @@ export const GaragePage = () => {
                   type="submit"
                   variant="primary"
                   size="md"
-                  className="flex-1 glow-cyan-sm"
+                  className="flex-1 glow-amber"
                   disabled={submittingVehicle}
                 >
                   {submittingVehicle ? 'Saving...' : 'Save Vehicle'}
