@@ -10,6 +10,17 @@ import {
 } from 'lucide-react';
 import { Button } from '../common/Button.jsx';
 
+const CATEGORY_PHOTOS = {
+  sedan: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=600&auto=format&fit=crop',
+  'executive-coupe': 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=600&auto=format&fit=crop',
+  'compact-suv': 'https://images.unsplash.com/photo-1563720223185-11003d516935?q=80&w=600&auto=format&fit=crop',
+  'full-suv': 'https://images.unsplash.com/photo-1551830820-330a71b99659?q=80&w=600&auto=format&fit=crop',
+  coupe: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=600&auto=format&fit=crop',
+  suv: 'https://images.unsplash.com/photo-1563720223185-11003d516935?q=80&w=600&auto=format&fit=crop',
+  'truck-van': 'https://images.unsplash.com/photo-1551830820-330a71b99659?q=80&w=600&auto=format&fit=crop',
+  exotic: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=600&auto=format&fit=crop'
+};
+
 export const BookingSummaryStep = ({
   category,
   pkg,
@@ -22,6 +33,8 @@ export const BookingSummaryStep = ({
   const adjustedPkgPrice = Number((basePrice * multiplier).toFixed(2));
   const addonsTotal = addons.reduce((sum, a) => sum + Number(a.price || 0), 0);
   const subtotal = Number((adjustedPkgPrice + addonsTotal).toFixed(2));
+
+  const photoUrl = CATEGORY_PHOTOS[category?.slug] || CATEGORY_PHOTOS[category?.name?.toLowerCase()] || CATEGORY_PHOTOS.sedan;
 
   const baseMinutes = Number(pkg?.baseDurationMinutes || pkg?.estimatedDurationMinutes || 90);
   const durMultiplier = Number(category?.durationMultiplier || 1.0);
@@ -52,18 +65,29 @@ export const BookingSummaryStep = ({
         <div className="lg:col-span-7 space-y-4">
           
           {/* Card 1: Selected Chassis */}
-          <div className="p-5 rounded-2xl bg-[#111622] border border-white/10 flex items-center justify-between">
-            <div className="flex items-center gap-3.5">
-              <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#F59E0B]">
-                <Car className="w-6 h-6" />
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#111622] border border-white/10 flex items-center justify-between gap-4 card-hover">
+            <div className="flex items-center gap-4">
+              <div className="w-20 h-14 rounded-xl overflow-hidden border border-white/10 flex-shrink-0 relative">
+                <img 
+                  src={photoUrl} 
+                  alt={category?.name || 'Vehicle Platform'} 
+                  className="w-full h-full object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0E14]/70 to-transparent" />
               </div>
               <div>
-                <div className="text-xs uppercase font-bold text-[#94A3B8] font-mono tracking-wider">Vehicle Platform</div>
-                <div className="text-base font-bold text-white mt-0.5 font-display">{category?.name || 'Compact / Sedan'}</div>
-                <div className="text-xs text-[#F59E0B] font-mono">Multiplier: {multiplier}x</div>
+                <div className="text-[10px] uppercase font-bold text-[#94A3B8] font-mono tracking-wider">
+                  Calibrated Vehicle Platform
+                </div>
+                <div className="text-base font-bold text-white mt-0.5 font-display">
+                  {category?.name || 'Compact / Sedan'}
+                </div>
+                <div className="text-xs text-[#F59E0B] font-mono font-medium">
+                  {multiplier === 1.0 ? '1.0x Baseline Surface Area' : `${multiplier}x Surface Area Multiplier`}
+                </div>
               </div>
             </div>
-            <Link to="/builder" className="text-xs text-[#F59E0B] hover:underline flex items-center gap-1 font-mono font-bold">
+            <Link to="/builder" className="text-xs text-[#F59E0B] hover:text-[#FBBF24] flex items-center gap-1.5 font-mono font-bold bg-[#F59E0B]/10 px-3 py-1.5 rounded-xl border border-[#F59E0B]/20 hover:border-[#F59E0B]/40 transition-colors">
               <Edit3 className="w-3.5 h-3.5" />
               <span>Modify</span>
             </Link>
@@ -147,10 +171,17 @@ export const BookingSummaryStep = ({
                 <span className="text-[#94A3B8]">Base Detailing Tier:</span>
                 <span className="font-mono text-white">${basePrice.toFixed(2)}</span>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="text-[#94A3B8]">Chassis Multiplier:</span>
-                <span className="font-mono text-[#F59E0B]">× {multiplier}x</span>
-              </div>
+              {multiplier !== 1.0 ? (
+                <div className="flex items-center justify-between">
+                  <span className="text-[#94A3B8]">Chassis Multiplier ({selectedVehicleCategory.label || selectedVehicleCategory.name || 'Calibrated'}):</span>
+                  <span className="font-mono text-[#F59E0B]">× {multiplier}x</span>
+                </div>
+              ) : (
+                <div className="flex items-center justify-between text-[11px] text-[#64748B]">
+                  <span>Chassis Calibration:</span>
+                  <span className="font-mono text-[#94A3B8]">1.0x (Standard Baseline)</span>
+                </div>
+              )}
               <div className="flex items-center justify-between">
                 <span className="text-[#94A3B8]">Adjusted Package Total:</span>
                 <span className="font-mono text-white">${adjustedPkgPrice.toFixed(2)}</span>
@@ -172,7 +203,7 @@ export const BookingSummaryStep = ({
 
             <div className="py-4">
               <div className="flex items-baseline justify-between">
-                <span className="text-xs font-bold text-white uppercase font-mono">Total Subtotal:</span>
+                <span className="text-xs font-bold text-white uppercase font-mono">Estimated Investment:</span>
                 <div className="text-right">
                   <div className="text-3xl font-black font-mono text-[#F59E0B]">
                     ${displayTotal}

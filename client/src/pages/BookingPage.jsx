@@ -197,8 +197,13 @@ export const BookingPage = () => {
     }
   };
 
+  // Scroll to top on step change for clear visibility
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentStep]);
+
   return (
-    <div className="w-full bg-[#0B0E14] text-[#F8FAFC] min-h-screen py-12 lg:py-16">
+    <div className="w-full bg-[#0B0E14] text-[#F8FAFC] min-h-screen pt-32 pb-24 sm:pt-36 sm:pb-28">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Header */}
