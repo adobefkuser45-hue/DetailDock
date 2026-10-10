@@ -119,6 +119,10 @@ export const GaragePage = () => {
     }
   }, [token, fetchGarage]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentUser, activeTab]);
+
   const handleLoginSubmit = async (e) => {
     e?.preventDefault();
     setAuthError('');
@@ -234,7 +238,7 @@ export const GaragePage = () => {
   // If Not Authenticated: Render High-Fidelity Login / Register Portal
   if (!token || !currentUser) {
     return (
-      <div className="w-full bg-[#0B0E14] text-[#F8FAFC] min-h-screen py-16 px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
+      <div className="w-full bg-[#0B0E14] text-[#F8FAFC] min-h-screen pt-32 pb-24 sm:pt-36 sm:pb-28 px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
         <div className="max-w-4xl mx-auto w-full">
           {/* Header Intro */}
           <div className="text-center mb-10">
@@ -322,7 +326,7 @@ export const GaragePage = () => {
                     value={authEmail}
                     onChange={(e) => setAuthEmail(e.target.value)}
                     placeholder="e.g. alex@example.com"
-                    className="w-full bg-[#08090C] border border-white/10 focus:border-[#D4AF37] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
+                    className="w-full bg-[#08090C] border border-white/10 focus:border-[#F59E0B] rounded-xl px-4 py-2.5 text-sm text-[#F8FAFC] outline-none transition-colors"
                   />
                 </div>
 
@@ -439,6 +443,46 @@ export const GaragePage = () => {
             </form>
           )}
         </div>
+
+        {/* Atelier VIP Client Privilege Architecture */}
+        <div className="mt-10 pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 gap-5 text-left">
+          <div className="p-5 rounded-2xl bg-[#111622] border border-white/10 hover:border-[#F59E0B]/30 transition-all space-y-2.5">
+            <div className="w-10 h-10 rounded-xl bg-[#F59E0B]/15 border border-[#F59E0B]/30 flex items-center justify-center text-[#F59E0B]">
+              <Clock className="w-5 h-5" />
+            </div>
+            <h4 className="text-sm font-bold text-white font-display">
+              Priority Cleanroom Bay Access
+            </h4>
+            <p className="text-xs text-[#94A3B8] leading-relaxed font-normal">
+              Guaranteed priority scheduling in climate-controlled dual cleanroom bays with dedicated master technician assignment.
+            </p>
+          </div>
+
+          <div className="p-5 rounded-2xl bg-[#111622] border border-white/10 hover:border-[#F59E0B]/30 transition-all space-y-2.5">
+            <div className="w-10 h-10 rounded-xl bg-[#10B981]/15 border border-[#10B981]/30 flex items-center justify-center text-[#10B981]">
+              <Award className="w-5 h-5" />
+            </div>
+            <h4 className="text-sm font-bold text-white font-display">
+              Serialized 9H Warranty Diplomas
+            </h4>
+            <p className="text-xs text-[#94A3B8] leading-relaxed font-normal">
+              Instant digital archive and vector PDF downloads of all multi-year ceramic coating warranty certificates.
+            </p>
+          </div>
+
+          <div className="p-5 rounded-2xl bg-[#111622] border border-white/10 hover:border-[#F59E0B]/30 transition-all space-y-2.5">
+            <div className="w-10 h-10 rounded-xl bg-[#3B82F6]/15 border border-[#3B82F6]/30 flex items-center justify-center text-[#3B82F6]">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
+            <h4 className="text-sm font-bold text-white font-display">
+              Sub-Micron Paint Health Records
+            </h4>
+            <p className="text-xs text-[#94A3B8] leading-relaxed font-normal">
+              Historical access to optical specular gloss index (GU) and ultrasonic clear coat thickness across every service milestone.
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
     );
@@ -447,16 +491,66 @@ export const GaragePage = () => {
   // Count active warranty certificates across bookings
   const warrantyCount = bookings.filter(b => b.warrantyCertificate?.issued).length;
 
-  const VEHICLE_PREVIEWS = {
-    supercar: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=800&auto=format&fit=crop',
-    coupe: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=800&auto=format&fit=crop',
-    sedan: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=800&auto=format&fit=crop',
-    suv: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800&auto=format&fit=crop',
-    truck: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop'
+  // Dynamic Supercar Photography Resolver
+  const getVehicleImage = (vehicle) => {
+    const make = (vehicle?.make || '').toLowerCase();
+    const model = (vehicle?.model || '').toLowerCase();
+    const cat = (vehicle?.categorySlug || '').toLowerCase();
+
+    // 1. Exact Brand / Model Supercars
+    if (make.includes('porsche') || model.includes('911') || model.includes('gt3') || model.includes('carrera') || model.includes('cayman')) {
+      return 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=800&auto=format&fit=crop'; // Porsche 911 GT3 RS
+    }
+    if (make.includes('ferrari') || model.includes('296') || model.includes('f8') || model.includes('tributo') || model.includes('sf90') || model.includes('roma')) {
+      return 'https://images.unsplash.com/photo-1592198084033-aade902d1aae?q=80&w=800&auto=format&fit=crop'; // Ferrari Rosso Corsa
+    }
+    if (make.includes('lamborghini') || model.includes('huracan') || model.includes('revuelto') || model.includes('aventador')) {
+      return 'https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?q=80&w=800&auto=format&fit=crop'; // Lamborghini
+    }
+    if (make.includes('mclaren') || model.includes('720s') || model.includes('750s') || model.includes('artura')) {
+      return 'https://images.unsplash.com/photo-1621135802920-133df287f89c?q=80&w=800&auto=format&fit=crop'; // McLaren
+    }
+    if (make.includes('bmw') || model.includes('m3') || model.includes('m4') || model.includes('m5') || model.includes('m8')) {
+      return 'https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=800&auto=format&fit=crop'; // BMW M3 Competition
+    }
+    if (make.includes('mercedes') || make.includes('amg') || model.includes('gt') || model.includes('c63')) {
+      return 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=800&auto=format&fit=crop'; // Mercedes-AMG
+    }
+    if (make.includes('audi') || model.includes('rs6') || model.includes('rs7') || model.includes('r8')) {
+      return 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?q=80&w=800&auto=format&fit=crop'; // Audi RS
+    }
+    if (make.includes('ford') && (model.includes('f-150') || model.includes('raptor') || model.includes('truck'))) {
+      return 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop'; // Ford F-150 Raptor
+    }
+    if (make.includes('rover') || model.includes('defender') || cat.includes('suv')) {
+      return 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800&auto=format&fit=crop'; // Luxury SUV
+    }
+
+    // 2. Category Fallbacks
+    if (cat.includes('coupe') || cat.includes('supercar')) {
+      return 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=800&auto=format&fit=crop';
+    }
+    if (cat.includes('truck')) {
+      return 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop';
+    }
+    return 'https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=800&auto=format&fit=crop';
+  };
+
+  // Format Chassis Category Badges
+  const formatCategoryBadge = (slug) => {
+    if (!slug) return 'Executive Coupe';
+    const s = slug.toLowerCase();
+    if (s.includes('supercar')) return 'Supercar / Exotic';
+    if (s.includes('executive-coupe') || s.includes('coupe')) return 'Executive Coupe';
+    if (s.includes('sedan')) return 'Luxury Sedan';
+    if (s.includes('compact-suv')) return 'Compact SUV / Crossover';
+    if (s.includes('full-suv') || s.includes('suv')) return 'Full-Size Luxury SUV';
+    if (s.includes('truck')) return 'Full-Size Truck';
+    return slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
   };
 
   return (
-    <div className="w-full bg-[#0B0E14] text-[#F8FAFC] min-h-screen py-10 px-4 sm:px-6 lg:px-8">
+    <div className="w-full bg-[#0B0E14] text-[#F8FAFC] min-h-screen pt-32 pb-24 sm:pt-36 sm:pb-28 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Toast Feedback Banner */}
         {actionSuccess && (
@@ -629,16 +723,16 @@ export const GaragePage = () => {
                 >
                   <div>
                     {/* Automotive Photo Banner */}
-                    <div className="h-40 -mx-6 -mt-6 mb-4 relative overflow-hidden bg-[#0B0E14] border-b border-white/10">
+                    <div className="h-44 -mx-6 -mt-6 mb-4 relative overflow-hidden bg-[#0B0E14] border-b border-white/10">
                       <img 
-                        src={VEHICLE_PREVIEWS[vehicle.categorySlug?.toLowerCase()] || VEHICLE_PREVIEWS.sedan} 
+                        src={getVehicleImage(vehicle)} 
                         alt={`${vehicle.make} ${vehicle.model}`}
-                        className="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500"
+                        className="w-full h-full object-cover opacity-85 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500"
                         loading="lazy"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#111622] via-transparent to-transparent" />
-                      <span className="absolute top-3 right-3 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#0B0E14]/80 text-[#F59E0B] border border-[#F59E0B]/30 backdrop-blur-md">
-                        {vehicle.categorySlug || 'sedan'}
+                      <span className="absolute top-3 right-3 text-[10px] font-mono font-bold tracking-wider px-2.5 py-1 rounded-full bg-[#0B0E14]/85 text-[#F59E0B] border border-[#F59E0B]/30 backdrop-blur-md">
+                        {formatCategoryBadge(vehicle.categorySlug)}
                       </span>
                     </div>
 
