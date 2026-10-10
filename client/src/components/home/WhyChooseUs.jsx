@@ -27,18 +27,18 @@ const PILLARS = [
     statLabel: 'True Paint Defect Reveal'
   },
   {
-    icon: Cpu,
-    tag: 'Authoritative Architecture',
-    title: 'Deterministic Server-Side Pricing Engine',
-    desc: 'No vague ballpark quotes or bait-and-switch invoicing. Body style multipliers and add-ons are authoritatively calculated and locked by the server upon booking.',
+    icon: ShieldCheck,
+    tag: 'Studio Pricing Guarantee',
+    title: 'Guaranteed Upfront Studio Rates',
+    desc: 'No vague ballpark quotes or bait-and-switch invoicing. Body style multipliers and specialized add-ons are completely transparent and locked upon reservation.',
     stat: '100%',
     statLabel: 'Price Certainty'
   },
   {
     icon: Radio,
-    tag: 'Customer Transparency',
-    title: 'Live Job Telemetry Tracking (DD-XXXXXX)',
-    desc: 'Every booking receives a unique tracking code. Monitor your vehicle’s journey through 5 stages in real time without ever needing to call the front desk.',
+    tag: 'Live Stage Tracking',
+    title: 'Real-Time Atelier Progress Portal',
+    desc: 'Every reservation receives a unique tracking code (DD-XXXXXX). Monitor your vehicle’s journey through 5 detailing stages in real time from your phone.',
     stat: '5 Stages',
     statLabel: 'Transparent Progress'
   }

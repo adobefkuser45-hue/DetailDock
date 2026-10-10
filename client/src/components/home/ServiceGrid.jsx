@@ -111,7 +111,7 @@ export const ServiceGrid = () => {
   const essentialPkg = packages.find(p => p.name.includes('Essential') || p.basePrice < 200) || packages[0];
 
   return (
-    <section id="services" className="py-24 bg-[#0B0E14] border-t border-white/10 relative overflow-hidden">
+    <section id="services" className="pt-44 pb-24 sm:pt-48 bg-[#0B0E14] border-t border-white/10 relative overflow-hidden scroll-mt-32">
       {/* Ambient Lighting */}
       <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#F59E0B]/5 rounded-full blur-[160px] pointer-events-none" />
 
@@ -119,15 +119,21 @@ export const ServiceGrid = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#F59E0B] bg-[#F59E0B]/10 px-4 py-1.5 rounded-full border border-[#F59E0B]/25 inline-flex items-center gap-2">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/25 text-xs font-bold uppercase tracking-widest text-[#F59E0B] mb-3">
             <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" />
-            Atelier Preservation Spectrum
-          </span>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-[-0.03em] mt-5 text-[#F8FAFC] font-display">
-            Asymmetric Concourse Bento
+            <span>Atelier Preservation Spectrum</span>
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-black tracking-[-0.03em] text-[#F8FAFC] font-display">
+            Bespoke Preservation Suites
           </h2>
+          <div className="mt-2 text-xs font-mono text-[#64748B] flex items-center justify-center gap-2">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#F59E0B]" />
+            <span>Asymmetric Concourse Bento</span>
+            <span className="text-white/20">•</span>
+            <span>Dual Cleanroom Bays Active</span>
+          </div>
           <p className="text-sm sm:text-base text-[#94A3B8] mt-3 font-normal">
-            Every vehicle is staged in our climate-controlled dual cleanroom bays under 96+ CRI Scangrip inspection lights. Explore our precision services and authoritative pricing below.
+            Every vehicle is staged in our climate-controlled dual cleanroom bays under 96+ CRI Scangrip inspection lights. Explore our precision services and guaranteed studio rates below.
           </p>
         </div>
 
@@ -139,14 +145,14 @@ export const ServiceGrid = () => {
             onMouseMove={handleCardMouseMove}
             className="lg:col-span-2 relative rounded-2xl bg-[#111622] border border-white/10 p-8 sm:p-10 flex flex-col justify-between overflow-hidden group hover:border-[#F59E0B]/50 transition-all duration-300 shadow-[0_20px_50px_rgba(0,0,0,0.7)]"
           >
-            {/* Photographic Backdrop with Gradient Fade */}
+            {/* Photographic Backdrop with Rich Contrast */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
               <img 
-                src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?q=80&w=1000&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?q=80&w=1200&auto=format&fit=crop" 
                 alt="Rotary Machine Compounding & Paint Correction"
-                className="w-full h-full object-cover object-center opacity-25 group-hover:scale-105 group-hover:opacity-35 transition-all duration-700 ease-out"
+                className="w-full h-full object-cover object-center opacity-40 group-hover:scale-105 group-hover:opacity-55 transition-all duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#111622] via-[#111622]/90 to-[#111622]/80" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#111622] via-[#111622]/85 to-[#111622]/40" />
             </div>
 
             {/* Specular Mouse-Tracking Highlight */}
@@ -218,7 +224,7 @@ export const ServiceGrid = () => {
                   iconRight={ArrowRight}
                   className="w-full sm:w-auto glow-amber-sm font-bold"
                 >
-                  Configure in 3D Builder
+                  Configure Signature Spec
                 </Button>
               </Link>
               <div className="text-xs text-[#64748B] font-mono">
@@ -227,19 +233,19 @@ export const ServiceGrid = () => {
             </div>
           </div>
 
-          {/* BENTO TILE 2: Ultrasonic Paint Depth Telemetry (Square Tech Card, 1 Col) */}
+          {/* BENTO TILE 2: Ultrasonic Paint Depth Telemetry (Actionable Studio Card, 1 Col) */}
           <div 
             onMouseMove={handleCardMouseMove}
             className="lg:col-span-1 relative rounded-2xl bg-[#111622] border border-white/10 p-8 flex flex-col justify-between overflow-hidden group hover:border-white/30 transition-all duration-300 shadow-[0_20px_50px_rgba(0,0,0,0.7)]"
           >
-            {/* Background Car Image */}
+            {/* Background Inspection Image */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
               <img 
-                src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=1000&auto=format&fit=crop" 
                 alt="Paint Sensor HUD"
-                className="w-full h-full object-cover opacity-20 group-hover:scale-105 group-hover:opacity-30 transition-all duration-700 ease-out"
+                className="w-full h-full object-cover opacity-35 group-hover:scale-105 group-hover:opacity-45 transition-all duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#111622] via-[#111622]/90 to-[#111622]/80" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#111622] via-[#111622]/85 to-[#111622]/40" />
             </div>
 
             {/* Specular Highlight */}
@@ -256,15 +262,15 @@ export const ServiceGrid = () => {
                   <Activity className="w-5 h-5" />
                 </div>
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#10B981] bg-[#10B981]/10 px-2.5 py-1 rounded-full border border-[#10B981]/25">
-                  Live Sensor Audit
+                  Studio Diagnostic
                 </span>
               </div>
 
               <h4 className="text-xl font-bold text-[#F8FAFC] tracking-tight mb-2 font-display">
-                Ultrasonic Depth Telemetry
+                Paint Health & Depth Mapping
               </h4>
               <p className="text-xs text-[#94A3B8] leading-relaxed mb-6 font-normal">
-                PosiTector electromagnetic paint thickness mapping before every rotary pass ensures clear coat safety.
+                PosiTector electromagnetic paint thickness mapping before every rotary pass ensures zero burn-through risk.
               </p>
 
               {/* Simulated Gauge Readout Pod */}
@@ -277,17 +283,26 @@ export const ServiceGrid = () => {
                   <div className="bg-gradient-to-r from-[#F59E0B] to-[#10B981] h-full w-[82%]" />
                 </div>
                 <div className="flex items-center justify-between text-xs pt-1">
-                  <span className="text-[#94A3B8]">Gloss Meter Reading:</span>
+                  <span className="text-[#94A3B8]">Target Gloss Metric:</span>
                   <span className="text-[#F59E0B] font-bold flex items-center gap-1">
-                    <Gauge className="w-3.5 h-3.5" /> 98.4 GU (Mirror)
+                    <Gauge className="w-3.5 h-3.5" /> 98+ GU (Mirror)
                   </span>
                 </div>
               </div>
             </div>
 
-            <div className="relative z-10 mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-[#94A3B8]">
-              <span>Tolerance Check:</span>
-              <span className="text-[#10B981] font-mono font-bold">Passed (Zero Burn Risk)</span>
+            {/* Actionable Booking Button */}
+            <div className="relative z-10 mt-6 pt-4 border-t border-white/10">
+              <Link to="/book" className="block w-full">
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  iconRight={ArrowRight}
+                  className="w-full text-xs font-semibold hover:border-[#10B981]/50 text-[#10B981]"
+                >
+                  Schedule Studio Diagnostic
+                </Button>
+              </Link>
             </div>
           </div>
 
@@ -299,11 +314,11 @@ export const ServiceGrid = () => {
             {/* Macro Water Beading Photography Backdrop */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
               <img 
-                src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?q=80&w=1000&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?q=80&w=1200&auto=format&fit=crop" 
                 alt="Ceramic Coating Hydrophobic Water Beading"
-                className="w-full h-full object-cover object-center opacity-25 group-hover:scale-105 group-hover:opacity-35 transition-all duration-700 ease-out"
+                className="w-full h-full object-cover object-center opacity-40 group-hover:scale-105 group-hover:opacity-55 transition-all duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#111622] via-[#111622]/90 to-[#111622]/80" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#111622] via-[#111622]/85 to-[#111622]/40" />
             </div>
 
             {/* Specular Highlight */}
@@ -333,7 +348,7 @@ export const ServiceGrid = () => {
                   <div className="text-3xl sm:text-4xl font-black font-mono text-[#F59E0B]">
                     ${ceramicPkg.basePrice}
                   </div>
-                  <div className="text-xs text-[#94A3B8]">baseline tier</div>
+                  <div className="text-xs text-[#94A3B8]">/ coupe & sedan baseline</div>
                 </div>
               </div>
 
@@ -384,11 +399,11 @@ export const ServiceGrid = () => {
             {/* Snow Foam Cannon Photography Backdrop */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
               <img 
-                src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?q=80&w=800&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?q=80&w=1000&auto=format&fit=crop" 
                 alt="Snow Foam Citrus Pre-Wash"
-                className="w-full h-full object-cover opacity-25 group-hover:scale-105 group-hover:opacity-35 transition-all duration-700 ease-out"
+                className="w-full h-full object-cover opacity-40 group-hover:scale-105 group-hover:opacity-55 transition-all duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#111622] via-[#111622]/90 to-[#111622]/80" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#111622] via-[#111622]/85 to-[#111622]/40" />
             </div>
 
             {/* Specular Highlight */}
@@ -437,9 +452,9 @@ export const ServiceGrid = () => {
                   variant="secondary"
                   size="sm"
                   iconRight={ArrowRight}
-                  className="w-full text-xs font-semibold"
+                  className="w-full text-xs font-semibold hover:border-[#F59E0B]/50 hover:text-white"
                 >
-                  Configure Essential (${essentialPkg.basePrice})
+                  Configure Essential Spec
                 </Button>
               </Link>
             </div>

@@ -43,6 +43,18 @@ export const Navbar = () => {
   const phoneText = settings?.contactPhone || '+1 (512) 842-9210';
   const cleanPhone = phoneText.replace(/[^\d+]/g, '');
 
+  const handleNavClick = (path) => {
+    if (path.startsWith('/#')) {
+      const targetId = path.replace('/#', '');
+      if (location.pathname === '/') {
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full pt-2 sm:pt-3 pb-2 px-3 sm:px-6 max-w-7xl mx-auto transition-all">
       {/* Floating Dynamic Island "Atelier Dock" */}
@@ -76,6 +88,7 @@ export const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
+                onClick={() => handleNavClick(item.path)}
                 className={`relative px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 flex items-center gap-2 ${
                   active
                     ? 'text-[#F8FAFC] bg-[#F59E0B]/20 border border-[#F59E0B]/50 shadow-[0_0_15px_rgba(245,158,11,0.25)] text-shadow-sm'
@@ -156,7 +169,10 @@ export const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  handleNavClick(item.path);
+                }}
                 className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-bold text-[#CBD5E1] hover:text-white hover:bg-[#161D2A] transition-colors"
               >
                 <div className="flex items-center gap-3">

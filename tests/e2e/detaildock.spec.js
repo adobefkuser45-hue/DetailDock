@@ -59,11 +59,18 @@ test.describe.serial('DetailDock End-to-End Atelier Customer & Admin Journey', (
 
     // Step 2: Studio Bay Date & Slot Selection
     const baySlotBtn = page.locator('[data-testid^="bay-slot-"]:not([disabled])').first();
-    const isFirstDateReady = await baySlotBtn.isVisible({ timeout: 4000 }).catch(() => false);
-    if (!isFirstDateReady) {
-      const nextDateBtn = page.locator('div.grid button').nth(1);
-      if (await nextDateBtn.isVisible()) {
-        await nextDateBtn.click();
+    let isSlotReady = await baySlotBtn.isVisible({ timeout: 3000 }).catch(() => false);
+    if (!isSlotReady) {
+      // Find a day with available slots
+      const dateButtons = page.locator('div.grid button');
+      const count = await dateButtons.count();
+      for (let i = 0; i < count; i++) {
+        await dateButtons.nth(i).click();
+        await page.waitForTimeout(600);
+        if (await baySlotBtn.isVisible().catch(() => false)) {
+          isSlotReady = true;
+          break;
+        }
       }
     }
     await baySlotBtn.waitFor({ state: 'visible', timeout: 15000 });
