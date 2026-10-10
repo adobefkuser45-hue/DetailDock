@@ -63,15 +63,15 @@ export const HeroSection = () => {
       className="relative overflow-hidden py-16 lg:py-24 border-b border-white/10 bg-[#0B0E14] transition-colors"
     >
       {/* Cinematic Supercar Full-Bleed Backdrop with Studio Vignette */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=1600&auto=format&fit=crop"
           alt="Exotic Porsche 911 GT3 Atelier Studio"
-          className="w-full h-full object-cover object-center opacity-30 mix-blend-luminosity scale-105"
+          className="w-full h-full object-cover object-center opacity-50 scale-100 transition-opacity duration-700"
         />
-        {/* Multi-layered gradient overlays to guarantee pristine contrast and luxury depth */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0B0E14] via-[#0B0E14]/90 to-[#0B0E14]/75" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0B0E14] via-transparent to-[#0B0E14]" />
+        {/* Calibrated Studio Vignette Overlays for Maximum Supercar Drama & Readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0B0E14] via-[#0B0E14]/80 to-[#0B0E14]/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0B0E14] via-transparent to-[#0B0E14]/80" />
       </div>
 
       {/* Dynamic Scangrip Optical Spotlight Beam */}
@@ -155,15 +155,15 @@ export const HeroSection = () => {
               </div>
               <div>
                 <div className="text-2xl font-extrabold text-[#F59E0B] font-mono tracking-tight">&lt; 0.5µm</div>
-                <div className="text-xs text-[#94A3B8] font-medium mt-1">Rotary Paint Leveling</div>
+                <div className="text-xs text-[#94A3B8] font-medium mt-1">Paint Preservation Depth</div>
               </div>
               <div>
                 <div className="text-2xl font-extrabold text-[#CBD5E1] font-mono tracking-tight">100%</div>
-                <div className="text-xs text-[#94A3B8] font-medium mt-1">Authoritative Server Math</div>
+                <div className="text-xs text-[#94A3B8] font-medium mt-1">Hand-Compounded Finish</div>
               </div>
               <div>
-                <div className="text-2xl font-extrabold text-[#10B981] font-mono tracking-tight">DD-XXXX</div>
-                <div className="text-xs text-[#94A3B8] font-medium mt-1">Live Job Telemetry HUD</div>
+                <div className="text-2xl font-extrabold text-[#10B981] font-mono tracking-tight">ISO-6</div>
+                <div className="text-xs text-[#94A3B8] font-medium mt-1">Sterile Cleanroom Studio</div>
               </div>
             </div>
           </div>
@@ -181,7 +181,7 @@ export const HeroSection = () => {
                   </span>
                 </div>
                 <span className="text-[11px] font-mono text-[#F59E0B] bg-[#F59E0B]/10 px-3 py-1 rounded-full border border-[#F59E0B]/25 font-bold">
-                  v2.0 Rule Engine
+                  Instant Studio Quote
                 </span>
               </div>
 
@@ -258,8 +258,8 @@ export const HeroSection = () => {
                 </div>
                 <div className="pt-4 border-t border-white/10 flex items-baseline justify-between">
                   <div>
-                    <span className="text-xs font-bold text-[#94A3B8] uppercase block font-mono">Authoritative Total:</span>
-                    <span className="text-[10px] text-[#64748B]">Paint leveling + steam decon</span>
+                    <span className="text-xs font-bold text-[#94A3B8] uppercase block font-mono">Guaranteed Studio Rate:</span>
+                    <span className="text-[10px] text-[#64748B]">Multi-stage swirl removal & steam decon</span>
                   </div>
                   <div className="text-right">
                     <div className="text-3xl font-black text-[#F59E0B] font-mono tracking-tight">
