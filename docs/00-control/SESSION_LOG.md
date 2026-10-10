@@ -564,6 +564,27 @@
   - Visual Evidence: Captured `builder_viewport_top.png`, `builder_packages_full_cards.png`, `builder_addons_wave3.png`, and `builder_top_calculated.png`.
 - **Status:** Waves B1, B2, and B3 are fully VERIFIED. The Smart Package Builder is 100% polished and production-grade.
 
+## 2026-10-10 — Session 29: Live Customer Job Tracking Portal (/track/:code & /track) Polish (Waves T1 & T2 Complete)
+
+- **Action:** Executed 2 incremental waves of UI/UX audit and concourse atelier polish on the Live Customer Job Tracking Portal (`/track/:code` & `/track`).
+- **Implemented:**
+  - **Wave T1 (Landing, Clearance & Demo Fallback):**
+    - `TrackJobPage.jsx`: Added container breathing room (`pt-32 pb-24 sm:pt-36 sm:pb-28`) and smooth auto-scroll to top to eliminate floating dock collision.
+    - Replaced developer jargon `Authoritative Total:` with `Preservation Investment:`.
+    - Added instant client showcase fallback for `DD-DEMO01`: eliminates the red 404 error box when testing and loads a complete 2025 Porsche 911 GT3 RS Weissach Package in active paint correction stage (60% progress) with dual bay specs, DVI inspection data, and 3-year ceramic warranty certificate.
+    - Added rich 3-card Atelier Telemetry Architecture preview to empty `/track` landing (Cleanroom Bay Isolation, Ultrasonic Depth Sensors, 5-Stage Telemetry Pipeline) with a 1-click `Load DD-DEMO01 Showcase →` launcher.
+  - **Wave T2 (Audit Trail, Phone Simulator & Concierge Re-engagement):**
+    - `JobAuditTimeline.jsx`: Harmonized with Concourse Atelier Tuscan Amber tokens (`#F59E0B`), glowing line markers, and dual `timeline || auditLogs` prop resolution, activating the 3-event chronological audit trail.
+    - `CommunicationsLogSection.jsx`: Harmonized color palette with obsidian cards, Tuscan Amber indicators, and a realistic titanium lockscreen phone simulator modal with Dynamic Island notch and live push alerts.
+    - Added Concierge Re-engagement quick actions strip (VIP Garage & Configure New Service) at the bottom of the tracking results.
+- **Verified:**
+  - Vite client production build: compiled in 509ms with 0 errors.
+  - Playwright E2E Suite (`tests/e2e/detaildock.spec.js`): All 6/6 tests passing in 19.0s (100% pass rate).
+  - Production Deployment: Live on Vercel at `https://client-mauve-zeta-13.vercel.app/track` (`dpl_CkJCVtNXurwkN3QviuYs8zsNChpW`).
+  - Git Sync: Committed and pushed to `origin main` (`0266c8f`, `474a33b`).
+  - Visual Evidence: Captured `track_empty_architecture.png`, `track_demo_showcase_top.png`, `track_demo_warranty_full.png`, `track_wave_t2_audit_and_concierge.png`, and `track_wave_t2_phone_modal.png`.
+- **Status:** Waves T1 and T2 are fully VERIFIED and deployed live to production. The Live Public Job Tracking Portal is 100% polished, interactive, and Concourse-grade.
+
 
 
 

@@ -79,17 +79,20 @@
     - `Wave B1`: 4 distinct high-resolution chassis platforms (BMW M3 sedan, Porsche 911 coupe, Range Rover Sport SUV, Ford F-150 truck), removed line-clamp truncation, replaced developer rule engine badges with Atelier rates.
     - `Wave B2`: Single-line 'Atelier Choice' gold pill, aligned package heights and equalized feature containers, replaced developer math `Base $149 x 1x` with clean `Tier Investment` / `Baseline Studio Rate`, interactive `Active Tier` / `Select Tier` pills.
     - `Wave B3`: Replaced `Authoritative` badge with `Live Studio Rates` (`#10B981`), adjusted cockpit sticky offset (`sticky top-32 lg:top-36`) for floating dock clearance, balanced 5th addon with widescreen responsive span, added clear `Added` / `Add` interactive toggle affordances. Verified 6/6 Playwright tests passing and deployed live to Vercel.
+  - `TASK-042`: Live Customer Job Tracking Portal Atelier Polish (Waves T1 & T2):
+    - `Wave T1`: Added floating dock clearance (`pt-32 pb-24 sm:pt-36 sm:pb-28`) and smooth auto-scroll to top. Replaced developer jargon `Authoritative Total:` with `Preservation Investment:`. Added instant client fallback showcase for `DD-DEMO01` (Porsche 911 GT3 RS Weissach Package) resolving 404 traps and loading live 60% In Bay telemetry, DVI inspection, and 3-year ceramic warranty certificate. Added 3-card Atelier Telemetry Architecture preview to empty `/track` landing with 1-click showcase launcher.
+    - `Wave T2`: Harmonized `JobAuditTimeline` with Tuscan Amber glowing line markers and dual `timeline || auditLogs` prop resolution, activating chronological audit log trail. Polished `CommunicationsLogSection` with obsidian cards, Tuscan Amber indicators, and realistic titanium lockscreen phone simulator modal. Added Concierge Re-engagement quick actions strip (VIP Garage & Configure New Service). Verified 6/6 Playwright tests passing and deployed live to Vercel.
 - **In Progress:**
-  - Next Page / Module Audit (Appointment Booking Wizard `/book` or Job Tracking Portal `/track`).
+  - Next Page / Module Audit (Customer Atelier Garage `/garage` or Admin Operations Portal `/admin`).
 - **Blockers:**
   - None.
 
 ---
 
 ## 4. Last Verified
-- **Task:** `TASK-041 — Smart Package Builder Atelier Polish`
+- **Task:** `TASK-042 — Live Customer Job Tracking Portal Atelier Polish`
 - **Date:** 2026-10-10
-- **Evidence Reference:** [VERIFICATION.md#task-041](file:///docs/00-control/VERIFICATION.md#task-041)
+- **Evidence Reference:** [VERIFICATION.md#task-042](file:///docs/00-control/VERIFICATION.md#task-042)
 
 ---
 

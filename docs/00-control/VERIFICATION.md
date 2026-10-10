@@ -1692,6 +1692,39 @@ All claims of completion must be verified with concrete evidence before receivin
   - `builder_packages_full_cards.png` (verified single-line Atelier Choice, aligned footers, luxury rate formatting).
   - `builder_addons_wave3.png` & `builder_cockpit_calculated.png` (verified balanced 5th addon, added state affordance, dynamic live calculation with chassis multiplier).
 
+---
+
+## TASK-042: Live Customer Job Tracking Portal Atelier Polish (Waves T1 & T2)
+
+- **Task ID:** TASK-042
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-10
+- **Classification:** `BOUNDED`
+
+### Acceptance Criteria:
+1. **Wave T1 (Landing, Clearance & Demo Fallback):**
+   - Calibrated container padding (`pt-32 pb-24 sm:pt-36 sm:pb-28`) and smooth auto-scroll to top to eliminate floating dock collision.
+   - Replaced developer jargon `Authoritative Total:` with `Preservation Investment:`.
+   - Added instant showcase fallback for `DD-DEMO01` (Porsche 911 GT3 RS Weissach Package) resolving 404 traps and loading live 60% In Bay telemetry, DVI inspection, and 3-year ceramic warranty certificate.
+   - Added 3-card Atelier Telemetry Architecture preview to empty `/track` landing with 1-click showcase launcher.
+2. **Wave T2 (Audit Trail, Phone Simulator & Concierge Re-engagement):**
+   - Harmonized `JobAuditTimeline` with Tuscan Amber glowing line markers and dual `timeline || auditLogs` prop resolution, activating chronological audit log trail.
+   - Polished `CommunicationsLogSection` with obsidian cards, Tuscan Amber indicators, and realistic titanium lockscreen phone simulator modal.
+   - Added Concierge Re-engagement quick actions strip (VIP Garage & Configure New Service).
+   - Pass all Playwright E2E tests (6/6 passing) and deploy live to Vercel production.
+
+### Verification Evidence:
+- **Playwright E2E Suite Run:**
+  - Output: `6 passed (19.0s)` with zero failures across all flows.
+- **Production Deployment:**
+  - Deployed to Vercel production: `https://client-mauve-zeta-13.vercel.app/track` (Deployment `dpl_CkJCVtNXurwkN3QviuYs8zsNChpW`).
+- **Visual Evidence Artifacts:**
+  - `track_empty_architecture.png` (verified empty landing with 3 atelier architecture cards and 1-click demo button).
+  - `track_demo_showcase_top.png` (verified instant resolution of DD-DEMO01 into active 60% In Studio Bay stage).
+  - `track_demo_warranty_full.png` (verified DVI 6-zone radar, gloss progress, 3-year warranty certificate, and communications log).
+  - `track_wave_t2_audit_and_concierge.png` (verified active 3-event chronological audit trail with glowing gold timeline and concierge re-engagement strip).
+  - `track_wave_t2_phone_modal.png` (verified titanium lockscreen phone simulator modal with live telemetry notification).
+
 
 
 
