@@ -43,7 +43,7 @@ export const PricingCockpit = ({
   const displayDuration = pricingData?.breakdown?.formattedDuration || formattedDuration;
 
   return (
-    <div className="rounded-2xl bg-[#111622] border border-white/10 p-6 sm:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.7)] sticky top-28 backdrop-blur-2xl hover:border-[#F59E0B]/30 transition-all duration-300">
+    <div className="rounded-2xl bg-[#111622] border border-white/10 p-6 sm:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.7)] sticky top-32 lg:top-36 backdrop-blur-2xl hover:border-[#F59E0B]/30 transition-all duration-300">
       {/* Header */}
       <div className="flex items-center justify-between pb-4 border-b border-white/10">
         <div className="flex items-center gap-2.5">
@@ -52,16 +52,16 @@ export const PricingCockpit = ({
             Pricing Cockpit
           </span>
         </div>
-        <div className="flex items-center gap-1.5 text-[11px] font-mono text-[#F59E0B] bg-[#F59E0B]/10 px-3 py-1 rounded-full border border-[#F59E0B]/25 font-bold">
+        <div>
           {isCalculating ? (
-            <span className="flex items-center gap-1">
+            <span className="flex items-center gap-1.5 text-[11px] font-mono text-[#F59E0B] bg-[#F59E0B]/10 px-3 py-1 rounded-full border border-[#F59E0B]/25 font-bold">
               <RefreshCw className="w-3 h-3 animate-spin text-[#F59E0B]" />
               Syncing...
             </span>
           ) : (
-            <span className="flex items-center gap-1">
-              <Cpu className="w-3 h-3" />
-              Authoritative
+            <span className="flex items-center gap-1.5 text-[11px] font-mono text-[#10B981] bg-[#10B981]/10 px-3 py-1 rounded-full border border-[#10B981]/25 font-bold">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#10B981]" />
+              Live Studio Rates
             </span>
           )}
         </div>
@@ -89,9 +89,9 @@ export const PricingCockpit = ({
         </div>
 
         {/* Package Base Math */}
-        <div className="flex items-center justify-between text-[#64748B] pl-2 font-mono">
-          <span>Base ${basePrice} × {multiplier}x:</span>
-          <span className="text-[#E2E8F0]">${adjustedPkgPrice.toFixed(2)}</span>
+        <div className="flex items-center justify-between text-[#94A3B8] pl-2 font-mono">
+          <span>{multiplier === 1.0 ? 'Baseline Tier Rate:' : `Calibrated Rate (${multiplier}x):`}</span>
+          <span className="text-[#F8FAFC] font-bold">${adjustedPkgPrice.toFixed(2)}</span>
         </div>
 
         {/* Addons List */}
