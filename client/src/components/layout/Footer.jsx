@@ -43,7 +43,7 @@ export const Footer = () => {
           <div className="space-y-4">
             <DetailDockLogo size="md" />
             <p className="text-xs text-[#94A3B8] leading-relaxed pr-4">
-              Concourse-grade automotive preservation studio. Master multi-stage rotary compounding, certified 9H ceramic glass shields, and sterile cleanroom execution guarded by authoritative server pricing.
+              Concourse-grade automotive preservation studio. Master multi-stage rotary compounding, certified 9H ceramic glass shields, and sterile cleanroom execution backed by guaranteed studio pricing.
             </p>
             <div className="flex items-center gap-2 pt-2 text-[11px] font-mono font-bold text-[#F59E0B]">
               <Compass className="w-3.5 h-3.5 text-[#F59E0B]" />
