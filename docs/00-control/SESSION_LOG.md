@@ -473,4 +473,28 @@
   - Backend regression test suite: 165+ automated test checks passing (100% pass rate).
 - **Status:** TASK-040 is VERIFIED. Ready for git commit and remote push.
 
+## 2026-10-10 — Session 25: Incremental Landing Page Audit — Waves 1, 2, and 3 (Before/After Slider 1:1 Pixel Alignment)
+
+- **Action:** Executed user-guided incremental UI/UX audit waves to eliminate AI template aesthetics, developer jargon, and logical inconsistencies on the landing page.
+- **Implemented:**
+  - **Wave 1 (Header & Footer Slop Cleanups):**
+    - `Navbar.jsx`: Removed duplicate `Track Job` link from navigation links; formatted phone number to prevent awkward line breaks.
+    - `HeroSection.jsx`: Removed stray 2px amber artifact line underneath navbar.
+    - `Footer.jsx`: Eliminated developer prompt leaks (`100% Permissive Commercial License (MIT) • Server edition: MongoDB Atlas + Express + React 19`) and replaced with authentic luxury atelier copy (`Bespoke Automotive Preservation & Concourse Detailing`, `Privacy Policy`, `Terms of Atelier Service`).
+  - **Wave 2 (Hero Section & Cockpit Polish):**
+    - `HeroSection.jsx`: Calibrated Porsche 911 GT3 RS background photo opacity to 50% with vignette. Replaced developer jargon (`100% Authoritative Server Math`, `DD-XXXX Live Job Telemetry HUD`) with luxury detailing metrics (`9H + IR`, `< 0.5µm Paint Preservation Depth`, `100% Hand-Compounded Finish`, `ISO-6 Sterile Cleanroom Studio`).
+    - Estimation Cockpit: Replaced `v2.0 Rule Engine` with `Instant Studio Quote`; replaced `AUTHORITATIVE TOTAL:` with `GUARANTEED STUDIO RATE: $289`.
+  - **Wave 3 (Defect Elimination Studio / Slider Logic Fix):**
+    - Resolved two-car mismatch bug: replaced spliced Camaro/BMW photos with a single identical vehicle (BMW M4 Competition in Marina Bay Metallic) on both sides of the scrubber.
+    - Applied GPU `clipPath: inset(0 (100 - sliderPos)% 0 0)` to guarantee 100.0% pixel-perfect alignment across headlights, grilles, and body lines without zoom or aspect-ratio distortion.
+    - Layered procedural SVG spiderweb micro-swirl scratches pattern and clearcoat oxidation haze on the "Before" layer, contrasting with the deep wet-look ceramic mirror finish on the "After" layer.
+    - Added `scroll-mt-28` to `section#results` to prevent sticky navbar overlap.
+- **Verified:**
+  - Vite client production build: compiled in 510ms with 0 errors.
+  - Playwright E2E Suite (`tests/e2e/detaildock.spec.js`): All 6/6 tests passing in 15.5s (100% pass rate).
+  - Production Deployment: Deployed to Vercel production at `https://client-mauve-zeta-13.vercel.app`.
+  - Git Sync: Committed and pushed to `origin main` (`e5cb488`).
+  - Visual Evidence: Captured `wave3_fixed_slider.png` confirming 100% seamless 1:1 vehicle alignment across the 50/50 scrubber.
+- **Status:** Waves 1, 2, and 3 are VERIFIED. Ready for Wave 4 (Services / Bento section).
+
 

@@ -70,8 +70,11 @@
   - `TASK-038`: Full E2E Playwright Verification (6/6 passing in 15.7s), Security Scan (24/24 passing), Zero Regressions (160+ checks passing).
   - `TASK-039`: Concourse Atelier v2.0 Luxury UI/UX Overhaul & 6-Zone Radar — Obsidian Nero/Liquid Champagne Gold tokens, Floating Atelier Dock, Asymmetrical Concourse Bento Grid with specular physics, Scangrip Spotlight beam, 6-Zone Ultrasonic Clear Coat Health Radar, VIP Supercar Garage Lounge, and 6/6 passing Playwright E2E tests in 16.2s.
   - `TASK-040`: Atelier Revolution: Real Supercar Photography, Tuscan Amber & Luxury Motion Overhaul — Permissive high-res supercar & detailing photography, Tuscan Amber (`#F59E0B`) and Sunset Bronze (`#D97706`) palette, fluid spring physics, live interactive Scangrip spotlight, real chassis platform photography, VIP fleet photography banners, and 6/6 passing Playwright E2E tests.
+  - `AUDIT-WAVE-1`: Cleaned navbar duplicate Track Job link, eliminated footer developer prompt leaks/stack disclosures, refined legal atelier footer copy.
+  - `AUDIT-WAVE-2`: Replaced washed-out hero photo with high-visibility Porsche 911 GT3 RS, eliminated developer jargon ("Server Math", "Rule Engine", "Live Telemetry") from public hero cockpit.
+  - `AUDIT-WAVE-3`: Fixed Before/After Defect Elimination Studio: eliminated two-car mismatch bug; unified car geometry into 1:1 pixel-perfect single-vehicle comparison (BMW M4 Competition) using GPU clip-path and realistic swirl spiderweb micro-defect overlay; verified 6/6 Playwright tests passing and deployed live to Vercel.
 - **In Progress:**
-  - Production Deployment Push & Remote Sync.
+  - `AUDIT-WAVE-4`: Services / Bento Section overhaul (renaming AI "Bento" headline, adding authentic multi-angle photography to service packages).
 - **Blockers:**
   - None.
 
