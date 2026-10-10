@@ -515,9 +515,38 @@ export const TrackJobPage = () => {
 
             {/* Chronological Audit Log Timeline */}
             <JobAuditTimeline
+              timeline={bookingData.timeline || bookingData.auditLogs}
               auditLogs={bookingData.auditLogs}
               createdAt={bookingData.createdAt}
             />
+
+            {/* Atelier Concierge Re-engagement Strip */}
+            <div className="p-6 rounded-2xl bg-gradient-to-r from-[#111622] via-[#161D2A] to-[#111622] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+              <div>
+                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#F59E0B] flex items-center justify-center sm:justify-start gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  Atelier Concierge Services
+                </span>
+                <h4 className="text-base font-bold text-white mt-0.5 font-display">
+                  Managing multiple vehicles or scheduling your next preservation?
+                </h4>
+                <p className="text-xs text-[#94A3B8] mt-0.5 font-normal">
+                  Access your VIP client garage or configure another vehicle treatment suite anytime.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3 flex-shrink-0">
+                <Link to="/garage">
+                  <Button variant="outline" size="sm" className="text-xs border-white/15 text-white hover:bg-white/5">
+                    Open VIP Garage
+                  </Button>
+                </Link>
+                <Link to="/builder">
+                  <Button variant="primary" size="sm" iconRight={ArrowRight} className="text-xs glow-amber">
+                    Configure New Service
+                  </Button>
+                </Link>
+              </div>
+            </div>
 
           </div>
         )}

@@ -38,21 +38,21 @@ export const CommunicationsLogSection = ({ communications = [], customerPhone = 
   };
 
   return (
-    <div className="rounded-2xl bg-[#101522] border border-[#1D2536] p-6 space-y-4">
+    <div className="rounded-2xl bg-[#111622] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] p-6 sm:p-7 space-y-5 text-left">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-[#1D2536] pb-4">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#0284C7]/20 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8]">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
+        <div className="flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-xl bg-[#F59E0B]/15 border border-[#F59E0B]/30 flex items-center justify-center text-[#F59E0B]">
             <BellRing className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
+            <h3 className="text-base font-bold text-white flex items-center gap-2 font-display">
               Automated Client Telemetry & Notifications
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#34D399]/20 text-[#34D399] border border-[#34D399]/30 font-mono font-semibold">
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#10B981]/15 text-[#10B981] border border-[#10B981]/30 font-mono font-semibold">
                 LIVE DISPATCH
               </span>
             </h3>
-            <p className="text-xs text-[#94A3B8]">
+            <p className="text-xs text-[#94A3B8] font-normal">
               Automated SMS and email receipts dispatched directly to client device.
             </p>
           </div>
@@ -64,14 +64,14 @@ export const CommunicationsLogSection = ({ communications = [], customerPhone = 
           size="sm"
           icon={Smartphone}
           onClick={() => handleOpenSimulator(defaultNotices[0])}
-          className="text-xs border-[#38BDF8]/40 text-[#38BDF8] hover:bg-[#38BDF8]/10"
+          className="text-xs border-[#F59E0B]/40 text-[#F59E0B] hover:bg-[#F59E0B]/10"
         >
           Simulate Phone Notification
         </Button>
       </div>
 
       {/* Dispatch Timeline Feed */}
-      <div className="space-y-3 pt-2">
+      <div className="space-y-3 pt-1">
         {defaultNotices.map((comm, idx) => {
           const isSms = comm.channel === 'sms';
           const isWhatsApp = comm.channel === 'whatsapp';
@@ -80,7 +80,7 @@ export const CommunicationsLogSection = ({ communications = [], customerPhone = 
           const channelBadge = isWhatsApp
             ? { label: 'WhatsApp', color: 'bg-[#25D366]/20 text-[#25D366] border-[#25D366]/30' }
             : isSms
-            ? { label: 'SMS Carrier', color: 'bg-[#38BDF8]/20 text-[#38BDF8] border-[#38BDF8]/30' }
+            ? { label: 'SMS Carrier', color: 'bg-[#F59E0B]/20 text-[#F59E0B] border-[#F59E0B]/30' }
             : { label: 'Secure Email', color: 'bg-[#8B5CF6]/20 text-[#A78BFA] border-[#8B5CF6]/30' };
 
           const timeFormatted = new Date(comm.dispatchedAt || Date.now()).toLocaleTimeString([], {
@@ -91,7 +91,7 @@ export const CommunicationsLogSection = ({ communications = [], customerPhone = 
           return (
             <div
               key={idx}
-              className="p-3.5 rounded-xl bg-[#090C12] border border-[#1D2536] hover:border-[#2A364E] transition-colors flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs"
+              className="p-3.5 rounded-xl bg-[#0B0E14] border border-white/10 hover:border-[#F59E0B]/30 transition-all flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs"
             >
               <div className="flex items-start gap-3 flex-1">
                 <div className="mt-0.5">
@@ -100,7 +100,7 @@ export const CommunicationsLogSection = ({ communications = [], customerPhone = 
                   ) : isWhatsApp ? (
                     <MessageSquare className="w-4 h-4 text-[#25D366]" />
                   ) : (
-                    <Smartphone className="w-4 h-4 text-[#38BDF8]" />
+                    <Smartphone className="w-4 h-4 text-[#F59E0B]" />
                   )}
                 </div>
                 <div className="space-y-1">
@@ -108,11 +108,11 @@ export const CommunicationsLogSection = ({ communications = [], customerPhone = 
                     <span className={`text-[10px] font-mono px-2 py-0.5 rounded border uppercase font-bold ${channelBadge.color}`}>
                       {channelBadge.label}
                     </span>
-                    <span className="text-[#64748B]">To: {comm.recipient}</span>
-                    <span className="text-[#2A364E]">•</span>
+                    <span className="text-[#94A3B8]">To: {comm.recipient}</span>
+                    <span className="text-white/20">•</span>
                     <span className="text-[#64748B] font-mono">{timeFormatted}</span>
                   </div>
-                  <p className="text-[#E2E8F0] leading-relaxed">
+                  <p className="text-[#E2E8F0] leading-relaxed font-normal">
                     {comm.message}
                   </p>
                 </div>
@@ -121,7 +121,7 @@ export const CommunicationsLogSection = ({ communications = [], customerPhone = 
               <button
                 type="button"
                 onClick={() => handleOpenSimulator(comm)}
-                className="text-[11px] text-[#38BDF8] hover:underline flex items-center gap-1 flex-shrink-0"
+                className="text-[11px] text-[#F59E0B] hover:underline flex items-center gap-1 flex-shrink-0 cursor-pointer font-medium"
               >
                 <span>Preview Alert</span>
                 <ExternalLink className="w-3 h-3" />
@@ -133,45 +133,45 @@ export const CommunicationsLogSection = ({ communications = [], customerPhone = 
 
       {/* Interactive Smartphone Notification Simulator Modal */}
       {showSimulator && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="max-w-sm w-full bg-[#0D1117] border-2 border-[#1D2536] rounded-3xl p-6 shadow-2xl relative space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
+          <div className="max-w-sm w-full bg-[#0B0E14] border border-white/15 rounded-3xl p-6 shadow-[0_25px_60px_rgba(0,0,0,0.9)] relative space-y-4">
             {/* Close Button */}
             <button
               onClick={() => setShowSimulator(false)}
-              className="absolute top-4 right-4 p-2 text-[#64748B] hover:text-white rounded-lg hover:bg-[#161D2E]"
+              className="absolute top-4 right-4 p-2 text-[#94A3B8] hover:text-white rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
 
-            {/* Smartphone Header Notch */}
-            <div className="w-24 h-4 bg-[#161D2E] rounded-full mx-auto" />
+            {/* Smartphone Header Dynamic Island */}
+            <div className="w-24 h-4 bg-black rounded-full mx-auto border border-white/10" />
 
             <div className="text-center pt-1">
-              <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-[#38BDF8] bg-[#0284C7]/20 px-2.5 py-1 rounded-full border border-[#0284C7]/30">
+              <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-[#F59E0B] bg-[#F59E0B]/15 px-3 py-1 rounded-full border border-[#F59E0B]/30">
                 Customer Phone Lockscreen
               </span>
-              <h4 className="text-base font-extrabold text-white mt-2">
-                Live Notification Alert
+              <h4 className="text-base font-extrabold text-white mt-2 font-display">
+                Live Telemetry Alert
               </h4>
             </div>
 
             {/* Phone Push Notification Card */}
-            <div className="p-4 rounded-2xl bg-[#161D2E]/90 border border-[#38BDF8]/40 shadow-xl space-y-2">
+            <div className="p-4 rounded-2xl bg-[#161D2A] border border-[#F59E0B]/30 shadow-xl space-y-2 text-left">
               <div className="flex items-center justify-between text-xs">
                 <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 rounded-md bg-[#0284C7] flex items-center justify-center text-white text-[10px] font-bold">
+                  <div className="w-5 h-5 rounded-md bg-[#F59E0B] flex items-center justify-center text-[#0B0E14] text-[10px] font-black">
                     DD
                   </div>
-                  <span className="font-bold text-white">DetailDock Atelier</span>
+                  <span className="font-bold text-white font-display">DetailDock Atelier</span>
                 </div>
-                <span className="text-[10px] text-[#64748B]">now</span>
+                <span className="text-[10px] text-[#94A3B8] font-mono">now</span>
               </div>
-              <p className="text-xs text-[#E2E8F0] leading-snug">
+              <p className="text-xs text-[#E2E8F0] leading-snug font-normal">
                 {selectedNotice?.message || 'Your vehicle detailing service is progressing in Cleanroom Bay 1.'}
               </p>
-              <div className="pt-1 flex items-center justify-between text-[10px] text-[#38BDF8]">
+              <div className="pt-1 flex items-center justify-between text-[10px] text-[#F59E0B] font-mono">
                 <span>Tap to view live telemetry</span>
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#34D399]" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#10B981]" />
               </div>
             </div>
 
