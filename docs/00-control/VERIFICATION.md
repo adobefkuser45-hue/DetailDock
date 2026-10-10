@@ -1757,6 +1757,33 @@ All claims of completion must be verified with concrete evidence before receivin
   - `garage_wave_g2_add_modal.png` (verified Add Vehicle Modal styled in Obsidian Nero with Tuscan Amber accents and glowing button).
   - `garage_wave_g2_bookings_tab_card.png` (verified Concierge Bookings empty state with atelier messaging, [Configure Detailing Package], and [Explore Demo Telemetry (DD-DEMO01)] actions).
 
+---
+
+## TASK-044: Admin Operations & Service Catalog Deck Atelier Polish (Waves A1 & A2)
+
+- **Task ID:** TASK-044
+- **Status:** `ATTEMPTED` (Wave A1 Verified)
+- **Date:** 2026-10-11
+- **Classification:** `ARCHITECTURAL`
+
+### Acceptance Criteria:
+1. **Wave A1 (Dock Clearance, Header Card, KPI Row & Kanban Card Typography):**
+   - Calibrated container padding (`pt-32 pb-24 sm:pt-36 sm:pb-28`) and smooth auto-scroll to top on both unauthenticated login screen and authenticated operations deck.
+   - Upgraded command deck header card to Obsidian Nero (`#0B0E14`) with live cleanroom status indicator and unified action buttons (`border-white/10`).
+   - Refined `AdminKpiRow.jsx` to Obsidian Nero cards with amber hover states, replaced developer jargon ("Authoritative multi-stage packages" -> "Bespoke multi-stage preservation suites"), and kept exact E2E metric labels (`Total Studio Revenue` and `Cleanroom Utilization`).
+   - Overhauled `KanbanBoard.jsx` with `whitespace-nowrap` on tracking codes and time slots to prevent line-wrapping glitches, and styled cards in Concourse obsidian with glowing amber accents while maintaining all stage buttons (`Confirm Bay`, `Stage in Bay`, `Mark Ready`, `Release Vehicle`).
+   - Pass all Playwright E2E tests (6/6 passing) and deploy live to Vercel production.
+
+### Verification Evidence:
+- **Playwright E2E Suite Run:**
+  - Output: `6 passed (19.8s)` with zero failures across all flows including Test 5 (Admin Operations Deck).
+- **Production Deployment:**
+  - Deployed to Vercel production: `https://client-mauve-zeta-13.vercel.app/admin` (Deployment `dpl_BMfsGzTQZ5cA2aHi5PdZSHNssBVg`).
+- **Visual Evidence Artifacts:**
+  - `admin_wave_a1_unauth_landing.png` (verified unauthenticated login screen with generous dock breathing room and font-display heading).
+  - `admin_wave_a1_deck_header_kpis.png` (verified authenticated deck top with Obsidian Nero header card, live cleanroom badge, quick actions, and polished KPI metric row).
+  - `admin_wave_a1_kanban_cards.png` (verified Kanban pipeline cards with single-line whitespace-nowrap tracking codes, clean time slot badges, and gold hover borders).
+
 
 
 

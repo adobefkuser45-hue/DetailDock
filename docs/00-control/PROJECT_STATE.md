@@ -16,10 +16,10 @@
 ---
 
 ## 2. Current Position
-- **Stage:** `20 Customer VIP Garage Lounge Complete`
-- **Milestone:** `M10 — Atelier Revolution: Customer VIP Garage Lounge (VERIFIED)`
-- **Current Task:** `TASK-043 — Customer VIP Garage Lounge Atelier Polish (Waves G1 & G2)`
-- **Task Status:** `VERIFIED`
+- **Stage:** `21 Admin Operations & Service Catalog Deck In Progress`
+- **Milestone:** `M11 — Atelier Revolution: Admin Operations & Service Catalog Deck`
+- **Current Task:** `TASK-044 — Admin Operations & Service Catalog Deck Atelier Polish (Wave A1 Verified)`
+- **Task Status:** `ATTEMPTED`
 - **Classification:** `ARCHITECTURAL`
 
 ---
@@ -85,8 +85,10 @@
   - `TASK-043`: Customer VIP Garage Lounge Atelier Polish (Waves G1 & G2):
     - `Wave G1`: Floating dock clearance (`pt-32 pb-24 sm:pt-36 sm:pb-28`) on unauth and auth views with smooth scroll-to-top. Dynamic supercar make/model photographic resolver (`getVehicleImage`) mapping authentic Porsche 911 GT3 RS, Ferrari 296 GTB, BMW M3/M4, Range Rover SUV, and Ford F-150 Truck. Added Concourse badge formatter for vehicle categories (`formatCategoryBadge`). Added 3 Atelier VIP Client Privilege cards to unauthenticated landing.
     - `Wave G2`: Polished KPI cards with hover transitions and luxury borders. Enhanced Add Vehicle Modal with Obsidian Nero backdrop, Tuscan Amber header badge, and glowing amber button while preserving form placeholders and schema compatibility. Designed empty ledger state for Concierge Bookings & History tab with direct package builder and demo telemetry links. Verified 6/6 Playwright tests passing (16.6s), Vite build in 501ms, deployed live to Vercel (`dpl_5q62baHoWAsBzFon8n2sySbfqS9V`).
+  - `TASK-044`: Admin Operations & Service Catalog Deck Atelier Polish (Waves A1 & A2):
+    - `Wave A1`: Added floating dock clearance (`pt-32 pb-24 sm:pt-36 sm:pb-28`) on unauthenticated and authenticated views in `AdminPage.jsx` with automatic smooth scroll-to-top on token state changes. Elevated command deck header card to Obsidian Nero (`#0B0E14`) with live cleanroom status indicator and unified action buttons. Upgraded `AdminKpiRow.jsx` to Obsidian Nero cards with amber hover states and eliminated developer jargon. Overhauled `KanbanBoard.jsx` with `whitespace-nowrap` on tracking codes and time slots to prevent line-wrapping glitches, and styled cards in Concourse obsidian with glowing amber accents. Verified 6/6 Playwright tests passing (19.8s), Vite build in 494ms, deployed live to Vercel (`dpl_BMfsGzTQZ5cA2aHi5PdZSHNssBVg`).
 - **In Progress:**
-  - Next Page / Module Audit (Admin Operations Deck & Service Catalog `/admin`).
+  - `TASK-044 Wave A2`: Admin Operations Login Card (`AdminLogin.jsx`), Service Catalog & Pricing Cockpit Modal (`CatalogManagerModal.jsx`), Studio Identity Settings Modal (`StudioSettingsModal.jsx`).
 - **Blockers:**
   - None.
 

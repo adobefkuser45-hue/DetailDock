@@ -606,6 +606,31 @@
   - Visual Evidence: Captured `garage_wave_g1_unauth.png`, `garage_wave_g1_auth_fleet.png`, `garage_wave_g2_add_modal.png`, and `garage_wave_g2_bookings_tab_card.png`.
 - **Status:** Waves G1 and G2 are fully VERIFIED and deployed live to production. The Customer VIP Garage Lounge is 100% polished, responsive, and Concourse-grade.
 
+## 2026-10-11 — Session 31: Admin Operations Deck (/admin) Polish — Wave A1 Complete
+
+- **Action:** Executed Wave A1 of the UI/UX audit and Concourse Atelier polish on the Admin Operations Deck (`/admin`).
+- **Implemented:**
+  - `AdminPage.jsx`:
+    - Added container breathing room (`pt-32 pb-24 sm:pt-36 sm:pb-28`) on both unauthenticated login and authenticated operations deck.
+    - Added automatic smooth scroll-to-top (`window.scrollTo({ top: 0, behavior: 'smooth' })`) on `token` state changes, preventing users from landing midway down the page in the Kanban lanes.
+    - Upgraded command deck header card to Obsidian Nero (`#0B0E14`) with subtle `border-white/10`, deep shadow, live cleanroom active badge with pulsing indicator, and unified action buttons.
+    - Upgraded search and filter bar with Obsidian styling, amber warehouse icon, and clean select styling.
+  - `AdminKpiRow.jsx`:
+    - Converted all 4 KPI cards to Obsidian Nero (`#111622`) with `border-white/10` and Tuscan Amber hover transitions (`hover:border-[#F59E0B]/30`).
+    - Replaced developer jargon ("Authoritative multi-stage packages" -> "Bespoke multi-stage preservation suites").
+    - Preserved exact E2E test metric strings (`Total Studio Revenue`, `Cleanroom Utilization`).
+  - `KanbanBoard.jsx`:
+    - Overhauled Kanban card typography with `whitespace-nowrap` on tracking codes and time slots, eliminating ugly line-wrapping glitches (e.g. `DD-` wrapping over `ZNBB9N`, or `01:00 PM` breaking onto two lines).
+    - Elevated cards to Obsidian Nero with gold/amber hover glow and high-contrast client badges.
+    - Maintained all operational status buttons (`Confirm Bay`, `Stage in Bay`, `Mark Ready`, `Release Vehicle`).
+- **Verified:**
+  - Vite client production build: compiled in 494ms with 0 errors.
+  - Playwright E2E Suite (`tests/e2e/detaildock.spec.js`): All 6/6 tests passing in 19.8s (100% pass rate).
+  - Production Deployment: Live on Vercel at `https://client-mauve-zeta-13.vercel.app/admin` (`dpl_BMfsGzTQZ5cA2aHi5PdZSHNssBVg`).
+  - Git Sync: Committed and pushed to `origin main` (`5a80ca1`).
+  - Visual Evidence: Captured `admin_wave_a1_unauth_landing.png`, `admin_wave_a1_deck_header_kpis.png`, and `admin_wave_a1_kanban_cards.png`.
+- **Status:** Wave A1 is fully VERIFIED and deployed live to production. Ready for Wave A2 (Modals & Login Card).
+
 
 
 
