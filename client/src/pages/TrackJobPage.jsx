@@ -69,6 +69,15 @@ const DEMO_BOOKING_SHOWCASE = {
     totalPrice: 667,
     totalDurationMinutes: 255
   },
+  packageSnapshot: {
+    title: 'Signature Multi-Stage Detail & Dual Ceramic Shield',
+    category: 'ceramic'
+  },
+  warrantyCertificate: {
+    certificateNumber: 'CCW-2026-911G',
+    issuedAt: '2026-10-14T10:00:00.000Z',
+    expiresAt: '2029-10-14T10:00:00.000Z'
+  },
   payment: {
     status: 'paid',
     method: 'stripe',
