@@ -2,10 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Sparkles, MapPin, Clock, Phone } from 'lucide-react';
 import { Button } from '../common/Button.jsx';
+import { useStudio } from '../../context/StudioContext.jsx';
 
 export const CTASection = () => {
+  const { settings } = useStudio();
+
+  const phoneText = settings?.contactPhone || '+1 (512) 842-9210';
+  const cleanPhone = phoneText.replace(/[^\d+]/g, '');
+  const addressText = settings?.address?.street 
+    ? `${settings.address.street}, ${settings.address.city}, ${settings.address.state} ${settings.address.zip}`
+    : '1440 Velocity Way, Suite 100, Austin, TX 78701';
+
   return (
-    <section className="py-24 relative overflow-hidden bg-[#0B0E14] border-t border-white/10">
+    <section id="contact-cta" className="py-24 relative overflow-hidden bg-[#0B0E14] border-t border-white/10 scroll-mt-24">
       {/* Supercar Showroom Backdrop */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <img
@@ -30,7 +39,7 @@ export const CTASection = () => {
         </h2>
 
         <p className="text-base sm:text-lg text-[#94A3B8] max-w-2xl mx-auto leading-relaxed mb-10 font-normal">
-          Book your climate-controlled bay slot today. Dynamic pricing calculated in seconds with zero hidden charges.
+          Book your climate-controlled bay slot today. Guaranteed upfront studio rates calculated in seconds with zero hidden charges.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
@@ -61,15 +70,17 @@ export const CTASection = () => {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-10 border-t border-white/10 text-xs text-[#94A3B8]">
           <div className="flex items-center justify-center gap-2">
             <MapPin className="w-4 h-4 text-[#F59E0B]" />
-            <span>2400 E 5th St, Austin, TX 78702</span>
+            <span>{addressText}</span>
           </div>
           <div className="flex items-center justify-center gap-2">
             <Clock className="w-4 h-4 text-[#F59E0B]" />
-            <span>Mon–Sat: 8:00 AM – 6:00 PM</span>
+            <span>Mon–Sat: 09:00 AM – 06:00 PM (Closed Sun)</span>
           </div>
           <div className="flex items-center justify-center gap-2">
             <Phone className="w-4 h-4 text-[#F59E0B]" />
-            <span>Direct Atelier Line: (512) 555-DOCK</span>
+            <a href={`tel:${cleanPhone}`} className="hover:text-white transition-colors">
+              Direct Atelier Line: {phoneText}
+            </a>
           </div>
         </div>
 

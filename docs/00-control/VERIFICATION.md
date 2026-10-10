@@ -1619,5 +1619,54 @@ All claims of completion must be verified with concrete evidence before receivin
 - **Visual Evidence Artifacts:**
   - `wave4_services_after_click.png` (verified zero navbar overlap, pristine typography, actionable diagnostic card, and rich detailing photography).
 
+---
+
+## AUDIT-WAVE-5: Process Timeline & Why Choose Us Polish
+
+- **Task ID:** AUDIT-WAVE-5
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-10
+- **Classification:** `BOUNDED`
+
+### Acceptance Criteria:
+1. Eliminate developer jargon from `ProcessTimeline.jsx` ('Dynamic Pricing Engine' -> 'Live Studio Configurator', 'Dual Bay Scheduling' -> 'Cleanroom Bay Reservation', 'Live Job Telemetry' -> 'Real-Time Stage Tracking').
+2. Eliminate tech startup copy from `WhyChooseUs.jsx` ('full-stack software' -> 'ISO-standard paint measurement, and seamless digital booking').
+3. Calibrate WhyChooseUs padding (`pt-36 pb-24 sm:pt-40 scroll-mt-32`) to guarantee zero occlusion from floating sticky navbar dock.
+4. Pass all Playwright E2E tests (6/6 passing) and deploy live to Vercel.
+
+### Verification Evidence:
+- **Playwright E2E Suite Run:**
+  - Output: `6 passed (16.6s)` with zero failures.
+- **Production Deployment:**
+  - Deployed to Vercel production: `https://client-mauve-zeta-13.vercel.app` (Deployment `dpl_DFBmnyqNV8hzw8iH8JYjwgjuYXca`).
+- **Visual Evidence Artifacts:**
+  - `wave5_why_choose_us.png` (verified clean top breathing room, zero dock collision, polished automotive value propositions).
+  - `wave5_process_timeline.png` (verified luxury client journey cards and authentic automotive stage copy).
+
+---
+
+## AUDIT-WAVE-6: Testimonials & Final CTA Section Consistency Polish
+
+- **Task ID:** AUDIT-WAVE-6
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-10
+- **Classification:** `BOUNDED`
+
+### Acceptance Criteria:
+1. Harmonize CTA contact details dynamically using `useStudio()` hook to eliminate conflicting address (`2400 E 5th St` -> `1440 Velocity Way, Suite 100, Austin, TX 78701`), phone number (`(512) 555-DOCK` -> `+1 (512) 842-9210`), and operating hours (`Mon–Sat: 09:00 AM – 06:00 PM (Closed Sun)`).
+2. Refine CTA pricing proposition ('Dynamic pricing calculated in seconds' -> 'Guaranteed upfront studio rates calculated in seconds with zero hidden charges').
+3. Add calibrated padding (`pt-36 pb-24 sm:pt-40 scroll-mt-32`) to `TestimonialsSection.jsx` to prevent floating dock occlusion.
+4. Pass all Playwright E2E tests (6/6 passing) and deploy live to Vercel.
+
+### Verification Evidence:
+- **Playwright E2E Suite Run:**
+  - Output: `6 passed (14.7s)` with zero failures.
+- **Production Deployment:**
+  - Deployed to Vercel production: `https://client-mauve-zeta-13.vercel.app` (Deployment `dpl_5DXPwE8zPdN366ms99nZip5CjBGh`).
+- **Visual Evidence Artifacts:**
+  - `wave6_testimonials.png` (verified authentic exotic supercar reviews with verified owner tags and generous breathing room).
+  - `wave6_final_cta.png` (verified double-bay perfection headline, synchronized Austin atelier location, phone link, and upfront rate guarantee).
+
+
 
 

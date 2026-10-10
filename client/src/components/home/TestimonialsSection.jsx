@@ -55,7 +55,7 @@ export const TestimonialsSection = () => {
   };
 
   return (
-    <section className="py-24 bg-[#0B0E14] border-t border-white/10 relative overflow-hidden">
+    <section id="testimonials" className="pt-36 pb-24 sm:pt-40 bg-[#0B0E14] border-t border-white/10 relative overflow-hidden scroll-mt-32">
       {/* Subtle radial glow */}
       <div className="absolute top-1/2 left-1/3 w-80 h-80 bg-[#F59E0B]/5 rounded-full blur-[140px] pointer-events-none" />
 
