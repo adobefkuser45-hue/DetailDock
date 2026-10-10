@@ -315,7 +315,7 @@ export const BuilderPage = () => {
   };
 
   return (
-    <div className="w-full bg-[#0B0E14] text-[#F8FAFC] min-h-screen py-12 lg:py-16">
+    <div className="w-full bg-[#0B0E14] text-[#F8FAFC] min-h-screen pt-32 pb-24 sm:pt-36 sm:pb-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Page Hero Header */}
@@ -323,13 +323,13 @@ export const BuilderPage = () => {
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#111622] border border-white/10 text-xs font-semibold text-[#F59E0B] mb-4">
               <Gauge className="w-3.5 h-3.5 text-[#F59E0B]" />
-              <span className="font-mono uppercase tracking-wider">Authoritative Dynamic Configurator</span>
+              <span className="font-mono uppercase tracking-wider">Interactive Atelier Configurator</span>
             </div>
             <h1 className="text-3xl sm:text-5xl font-black text-[#F8FAFC] tracking-[-0.03em] font-display">
               Smart Package Builder
             </h1>
             <p className="text-sm sm:text-base text-[#94A3B8] max-w-2xl mt-2 font-normal">
-              Select your vehicle body style to apply server-side surface area multipliers, pick your preservation tier, and customize with bespoke studio enhancements.
+              Select your vehicle platform to calibrate surface area and technician bay duration, choose your preservation tier, and customize with bespoke studio enhancements.
             </p>
           </div>
 
@@ -341,9 +341,9 @@ export const BuilderPage = () => {
               <RotateCcw className="w-3.5 h-3.5 text-[#F59E0B]" />
               Reset Config
             </button>
-            <div className="text-xs font-mono text-[#F59E0B] bg-[#F59E0B]/10 px-3.5 py-2 rounded-xl border border-[#F59E0B]/25 flex items-center gap-1.5 font-bold">
-              <Cpu className="w-3.5 h-3.5" />
-              Deterministic Rule Engine
+            <div className="text-xs font-mono text-[#10B981] bg-[#10B981]/10 px-3.5 py-2 rounded-xl border border-[#10B981]/25 flex items-center gap-1.5 font-bold">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              Guaranteed Studio Rates
             </div>
           </div>
         </div>

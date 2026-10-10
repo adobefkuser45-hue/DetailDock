@@ -9,11 +9,16 @@ const ICON_MAP = {
 };
 
 const CATEGORY_PHOTOS = {
-  sedan: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=400&auto=format&fit=crop',
-  coupe: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=400&auto=format&fit=crop',
-  suv: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=400&auto=format&fit=crop',
-  'truck-van': 'https://images.unsplash.com/photo-1559416523-140ddc3d238c?q=80&w=400&auto=format&fit=crop',
-  exotic: 'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?q=80&w=400&auto=format&fit=crop'
+  // Primary API and Seed Database Slugs:
+  sedan: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=600&auto=format&fit=crop',
+  'executive-coupe': 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=600&auto=format&fit=crop',
+  'compact-suv': 'https://images.unsplash.com/photo-1563720223185-11003d516935?q=80&w=600&auto=format&fit=crop',
+  'full-suv': 'https://images.unsplash.com/photo-1551830820-330a71b99659?q=80&w=600&auto=format&fit=crop',
+  // Direct Alias Fallbacks:
+  coupe: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=600&auto=format&fit=crop',
+  suv: 'https://images.unsplash.com/photo-1563720223185-11003d516935?q=80&w=600&auto=format&fit=crop',
+  'truck-van': 'https://images.unsplash.com/photo-1551830820-330a71b99659?q=80&w=600&auto=format&fit=crop',
+  exotic: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=600&auto=format&fit=crop'
 };
 
 export const VehicleSelector = ({ categories, selectedCategory, onSelect }) => {
@@ -29,7 +34,7 @@ export const VehicleSelector = ({ categories, selectedCategory, onSelect }) => {
           </h2>
         </div>
         <span className="text-xs text-[#94A3B8] font-mono">
-          Applies surface area multiplier
+          Precision Surface Area Calibration
         </span>
       </div>
 
@@ -89,7 +94,7 @@ export const VehicleSelector = ({ categories, selectedCategory, onSelect }) => {
                     </div>
                   </div>
 
-                  <p className="text-xs text-[#94A3B8] leading-relaxed mb-3 font-normal line-clamp-2">
+                  <p className="text-xs text-[#94A3B8] leading-relaxed mb-3 font-normal min-h-[2.5rem]">
                     {cat.description}
                   </p>
                 </div>
