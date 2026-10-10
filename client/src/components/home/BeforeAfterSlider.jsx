@@ -14,26 +14,24 @@ const COMPARISON_SCENARIOS = [
   {
     id: 'paint',
     title: 'Paint Correction & Ceramic Shield',
-    subtitle: 'BMW M4 Competition — Marina Bay Metallic',
-    beforeLabel: 'Before: Swirl Haze & Holograms',
+    subtitle: 'Porsche 911 GT3 RS — Cleanroom Paint Correction',
+    beforeLabel: 'Before: Road Grime & Swirl Haze',
     afterLabel: 'After: 2-Stage Compound + 9H Ceramic',
-    image: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=1600&auto=format&fit=crop',
-    beforeImage: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=1600&auto=format&fit=crop',
-    afterImage: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=1600&auto=format&fit=crop',
-    beforeStats: { gloss: '58 GU', defects: 'Heavy Holograms', slickness: 'Low' },
+    beforeImage: '/images/slider/paint_before.jpg',
+    afterImage: '/images/slider/paint_after.jpg',
+    beforeStats: { gloss: '58 GU', defects: 'Heavy Grime & Swirls', slickness: 'Low' },
     afterStats: { gloss: '98 GU', defects: '95%+ Elimination', slickness: '115° Beading' },
-    defectList: ['Tunnel wash micro-swirls', 'Acid rain etching', 'Clear coat haze'],
+    defectList: ['Dried road grime & mud', 'Tunnel wash micro-swirls', 'Clear coat oxidation'],
     type: 'paint'
   },
   {
     id: 'wheels',
     title: 'Wheels & Caliper Heat Shield',
-    subtitle: 'Forged Centerlock Wheels & Carbon Ceramic Calipers',
-    beforeLabel: 'Before: Baked Metallic Dust',
+    subtitle: 'Lamborghini Forged Centerlock & Carbon Ceramic Calipers',
+    beforeLabel: 'Before: Baked Metallic Dust & Tar',
     afterLabel: 'After: High-Temp Ceramic Coating',
-    image: 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=1600&auto=format&fit=crop',
-    beforeImage: 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=1600&auto=format&fit=crop',
-    afterImage: 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=1600&auto=format&fit=crop',
+    beforeImage: '/images/slider/wheels_before.jpg',
+    afterImage: '/images/slider/wheels_after.jpg',
     beforeStats: { gloss: '42 GU', defects: 'Sintered Brake Dust', slickness: 'Sticking' },
     afterStats: { gloss: '94 GU', defects: 'Zero Contamination', slickness: 'Hydrophobic' },
     defectList: ['Baked-on iron filings', 'Road asphalt tar spots', 'Calipers oxidation'],
@@ -42,12 +40,11 @@ const COMPARISON_SCENARIOS = [
   {
     id: 'interior',
     title: 'Cockpit Leather & Steam Extraction',
-    subtitle: 'Full Leather & Alcantara Interior Suite',
-    beforeLabel: 'Before: Oily Grime & Dirt',
-    afterLabel: 'After: OEM Matte Restored',
-    image: 'https://images.unsplash.com/photo-1563720223185-11003d516935?q=80&w=1600&auto=format&fit=crop',
-    beforeImage: 'https://images.unsplash.com/photo-1563720223185-11003d516935?q=80&w=1600&auto=format&fit=crop',
-    afterImage: 'https://images.unsplash.com/photo-1563720223185-11003d516935?q=80&w=1600&auto=format&fit=crop',
+    subtitle: 'Ferrari F8 Tributo — Full Leather & Carbon Cockpit',
+    beforeLabel: 'Before: Grime, Oily Shine & Debris',
+    afterLabel: 'After: OEM Factory Matte Restored',
+    beforeImage: '/images/slider/interior_before.jpg',
+    afterImage: '/images/slider/interior_after.jpg',
     beforeStats: { gloss: '75 GU (Oily)', defects: 'Body Oils & Dirt', slickness: 'Greasy' },
     afterStats: { gloss: 'Matte OEM', defects: 'Steam Sanitized', slickness: 'Supple Touch' },
     defectList: ['Oily steering wheel shine', 'Creased dirt deposits', 'UV fading on bolsters'],
@@ -124,7 +121,7 @@ export const BeforeAfterSlider = () => {
   }, [isDragging, handleMove]);
 
   return (
-    <section id="results" className="py-24 bg-[#08090C] border-t border-b border-white/10 relative overflow-hidden scroll-mt-28">
+    <section id="results" className="pt-32 pb-24 bg-[#08090C] border-t border-b border-white/10 relative overflow-hidden scroll-mt-32">
       {/* Background radial accent */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[160px] pointer-events-none" />
 
@@ -238,26 +235,19 @@ export const BeforeAfterSlider = () => {
           onTouchMove={handlePointerMove}
           className="relative w-full h-[400px] sm:h-[500px] lg:h-[560px] rounded-2xl overflow-hidden select-none border border-white/15 shadow-[0_25px_60px_rgba(0,0,0,0.85)] bg-[#0B0E14] cursor-ew-resize group"
         >
-          {/* LAYER 1: The "AFTER" (Real Flawless Ceramic Mirror Finish Photo) */}
+          {/* LAYER 1: The "AFTER" (Ceramic Mirror Finish Photo) */}
           <div className="absolute inset-0 w-full h-full bg-[#0B0E14] overflow-hidden">
             <img 
               src={activeScenario.afterImage} 
               alt={activeScenario.afterLabel} 
-              className={`w-full h-full object-cover object-center ${
-                activeScenario.type === 'paint'
-                  ? 'filter contrast-105 brightness-102 saturate-105'
-                  : activeScenario.type === 'wheels'
-                  ? 'filter contrast-110 brightness-105 saturate-110'
-                  : 'filter contrast-105 brightness-100 saturate-105'
-              }`}
+              className="w-full h-full object-cover object-center"
             />
-            {/* Subtle ceramic reflection sheen */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/5 via-transparent to-amber-500/10 pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0E14]/70 via-transparent to-[#0B0E14]/30 pointer-events-none" />
+            {/* Subtle atmospheric vignette */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0E14]/70 via-transparent to-[#0B0E14]/20 pointer-events-none" />
 
             {/* Minimal Elegant After Studio Pill */}
             <div className="absolute top-5 right-5 z-20 pointer-events-none">
-              <span className="px-3 py-1 rounded-full bg-[#0B0E14]/80 border border-[#10B981]/40 text-[#10B981] text-xs font-bold uppercase tracking-wider backdrop-blur-md flex items-center gap-1.5 shadow-lg font-mono">
+              <span className="px-3 py-1 rounded-full bg-[#0B0E14]/85 border border-[#10B981]/50 text-[#10B981] text-xs font-bold uppercase tracking-wider backdrop-blur-md flex items-center gap-1.5 shadow-xl font-mono">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 {activeScenario.afterLabel}
               </span>
@@ -272,56 +262,13 @@ export const BeforeAfterSlider = () => {
             <img 
               src={activeScenario.beforeImage} 
               alt={activeScenario.beforeLabel} 
-              className={`w-full h-full object-cover object-center ${
-                activeScenario.type === 'paint'
-                  ? 'filter contrast-90 brightness-95 saturate-85'
-                  : activeScenario.type === 'wheels'
-                  ? 'filter contrast-85 brightness-90 sepia-[0.25] saturate-70'
-                  : 'filter contrast-90 brightness-95'
-              }`}
+              className="w-full h-full object-cover object-center"
             />
-            
-            {/* Paint Swirl / Spiderweb Defect Overlay */}
-            {activeScenario.type === 'paint' && (
-              <>
-                {/* Clear coat oxidation haze */}
-                <div className="absolute inset-0 bg-slate-900/20 mix-blend-color-dodge pointer-events-none" />
-                <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-transparent to-red-500/10 mix-blend-screen pointer-events-none" />
-                
-                {/* Procedural Micro-Swirl Scratch Spiderweb Pattern */}
-                <div className="absolute inset-0 pointer-events-none mix-blend-screen opacity-45">
-                  <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <pattern id="paintSwirls" width="140" height="140" patternUnits="userSpaceOnUse">
-                        <circle cx="70" cy="70" r="60" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="0.8" strokeDasharray="3 5" />
-                        <circle cx="70" cy="70" r="45" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="0.8" strokeDasharray="2 4" />
-                        <circle cx="70" cy="70" r="30" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="0.8" />
-                        <circle cx="70" cy="70" r="15" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="0.75" />
-                        <path d="M 15 15 Q 70 110 125 25" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="0.6" strokeDasharray="4 4" />
-                        <path d="M 25 125 Q 85 35 120 115" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="0.6" strokeDasharray="4 4" />
-                      </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#paintSwirls)" />
-                  </svg>
-                </div>
-              </>
-            )}
-
-            {/* Wheels Brake Dust Patina Overlay */}
-            {activeScenario.type === 'wheels' && (
-              <div className="absolute inset-0 bg-amber-950/20 mix-blend-multiply pointer-events-none" />
-            )}
-
-            {/* Interior Sebum / Greasy Shine Overlay */}
-            {activeScenario.type === 'interior' && (
-              <div className="absolute inset-0 bg-white/10 mix-blend-overlay pointer-events-none" />
-            )}
-
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0E14]/60 via-transparent to-[#0B0E14]/30 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0E14]/60 via-transparent to-[#0B0E14]/20 pointer-events-none" />
 
             {/* Minimal Elegant Before Studio Pill */}
             <div className="absolute top-5 left-5 z-20 pointer-events-none">
-              <span className="px-3 py-1 rounded-full bg-[#0B0E14]/80 border border-[#EF4444]/40 text-[#F87171] text-xs font-bold uppercase tracking-wider backdrop-blur-md flex items-center gap-1.5 shadow-lg font-mono">
+              <span className="px-3 py-1 rounded-full bg-[#0B0E14]/85 border border-[#EF4444]/50 text-[#F87171] text-xs font-bold uppercase tracking-wider backdrop-blur-md flex items-center gap-1.5 shadow-xl font-mono">
                 <Flame className="w-3.5 h-3.5" />
                 {activeScenario.beforeLabel}
               </span>
