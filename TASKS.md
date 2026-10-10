@@ -53,6 +53,7 @@
 | **TASK-040** | 17 Creative UI | Atelier Revolution: Real Supercar Photography, Tuscan Amber & Luxury Motion Overhaul | `VERIFIED` | TASK-039 | [VERIFICATION.md#task-040](file:///docs/00-control/VERIFICATION.md#task-040) |
 | **TASK-041** | 18 Atelier UI | Smart Package Builder Atelier Polish (Chassis Photography, Package Alignment & Live Cockpit) | `VERIFIED` | TASK-040 | [VERIFICATION.md#task-041](file:///docs/00-control/VERIFICATION.md#task-041) |
 | **TASK-042** | 19 Atelier UI | Live Customer Job Tracking Portal Atelier Polish (Waves T1 & T2) | `VERIFIED` | TASK-041 | [VERIFICATION.md#task-042](file:///docs/00-control/VERIFICATION.md#task-042) |
+| **TASK-043** | 20 Atelier UI | Customer VIP Garage Lounge Atelier Polish (Waves G1 & G2) | `VERIFIED` | TASK-042 | [VERIFICATION.md#task-043](file:///docs/00-control/VERIFICATION.md#task-043) |
 
 ---
 

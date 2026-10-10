@@ -1725,6 +1725,38 @@ All claims of completion must be verified with concrete evidence before receivin
   - `track_wave_t2_audit_and_concierge.png` (verified active 3-event chronological audit trail with glowing gold timeline and concierge re-engagement strip).
   - `track_wave_t2_phone_modal.png` (verified titanium lockscreen phone simulator modal with live telemetry notification).
 
+---
+
+## TASK-043: Customer VIP Garage Lounge Atelier Polish (Waves G1 & G2)
+
+- **Task ID:** TASK-043
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-10
+- **Classification:** `ARCHITECTURAL`
+
+### Acceptance Criteria:
+1. **Wave G1 (Dock Clearance, Dynamic Supercar Photography & Concourse Badges):**
+   - Calibrated container padding (`pt-32 pb-24 sm:pt-36 sm:pb-28`) and smooth auto-scroll to top on both unauthenticated and authenticated views.
+   - Dynamic supercar photographic resolver (`getVehicleImage`) dynamically maps authentic Porsche 911 GT3 RS, Ferrari 296 GTB, BMW M3/M4, Range Rover SUV, and Ford F-150 Truck based on make and model.
+   - Concourse badge formatter (`formatCategoryBadge`) converts raw developer slugs into elegant title-case pills (`Executive Coupe`, `Full-Size Luxury SUV`).
+   - Added 3 Atelier VIP Client Privilege cards to unauthenticated landing.
+2. **Wave G2 (KPI Cards, Concierge Bookings & Add Vehicle Modal):**
+   - Refined KPI summary cards with hover transitions and luxury borders.
+   - Polished Add Vehicle Modal with Obsidian Nero backdrop, Tuscan Amber header icon, and glowing amber button while preserving form placeholders and schema compatibility.
+   - Designed empty ledger state for Concierge Bookings & History tab with direct package builder and demo telemetry links.
+   - Pass all Playwright E2E tests (6/6 passing) and deploy live to Vercel production.
+
+### Verification Evidence:
+- **Playwright E2E Suite Run:**
+  - Output: `6 passed (16.6s)` with zero failures across all flows including Test 6 (VIP Garage Lounge & Fleet Management).
+- **Production Deployment:**
+  - Deployed to Vercel production: `https://client-mauve-zeta-13.vercel.app/garage` (Deployment `dpl_5q62baHoWAsBzFon8n2sySbfqS9V`).
+- **Visual Evidence Artifacts:**
+  - `garage_wave_g1_unauth.png` (verified unauthenticated landing with 3 VIP client privilege cards and zero dock collision).
+  - `garage_wave_g1_auth_fleet.png` (verified authenticated vehicle fleet cards displaying authentic Porsche, BMW, Ferrari photography with Concourse category badges).
+  - `garage_wave_g2_add_modal.png` (verified Add Vehicle Modal styled in Obsidian Nero with Tuscan Amber accents and glowing button).
+  - `garage_wave_g2_bookings_tab_card.png` (verified Concierge Bookings empty state with atelier messaging, [Configure Detailing Package], and [Explore Demo Telemetry (DD-DEMO01)] actions).
+
 
 
 

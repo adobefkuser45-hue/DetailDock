@@ -16,9 +16,9 @@
 ---
 
 ## 2. Current Position
-- **Stage:** `17 Creative Atelier Luxury Photography & Tuscan Amber Complete`
-- **Milestone:** `M09 — Atelier Revolution: Real Supercar Photography & Tuscan Amber (VERIFIED)`
-- **Current Task:** `TASK-040 — Atelier Revolution: Real Supercar Photography, Tuscan Amber & Luxury Motion Overhaul`
+- **Stage:** `20 Customer VIP Garage Lounge Complete`
+- **Milestone:** `M10 — Atelier Revolution: Customer VIP Garage Lounge (VERIFIED)`
+- **Current Task:** `TASK-043 — Customer VIP Garage Lounge Atelier Polish (Waves G1 & G2)`
 - **Task Status:** `VERIFIED`
 - **Classification:** `ARCHITECTURAL`
 
@@ -82,17 +82,20 @@
   - `TASK-042`: Live Customer Job Tracking Portal Atelier Polish (Waves T1 & T2):
     - `Wave T1`: Added floating dock clearance (`pt-32 pb-24 sm:pt-36 sm:pb-28`) and smooth auto-scroll to top. Replaced developer jargon `Authoritative Total:` with `Preservation Investment:`. Added instant client fallback showcase for `DD-DEMO01` (Porsche 911 GT3 RS Weissach Package) resolving 404 traps and loading live 60% In Bay telemetry, DVI inspection, and 3-year ceramic warranty certificate. Added 3-card Atelier Telemetry Architecture preview to empty `/track` landing with 1-click showcase launcher.
     - `Wave T2`: Harmonized `JobAuditTimeline` with Tuscan Amber glowing line markers and dual `timeline || auditLogs` prop resolution, activating chronological audit log trail. Polished `CommunicationsLogSection` with obsidian cards, Tuscan Amber indicators, and realistic titanium lockscreen phone simulator modal. Added Concierge Re-engagement quick actions strip (VIP Garage & Configure New Service). Verified 6/6 Playwright tests passing and deployed live to Vercel.
+  - `TASK-043`: Customer VIP Garage Lounge Atelier Polish (Waves G1 & G2):
+    - `Wave G1`: Floating dock clearance (`pt-32 pb-24 sm:pt-36 sm:pb-28`) on unauth and auth views with smooth scroll-to-top. Dynamic supercar make/model photographic resolver (`getVehicleImage`) mapping authentic Porsche 911 GT3 RS, Ferrari 296 GTB, BMW M3/M4, Range Rover SUV, and Ford F-150 Truck. Added Concourse badge formatter for vehicle categories (`formatCategoryBadge`). Added 3 Atelier VIP Client Privilege cards to unauthenticated landing.
+    - `Wave G2`: Polished KPI cards with hover transitions and luxury borders. Enhanced Add Vehicle Modal with Obsidian Nero backdrop, Tuscan Amber header badge, and glowing amber button while preserving form placeholders and schema compatibility. Designed empty ledger state for Concierge Bookings & History tab with direct package builder and demo telemetry links. Verified 6/6 Playwright tests passing (16.6s), Vite build in 501ms, deployed live to Vercel (`dpl_5q62baHoWAsBzFon8n2sySbfqS9V`).
 - **In Progress:**
-  - Next Page / Module Audit (Customer Atelier Garage `/garage` or Admin Operations Portal `/admin`).
+  - Next Page / Module Audit (Admin Operations Deck & Service Catalog `/admin`).
 - **Blockers:**
   - None.
 
 ---
 
 ## 4. Last Verified
-- **Task:** `TASK-042 — Live Customer Job Tracking Portal Atelier Polish`
+- **Task:** `TASK-043 — Customer VIP Garage Lounge Atelier Polish`
 - **Date:** 2026-10-10
-- **Evidence Reference:** [VERIFICATION.md#task-042](file:///docs/00-control/VERIFICATION.md#task-042)
+- **Evidence Reference:** [VERIFICATION.md#task-043](file:///docs/00-control/VERIFICATION.md#task-043)
 
 ---
 

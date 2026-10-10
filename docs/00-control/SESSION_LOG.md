@@ -585,6 +585,27 @@
   - Visual Evidence: Captured `track_empty_architecture.png`, `track_demo_showcase_top.png`, `track_demo_warranty_full.png`, `track_wave_t2_audit_and_concierge.png`, and `track_wave_t2_phone_modal.png`.
 - **Status:** Waves T1 and T2 are fully VERIFIED and deployed live to production. The Live Public Job Tracking Portal is 100% polished, interactive, and Concourse-grade.
 
+## 2026-10-10 — Session 30: Customer VIP Garage Lounge (/garage) Polish (Waves G1 & G2 Complete)
+
+- **Action:** Executed 2 incremental waves of UI/UX audit and Concourse Atelier polish on the Customer VIP Garage Lounge (`/garage`).
+- **Implemented:**
+  - **Wave G1 (Dock Clearance, Dynamic Supercar Photography & Concourse Badges):**
+    - `GaragePage.jsx`: Added container breathing room (`pt-32 pb-24 sm:pt-36 sm:pb-28`) and smooth auto-scroll to top on both unauthenticated and authenticated views.
+    - Added 3 Atelier VIP Client Privilege cards to the unauthenticated view (Priority Cleanroom Bay Access, Serialized 9H Warranty Diplomas, Sub-Micron Paint Health Records).
+    - Built an intelligent supercar photographic resolver (`getVehicleImage`) dynamically mapping authentic Porsche 911 GT3 RS, Ferrari 296 GTB / Rosso Corsa, BMW M3/M4, Range Rover SUV, and Ford F-150 Truck based on make and model.
+    - Added `formatCategoryBadge` to convert raw hyphenated developer slugs into title-case Concourse pills (`Executive Coupe`, `Luxury Sedan`, `Full-Size Luxury SUV`).
+  - **Wave G2 (KPI Cards, Concierge Bookings & Add Vehicle Modal Polish):**
+    - `GaragePage.jsx`: Updated summary KPI cards with smooth hover transitions, subtle luxury borders, and glowing amber accents.
+    - Enhanced Add Vehicle Modal with Obsidian Nero backdrop (`#0B0E14`), Tuscan Amber header icon (`#F59E0B`), uppercase monospace input labels, and glowing amber button while preserving form placeholders and schema compatibility.
+    - Designed empty ledger state for Concierge Bookings & History tab with atelier messaging, `[Configure Detailing Package]` launcher, and direct `[Explore Demo Telemetry (DD-DEMO01)]` action.
+- **Verified:**
+  - Vite client production build: compiled in 501ms with 0 errors.
+  - Playwright E2E Suite (`tests/e2e/detaildock.spec.js`): All 6/6 tests passing in 16.6s (100% pass rate).
+  - Production Deployment: Live on Vercel at `https://client-mauve-zeta-13.vercel.app/garage` (`dpl_5q62baHoWAsBzFon8n2sySbfqS9V`).
+  - Git Sync: Committed and pushed to `origin main` (`c296d59`, `c2c8761`).
+  - Visual Evidence: Captured `garage_wave_g1_unauth.png`, `garage_wave_g1_auth_fleet.png`, `garage_wave_g2_add_modal.png`, and `garage_wave_g2_bookings_tab_card.png`.
+- **Status:** Waves G1 and G2 are fully VERIFIED and deployed live to production. The Customer VIP Garage Lounge is 100% polished, responsive, and Concourse-grade.
+
 
 
 
