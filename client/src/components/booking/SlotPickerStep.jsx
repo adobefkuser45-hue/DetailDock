@@ -7,7 +7,9 @@ import {
   ShieldCheck, 
   AlertCircle, 
   RefreshCw,
-  Warehouse
+  Warehouse,
+  Lock,
+  Check
 } from 'lucide-react';
 import { Button } from '../common/Button.jsx';
 import { getAvailability } from '../../services/api.js';
@@ -52,6 +54,10 @@ export const SlotPickerStep = ({
   const [slotsData, setSlotsData] = useState([]);
   const [isLoadingSlots, setIsLoadingSlots] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
+
+  // Next available date finder state
+  const [nextAvailableDate, setNextAvailableDate] = useState(null);
+  const [isSearchingNext, setIsSearchingNext] = useState(false);
 
   useEffect(() => {
     if (!selectedDate && activeDate) {
@@ -102,16 +108,67 @@ export const SlotPickerStep = ({
     return () => { isMounted = false; };
   }, [activeDate]);
 
+  const allBooked = !isLoadingSlots && slotsData.length > 0 && slotsData.every(s => !s.isAvailable);
+  const activeDateObj = availableDates.find(d => d.dateStr === activeDate);
+
+  // When all slots on active date are booked, automatically find next available date
+  useEffect(() => {
+    let isMounted = true;
+    if (allBooked) {
+      const currentIndex = availableDates.findIndex(d => d.dateStr === activeDate);
+      const remainingDates = availableDates.slice(currentIndex + 1);
+
+      const findNext = async () => {
+        setIsSearchingNext(true);
+        for (const d of remainingDates) {
+          try {
+            const res = await getAvailability(d.dateStr);
+            const slots = res?.data?.slots || res?.slots || [];
+            if (slots.some(s => s.isAvailable)) {
+              if (isMounted) {
+                setNextAvailableDate(d);
+                setIsSearchingNext(false);
+              }
+              return;
+            }
+          } catch (e) {
+            // continue search
+          }
+        }
+        if (isMounted) {
+          if (remainingDates[0]) setNextAvailableDate(remainingDates[0]);
+          setIsSearchingNext(false);
+        }
+      };
+      findNext();
+    } else {
+      setNextAvailableDate(null);
+      setIsSearchingNext(false);
+    }
+    return () => { isMounted = false; };
+  }, [allBooked, activeDate]);
+
   const handleDateClick = (dateStr) => {
     setActiveDate(dateStr);
     onSelectDate(dateStr);
     onSelectSlot('');
   };
 
+  const handleJumpToNextAvailable = () => {
+    if (nextAvailableDate) {
+      handleDateClick(nextAvailableDate.dateStr);
+    } else {
+      const currentIndex = availableDates.findIndex(d => d.dateStr === activeDate);
+      if (currentIndex !== -1 && currentIndex + 1 < availableDates.length) {
+        handleDateClick(availableDates[currentIndex + 1].dateStr);
+      }
+    }
+  };
+
   return (
     <div className="space-y-8 text-left">
       <div>
-        <span className="text-xs font-mono font-bold text-[#D4AF37] uppercase tracking-wider">
+        <span className="text-xs font-mono font-bold text-[#F59E0B] uppercase tracking-wider">
           Step 02 of 03
         </span>
         <h2 className="text-2xl sm:text-3xl font-black text-[#F8FAFC] tracking-tight mt-1 font-display">
@@ -124,9 +181,14 @@ export const SlotPickerStep = ({
 
       {/* Date Carousel */}
       <div className="space-y-3">
-        <label className="text-xs font-bold uppercase text-[#94A3B8] tracking-wider block font-mono">
-          1. Select Intake Date
-        </label>
+        <div className="flex items-center justify-between">
+          <label className="text-xs font-bold uppercase text-[#94A3B8] tracking-wider block font-mono">
+            1. Select Intake Date
+          </label>
+          <span className="text-[11px] font-mono text-[#64748B]">
+            Sundays Reserved for Facility Maintenance
+          </span>
+        </div>
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
           {availableDates.map((d) => {
             const isSelected = activeDate === d.dateStr;
@@ -135,10 +197,10 @@ export const SlotPickerStep = ({
                 key={d.dateStr}
                 type="button"
                 onClick={() => handleDateClick(d.dateStr)}
-                className={`p-3.5 rounded-2xl border text-center transition-all cursor-pointer tactile-press ${
+                className={`p-3.5 rounded-2xl border text-center transition-all cursor-pointer tactile-press flex flex-col items-center justify-between min-h-[96px] ${
                   isSelected
-                    ? 'bg-[#161D2A] border-[#F59E0B] text-white shadow-[0_0_20px_rgba(245,158,11,0.18)] ring-1 ring-[#F59E0B]'
-                    : 'bg-[#111622] border-white/10 text-[#94A3B8] hover:border-white/25 hover:text-white'
+                    ? 'bg-[#161D2A] border-[#F59E0B] text-white shadow-[0_0_24px_rgba(245,158,11,0.22)] ring-1 ring-[#F59E0B]'
+                    : 'bg-[#111622] border-white/10 text-[#94A3B8] hover:border-white/25 hover:text-white hover:bg-[#151B27]'
                 }`}
               >
                 <div className="text-[11px] font-mono uppercase text-[#F59E0B] font-bold">
@@ -150,17 +212,73 @@ export const SlotPickerStep = ({
                 <div className="text-[10px] text-[#94A3B8] font-mono">
                   {d.monthName}
                 </div>
+                {isSelected && (
+                  <div className="mt-1">
+                    {isLoadingSlots ? (
+                      <span className="inline-block w-2 h-2 rounded-full bg-[#F59E0B] animate-ping" />
+                    ) : allBooked ? (
+                      <span className="text-[9px] font-mono font-bold text-[#FCA5A5] bg-[#EF4444]/20 px-2 py-0.5 rounded border border-[#EF4444]/30">
+                        Committed
+                      </span>
+                    ) : (
+                      <span className="text-[9px] font-mono font-bold text-[#34D399] bg-[#10B981]/20 px-2 py-0.5 rounded border border-[#10B981]/30">
+                        Bays Open
+                      </span>
+                    )}
+                  </div>
+                )}
               </button>
             );
           })}
         </div>
       </div>
 
+      {/* Fully Committed Guidance Banner */}
+      {allBooked && (
+        <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#1C1412] to-[#121824] border border-[#F59E0B]/30 shadow-[0_12px_35px_rgba(0,0,0,0.6)] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-start sm:items-center gap-3.5">
+            <div className="w-10 h-10 rounded-xl bg-[#F59E0B]/15 border border-[#F59E0B]/30 flex items-center justify-center shrink-0 text-[#F59E0B]">
+              <AlertCircle className="w-5 h-5 text-[#F59E0B]" />
+            </div>
+            <div>
+              <div className="text-sm font-bold text-white font-display flex items-center gap-2">
+                Cleanroom Bays Fully Committed for {activeDateObj ? `${activeDateObj.weekday}, ${activeDateObj.monthName} ${activeDateObj.dayNum}` : activeDate}
+                <span className="text-[10px] font-mono uppercase bg-[#EF4444]/20 text-[#FCA5A5] px-2 py-0.5 rounded font-bold border border-[#EF4444]/30">
+                  Full Atelier Capacity
+                </span>
+              </div>
+              <p className="text-xs text-[#94A3B8] mt-0.5">
+                Both climate-controlled cleanroom bays are operating at maximum capacity to ensure zero double-booking and dedicated detailer isolation.
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={handleJumpToNextAvailable}
+            disabled={isSearchingNext}
+            className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#F59E0B] to-[#D97706] hover:from-[#D97706] hover:to-[#B45309] text-[#0B0E14] font-bold text-xs font-mono uppercase tracking-wider flex items-center gap-2 shrink-0 self-start sm:self-auto shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all cursor-pointer active:scale-95"
+          >
+            {isSearchingNext ? (
+              <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+            ) : (
+              <Calendar className="w-3.5 h-3.5" />
+            )}
+            <span>Jump to Next Open Date</span>
+            {nextAvailableDate ? (
+              <span className="font-sans font-black underline">
+                ({nextAvailableDate.weekday} {nextAvailableDate.dayNum})
+              </span>
+            ) : null}
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
+
       {/* Time Slot Grid */}
       <div className="space-y-3 pt-2">
         <div className="flex items-center justify-between">
           <label className="text-xs font-bold uppercase text-[#94A3B8] tracking-wider block font-mono">
-            2. Select Bay Slot for {activeDate}
+            2. Select Bay Slot for {activeDateObj ? `${activeDateObj.weekday}, ${activeDateObj.monthName} ${activeDateObj.dayNum}` : activeDate}
           </label>
           {isLoadingSlots && (
             <span className="text-xs text-[#F59E0B] flex items-center gap-1 font-mono">
@@ -186,20 +304,27 @@ export const SlotPickerStep = ({
                 onClick={() => onSelectSlot(slotTime)}
                 className={`p-4 rounded-xl border text-left transition-all relative tactile-press ${
                   !isAvailable
-                    ? 'bg-[#111622]/40 border-white/5 opacity-50 cursor-not-allowed'
+                    ? 'bg-[#0E121B]/60 border-white/5 opacity-55 cursor-not-allowed'
                     : isSelected
-                    ? 'bg-[#161D2A] border-[#F59E0B] shadow-[0_0_20px_rgba(245,158,11,0.18)] ring-1 ring-[#F59E0B] cursor-pointer'
-                    : 'bg-[#111622] border-white/10 hover:border-white/25 hover:bg-[#161D2A] cursor-pointer'
+                    ? 'bg-[#182030] border-[#F59E0B] shadow-[0_0_24px_rgba(245,158,11,0.25)] ring-1 ring-[#F59E0B] cursor-pointer'
+                    : 'bg-[#111622] border-white/10 hover:border-[#F59E0B]/50 hover:bg-[#161D2A] cursor-pointer'
                 }`}
               >
-                {/* Time */}
-                <div className="flex items-center justify-between mb-2">
-                  <div className="text-base font-black font-mono text-white flex items-center gap-1.5">
-                    <Clock className="w-4 h-4 text-[#F59E0B]" />
+                {/* Time & Selection Indicator */}
+                <div className="flex items-center justify-between mb-2.5">
+                  <div className={`text-base font-black font-mono flex items-center gap-1.5 ${isAvailable ? 'text-white' : 'text-[#64748B]'}`}>
+                    <Clock className={`w-4 h-4 ${isAvailable ? 'text-[#F59E0B]' : 'text-[#64748B]'}`} />
                     {slotTime}
                   </div>
-                  {isSelected && (
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B] shadow-md shadow-[#F59E0B]" />
+                  {isAvailable && (
+                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${
+                      isSelected ? 'border-[#F59E0B] bg-[#F59E0B]' : 'border-slate-600'
+                    }`}>
+                      {isSelected && <div className="w-1.5 h-1.5 bg-[#0B0E14] rounded-full" />}
+                    </div>
+                  )}
+                  {!isAvailable && (
+                    <Lock className="w-3.5 h-3.5 text-[#EF4444]/60" />
                   )}
                 </div>
 
@@ -207,19 +332,29 @@ export const SlotPickerStep = ({
                 <div className="text-xs">
                   {isAvailable ? (
                     openBaysCount >= 2 ? (
-                      <span className="text-[#10B981] font-semibold flex items-center gap-1 font-mono">
-                        <Warehouse className="w-3.5 h-3.5" />
-                        Dual Bays Open (1 & 2)
-                      </span>
+                      <div className="flex items-center justify-between">
+                        <span className="text-[#10B981] font-semibold flex items-center gap-1 font-mono text-[11px]">
+                          <Warehouse className="w-3.5 h-3.5" />
+                          Dual Bays Open
+                        </span>
+                        <span className="text-[10px] font-mono font-bold text-[#10B981] bg-[#10B981]/15 px-1.5 py-0.5 rounded">
+                          Bays 1 & 2
+                        </span>
+                      </div>
                     ) : (
-                      <span className="text-[#F59E0B] font-semibold flex items-center gap-1 font-mono">
-                        <Warehouse className="w-3.5 h-3.5" />
-                        1 Bay Open ({slot.suggestedBay ? `Bay ${slot.suggestedBay}` : 'Bay 1'})
-                      </span>
+                      <div className="flex items-center justify-between">
+                        <span className="text-[#F59E0B] font-semibold flex items-center gap-1 font-mono text-[11px]">
+                          <Warehouse className="w-3.5 h-3.5" />
+                          1 Bay Open
+                        </span>
+                        <span className="text-[10px] font-mono font-bold text-[#F59E0B] bg-[#F59E0B]/15 px-1.5 py-0.5 rounded">
+                          {slot.suggestedBay ? `Bay ${slot.suggestedBay}` : 'Bay 1'}
+                        </span>
+                      </div>
                     )
                   ) : (
-                    <span className="text-[#EF4444] font-semibold font-mono">
-                      Fully Booked
+                    <span className="text-[#94A3B8] font-semibold font-mono text-[11px] flex items-center gap-1">
+                      Fully Reserved
                     </span>
                   )}
                 </div>
@@ -231,22 +366,23 @@ export const SlotPickerStep = ({
 
       {/* Selected Slot Confirmation Strip */}
       {selectedSlot && (
-        <div className="p-4 rounded-xl bg-[#111622] border border-[#F59E0B]/30 flex items-center justify-between text-xs">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[#F59E0B]">
+        <div className="p-4 sm:p-4.5 rounded-2xl bg-gradient-to-r from-[#141B28] to-[#111622] border border-[#F59E0B]/40 shadow-[0_8px_30px_rgba(245,158,11,0.12)] flex items-center justify-between text-xs">
+          <div className="flex items-center gap-3.5">
+            <div className="w-9 h-9 rounded-xl bg-[#F59E0B]/15 border border-[#F59E0B]/30 flex items-center justify-center text-[#F59E0B] shrink-0">
               <Calendar className="w-4 h-4" />
             </div>
             <div>
-              <div className="font-bold text-white font-display">
+              <div className="font-bold text-white font-display text-sm flex items-center gap-2">
                 Scheduled Slot: {activeDate} at {selectedSlot}
+                <Check className="w-3.5 h-3.5 text-[#10B981]" />
               </div>
-              <div className="text-[#94A3B8]">
-                Assigned to climate-controlled bay upon submission
+              <div className="text-[#94A3B8] text-[11px] mt-0.5">
+                Climate-controlled cleanroom bay dedicated exclusively upon vehicle intake
               </div>
             </div>
           </div>
-          <span className="text-[11px] font-mono text-[#10B981] font-bold bg-[#10B981]/15 px-2.5 py-1 rounded-md">
-            Bay Available
+          <span className="text-[11px] font-mono text-[#10B981] font-bold bg-[#10B981]/15 border border-[#10B981]/30 px-3 py-1 rounded-lg shrink-0">
+            Bay Reserved
           </span>
         </div>
       )}
