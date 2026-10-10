@@ -73,8 +73,9 @@
   - `AUDIT-WAVE-1`: Cleaned navbar duplicate Track Job link, eliminated footer developer prompt leaks/stack disclosures, refined legal atelier footer copy.
   - `AUDIT-WAVE-2`: Replaced washed-out hero photo with high-visibility Porsche 911 GT3 RS, eliminated developer jargon ("Server Math", "Rule Engine", "Live Telemetry") from public hero cockpit.
   - `AUDIT-WAVE-3`: Fixed Before/After Defect Elimination Studio: completely replaced artificial SVG lines and concentric circle overlays with authentic 1:1 photographic before/after vehicle pairs (Porsche 911 GT3 RS paint with real grime/swirls -> 9H ceramic mirror, Lamborghini wheel with real baked brake dust -> gloss black ceramic, Ferrari interior with real grime/crumbs -> OEM factory matte). Verified 100% pixel alignment via GPU clip-path with zero navbar overlap (`pt-32 scroll-mt-32`). Verified 6/6 Playwright tests passing and deployed live to Vercel.
+  - `AUDIT-WAVE-4`: Services & Bento Section Overhaul (`ServiceGrid.jsx`, `WhyChooseUs.jsx`, `Layout.jsx`, `Navbar.jsx`): Replaced AI buzzword header with 'Bespoke Preservation Suites', activated Tile 2 with direct 'Schedule Studio Diagnostic' booking CTA, upgraded multi-angle detailing photography, eliminated developer jargon from Why Choose Us, added smooth hash-scrolling and generous padding (`pt-48 scroll-mt-32`) to eliminate floating dock overlap. Verified 6/6 Playwright tests passing and deployed live to Vercel.
 - **In Progress:**
-  - `AUDIT-WAVE-4`: Services / Bento Section overhaul (renaming AI "Bento" headline, adding authentic multi-angle photography to service packages).
+  - `AUDIT-WAVE-5`: Process Timeline & Why Choose Us Polish (awaiting user approval).
 - **Blockers:**
   - None.
 

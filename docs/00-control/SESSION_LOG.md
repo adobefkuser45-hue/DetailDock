@@ -500,4 +500,25 @@
   - Visual Evidence: Captured and inspected `slider_paint_real.png`, `slider_wheels_real.png`, and `slider_interior_real.png` confirming authentic automotive transformations with 0 fake lines.
 - **Status:** Waves 1, 2, and 3 are VERIFIED. Ready for Wave 4 (Services / Bento section).
 
+## 2026-10-10 — Session 26: Incremental Landing Page Audit — Wave 4 (Bespoke Preservation Suites & Zero Overlap)
+
+- **Action:** Executed Wave 4 of the landing page UI/UX audit on the Services and Preservation Suites section (`ServiceGrid.jsx`, `WhyChooseUs.jsx`, `Layout.jsx`, `Navbar.jsx`).
+- **Implemented:**
+  - `ServiceGrid.jsx`:
+    - Replaced AI buzzword header ("Asymmetric Concourse Bento") with prestigious luxury title ("Bespoke Preservation Suites") while preserving studio badge for test assertions.
+    - Transformed static/dead sensor card (Tile 2) into an actionable "Paint Health & Depth Mapping" studio diagnostic with direct booking CTA ("Schedule Studio Diagnostic" -> `/book`).
+    - Upgraded package photography backdrops with calibrated contrast (`opacity-40 hover:opacity-55`).
+    - Increased top padding and added scroll margin (`pt-48 pb-24 scroll-mt-32`) to eliminate floating sticky navbar dock overlap.
+  - `WhyChooseUs.jsx`: Eliminated developer jargon ("Deterministic Server-Side Pricing Engine" -> "Guaranteed Upfront Studio Rates", "Live Job Telemetry Tracking" -> "Real-Time Atelier Progress Portal").
+  - `Layout.jsx` & `Navbar.jsx`: Added smooth in-page hash scrolling so clicking "Services" or any `#hash` anchor navigates smoothly with zero dock occlusion.
+  - `tests/e2e/detaildock.spec.js`: Hardened calendar slot selector in Test 3 to cycle past fully booked days automatically.
+- **Verified:**
+  - Vite client production build: compiled in 508ms with 0 errors.
+  - Playwright E2E Suite (`tests/e2e/detaildock.spec.js`): All 6/6 tests passing in 14.4s (100% pass rate).
+  - Production Deployment: Live on Vercel at `https://client-mauve-zeta-13.vercel.app` (`dpl_34LS44njxaBNWXfxCafSSmBTSL8c`).
+  - Git Sync: Committed and pushed to `origin main` (`6bcb978`).
+  - Visual Evidence: Captured `wave4_services_after_click.png` confirming > 225px breathing room below floating navbar dock, zero overlap, and crisp concourse aesthetics.
+- **Status:** Wave 4 is VERIFIED. Ready for Wave 5 (Process Timeline & Why Choose Us Polish).
+
+
 

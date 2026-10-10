@@ -55,7 +55,7 @@ export const WhyChooseUs = () => {
   };
 
   return (
-    <section className="py-24 bg-[#0B0E14] border-t border-white/10 relative overflow-hidden">
+    <section id="why-us" className="pt-36 pb-24 sm:pt-40 bg-[#0B0E14] border-t border-white/10 relative overflow-hidden scroll-mt-32">
       {/* Background radial accent */}
       <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-[#F59E0B]/5 rounded-full blur-[140px] pointer-events-none" />
 
@@ -71,7 +71,7 @@ export const WhyChooseUs = () => {
             Engineered Detailing. Zero Compromises.
           </h2>
           <p className="text-sm sm:text-base text-[#94A3B8] mt-3 font-normal">
-            Most detailing shops operate in open garages with unpredictable scheduling. We engineered our atelier around sterile cleanroom conditions and transparent full-stack software.
+            Most detailing shops operate in open garages with unpredictable scheduling. We engineered our atelier around sterile cleanroom conditions, ISO-standard paint measurement, and seamless digital booking.
           </p>
         </div>
 

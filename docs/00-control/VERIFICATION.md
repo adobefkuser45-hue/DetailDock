@@ -1590,4 +1590,34 @@ All claims of completion must be verified with concrete evidence before receivin
   - `detaildock_atelier_tracking.png` (verified glowing amber code and telemetry progression)
   - `detaildock_atelier_garage.png` (verified VIP fleet cards with high-res vehicle photo banners)
 
+---
+
+## AUDIT-WAVE-4: Services & Preservation Suites Overhaul
+
+- **Task ID:** AUDIT-WAVE-4
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-10
+- **Classification:** `BOUNDED`
+
+### Acceptance Criteria:
+1. Replace AI buzzword header ("Asymmetric Concourse Bento") with prestigious luxury title ("Bespoke Preservation Suites").
+2. Transform static/dead sensor card (Tile 2) into an actionable "Paint Health & Depth Mapping" studio diagnostic with direct booking CTA ("Schedule Studio Diagnostic" -> `/book`).
+3. Replace flat backgrounds with authentic multi-angle automotive detailing photography (Rupes polisher on Porsche clearcoat, ceramic hydrophobic water beading on hood, high-density snow foam pre-wash).
+4. Eliminate developer jargon from `WhyChooseUs.jsx` ("Deterministic Server-Side Pricing Engine" -> "Guaranteed Upfront Studio Rates", "Live Job Telemetry Tracking" -> "Real-Time Atelier Progress Portal").
+5. Implement smooth in-page hash scrolling in `Layout.jsx` and `Navbar.jsx`, with calibrated `pt-48 pb-24 scroll-mt-32` spacing ensuring zero overlap from the floating sticky navbar dock.
+6. 100% passing Playwright E2E tests (6/6 passing) and live deployment on Vercel verified.
+
+### Verification Evidence:
+- **Playwright E2E Suite Run:**
+  - Output: `6 passed (14.4s)` with zero failures.
+- **Production Deployment:**
+  - Deployed to Vercel production: `https://client-mauve-zeta-13.vercel.app` (Deployment `dpl_34LS44njxaBNWXfxCafSSmBTSL8c`).
+- **Live Measured Coordinates (Anchor Navigation):**
+  - Section Top: `y = 128px`
+  - Floating Dock Bottom: `y = 96px`
+  - Section Header Badge: `y = 321px` (> 225px clear breathing room under navbar)
+- **Visual Evidence Artifacts:**
+  - `wave4_services_after_click.png` (verified zero navbar overlap, pristine typography, actionable diagnostic card, and rich detailing photography).
+
+
 

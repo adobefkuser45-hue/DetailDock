@@ -13,15 +13,15 @@ const STEPS = [
     icon: Sliders,
     title: 'Configure Your Spec',
     desc: 'Select your vehicle chassis, choose between essential decon or 9H ceramic packages, and add custom treatments with transparent live pricing.',
-    meta: 'Dynamic Pricing Engine',
+    meta: 'Live Studio Configurator',
     img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=600&auto=format&fit=crop'
   },
   {
     step: '02',
     icon: CalendarCheck,
     title: 'Reserve Guaranteed Bay',
-    desc: 'Select an open date and time slot. Our server guards double-bay capacity to ensure dedicated technician focus without vehicle congestion.',
-    meta: 'Dual Bay Scheduling',
+    desc: 'Select an open date and time slot. Guaranteed dual-bay capacity reservation ensures dedicated master technician focus without vehicle congestion.',
+    meta: 'Cleanroom Bay Reservation',
     img: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=600&auto=format&fit=crop'
   },
   {
@@ -37,7 +37,7 @@ const STEPS = [
     icon: ShieldCheck,
     title: 'Track & Handover',
     desc: 'Track live stage progress using your code (DD-XXXXXX). Receive your serialized warranty certificate and inspection report upon handover.',
-    meta: 'Live Job Telemetry',
+    meta: 'Real-Time Stage Tracking',
     img: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=600&auto=format&fit=crop'
   }
 ];
