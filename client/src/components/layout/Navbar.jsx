@@ -27,7 +27,6 @@ export const Navbar = () => {
     { name: 'Smart Builder', path: '/builder', icon: Wrench, highlight: true },
     { name: 'Schedule Bay', path: '/book', icon: Calendar },
     { name: 'Garage', path: '/garage', icon: Car },
-    { name: 'Track Job', path: '/track', icon: Search },
     { name: 'Admin Portal', path: '/admin', icon: Shield }
   ];
 
@@ -96,10 +95,10 @@ export const Navbar = () => {
         </nav>
 
         {/* Action Buttons & Concierge Hotline */}
-        <div className="hidden sm:flex items-center gap-3">
+        <div className="hidden sm:flex items-center gap-2.5">
           <a
             href={`tel:${cleanPhone}`}
-            className="hidden lg:flex items-center gap-1.5 text-xs font-medium text-[#94A3B8] hover:text-[#F59E0B] transition-colors py-1.5 px-2.5 rounded-lg hover:bg-[#161D2A]"
+            className="hidden xl:inline-flex items-center gap-1.5 text-xs font-medium text-[#94A3B8] hover:text-[#F59E0B] transition-colors py-1.5 px-2.5 rounded-lg hover:bg-[#161D2A] whitespace-nowrap"
             title="Call Concierge"
           >
             <PhoneCall className="w-3.5 h-3.5 text-[#F59E0B]" />
@@ -111,7 +110,7 @@ export const Navbar = () => {
               variant="outline"
               size="sm"
               icon={Search}
-              className="text-xs py-1.5 border-white/10 hover:border-[#F59E0B]/50"
+              className="text-xs py-1.5 border-white/10 hover:border-[#F59E0B]/50 whitespace-nowrap"
             >
               Track Job
             </Button>

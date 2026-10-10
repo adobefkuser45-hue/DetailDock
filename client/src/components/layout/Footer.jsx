@@ -30,8 +30,8 @@ export const Footer = () => {
       <div className="h-px w-full bg-gradient-to-r from-transparent via-[#F59E0B]/60 to-transparent" />
 
       {/* Grand Architectural Background Watermark */}
-      <div className="absolute top-12 left-0 right-0 pointer-events-none select-none overflow-hidden flex justify-center opacity-40">
-        <span className="text-[12vw] font-black tracking-tighter uppercase whitespace-nowrap text-white/[0.02]">
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden flex items-center justify-center opacity-30">
+        <span className="text-[10vw] font-black tracking-tighter uppercase whitespace-nowrap text-white/[0.015]">
           DETAILDOCK ATELIER
         </span>
       </div>
@@ -172,18 +172,22 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Legal Bar */}
-        <div className="mt-8 pt-6 border-t border-[#1B1E28] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#64748B]">
-          <div className="flex items-center gap-2">
+        <div className="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#64748B]">
+          <div className="flex flex-wrap items-center gap-2">
             <span>{studioName} © {new Date().getFullYear()}</span>
             <span>•</span>
-            <span className="flex items-center gap-1 text-[#94A3B8]">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#10B981]" />
-              100% Permissive Commercial License (MIT)
-            </span>
+            <span className="text-[#94A3B8]">Bespoke Automotive Preservation & Concourse Detailing</span>
           </div>
 
-          <div className="flex items-center gap-6">
-            <span className="text-[11px] font-mono">Server Verified: MongoDB Atlas + Express + React 19</span>
+          <div className="flex items-center gap-5 text-[11px]">
+            <span className="hover:text-[#CBD5E1] cursor-pointer transition-colors">Privacy Policy</span>
+            <span>•</span>
+            <span className="hover:text-[#CBD5E1] cursor-pointer transition-colors">Terms of Atelier Service</span>
+            <span>•</span>
+            <span className="flex items-center gap-1 text-[#F59E0B]/80 font-mono">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#F59E0B]" />
+              9H Warranty Backed
+            </span>
           </div>
         </div>
       </div>

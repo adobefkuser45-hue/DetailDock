@@ -92,9 +92,6 @@ export const HeroSection = () => {
       <div className="absolute top-10 right-1/4 w-[500px] h-[500px] bg-[#F59E0B]/5 rounded-full blur-[140px] pointer-events-none z-0" />
       <div className="absolute -bottom-20 left-10 w-[450px] h-[450px] bg-white/[0.03] rounded-full blur-[120px] pointer-events-none z-0" />
 
-      {/* Scangrip Overhead Cleanroom Light Bar */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4/5 max-w-5xl h-[2px] bg-gradient-to-r from-transparent via-[#F59E0B]/80 to-transparent shadow-[0_0_30px_rgba(245,158,11,0.7)] z-10" />
-
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
           
