@@ -21,7 +21,7 @@ async function capture() {
   console.log('Saved builder_viewport_top.png');
 
   // Viewport 2: Package Selector
-  const pkgSection = page.locator('text=2. Select Preservation Package').first();
+  const pkgSection = page.locator('text=Choose Detailing Tier').first();
   if (await pkgSection.count() > 0) {
     await pkgSection.scrollIntoViewIfNeeded();
     await page.waitForTimeout(1000);
@@ -32,7 +32,7 @@ async function capture() {
   }
 
   // Viewport 3: Add-on Selector
-  const addonSection = page.locator('text=3. Bespoke Atelier Add-Ons').first();
+  const addonSection = page.locator('text=Optional Atelier Enhancements').first();
   if (await addonSection.count() > 0) {
     await addonSection.scrollIntoViewIfNeeded();
     await page.waitForTimeout(1000);
