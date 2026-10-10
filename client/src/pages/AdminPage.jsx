@@ -270,6 +270,11 @@ export const AdminPage = () => {
     }
   }, [token, loadDashboardData]);
 
+  // Smooth scroll to top when authenticated or token changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [token]);
+
   // Advance Status Directly from Kanban Card
   const handleAdvanceStatus = async (booking, nextStatus, defaultNote = '') => {
     const bookingId = booking._id || booking.id || booking.bookingCode;
@@ -401,15 +406,15 @@ export const AdminPage = () => {
   // If Not Authenticated, Render Admin Login Screen
   if (!token) {
     return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#8B5CF6]/15 border border-[#8B5CF6]/30 text-[#A78BFA] text-xs font-bold uppercase tracking-wider mb-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 sm:pt-36 sm:pb-28 text-center animate-fadeIn">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/30 text-[#F59E0B] text-xs font-bold uppercase tracking-wider mb-4 font-mono">
           <Shield className="w-4 h-4" />
           DetailDock Studio Operations
         </div>
-        <h1 className="text-3xl sm:text-5xl font-extrabold text-[#F8FAFC] tracking-tight mb-3">
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-[#F8FAFC] tracking-tight mb-3 font-display">
           Atelier Master Command Deck
         </h1>
-        <p className="text-sm text-[#94A3B8] max-w-xl mx-auto mb-8">
+        <p className="text-sm text-[#94A3B8] max-w-xl mx-auto mb-8 font-normal leading-relaxed">
           Authorized personnel only. Monitor cleanroom telemetry, track dual-bay appointment pipelines, and manage real-time work transitions.
         </p>
 
@@ -420,12 +425,12 @@ export const AdminPage = () => {
 
   // Authenticated Atelier Command Deck
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 sm:pt-36 sm:pb-28 space-y-8 animate-fadeIn">
       
       {/* Top Operations Header */}
-      <div className="p-6 rounded-3xl bg-[#101522] border-2 border-[#1D2536] shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden text-left">
+      <div className="p-6 sm:p-8 rounded-3xl bg-[#0B0E14] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.7)] flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden text-left">
         {/* Ambient Top Glow */}
-        <div className="absolute top-0 right-1/4 w-96 h-32 bg-[#0284C7]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-96 h-32 bg-[#F59E0B]/5 rounded-full blur-3xl pointer-events-none" />
 
         <div>
           <div className="flex items-center gap-3">
@@ -433,18 +438,18 @@ export const AdminPage = () => {
               <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
               Live Cleanrooms Active
             </span>
-            <span className="text-xs text-[#64748B] font-mono">
+            <span className="text-xs text-[#94A3B8] font-mono">
               Bay 1 & Bay 2 99.97% HEPA Sealed
             </span>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-2 flex items-center gap-3">
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-[#F8FAFC] tracking-tight mt-2 flex items-center gap-3 font-display">
             <span>Atelier Operations Deck</span>
           </h1>
 
-          <p className="text-xs text-[#94A3B8] mt-1 flex items-center gap-2">
-            <span>Signed in as <strong className="text-white">{currentUser?.name || 'Master Detailer'}</strong> ({currentUser?.email || 'admin@detaildock.com'})</span>
-            <span>•</span>
+          <p className="text-xs text-[#94A3B8] mt-1.5 flex items-center gap-2 flex-wrap">
+            <span>Signed in as <strong className="text-[#F8FAFC] font-semibold">{currentUser?.name || 'Master Detailer'}</strong> ({currentUser?.email || 'admin@detaildock.com'})</span>
+            <span className="text-white/20">•</span>
             <span className="font-mono text-[#64748B]">
               Refreshed: {lastRefreshedAt.toLocaleTimeString()}
             </span>
@@ -459,7 +464,7 @@ export const AdminPage = () => {
             onClick={() => loadDashboardData(true)}
             isLoading={refreshing}
             iconLeft={RefreshCw}
-            className="text-xs border border-[#1D2536]"
+            className="text-xs border border-white/10 text-[#CBD5E1] hover:text-white hover:bg-white/5"
           >
             Refresh Pipeline
           </Button>
@@ -468,9 +473,9 @@ export const AdminPage = () => {
             href="/"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-3.5 py-2 rounded-xl bg-[#161D2E] border border-[#2A364E] text-[#94A3B8] hover:text-white text-xs font-medium transition-colors flex items-center gap-1.5"
+            className="px-3.5 py-2 rounded-xl bg-[#111622] border border-white/10 text-[#CBD5E1] hover:text-white text-xs font-medium transition-colors flex items-center gap-1.5 hover:border-white/20"
           >
-            <ExternalLink className="w-3.5 h-3.5 text-[#38BDF8]" />
+            <ExternalLink className="w-3.5 h-3.5 text-[#F59E0B]" />
             <span>Storefront</span>
           </a>
 
@@ -479,17 +484,17 @@ export const AdminPage = () => {
             size="sm"
             onClick={() => setSettingsModalOpen(true)}
             iconLeft={Building2}
-            className="text-xs border-[#38BDF8]/40 text-[#38BDF8] hover:bg-[#38BDF8]/10"
+            className="text-xs border-white/10 text-[#CBD5E1] hover:text-white hover:border-[#F59E0B]/40 hover:bg-[#F59E0B]/10"
           >
             Studio Identity Settings
           </Button>
 
           <Button
-            variant="outline"
+            variant="primary"
             size="sm"
             onClick={() => setCatalogModalOpen(true)}
             iconLeft={SlidersHorizontal}
-            className="text-xs border-[#10B981]/40 text-[#10B981] hover:bg-[#10B981]/10"
+            className="text-xs glow-amber font-bold"
           >
             Catalog & Pricing Cockpit
           </Button>
@@ -499,7 +504,7 @@ export const AdminPage = () => {
             size="sm"
             onClick={handleLogout}
             iconLeft={LogOut}
-            className="text-xs border-[#EF4444]/40 text-[#FCA5A5] hover:bg-[#EF4444]/15"
+            className="text-xs border-[#EF4444]/30 text-[#FCA5A5] hover:bg-[#EF4444]/15 hover:border-[#EF4444]/50"
           >
             Sign Out
           </Button>
@@ -510,16 +515,16 @@ export const AdminPage = () => {
       <AdminKpiRow stats={stats} bookingsCount={bookings.length} />
 
       {/* Search & Filtration Bar */}
-      <div className="p-4 rounded-2xl bg-[#101522] border border-[#1D2536] flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 text-left">
+      <div className="p-4 sm:p-5 rounded-2xl bg-[#0B0E14] border border-white/10 shadow-lg flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 text-left">
         {/* Search Input */}
         <div className="relative flex-1">
-          <Search className="w-4 h-4 text-[#64748B] absolute left-3.5 top-3" />
+          <Search className="w-4 h-4 text-[#64748B] absolute left-3.5 top-3.5" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search booking code (DD-XXXXXX), client name, phone, or vehicle model..."
-            className="w-full pl-10 pr-4 py-2 rounded-xl bg-[#090C12] border border-[#1D2536] focus:border-[#38BDF8] text-xs text-white placeholder-[#64748B] focus:outline-none transition-colors"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#111622] border border-white/10 focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/50 text-xs text-[#F8FAFC] placeholder-[#64748B] focus:outline-none transition-colors"
           />
         </div>
 
@@ -527,11 +532,11 @@ export const AdminPage = () => {
         <div className="flex items-center gap-3 flex-wrap">
           {/* Bay Selector */}
           <div className="flex items-center gap-1.5 text-xs text-[#94A3B8]">
-            <Warehouse className="w-3.5 h-3.5 text-[#38BDF8]" />
+            <Warehouse className="w-3.5 h-3.5 text-[#F59E0B]" />
             <select
               value={selectedBay}
               onChange={(e) => setSelectedBay(e.target.value)}
-              className="px-3 py-1.5 rounded-xl bg-[#090C12] border border-[#1D2536] text-white text-xs focus:outline-none focus:border-[#38BDF8]"
+              className="px-3 py-2 rounded-xl bg-[#111622] border border-white/10 text-[#F8FAFC] text-xs focus:outline-none focus:border-[#F59E0B]"
             >
               <option value="all">All Studio Bays</option>
               <option value="1">Cleanroom Bay 1</option>
@@ -547,7 +552,7 @@ export const AdminPage = () => {
                 setSelectedBay('all');
                 setStatusFilter('all');
               }}
-              className="px-3 py-1.5 rounded-xl bg-[#161D2E] text-xs text-[#38BDF8] hover:underline"
+              className="px-3 py-2 rounded-xl bg-[#111622] border border-white/10 text-xs text-[#F59E0B] hover:text-white transition-colors"
             >
               Reset Filters
             </button>
