@@ -245,14 +245,11 @@ export const BeforeAfterSlider = () => {
             {/* Subtle photographic reflection sheen */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#0B0E14]/70 via-transparent to-[#0B0E14]/30 pointer-events-none" />
 
-            {/* After Studio Tag */}
-            <div className="absolute top-6 right-6 z-20 flex flex-col items-end pointer-events-none">
-              <span className="px-3.5 py-1 rounded-full bg-[#10B981]/25 border border-[#10B981]/40 text-[#10B981] text-xs font-black uppercase tracking-wider backdrop-blur-md flex items-center gap-1.5 shadow-xl font-mono">
+            {/* Minimal Elegant After Studio Pill */}
+            <div className="absolute top-5 right-5 z-20 pointer-events-none">
+              <span className="px-3 py-1 rounded-full bg-[#0B0E14]/80 border border-[#10B981]/40 text-[#10B981] text-xs font-bold uppercase tracking-wider backdrop-blur-md flex items-center gap-1.5 shadow-lg font-mono">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                {activeScenario.afterLabel}
-              </span>
-              <span className="text-[11px] font-mono text-[#F59E0B] mt-1.5 bg-[#0B0E14]/90 px-2.5 py-0.5 rounded border border-white/10 shadow-md">
-                9H Ceramic • 98 GU Mirror Finish
+                After: Ceramic Mirror
               </span>
             </div>
           </div>
@@ -271,16 +268,13 @@ export const BeforeAfterSlider = () => {
                 alt={activeScenario.beforeLabel} 
                 className="w-full h-full object-cover object-center filter contrast-90 brightness-95"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0E14]/70 via-[#0B0E14]/20 to-[#0B0E14]/40 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0E14]/60 via-transparent to-[#0B0E14]/30 pointer-events-none" />
 
-              {/* Before Studio Tag */}
-              <div className="absolute top-6 left-6 z-20 flex flex-col items-start pointer-events-none">
-                <span className="px-3.5 py-1 rounded-full bg-[#EF4444]/25 border border-[#EF4444]/40 text-[#F87171] text-xs font-black uppercase tracking-wider backdrop-blur-md flex items-center gap-1.5 shadow-xl font-mono">
+              {/* Minimal Elegant Before Studio Pill */}
+              <div className="absolute top-5 left-5 z-20 pointer-events-none">
+                <span className="px-3 py-1 rounded-full bg-[#0B0E14]/80 border border-[#EF4444]/40 text-[#F87171] text-xs font-bold uppercase tracking-wider backdrop-blur-md flex items-center gap-1.5 shadow-lg font-mono">
                   <Flame className="w-3.5 h-3.5" />
-                  {activeScenario.beforeLabel}
-                </span>
-                <span className="text-[11px] font-mono text-[#94A3B8] mt-1.5 bg-[#0B0E14]/90 px-2.5 py-0.5 rounded border border-white/10 shadow-md">
-                  Hazed • 58 GU • Swirl Webs Present
+                  Before: Swirl Haze
                 </span>
               </div>
             </div>
@@ -316,39 +310,36 @@ export const BeforeAfterSlider = () => {
                 <div className="w-0.5 h-4 bg-[#F59E0B] rounded-full" />
               </div>
             </div>
-
-            {/* Top Badge on Handle */}
-            <div className="absolute top-3 px-2 py-0.5 rounded bg-[#111622] border border-[#F59E0B]/60 text-[10px] font-mono text-[#F59E0B] font-bold shadow-md whitespace-nowrap">
-              {Math.round(sliderPos)}%
-            </div>
           </div>
 
           {/* Bottom Interaction Prompt */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 px-3.5 py-1 rounded-full bg-[#0B0E14]/90 border border-white/10 text-[11px] text-[#94A3B8] font-medium backdrop-blur-md pointer-events-none flex items-center gap-2">
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 px-3.5 py-1 rounded-full bg-[#0B0E14]/85 border border-white/10 text-[11px] text-[#94A3B8] font-medium backdrop-blur-md pointer-events-none flex items-center gap-2 shadow-lg">
             <Sliders className="w-3.5 h-3.5 text-[#F59E0B]" />
-            <span>Drag slider horizontally or use buttons above</span>
+            <span>Slide horizontally to inspect paint transition</span>
           </div>
         </div>
 
         {/* Post-Inspection Telemetry Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-          <div className="p-6 rounded-2xl bg-[#111622] border border-white/10 flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 text-[#F59E0B]">
+          <div className="p-6 rounded-2xl bg-[#111622]/90 border border-white/10 hover:border-[#F59E0B]/40 transition-all flex items-start gap-4 shadow-xl card-hover">
+            <div className="w-11 h-11 rounded-xl bg-[#F59E0B]/10 border border-[#F59E0B]/25 flex items-center justify-center flex-shrink-0 text-[#F59E0B]">
               <Gauge className="w-5 h-5" />
             </div>
             <div>
               <div className="text-xs uppercase font-bold text-[#94A3B8] font-mono tracking-wider">Gloss Reflection Jump</div>
-              <div className="text-xl font-black text-[#F8FAFC] font-mono mt-0.5">
-                {activeScenario.beforeStats.gloss} ➔ <span className="text-[#F59E0B]">{activeScenario.afterStats.gloss}</span>
+              <div className="text-xl font-black text-[#F8FAFC] font-mono mt-0.5 flex items-center gap-2">
+                <span>{activeScenario.beforeStats.gloss}</span>
+                <span className="text-[#64748B]">➔</span>
+                <span className="text-[#F59E0B]">{activeScenario.afterStats.gloss}</span>
               </div>
               <p className="text-xs text-[#94A3B8] mt-1.5 leading-relaxed font-normal">
-                Measured with precision 60° angle digital micro-gloss meter before and after 2-stage compounding.
+                Measured with precision 60° digital micro-gloss meter before and after 2-stage rotary compounding.
               </p>
             </div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-[#111622] border border-white/10 flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 text-[#10B981]">
+          <div className="p-6 rounded-2xl bg-[#111622]/90 border border-white/10 hover:border-[#10B981]/40 transition-all flex items-start gap-4 shadow-xl card-hover">
+            <div className="w-11 h-11 rounded-xl bg-[#10B981]/10 border border-[#10B981]/25 flex items-center justify-center flex-shrink-0 text-[#10B981]">
               <CheckCircle2 className="w-5 h-5" />
             </div>
             <div>
@@ -357,13 +348,13 @@ export const BeforeAfterSlider = () => {
                 95%+ Clear Coat Purity
               </div>
               <p className="text-xs text-[#94A3B8] mt-1.5 leading-relaxed font-normal">
-                Zero rotary buffer trails, holograms, or sanding marks. OEM clear coat thickness preserved within 2-4 microns.
+                Zero buffer trails or holograms. OEM clear coat thickness preserved safely within 2-4 microns.
               </p>
             </div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-[#111622] border border-white/10 flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 text-[#F59E0B]">
+          <div className="p-6 rounded-2xl bg-[#111622]/90 border border-white/10 hover:border-[#F59E0B]/40 transition-all flex items-start gap-4 shadow-xl card-hover">
+            <div className="w-11 h-11 rounded-xl bg-[#F59E0B]/10 border border-[#F59E0B]/25 flex items-center justify-center flex-shrink-0 text-[#F59E0B]">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
@@ -372,7 +363,7 @@ export const BeforeAfterSlider = () => {
                 3-Year Certified Bond
               </div>
               <p className="text-xs text-[#94A3B8] mt-1.5 leading-relaxed font-normal">
-                Permanent chemical cross-link bonding with serialized digital certificate and free annual maintenance washes.
+                Permanent chemical cross-link bonding with serialized digital certificate and atelier warranty.
               </p>
             </div>
           </div>
