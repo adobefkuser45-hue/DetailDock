@@ -1667,6 +1667,32 @@ All claims of completion must be verified with concrete evidence before receivin
   - `wave6_testimonials.png` (verified authentic exotic supercar reviews with verified owner tags and generous breathing room).
   - `wave6_final_cta.png` (verified double-bay perfection headline, synchronized Austin atelier location, phone link, and upfront rate guarantee).
 
+---
+
+## TASK-041: Smart Package Builder Atelier Polish (Waves B1, B2, B3)
+
+- **Task ID:** TASK-041
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-10
+- **Classification:** `ARCHITECTURAL`
+
+### Acceptance Criteria:
+1. **Wave B1 (Chassis Platform Selector):** 4 distinct high-resolution vehicle platforms (BMW M3 sedan, Porsche 911 coupe, Range Rover Sport SUV, Ford F-150 truck), eliminated text truncation, replaced developer rule engine badges with Atelier rates.
+2. **Wave B2 (Preservation Package Cards):** Strictly single-line 'Atelier Choice' gold pill, aligned package card heights, replaced developer math `Base $149 x 1x` with clean `Tier Investment` / `Baseline Studio Rate`, interactive `Active Tier` / `Select Tier` pills.
+3. **Wave B3 (Add-on Selector & Pricing Cockpit):** Replaced `Authoritative` badge with `Live Studio Rates` (`#10B981`), adjusted cockpit sticky offset (`sticky top-32 lg:top-36`) for floating dock clearance, balanced 5th addon with widescreen responsive span, added clear `Added` / `Add` interactive toggle affordances.
+4. Pass all Playwright E2E tests (6/6 passing) and deploy live to Vercel production.
+
+### Verification Evidence:
+- **Playwright E2E Suite Run:**
+  - Output: `6 passed (14.2s)` with zero failures across all flows.
+- **Production Deployment:**
+  - Deployed to Vercel production: `https://client-mauve-zeta-13.vercel.app/builder` (Deployment `dpl_DdtNJSWntfGSYK8BxZU2Fb6YsXzh`).
+- **Visual Evidence Artifacts:**
+  - `builder_viewport_top.png` (verified 4 distinct luxury vehicles, un-truncated descriptions, atelier badges).
+  - `builder_packages_full_cards.png` (verified single-line Atelier Choice, aligned footers, luxury rate formatting).
+  - `builder_addons_wave3.png` & `builder_cockpit_calculated.png` (verified balanced 5th addon, added state affordance, dynamic live calculation with chassis multiplier).
+
+
 
 
 

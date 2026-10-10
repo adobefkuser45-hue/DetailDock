@@ -537,6 +537,34 @@
   - Visual Evidence: Captured `wave5_why_choose_us.png`, `wave5_process_timeline.png`, `wave6_testimonials.png`, and `wave6_final_cta.png`.
 - **Status:** Waves 1 through 6 are fully VERIFIED and deployed to production. The DetailDock homepage is completely clean of AI slop, developer jargon, and visual layout glitches.
 
+## 2026-10-10 — Session 28: Smart Package Builder (/builder) UI/UX Overhaul (Waves B1, B2, B3)
+
+- **Action:** Executed 3 incremental waves of UI/UX audit and luxury atelier polish on the Smart Package Builder (`/builder`).
+- **Implemented:**
+  - **Wave B1 (Chassis Platform Selector & Hero Area):**
+    - Configured 4 authentic, high-resolution vehicles in `VehicleSelector.jsx`: BMW M3 Competition sedan, Porsche 911 GT3 coupe, Range Rover Sport SUV, Ford F-150 full-size truck.
+    - Removed `line-clamp-2` truncation from vehicle descriptions to ensure zero cutoffs.
+    - Replaced developer rule engine badges with `Interactive Atelier Configurator`, `Guaranteed Studio Rates`, and `Precision Surface Area Calibration`.
+    - Added calibrated breathing room (`pt-32 pb-24 sm:pt-36 sm:pb-28`) for the floating dock.
+  - **Wave B2 (Preservation Package Cards Polish):**
+    - Fixed 'Atelier Choice' badge wrapping into a single, crisp gold pill with `whitespace-nowrap` and glowing shadow.
+    - Harmonized equal height across all 3 cards (`min-h-[2.5rem]` description, `flex-1` feature list, `h-full`) so prices and footers align horizontally.
+    - Eliminated developer math (`Base: $149 × 1x` -> `Baseline Studio Rate` or `${multiplier}x Chassis Rate`).
+    - Added luxury interactive selection buttons (`Active Tier` gold pill vs `Select Tier` hover pill) with 3/12/36-mo warranty chips.
+  - **Wave B3 (Add-on Selector & Pricing Cockpit):**
+    - Replaced `Authoritative` badge with `Live Studio Rates` (`#10B981`) and adjusted sticky offset to `sticky top-32 lg:top-36`.
+    - Cleaned pricing breakdown math from developer equation to clear tier invoice lines.
+    - Balanced 5th addon card to span 2 columns on medium/large screens with clean text width.
+    - Added clear interactive `Added` / `Add` status labels alongside tactile animated toggle switches.
+- **Verified:**
+  - Vite client production build: compiled in 494ms with 0 errors.
+  - Playwright E2E Suite (`tests/e2e/detaildock.spec.js`): All 6/6 tests passing in 14.2s (100% pass rate).
+  - Production Deployment: Live on Vercel at `https://client-mauve-zeta-13.vercel.app/builder` (`dpl_DdtNJSWntfGSYK8BxZU2Fb6YsXzh`).
+  - Git Sync: Committed and pushed to `origin main` (`8560d5f`, `2e7bfcc`, `9f1a603`).
+  - Visual Evidence: Captured `builder_viewport_top.png`, `builder_packages_full_cards.png`, `builder_addons_wave3.png`, and `builder_top_calculated.png`.
+- **Status:** Waves B1, B2, and B3 are fully VERIFIED. The Smart Package Builder is 100% polished and production-grade.
+
+
 
 
 

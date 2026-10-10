@@ -75,18 +75,21 @@
   - `AUDIT-WAVE-3`: Fixed Before/After Defect Elimination Studio: completely replaced artificial SVG lines and concentric circle overlays with authentic 1:1 photographic before/after vehicle pairs (Porsche 911 GT3 RS paint with real grime/swirls -> 9H ceramic mirror, Lamborghini wheel with real baked brake dust -> gloss black ceramic, Ferrari interior with real grime/crumbs -> OEM factory matte). Verified 100% pixel alignment via GPU clip-path with zero navbar overlap (`pt-32 scroll-mt-32`). Verified 6/6 Playwright tests passing and deployed live to Vercel.
   - `AUDIT-WAVE-4`: Services & Bento Section Overhaul (`ServiceGrid.jsx`, `WhyChooseUs.jsx`, `Layout.jsx`, `Navbar.jsx`): Replaced AI buzzword header with 'Bespoke Preservation Suites', activated Tile 2 with direct 'Schedule Studio Diagnostic' booking CTA, upgraded multi-angle detailing photography, eliminated developer jargon from Why Choose Us, added smooth hash-scrolling and generous padding (`pt-48 scroll-mt-32`) to eliminate floating dock overlap. Verified 6/6 Playwright tests passing and deployed live to Vercel.
   - `AUDIT-WAVE-5`: Process Timeline & Why Choose Us Polish (`ProcessTimeline.jsx`, `WhyChooseUs.jsx`): Eliminated developer jargon ('Dynamic Pricing Engine' -> 'Live Studio Configurator', 'Live Job Telemetry' -> 'Real-Time Stage Tracking', 'full-stack software' -> 'ISO-standard paint measurement and seamless digital booking'), calibrated WhyChooseUs padding (`pt-36 pb-24 sm:pt-40 scroll-mt-32`) to prevent dock overlap. Verified 6/6 Playwright tests passing and deployed live to Vercel.
-  - `AUDIT-WAVE-6`: Testimonials & Final CTA Section Consistency Polish (`TestimonialsSection.jsx`, `CTASection.jsx`): Dynamically synchronized studio address, operating hours, and direct telephone line via `useStudio()`, added calibrated padding (`pt-36 pb-24 sm:pt-40 scroll-mt-32`), replaced dynamic pricing copy with guaranteed upfront studio rates. Verified 6/6 Playwright tests passing and deployed live to Vercel.
+  - `TASK-041`: Smart Package Builder Atelier Polish (Waves B1, B2, B3):
+    - `Wave B1`: 4 distinct high-resolution chassis platforms (BMW M3 sedan, Porsche 911 coupe, Range Rover Sport SUV, Ford F-150 truck), removed line-clamp truncation, replaced developer rule engine badges with Atelier rates.
+    - `Wave B2`: Single-line 'Atelier Choice' gold pill, aligned package heights and equalized feature containers, replaced developer math `Base $149 x 1x` with clean `Tier Investment` / `Baseline Studio Rate`, interactive `Active Tier` / `Select Tier` pills.
+    - `Wave B3`: Replaced `Authoritative` badge with `Live Studio Rates` (`#10B981`), adjusted cockpit sticky offset (`sticky top-32 lg:top-36`) for floating dock clearance, balanced 5th addon with widescreen responsive span, added clear `Added` / `Add` interactive toggle affordances. Verified 6/6 Playwright tests passing and deployed live to Vercel.
 - **In Progress:**
-  - Full Landing Page Audit Complete (Waves 1–6). Awaiting user review for next stage/page audit.
+  - Next Page / Module Audit (Appointment Booking Wizard `/book` or Job Tracking Portal `/track`).
 - **Blockers:**
   - None.
 
 ---
 
 ## 4. Last Verified
-- **Task:** `TASK-040 — Atelier Revolution: Real Supercar Photography, Tuscan Amber & Luxury Motion Overhaul`
+- **Task:** `TASK-041 — Smart Package Builder Atelier Polish`
 - **Date:** 2026-10-10
-- **Evidence Reference:** [VERIFICATION.md#task-040](file:///docs/00-control/VERIFICATION.md#task-040)
+- **Evidence Reference:** [VERIFICATION.md#task-041](file:///docs/00-control/VERIFICATION.md#task-041)
 
 ---
 
