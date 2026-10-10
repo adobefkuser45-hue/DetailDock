@@ -15,6 +15,7 @@ import { Button } from '../common/Button.jsx';
 import { PaymentSelector } from './PaymentSelector.jsx';
 
 export const CustomerIntakeStep = ({
+  category,
   formData,
   onChangeForm,
   totalPrice,
@@ -83,11 +84,19 @@ export const CustomerIntakeStep = ({
 
       {/* SECTION 1: VEHICLE DETAILS */}
       <div className="p-6 sm:p-7 rounded-2xl bg-[#111622] border border-white/10 space-y-4 shadow-[0_15px_40px_rgba(0,0,0,0.5)]">
-        <div className="flex items-center gap-2 pb-3 border-b border-white/10">
-          <Car className="w-4 h-4 text-[#F59E0B]" />
-          <h3 className="text-sm font-bold uppercase tracking-wider text-white font-mono">
-            Vehicle Specification
-          </h3>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
+          <div className="flex items-center gap-2">
+            <Car className="w-4 h-4 text-[#F59E0B]" />
+            <h3 className="text-sm font-bold uppercase tracking-wider text-white font-mono">
+              Vehicle Specification
+            </h3>
+          </div>
+          {category && (
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0B0E14] border border-[#F59E0B]/30 text-xs font-mono text-[#F59E0B] self-start sm:self-auto">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B]" />
+              <span>Calibrated Chassis: <strong className="text-white font-sans">{category.label || category.name || 'Compact / Sedan'}</strong> ({category.multiplier || 1.0}x)</span>
+            </div>
+          )}
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

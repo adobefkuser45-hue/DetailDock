@@ -289,6 +289,7 @@ export const BookingPage = () => {
 
           {currentStep === 3 && (
             <CustomerIntakeStep
+              category={category}
               formData={formData}
               onChangeForm={handleFormChange}
               totalPrice={pricing?.summary?.totalPrice || pkg?.basePrice || 0}
