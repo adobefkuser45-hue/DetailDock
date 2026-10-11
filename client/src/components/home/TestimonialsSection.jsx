@@ -1,5 +1,6 @@
 import React from 'react';
 import { Star, ShieldCheck, Quote, CheckCircle2, Award } from 'lucide-react';
+import { useStudio } from '../../context/StudioContext.jsx';
 
 const TESTIMONIALS = [
   {
@@ -45,6 +46,20 @@ const TESTIMONIALS = [
 ];
 
 export const TestimonialsSection = () => {
+  const { cms } = useStudio();
+  const list = (cms?.testimonials && cms.testimonials.length > 0)
+    ? cms.testimonials.filter(item => item.isActive !== false).map((item, idx) => ({
+        author: item.clientName || TESTIMONIALS[idx % TESTIMONIALS.length]?.author || 'Verified Client',
+        location: item.location || 'Austin, TX',
+        vehicle: item.vehicle || TESTIMONIALS[idx % TESTIMONIALS.length]?.vehicle || 'Performance Exotic',
+        paintColor: item.paintColor || 'Factory Finish',
+        service: item.service || 'Ceramic Coating Atelier',
+        rating: item.rating || 5,
+        quote: item.quote || TESTIMONIALS[idx % TESTIMONIALS.length]?.quote || 'Exceptional craftsmanship and precision.',
+        verified: item.isVerified !== false
+      }))
+    : TESTIMONIALS;
+
   const handleCardMouseMove = (e) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
@@ -77,7 +92,7 @@ export const TestimonialsSection = () => {
 
         {/* Testimonials Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {TESTIMONIALS.map((item, idx) => (
+          {list.map((item, idx) => (
             <div
               key={idx}
               onMouseMove={handleCardMouseMove}

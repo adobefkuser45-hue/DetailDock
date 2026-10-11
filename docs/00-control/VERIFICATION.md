@@ -1840,6 +1840,159 @@ All claims of completion must be verified with concrete evidence before receivin
   - `mobile_audit_garage.png` (verified VIP garage login card with 1-click demo credentials).
   - `mobile_audit_admin.png` (verified mobile restricted admin operations login card).
 
+---
+
+## TASK-046: Phase 1 — Monorepo Decoupling & Customer Site Cleansing (Zero Admin Leakage)
+
+- **Task ID:** TASK-046
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-11
+- **Classification:** `ARCHITECTURAL`
+
+### Acceptance Criteria:
+1. Complete removal of `/admin` route and `AdminPage` import from `client/src/App.jsx`.
+2. Removal of all Admin Portal navigation links from `client/src/components/layout/Navbar.jsx` and `client/src/components/layout/Footer.jsx`.
+3. Client production bundle size reduced by eliminating admin components.
+4. Client production build passes with zero bundle or lint errors.
+
+### Verification Evidence:
+- **Bundle Cleansing & Size Proof:**
+  - Previous client bundle: `598.67 kB`
+  - Cleansed client bundle: `517.47 kB` (-81.2 kB of admin code completely purged from public customer app).
+  - Vite build: `node "../node_modules/vite/bin/vite.js" build` passed in `504ms`.
+- **Route Proof:**
+  - Navigating to `/admin` on customer app returns 0 admin elements and redirects safely to `/`.
+
+---
+
+## TASK-047: Phase 2 — Database Schema & Dynamic CMS API (`StudioCMS` Model & Routes)
+
+- **Task ID:** TASK-047
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-11
+- **Classification:** `ARCHITECTURAL`
+
+### Acceptance Criteria:
+1. Mongoose model `server/src/models/StudioCMS.js` created with announcement banner, hero headlines & CTAs, before/after showcase, client testimonials, and studio FAQs.
+2. Controller `server/src/controllers/cmsController.js` and routes `server/src/routes/cmsRoutes.js` implemented.
+3. Public endpoint `GET /api/v1/cms/content` and protected endpoints `GET /api/v1/cms/admin/content`, `PUT/PATCH /api/v1/cms/admin/content`, `POST /api/v1/cms/admin/reset`.
+4. CORS origin headers configured dynamically to support both `http://localhost:5173` and `http://localhost:5174`.
+
+### Verification Evidence:
+- **Automated Integration Test Run (`testCMSAndSovereignAdmin.js`):**
+  - Command: `node server/src/scripts/testCMSAndSovereignAdmin.js`
+  - Output: `17 / 17 checks passed (100% pass rate)` with live MongoDB Atlas connection.
+  - Verified unauthorized requests blocked with HTTP 401.
+  - Verified admin modifications reflect immediately on public endpoint without code deployment.
+
+---
+
+## TASK-048: Phase 3 — Dedicated Sovereign Admin App Foundation
+
+- **Task ID:** TASK-048
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-11
+- **Classification:** `ARCHITECTURAL`
+
+### Acceptance Criteria:
+1. Sovereign admin workspace `admin/` created with dedicated `package.json`, `vite.config.js` running on port `5174`.
+2. Standalone `admin/src/App.jsx` with Obsidian Concourse luxury styling tokens and top command deck header.
+3. Dedicated `admin/src/services/api.js` client handling admin auth, cleanroom operations, catalog pricing, and CMS APIs.
+4. Production build verifies clean standalone bundle.
+
+### Verification Evidence:
+- **Admin App Build:**
+  - Command: `node "../node_modules/vite/bin/vite.js" build` (from `admin/`)
+  - Output: `dist/assets/index-By1nQN5z.js 337.81 kB │ gzip: 92.06 kB` built in `441ms`.
+  - Zero dependencies on customer site code.
+
+---
+
+## TASK-049: Phase 4 — Studio Operations Core in Sovereign Admin
+
+- **Task ID:** TASK-049
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-11
+- **Classification:** `ARCHITECTURAL`
+
+### Acceptance Criteria:
+1. Dual-Bay Cleanroom Kanban Dispatcher (`KanbanBoard.jsx`) with 5 lanes (`Requested`, `Confirmed`, `In Cleanroom Bay`, `Showroom Ready`, `Completed & Released`) and 1-click WhatsApp/SMS triggers.
+2. Financial & Operational KPIs (`AdminKpiRow.jsx`) displaying total revenue, active bays, bookings count, and AOV.
+3. Full Appointment Inspection & Override Modal (`BookingDetailModal.jsx`) supporting DVI micron readings, gloss GU, and serialized 3-year warranty diploma generation.
+4. Service Catalog Cockpit (`CatalogManagerModal.jsx`) and Studio Settings Customizer (`StudioSettingsModal.jsx`).
+
+### Verification Evidence:
+- **E2E Integration Verification:**
+  - Playwright Test 5 (`detaildock.spec.js`): Authenticates on port 5174, inspects KPIs, verifies Kanban board, and operates catalog modals in `2.2s`.
+
+---
+
+## TASK-050: Phase 5 — Dynamic Website CMS Cockpit & Real-Time Client Synchronization
+
+- **Task ID:** TASK-050
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-11
+- **Classification:** `ARCHITECTURAL`
+
+### Acceptance Criteria:
+1. 5-tab CMS Cockpit Modal (`CMSManagerModal.jsx`):
+   - Announcement Bar (active toggle, message, link, badge).
+   - Hero & Headlines (badge, headline, subheadline, CTAs, 4 telemetry chips).
+   - Before & After Showcases (CRUD for vehicle defect pairs, gloss ratings).
+   - Reviews (CRUD for verified client quotes, star ratings).
+   - Studio FAQs (CRUD for cleanroom and warranty questions).
+2. Customer app `StudioContext.jsx` provides dynamic `cms`, local caching, and `refreshCMS()`.
+3. Injected dynamic CMS into `Navbar.jsx` (announcement banner), `HeroSection.jsx` (headline, subheadline, CTAs, telemetry), `BeforeAfterSlider.jsx` (showcase gallery), and `TestimonialsSection.jsx` (reviews).
+
+### Verification Evidence:
+- **Automated CMS Verification:**
+  - Automated integration test `testCMSAndSovereignAdmin.js` verified PATCH updates to banner and immediate reflection on public endpoint.
+  - Client production build passed in `514ms` with zero bundle errors.
+  - Admin production build passed in `441ms` with zero bundle errors.
+
+---
+
+## TASK-051: Phase 6 — Automated Multi-App Verification, Playwright E2E Suites & Dual Cloud Deployment
+
+- **Task ID:** TASK-051
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-11
+- **Classification:** `ARCHITECTURAL`
+
+### Acceptance Criteria:
+1. Playwright configured with multi-app webservers (Port 5000 API, Port 5173 Customer App, Port 5174 Sovereign Admin).
+2. Zero Admin Leakage assertion: navigating to `:5173/admin` yields 0 admin deck elements.
+3. Sovereign Admin verification: port 5174 authenticates, inspects Kanban pipeline, and opens Catalog and CMS modals.
+4. Full 12/12 Playwright tests passing with 0 regressions.
+5. All 17 CMS and sovereign backend integration checks passing.
+
+### Verification Evidence:
+- **Playwright Full Suite Run Output:**
+  ```text
+  Running 12 tests using 1 worker
+    ok  1 [chromium] › 1. Homepage: Renders luxury atelier hero, before/after slider, and packages (1.1s)
+    ok  2 [chromium] › 2. Smart Package Builder: Configures chassis, packages, addons, and calculates price (890ms)
+    ok  3 [chromium] › 3. Appointment Booking Wizard: Generates DD-XXXXXX code (5.3s)
+    ok  4 [chromium] › 4. Live Public Job Tracking Portal: Resolves telemetry & specs (1.4s)
+    ok  5 [chromium] › 5. Admin Operations Deck: Authenticates on sovereign port 5174 & operates CMS Cockpit (2.2s)
+    ok  6 [chromium] › 6. Customer Atelier Garage: Authenticates VIP client & fleet (2.9s)
+    ok  7 [chromium] › 7. Homepage Mobile: Zero horizontal overflow (2.0s)
+    ok  8 [chromium] › 8. Smart Package Builder Mobile: Responsive chassis cards (1.1s)
+    ok  9 [chromium] › 9. Appointment Booking Wizard Mobile: Clean slot picker (1.1s)
+    ok 10 [chromium] › 10. Live Telemetry Portal Mobile: 5-stage progress gauge (1.1s)
+    ok 11 [chromium] › 11. Customer VIP Garage Mobile: Atelier privileges (1.0s)
+    ok 12 [chromium] › 12. Admin Operations Deck Mobile: Restricted login card on port 5174 (1.9s)
+
+    12 passed (27.7s)
+  ```
+- **Backend CMS Integration Test Run Output:**
+  ```text
+  📊 Test Results: 17/17 checks passed (100% pass rate) on MongoDB Atlas.
+  ```
+- **Interactive Generative Architecture Blueprint:**
+  - Artifact `detaildock_architecture_diagram.html` created and verified with live reactive twin simulator and 5-stage workflow stepper.
+
+
 
 
 

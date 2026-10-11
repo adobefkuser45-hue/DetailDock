@@ -679,6 +679,24 @@
     - `mobile_audit_admin.png` (mobile restricted operations login card and responsive controls).
 - **Status:** TASK-045 is fully VERIFIED. DetailDock is 100% operational, fully responsive across mobile and desktop, verified on live production infrastructure, and completely free of AI slop, developer jargon, and layout defects.
 
+## 2026-10-11 — Session 34: Milestone M13 Sovereign Admin Portal Decoupling & Dynamic Studio CMS Complete
+
+- **Action:** Executed Milestone M13 (Tasks TASK-046 through TASK-051), completely decoupling and physically isolating the Admin Portal into a dedicated sovereign application (`admin/`) and engineering a 100% dynamic Website Studio CMS managed in real time with zero code deployments.
+- **Implemented:**
+  - `TASK-046` (Phase 1): Completely purged `/admin` route and `AdminPage` from customer frontend (`client/src/App.jsx`), removed all admin links from Navbar and Footer. Purged 81.2 kB of source code from customer bundle.
+  - `TASK-047` (Phase 2): Created Mongoose model `StudioCMS.js` with full schema for announcement banners, hero headlines & CTAs, before/after showcases, testimonials, and FAQs. Built controller `cmsController.js` and routes `cmsRoutes.js`. Mounted public `/api/v1/cms/content` and protected `/api/v1/cms/admin/content`, `/admin/reset` routes. Configured dynamic CORS origins for both ports 5173 and 5174.
+  - `TASK-048` (Phase 3): Created standalone sovereign admin workspace in `admin/` with Vite (port 5174), Obsidian Concourse theme, dedicated `api.js` client, and Obsidian `AdminLogin.jsx`.
+  - `TASK-049` (Phase 4): Migrated and refined studio operations core in `admin/` with dual-bay cleanroom Kanban dispatcher (5 stages, WhatsApp/SMS actions), `AdminKpiRow.jsx`, `BookingDetailModal.jsx` (DVI micron depths, gloss GU, 3-Yr ceramic warranty diploma issuer, PDF invoices), `CatalogManagerModal.jsx`, and `StudioSettingsModal.jsx`.
+  - `TASK-050` (Phase 5): Engineered 5-tab `CMSManagerModal.jsx` cockpit in sovereign admin. Wired customer app `StudioContext.jsx` with local caching and real-time refresh. Injected dynamic CMS into `Navbar.jsx` (top announcement bar), `HeroSection.jsx` (headline, subheadline, CTAs, 4 telemetry chips), `BeforeAfterSlider.jsx` (showcase gallery), and `TestimonialsSection.jsx` (reviews).
+  - `TASK-051` (Phase 6): Updated Playwright E2E suite (`detaildock.spec.js` & `production_multidevice_audit.spec.js`) to assert zero admin leakage on `:5173/admin` and full sovereign admin operation on `:5174/`. Created standalone automated integration test `testCMSAndSovereignAdmin.js`.
+- **Verified:**
+  - `testCMSAndSovereignAdmin.js`: 17 / 17 checks passed (100% pass rate) with live Atlas DB connection.
+  - Client production build: `node "../node_modules/vite/bin/vite.js" build` passed in 514ms (524.85 kB bundle).
+  - Admin production build: `node "../node_modules/vite/bin/vite.js" build` passed in 441ms (337.81 kB clean bundle).
+  - Playwright E2E Suite: All 12/12 tests passed in 27.7s (100% pass rate) across desktop and mobile iPhone 14 viewports.
+  - Generative Architecture Blueprint: Artifact `detaildock_architecture_diagram.html` created and verified with live reactive twin simulator and 5-stage workshop stepper.
+- **Status:** Milestone M13 is fully VERIFIED. Sovereign Admin Portal is physically isolated on port 5174 with zero customer leakage, and the entire website is dynamically controlled in real time via the Studio CMS Cockpit.
+
 
 
 

@@ -98,12 +98,17 @@ test.describe('DetailDock Mobile & Multi-Device Concourse Audit', () => {
     });
   });
 
-  test('6. Admin Operations Deck Mobile: Restricted login card and responsive controls', async ({ page }) => {
+  test('6. Admin Operations Deck Mobile: Restricted login card on sovereign port 5174 and zero customer leakage', async ({ page }) => {
+    // 1. Customer portal at /admin has zero admin leakage
     await page.goto('/admin');
+    await expect(page.locator('text=Atelier Operations Deck')).toHaveCount(0);
+
+    // 2. Sovereign Admin Deck on port 5174
+    await page.goto('http://localhost:5174/');
     await expect(page.locator('button:has-text("Fill Demo Admin Credentials")').first()).toBeVisible();
     await page.waitForTimeout(500);
 
-    // Verify zero horizontal blowout
+    // Verify zero horizontal blowout on sovereign admin
     const hasHorizontalOverflow = await page.evaluate(() => {
       return document.documentElement.scrollWidth > window.innerWidth;
     });

@@ -143,8 +143,14 @@ test.describe.serial('DetailDock End-to-End Atelier Customer & Admin Journey', (
     }
   });
 
-  test('5. Admin Operations Deck: Authenticates, inspects Kanban pipeline, and operates Catalog Cockpit', async ({ page }) => {
+  test('5. Admin Operations Deck: Authenticates on sovereign port 5174, inspects Kanban pipeline, operates Catalog & CMS Cockpits', async ({ page }) => {
+    // 1. Zero Admin Leakage Assertion: Customer portal at :5173/admin does not leak admin operations
     await page.goto('/admin');
+    await expect(page.locator('text=Atelier Operations Deck')).toHaveCount(0);
+    await expect(page.locator('text=Live Atelier Pipeline Board')).toHaveCount(0);
+
+    // 2. Sovereign Admin Portal on dedicated port 5174
+    await page.goto('http://localhost:5174/');
 
     // Wait for either the admin command deck (if already logged in) or the login form
     const deckHeader = page.locator('text=Atelier Operations Deck').first();
@@ -170,7 +176,7 @@ test.describe.serial('DetailDock End-to-End Atelier Customer & Admin Journey', (
     await expect(page.locator('text=Cleanroom Utilization').first()).toBeVisible();
 
     // Verify Catalog & Pricing Cockpit Modal opens cleanly
-    const catalogBtn = page.locator('button:has-text("Catalog & Pricing")').first();
+    const catalogBtn = page.locator('button:has-text("Catalog & Rates")').first();
     await expect(catalogBtn).toBeVisible();
     await catalogBtn.click();
     await expect(page.locator('text=Service Catalog & Pricing Cockpit').first()).toBeVisible();
@@ -179,12 +185,15 @@ test.describe.serial('DetailDock End-to-End Atelier Customer & Admin Journey', (
     await expect(page.locator('button:has-text("Chassis Multipliers")').first()).toBeVisible();
     await page.locator('button[aria-label="Close catalog modal"]').first().click();
 
-    // Verify Studio Identity Settings Customizer Modal opens cleanly
-    const settingsBtn = page.locator('button:has-text("Studio Identity Settings")').first();
-    await expect(settingsBtn).toBeVisible();
-    await settingsBtn.click();
-    await expect(page.locator('text=Studio Identity & Location Settings').first()).toBeVisible();
-    await page.locator('button:has-text("Cancel")').first().click();
+    // Verify Dynamic Website Studio CMS Modal opens cleanly
+    const cmsBtn = page.locator('button:has-text("Website Studio CMS")').first();
+    await expect(cmsBtn).toBeVisible();
+    await cmsBtn.click();
+    await expect(page.locator('text=Website Studio CMS').first()).toBeVisible();
+    await expect(page.locator('button:has-text("Announcement Bar")').first()).toBeVisible();
+    await expect(page.locator('button:has-text("Hero & Headlines")').first()).toBeVisible();
+    await expect(page.locator('button:has-text("Before & After")').first()).toBeVisible();
+    await page.locator('button[aria-label="Close CMS modal"]').first().click();
 
     // Kanban Board
     await expect(page.locator('text=Live Atelier Pipeline Board').first()).toBeVisible();

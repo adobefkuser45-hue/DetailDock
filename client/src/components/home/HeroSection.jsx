@@ -12,11 +12,32 @@ import {
   ShieldCheck
 } from 'lucide-react';
 import { Button } from '../common/Button.jsx';
+import { useStudio } from '../../context/StudioContext.jsx';
 
 export const HeroSection = () => {
+  const { cms } = useStudio();
   const [selectedQuickBody, setSelectedQuickBody] = useState('sedan');
   const [mousePos, setMousePos] = useState({ x: 50, y: 30 });
   const heroRef = useRef(null);
+
+  const heroData = cms?.hero || {};
+  const badgeParts = (heroData.badge || 'DUAL CLEANROOM BAYS ACTIVE • Austin ISO-6 Atelier').split('•');
+  const badgeLeft = badgeParts[0]?.trim() || 'DUAL CLEANROOM BAYS ACTIVE';
+  const badgeRight = badgeParts[1]?.trim() || 'Austin ISO-6 Atelier';
+  const headline = heroData.headline || 'Where Paint Meets Concourse Perfection.';
+  const subheadline = heroData.subheadline || 'Bespoke multi-stage rotary compounding, certified 9H ceramic glass shielding, and real-time bay telemetry engineered for discerning automotive enthusiasts.';
+  const primaryCtaText = heroData.primaryCtaText || 'Configure In Smart Builder';
+  const primaryCtaLink = heroData.primaryCtaLink || '/builder';
+  const secondaryCtaText = heroData.secondaryCtaText || 'Reserve Bay Appointment';
+  const secondaryCtaLink = heroData.secondaryCtaLink || '/book';
+  const telemetryHighlights = (heroData.telemetryHighlights && heroData.telemetryHighlights.length > 0)
+    ? heroData.telemetryHighlights
+    : [
+        { metric: '9H + IR', description: 'Shortwave Infrared Cured' },
+        { metric: '< 0.5µm', description: 'Paint Preservation Depth' },
+        { metric: '100%', description: 'Hand-Compounded Finish' },
+        { metric: 'ISO-6', description: 'Sterile Cleanroom Studio' }
+      ];
 
   const QUICK_ESTIMATES = {
     sedan: { 
@@ -104,67 +125,74 @@ export const HeroSection = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75" />
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#10B981]" />
               </span>
-              <span className="text-[#F59E0B] font-mono tracking-wider font-bold">DUAL CLEANROOM BAYS ACTIVE</span>
-              <span className="text-white/20">•</span>
-              <span className="text-[#94A3B8]">Austin ISO-6 Atelier</span>
+              <span className="text-[#F59E0B] font-mono tracking-wider font-bold">{badgeLeft}</span>
+              {badgeRight && (
+                <>
+                  <span className="text-white/20">•</span>
+                  <span className="text-[#94A3B8]">{badgeRight}</span>
+                </>
+              )}
             </div>
 
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-6xl lg:text-[70px] font-black tracking-[-0.04em] text-[#F8FAFC] leading-[1.03] mb-6 font-display">
-              Where Paint Meets <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F59E0B] via-[#FBBF24] to-[#D97706] filter drop-shadow-[0_2px_15px_rgba(245,158,11,0.3)]">
-                Concourse Perfection.
-              </span>
+              {headline.includes('Concourse Perfection') ? (
+                <>
+                  {headline.split('Concourse Perfection')[0]}
+                  <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F59E0B] via-[#FBBF24] to-[#D97706] filter drop-shadow-[0_2px_15px_rgba(245,158,11,0.3)]">
+                    Concourse Perfection.
+                  </span>
+                </>
+              ) : (
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-[#F59E0B]">
+                  {headline}
+                </span>
+              )}
             </h1>
 
             {/* Subtitle */}
             <p className="text-base sm:text-lg text-[#94A3B8] leading-relaxed max-w-2xl mb-10 font-normal">
-              Bespoke multi-stage rotary compounding, certified 9H ceramic glass shielding, and real-time bay telemetry engineered for discerning automotive enthusiasts.
+              {subheadline}
             </p>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-center gap-4 mb-12">
-              <Link to="/builder" className="w-full sm:w-auto">
+              <Link to={primaryCtaLink} className="w-full sm:w-auto">
                 <Button
                   variant="primary"
                   size="lg"
                   iconRight={ArrowRight}
                   className="w-full sm:w-auto glow-amber shadow-2xl font-bold"
                 >
-                  Configure In Smart Builder
+                  {primaryCtaText}
                 </Button>
               </Link>
 
-              <Link to="/book" className="w-full sm:w-auto">
+              <Link to={secondaryCtaLink} className="w-full sm:w-auto">
                 <Button
                   variant="secondary"
                   size="lg"
                   icon={Calendar}
                   className="w-full sm:w-auto border-white/15 hover:border-[#F59E0B]/50"
                 >
-                  Reserve Bay Appointment
+                  {secondaryCtaText}
                 </Button>
               </Link>
             </div>
 
             {/* Core Architectural Metric Strip */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-white/10">
-              <div>
-                <div className="text-2xl font-extrabold text-[#F8FAFC] font-mono tracking-tight">9H + IR</div>
-                <div className="text-xs text-[#94A3B8] font-medium mt-1">Shortwave Infrared Cured</div>
-              </div>
-              <div>
-                <div className="text-2xl font-extrabold text-[#F59E0B] font-mono tracking-tight">&lt; 0.5µm</div>
-                <div className="text-xs text-[#94A3B8] font-medium mt-1">Paint Preservation Depth</div>
-              </div>
-              <div>
-                <div className="text-2xl font-extrabold text-[#CBD5E1] font-mono tracking-tight">100%</div>
-                <div className="text-xs text-[#94A3B8] font-medium mt-1">Hand-Compounded Finish</div>
-              </div>
-              <div>
-                <div className="text-2xl font-extrabold text-[#10B981] font-mono tracking-tight">ISO-6</div>
-                <div className="text-xs text-[#94A3B8] font-medium mt-1">Sterile Cleanroom Studio</div>
-              </div>
+              {telemetryHighlights.slice(0, 4).map((item, idx) => (
+                <div key={idx}>
+                  <div className={`text-2xl font-extrabold font-mono tracking-tight ${idx === 1 ? 'text-[#F59E0B]' : idx === 3 ? 'text-[#10B981]' : 'text-[#F8FAFC]'}`}>
+                    {item.metric}
+                  </div>
+                  <div className="text-xs text-[#94A3B8] font-medium mt-1">
+                    {item.description}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 

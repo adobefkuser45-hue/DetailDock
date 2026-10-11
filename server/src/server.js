@@ -21,6 +21,7 @@ import authRoutes from './routes/authRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import paymentRoutes from './routes/paymentRoutes.js';
 import studioRoutes from './routes/studioRoutes.js';
+import cmsRoutes from './routes/cmsRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,8 +34,26 @@ const PORT = process.env.PORT || 5000;
 
 // Security & Utility Middlewares
 app.use(helmet());
+
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  process.env.ADMIN_URL,
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'https://client-mauve-zeta-13.vercel.app'
+].filter(Boolean);
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin) || allowedOrigins.some(o => origin.startsWith(o))) {
+      return callback(null, true);
+    }
+    // Allow localhost in non-production environments
+    if (process.env.NODE_ENV !== 'production' && origin.includes('localhost')) {
+      return callback(null, true);
+    }
+    callback(null, true); // Permissive fallback
+  },
   credentials: true
 }));
 app.use(express.json({
@@ -87,6 +106,7 @@ app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/admin', adminRoutes);
 app.use('/api/v1/payments', paymentRoutes);
 app.use('/api/v1/studio', studioRoutes);
+app.use('/api/v1/cms', cmsRoutes);
 
 // Fallback 404 Route
 app.use((req, res) => {

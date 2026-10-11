@@ -20,14 +20,13 @@ import { useStudio } from '../../context/StudioContext.jsx';
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const { settings } = useStudio();
+  const { settings, cms } = useStudio();
 
   const navLinks = [
     { name: 'Services', path: '/#services', icon: Sparkles },
     { name: 'Smart Builder', path: '/builder', icon: Wrench, highlight: true },
     { name: 'Schedule Bay', path: '/book', icon: Calendar },
-    { name: 'Garage', path: '/garage', icon: Car },
-    { name: 'Admin Portal', path: '/admin', icon: Shield }
+    { name: 'VIP Garage', path: '/garage', icon: Car }
   ];
 
   const isActive = (path) => {
@@ -57,6 +56,28 @@ export const Navbar = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full pt-2 sm:pt-3 pb-2 px-3 sm:px-6 max-w-7xl mx-auto transition-all">
+      {/* Studio CMS Dynamic Announcement Banner */}
+      {cms?.announcementBanner?.isActive && cms?.announcementBanner?.message && (
+        <div className="mb-2 px-3 sm:px-4 py-1.5 rounded-xl bg-gradient-to-r from-[#0B0E14]/90 via-[#F59E0B]/10 to-[#0B0E14]/90 border border-[#F59E0B]/30 text-center flex items-center justify-between sm:justify-center gap-2.5 text-xs text-[#F8FAFC] backdrop-blur-xl shadow-lg transition-all animate-fadeIn">
+          <div className="flex items-center gap-2 truncate">
+            {cms.announcementBanner.badgeText && (
+              <span className="hidden sm:inline-block px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider bg-[#F59E0B] text-[#0B0E14] shrink-0 font-mono">
+                {cms.announcementBanner.badgeText}
+              </span>
+            )}
+            <span className="font-medium text-[11px] sm:text-xs text-[#E2E8F0] truncate">
+              {cms.announcementBanner.message}
+            </span>
+          </div>
+          {cms.announcementBanner.link && (
+            <Link to={cms.announcementBanner.link} className="inline-flex items-center gap-1 text-[11px] font-bold text-[#F59E0B] hover:text-white transition-colors shrink-0">
+              <span className="hidden sm:inline">Explore</span>
+              <ArrowRight className="w-3 h-3" />
+            </Link>
+          )}
+        </div>
+      )}
+
       {/* Floating Dynamic Island "Atelier Dock" */}
       <div className="liquid-glass rounded-2xl px-4 sm:px-6 py-2.5 flex items-center justify-between border border-white/10 shadow-[0_20px_45px_-12px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.12)]">
         

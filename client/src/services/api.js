@@ -405,3 +405,12 @@ export const removeSavedVehicle = async (vehicleId, token) => {
   return res.data;
 };
 
+// -------------------------------------------------------------
+// Website Studio CMS (Public)
+// -------------------------------------------------------------
+
+export const getPublicCMS = async () => {
+  const res = await request('/cms/content');
+  return res.data;
+};
+

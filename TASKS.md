@@ -56,6 +56,12 @@
 | **TASK-043** | 20 Atelier UI | Customer VIP Garage Lounge Atelier Polish (Waves G1 & G2) | `VERIFIED` | TASK-042 | [VERIFICATION.md#task-043](file:///docs/00-control/VERIFICATION.md#task-043) |
 | **TASK-044** | 21 Atelier UI | Admin Operations & Service Catalog Deck Atelier Polish (Waves A1 & A2) | `VERIFIED` | TASK-043 | [VERIFICATION.md#task-044](file:///docs/00-control/VERIFICATION.md#task-044) |
 | **TASK-045** | 22 Production Verification | Final End-to-End Production Health, Mobile Responsiveness & Multi-Device Verification Suite | `VERIFIED` | TASK-044 | [VERIFICATION.md#task-045](file:///docs/00-control/VERIFICATION.md#task-045) |
+| **TASK-046** | 23 Sovereign Admin | Phase 1 — Monorepo Decoupling & Customer Site Cleansing (Zero Admin Leakage) | `VERIFIED` | TASK-045 | [VERIFICATION.md#task-046](file:///docs/00-control/VERIFICATION.md#task-046) |
+| **TASK-047** | 23 Sovereign Admin | Phase 2 — Database Schema & Dynamic CMS API (`StudioCMS` Model & Routes) | `VERIFIED` | TASK-046 | [VERIFICATION.md#task-047](file:///docs/00-control/VERIFICATION.md#task-047) |
+| **TASK-048** | 23 Sovereign Admin | Phase 3 — Dedicated Sovereign Admin App Foundation (`admin/` Vite App, Obsidian Shell & Auth) | `VERIFIED` | TASK-047 | [VERIFICATION.md#task-048](file:///docs/00-control/VERIFICATION.md#task-048) |
+| **TASK-049** | 23 Sovereign Admin | Phase 4 — Studio Operations Core in Sovereign Admin (Kanban, Telemetry, DVI, Warranty & CRM) | `VERIFIED` | TASK-048 | [VERIFICATION.md#task-049](file:///docs/00-control/VERIFICATION.md#task-049) |
+| **TASK-050** | 23 Sovereign Admin | Phase 5 — Dynamic Website CMS Cockpit & Real-Time Client Synchronization | `VERIFIED` | TASK-049 | [VERIFICATION.md#task-050](file:///docs/00-control/VERIFICATION.md#task-050) |
+| **TASK-051** | 23 Sovereign Admin | Phase 6 — Automated Multi-App Verification, Playwright E2E Suites & Dual Cloud Deployment | `VERIFIED` | TASK-050 | [VERIFICATION.md#task-051](file:///docs/00-control/VERIFICATION.md#task-051) |
 
 ---
 

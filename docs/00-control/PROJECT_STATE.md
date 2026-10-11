@@ -16,9 +16,9 @@
 ---
 
 ## 2. Current Position
-- **Stage:** `23 Production Platform Operational, Fully Audited & Complete`
-- **Milestone:** `M12 — Production Completion: Multi-Device Audit & Verified Platform Launch`
-- **Current Task:** `TASK-045 — Final End-to-End Production Health, Mobile Responsiveness & Multi-Device Verification Suite`
+- **Stage:** `24 Sovereign Admin Portal Decoupling & Dynamic CMS Architecture`
+- **Milestone:** `M13 — Sovereign Admin Portal Decoupling & Dynamic Studio CMS`
+- **Current Task:** `TASK-051 — Phase 6: Automated Multi-App Verification, Playwright E2E Suites & Dual Cloud Deployment`
 - **Task Status:** `VERIFIED`
 - **Classification:** `ARCHITECTURAL`
 
@@ -92,17 +92,23 @@
     - Live Production Endpoint Health: Vercel frontend Status 200 (901ms), Render API Status 200 (`readyState: 1`, MongoDB Atlas connected), Render Public Catalog API Status 200 (3 active suites), Render Studio Settings API Status 200.
     - Multi-Device & Mobile Responsiveness Suite: iPhone 14 mobile viewport (390x844) verified across all 6 routes (`/`, `/builder`, `/book`, `/track/DD-DEMO01`, `/garage`, `/admin`). Passed zero horizontal blowout assertion (`document.documentElement.scrollWidth <= window.innerWidth`) on 100% of routes.
     - Automated Test Integrity: 6/6 mobile Playwright audit tests passed in 11.7s; 6/6 desktop Playwright journey tests passed in 18.8s. Total 12/12 passing E2E tests with 0 regressions.
+  - `TASK-046`: Phase 1 — Monorepo Decoupling & Customer Site Cleansing (Zero Admin Leakage): Removed /admin route and AdminPage from `client/src/App.jsx`, purged Admin Portal navigation links from `Navbar.jsx` and `Footer.jsx`. Reduced client bundle by 81 kB (from 598.67 kB to 517.47 kB). Vite build passed in 504ms.
+  - `TASK-047`: Phase 2 — Database Schema & Dynamic CMS API (`StudioCMS` Model & Routes): Created `server/src/models/StudioCMS.js`, `server/src/controllers/cmsController.js`, and `server/src/routes/cmsRoutes.js`. Mounted public `/api/v1/cms/content` and protected `/api/v1/cms/admin/content`, `/admin/reset` routes. Configured dynamic CORS origin matching ports 5173 and 5174. 17/17 automated integration checks passed.
+  - `TASK-048`: Phase 3 — Dedicated Sovereign Admin App Foundation: Created `admin/package.json`, `admin/vite.config.js` (port 5174), `admin/index.html`, `admin/src/index.css`, `admin/src/main.jsx`, `admin/src/App.jsx`, `admin/src/services/api.js`, and `admin/src/components/admin/AdminLogin.jsx`. Production build verified in 439ms (clean 337 kB bundle).
+  - `TASK-049`: Phase 4 — Studio Operations Core in Sovereign Admin: Built Dual-Bay Cleanroom Kanban Dispatcher (5 lanes, WhatsApp/SMS triggers), `AdminKpiRow.jsx` (revenue, bays, tickets, utilization), `BookingDetailModal.jsx` (DVI micron depths, gloss GU, 3-Yr ceramic warranty diploma issuer, vector tax invoices), `CatalogManagerModal.jsx` (packages, add-ons, chassis multipliers), and `StudioSettingsModal.jsx` (white-label customizer).
+  - `TASK-050`: Phase 5 — Dynamic Website CMS Cockpit & Real-Time Client Synchronization: Implemented 5-tab `CMSManagerModal.jsx` in sovereign admin (Announcement Banner, Hero & Headlines, Before/After Showcases, Testimonials, FAQs). Wired `StudioContext.jsx` in customer client to consume dynamic CMS with fallback defaults. Injected dynamic CMS into `Navbar.jsx` (top announcement banner), `HeroSection.jsx` (badge, headline, subheadline, CTAs, telemetry chips), `BeforeAfterSlider.jsx` (showcase gallery), and `TestimonialsSection.jsx` (reviews).
+  - `TASK-051`: Phase 6 — Automated Multi-App Verification, Playwright E2E Suites & Dual Cloud Deployment: Configured Playwright multi-app webservers (ports 5000, 5173, and 5174). Asserted zero customer admin leakage on `:5173/admin` and full sovereign admin operation on `:5174/`. 12/12 Playwright E2E tests passed in 27.7s. 17/17 backend integration checks passed.
 - **In Progress:**
-  - None (All milestones, features, and responsive audits are fully complete).
+  - None (Milestone M13 Sovereign Admin Decoupling & Studio CMS is 100% complete).
 - **Blockers:**
   - None.
 
 ---
 
 ## 4. Last Verified
-- **Task:** `TASK-045 — Final End-to-End Production Health, Mobile Responsiveness & Multi-Device Verification Suite`
+- **Task:** `TASK-051 — Phase 6: Automated Multi-App Verification, Playwright E2E Suites & Dual Cloud Deployment`
 - **Date:** 2026-10-11
-- **Evidence Reference:** [VERIFICATION.md#task-045](file:///docs/00-control/VERIFICATION.md#task-045)
+- **Evidence Reference:** [VERIFICATION.md#task-051](file:///docs/00-control/VERIFICATION.md#task-051)
 
 ---
 

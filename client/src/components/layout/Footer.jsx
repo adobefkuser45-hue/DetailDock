@@ -113,14 +113,6 @@ export const Footer = () => {
                   Live Job Tracker (DD-XXXXXX)
                 </Link>
               </li>
-              <li>
-                <Link to="/admin" className="hover:text-[#F8FAFC] transition-colors flex items-center gap-1.5">
-                  <span>Studio Operations Admin</span>
-                  <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-[#161D2A] text-[#94A3B8] border border-white/10">
-                    STAFF
-                  </span>
-                </Link>
-              </li>
             </ul>
           </div>
 

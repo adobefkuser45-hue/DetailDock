@@ -32,6 +32,12 @@ export default defineConfig({
       port: 5173,
       timeout: 30000,
       reuseExistingServer: true
+    },
+    {
+      command: 'node node_modules/vite/bin/vite.js admin --port 5174',
+      port: 5174,
+      timeout: 30000,
+      reuseExistingServer: true
     }
   ]
 });

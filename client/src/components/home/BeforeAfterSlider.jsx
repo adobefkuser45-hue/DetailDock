@@ -9,6 +9,7 @@ import {
   Flame,
   Award
 } from 'lucide-react';
+import { useStudio } from '../../context/StudioContext.jsx';
 
 const COMPARISON_SCENARIOS = [
   {
@@ -53,7 +54,32 @@ const COMPARISON_SCENARIOS = [
 ];
 
 export const BeforeAfterSlider = () => {
-  const [activeScenario, setActiveScenario] = useState(COMPARISON_SCENARIOS[0]);
+  const { cms } = useStudio();
+  const scenarios = (cms?.beforeAfterShowcase && cms.beforeAfterShowcase.length > 0)
+    ? cms.beforeAfterShowcase.filter(item => item.isActive !== false).map((item, idx) => {
+        const fallback = COMPARISON_SCENARIOS[idx % COMPARISON_SCENARIOS.length];
+        return {
+          id: `scenario-${idx}`,
+          title: item.treatment ? item.treatment.split('&')[0].trim() : fallback.title,
+          subtitle: item.vehicle ? `${item.vehicle} — ${item.treatment || ''}` : fallback.subtitle,
+          beforeLabel: item.defectType ? `Before: ${item.defectType}` : fallback.beforeLabel,
+          afterLabel: item.swirlElimination ? `After: ${item.swirlElimination}` : fallback.afterLabel,
+          beforeImage: (item.beforeImage && !item.beforeImage.includes('unsplash')) ? item.beforeImage : fallback.beforeImage,
+          afterImage: (item.afterImage && !item.afterImage.includes('unsplash')) ? item.afterImage : fallback.afterImage,
+          beforeStats: fallback.beforeStats,
+          afterStats: {
+            ...fallback.afterStats,
+            gloss: item.finalGloss || fallback.afterStats.gloss,
+            defects: item.swirlElimination || fallback.afterStats.defects
+          },
+          defectList: [item.defectType || fallback.defectList[0], ...fallback.defectList.slice(1)],
+          type: fallback.type
+        };
+      })
+    : COMPARISON_SCENARIOS;
+
+  const [activeScenarioIndex, setActiveScenarioIndex] = useState(0);
+  const activeScenario = scenarios[activeScenarioIndex] || scenarios[0] || COMPARISON_SCENARIOS[0];
   const [sliderPos, setSliderPos] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const [scangripMode, setScangripMode] = useState(true);
@@ -144,13 +170,13 @@ export const BeforeAfterSlider = () => {
 
           {/* Quick Scenario Selector Tabs */}
           <div className="flex flex-wrap gap-2 p-1.5 bg-[#111622] border border-white/10 rounded-xl self-start md:self-auto">
-            {COMPARISON_SCENARIOS.map((scenario) => {
-              const isSelected = activeScenario.id === scenario.id;
+            {scenarios.map((scenario, sIdx) => {
+              const isSelected = activeScenarioIndex === sIdx;
               return (
                 <button
-                  key={scenario.id}
+                  key={scenario.id || sIdx}
                   onClick={() => {
-                    setActiveScenario(scenario);
+                    setActiveScenarioIndex(sIdx);
                     setSliderPos(50);
                   }}
                   className={`px-4 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer tactile-press ${

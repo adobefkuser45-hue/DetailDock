@@ -39,6 +39,7 @@ router.post('/bookings/:code/dispatch-message', recordDispatchedMessage);
 
 // Business metrics & settings
 router.get('/dashboard/stats', getDashboardStats);
+router.get('/stats', getDashboardStats);
 router.get('/settings', getStudioSettings);
 router.put('/settings', updateStudioSettings);
 
