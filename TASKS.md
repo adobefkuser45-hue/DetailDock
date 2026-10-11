@@ -62,6 +62,7 @@
 | **TASK-049** | 23 Sovereign Admin | Phase 4 — Studio Operations Core in Sovereign Admin (Kanban, Telemetry, DVI, Warranty & CRM) | `VERIFIED` | TASK-048 | [VERIFICATION.md#task-049](file:///docs/00-control/VERIFICATION.md#task-049) |
 | **TASK-050** | 23 Sovereign Admin | Phase 5 — Dynamic Website CMS Cockpit & Real-Time Client Synchronization | `VERIFIED` | TASK-049 | [VERIFICATION.md#task-050](file:///docs/00-control/VERIFICATION.md#task-050) |
 | **TASK-051** | 23 Sovereign Admin | Phase 6 — Automated Multi-App Verification, Playwright E2E Suites & Dual Cloud Deployment | `VERIFIED` | TASK-050 | [VERIFICATION.md#task-051](file:///docs/00-control/VERIFICATION.md#task-051) |
+| **TASK-052** | 24 Sovereign Deploy | Sovereign Admin Cloud Production Deployment (Dedicated Vercel Project, Subdomain & CORS Integration) | `VERIFIED` | TASK-051 | [VERIFICATION.md#task-052](file:///docs/00-control/VERIFICATION.md#task-052) |
 
 ---
 

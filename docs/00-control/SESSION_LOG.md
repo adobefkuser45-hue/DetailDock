@@ -697,6 +697,30 @@
   - Generative Architecture Blueprint: Artifact `detaildock_architecture_diagram.html` created and verified with live reactive twin simulator and 5-stage workshop stepper.
 - **Status:** Milestone M13 is fully VERIFIED. Sovereign Admin Portal is physically isolated on port 5174 with zero customer leakage, and the entire website is dynamically controlled in real time via the Studio CMS Cockpit.
 
+## 2026-10-11 — Session 35: Milestone M14 Sovereign Admin Cloud Production Deployment & Decoupled Architecture
+
+- **Action:** Executed Milestone M14 (TASK-052). Deployed the decoupled Sovereign Admin Portal to dedicated Vercel production infrastructure on custom domains (`https://detaildock-ops.vercel.app` and `https://detaildock-admin-adobe12.vercel.app`), redeployed the cleansed Customer Portal to Vercel (`https://client-mauve-zeta-13.vercel.app`), updated and deployed Render backend API CORS integration (`dep-db5rg4d9fdbs73ds3bg0`), and verified 100% end-to-end cloud production functionality.
+- **Implemented:**
+  - `admin/vercel.json`: Created SPA rewrite rules routing all client paths to `/index.html`.
+  - `admin/package-lock.json`: Generated audited lockfile with 0 vulnerabilities for reproducible Vercel builds.
+  - Vercel Project `detaildock-admin` (ID: `prj_smB1K4Cg56Noh7MM4s2HbhNVVDLP`): Provisioned under team `team_xCuZHxUtBKLg7rV4XJDgRNS1` with `VITE_API_URL` and `VITE_CLIENT_URL` environment variables.
+  - Custom Domains: Added and verified `https://detaildock-ops.vercel.app` and `https://detaildock-admin-adobe12.vercel.app` with zero SSO locks.
+  - Sovereign Admin Cloud Deploy: Compiled production bundle with production Render API endpoints and deployed to Vercel (`dpl_3LZ2H3WKL8UvhYeM3RhBXdMJLiuH`).
+  - Cleansed Customer Portal Cloud Deploy: Compiled cleansed client bundle (zero admin code/routes) and deployed to Vercel (`dpl_AP67KHKKuedE9ZLwUoZGLFggvsio`).
+  - Render API Service CORS & Deploy: Updated `server/src/server.js` `allowedOrigins` to include `https://detaildock-ops.vercel.app` and `https://detaildock-admin-adobe12.vercel.app`. Pushed commit `53d1084` and triggered Render cloud deployment (`dep-db5rg4d9fdbs73ds3bg0`, status: `live`).
+  - Automated Cloud Verification Suite: Created `tests/e2e/cloud_production_verification.spec.js` asserting zero admin leakage on the live customer portal and full live authentication against Render API on the sovereign admin deck.
+- **Verified:**
+  - Sovereign Admin Production URL: `https://detaildock-ops.vercel.app` returns HTTP 200 with obsidian theme and zero SSO barriers.
+  - Secondary Admin URL: `https://detaildock-admin-adobe12.vercel.app` returns HTTP 200.
+  - Customer Production URL: `https://client-mauve-zeta-13.vercel.app` returns HTTP 200 with zero admin links in navbar/footer and zero admin routes.
+  - Render Backend API Health: `https://detaildock-api.onrender.com/api/v1/health` returns `{ success: true, database: { status: 'Connected', connected: true } }`.
+  - Dynamic CMS API: `https://detaildock-api.onrender.com/api/v1/cms/content` returns full active announcement banner, hero copy, before/after showcases, testimonials, and FAQs.
+  - Cloud Admin Login: Render API returned HTTP 200 with valid JWT token and `access-control-allow-origin: https://detaildock-ops.vercel.app`.
+  - Playwright Cloud Production Suite: 2/2 tests passed in 10.9s (`cloud_production_verification.spec.js`).
+  - Playwright Full Regression Suite: All 12/12 tests passed in 29.9s (`detaildock.spec.js` and `production_multidevice_audit.spec.js`). Total 14/14 Playwright E2E tests passing (100% pass rate).
+- **Status:** TASK-052 is fully VERIFIED. Sovereign Admin Portal is deployed live in the cloud on dedicated domain `https://detaildock-ops.vercel.app`, completely decoupled from the customer portal, and integrated with live Render API and MongoDB Atlas.
+
+
 
 
 

@@ -1992,6 +1992,59 @@ All claims of completion must be verified with concrete evidence before receivin
 - **Interactive Generative Architecture Blueprint:**
   - Artifact `detaildock_architecture_diagram.html` created and verified with live reactive twin simulator and 5-stage workflow stepper.
 
+---
+
+## TASK-052: Sovereign Admin Cloud Production Deployment (Dedicated Vercel Project, Subdomain & CORS Integration)
+
+- **Task ID:** TASK-052
+- **Status:** `VERIFIED`
+- **Date:** 2026-10-11
+- **Classification:** `ARCHITECTURAL`
+
+### Acceptance Criteria:
+1. Create and configure dedicated Vercel project for Sovereign Admin (`detaildock-admin`, ID: `prj_smB1K4Cg56Noh7MM4s2HbhNVVDLP`).
+2. Attach dedicated custom production domains (`https://detaildock-ops.vercel.app` and `https://detaildock-admin-adobe12.vercel.app`) with SSL and zero SSO blocks.
+3. Deploy pre-built, verified Sovereign Admin production bundle (`dpl_3LZ2H3WKL8UvhYeM3RhBXdMJLiuH`) with SPA rewrites (`admin/vercel.json`).
+4. Update Render backend API CORS `allowedOrigins` to explicitly accept `https://detaildock-ops.vercel.app` and deploy to Render (`dep-db5rg4d9fdbs73ds3bg0`).
+5. Redeploy cleansed Customer Portal (`client`, `dpl_AP67KHKKuedE9ZLwUoZGLFggvsio`) to `https://client-mauve-zeta-13.vercel.app`.
+6. Run live cloud production Playwright test suite and verify 100% pass rate with zero admin leakage and successful live Render API login.
+
+### Verification Evidence:
+- **Production Cloud Deployments & Endpoints:**
+  - **Sovereign Admin Deck:** `https://detaildock-ops.vercel.app` (Deployment `dpl_3LZ2H3WKL8UvhYeM3RhBXdMJLiuH`, Status: `READY`)
+  - **Secondary Admin Alias:** `https://detaildock-admin-adobe12.vercel.app` (Status: `READY`)
+  - **Customer Web Portal:** `https://client-mauve-zeta-13.vercel.app` (Deployment `dpl_AP67KHKKuedE9ZLwUoZGLFggvsio`, Status: `READY`)
+  - **Render Backend API Service:** `https://detaildock-api.onrender.com` (Deploy `dep-db5rg4d9fdbs73ds3bg0`, Status: `live`)
+  - **Dynamic Website CMS API:** `https://detaildock-api.onrender.com/api/v1/cms/content` (HTTP 200, returns active banner, hero, before/after showcases, testimonials, FAQs)
+  - **CORS Allowed Origin Proof:** Render API returned `Headers: https://detaildock-ops.vercel.app` and `Status: 200` upon admin login.
+- **Playwright Cloud Production Test Suite Run (`cloud_production_verification.spec.js`):**
+  ```text
+  Running 2 tests using 1 worker
+    ok 1 [chromium] › 1. Production Customer Portal is live and has ZERO admin leakage (964ms)
+    ok 2 [chromium] › 2. Sovereign Admin Deck is live on dedicated domain and logs in with live Render API (4.3s)
+
+    2 passed (10.9s)
+  ```
+- **Playwright Full Regression Test Suite Run (`detaildock.spec.js` & `production_multidevice_audit.spec.js`):**
+  ```text
+  Running 12 tests using 1 worker
+    ok  1 [chromium] › 1. Homepage: Renders luxury atelier hero, before/after slider, and packages (1.2s)
+    ok  2 [chromium] › 2. Smart Package Builder: Configures chassis, packages, addons (997ms)
+    ok  3 [chromium] › 3. Appointment Booking Wizard: Generates DD-XXXXXX code (5.9s)
+    ok  4 [chromium] › 4. Live Public Job Tracking Portal: Resolves telemetry & specs (1.5s)
+    ok  5 [chromium] › 5. Admin Operations Deck: Authenticates on sovereign port 5174 (2.7s)
+    ok  6 [chromium] › 6. Customer Atelier Garage: Authenticates VIP client & fleet (2.9s)
+    ok  7 [chromium] › 7. Homepage Mobile: Pristine rendering, zero horizontal overflow (2.0s)
+    ok  8 [chromium] › 8. Smart Package Builder Mobile: Responsive chassis cards (1.1s)
+    ok  9 [chromium] › 9. Appointment Booking Wizard Mobile: Clean slot picker (1.1s)
+    ok 10 [chromium] › 10. Live Telemetry Portal Mobile: 5-stage progress gauge (1.1s)
+    ok 11 [chromium] › 11. Customer VIP Garage Mobile: Unauth landing & Atelier privileges (1.0s)
+    ok 12 [chromium] › 12. Admin Operations Deck Mobile: Restricted login card (2.4s)
+
+    12 passed (29.9s)
+  ```
+- **Total Combined Tests Passing:** **14 / 14 Playwright E2E Tests Passed (100% pass rate)** with 0 failures and 0 regressions.
+
 
 
 

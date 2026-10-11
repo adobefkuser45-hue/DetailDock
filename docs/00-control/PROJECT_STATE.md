@@ -16,9 +16,9 @@
 ---
 
 ## 2. Current Position
-- **Stage:** `24 Sovereign Admin Portal Decoupling & Dynamic CMS Architecture`
-- **Milestone:** `M13 — Sovereign Admin Portal Decoupling & Dynamic Studio CMS`
-- **Current Task:** `TASK-051 — Phase 6: Automated Multi-App Verification, Playwright E2E Suites & Dual Cloud Deployment`
+- **Stage:** `24 Sovereign Admin Cloud Production Deployment`
+- **Milestone:** `M14 — Sovereign Admin Cloud Production Deployment & Decoupled Architecture`
+- **Current Task:** `TASK-052 — Sovereign Admin Cloud Production Deployment (Dedicated Vercel Project, Subdomain & CORS Integration)`
 - **Task Status:** `VERIFIED`
 - **Classification:** `ARCHITECTURAL`
 
@@ -98,24 +98,27 @@
   - `TASK-049`: Phase 4 — Studio Operations Core in Sovereign Admin: Built Dual-Bay Cleanroom Kanban Dispatcher (5 lanes, WhatsApp/SMS triggers), `AdminKpiRow.jsx` (revenue, bays, tickets, utilization), `BookingDetailModal.jsx` (DVI micron depths, gloss GU, 3-Yr ceramic warranty diploma issuer, vector tax invoices), `CatalogManagerModal.jsx` (packages, add-ons, chassis multipliers), and `StudioSettingsModal.jsx` (white-label customizer).
   - `TASK-050`: Phase 5 — Dynamic Website CMS Cockpit & Real-Time Client Synchronization: Implemented 5-tab `CMSManagerModal.jsx` in sovereign admin (Announcement Banner, Hero & Headlines, Before/After Showcases, Testimonials, FAQs). Wired `StudioContext.jsx` in customer client to consume dynamic CMS with fallback defaults. Injected dynamic CMS into `Navbar.jsx` (top announcement banner), `HeroSection.jsx` (badge, headline, subheadline, CTAs, telemetry chips), `BeforeAfterSlider.jsx` (showcase gallery), and `TestimonialsSection.jsx` (reviews).
   - `TASK-051`: Phase 6 — Automated Multi-App Verification, Playwright E2E Suites & Dual Cloud Deployment: Configured Playwright multi-app webservers (ports 5000, 5173, and 5174). Asserted zero customer admin leakage on `:5173/admin` and full sovereign admin operation on `:5174/`. 12/12 Playwright E2E tests passed in 27.7s. 17/17 backend integration checks passed.
+  - `TASK-052`: Sovereign Admin Cloud Production Deployment: Provisioned dedicated Vercel project (`detaildock-admin`, `prj_smB1K4Cg56Noh7MM4s2HbhNVVDLP`), attached custom production domains (`https://detaildock-ops.vercel.app`, `https://detaildock-admin-adobe12.vercel.app`), configured Render backend CORS origins, triggered Render production deploy (`dep-db5rg4d9fdbs73ds3bg0`), and verified 100% end-to-end functionality with 14/14 passing Playwright E2E tests (including live cloud production test suite).
 - **In Progress:**
-  - None (Milestone M13 Sovereign Admin Decoupling & Studio CMS is 100% complete).
+  - None (Milestone M14 Sovereign Admin Cloud Production Deployment is 100% complete and verified).
 - **Blockers:**
   - None.
 
 ---
 
 ## 4. Last Verified
-- **Task:** `TASK-051 — Phase 6: Automated Multi-App Verification, Playwright E2E Suites & Dual Cloud Deployment`
+- **Task:** `TASK-052 — Sovereign Admin Cloud Production Deployment (Dedicated Vercel Project, Subdomain & CORS Integration)`
 - **Date:** 2026-10-11
-- **Evidence Reference:** [VERIFICATION.md#task-051](file:///docs/00-control/VERIFICATION.md#task-051)
+- **Evidence Reference:** [VERIFICATION.md#task-052](file:///docs/00-control/VERIFICATION.md#task-052)
 
 ---
 
 ## 5. Production Infrastructure & Endpoints
-- **Frontend Web Application (Vercel):** https://client-mauve-zeta-13.vercel.app
+- **Customer Web Application (Vercel):** https://client-mauve-zeta-13.vercel.app (and https://client-adobe12.vercel.app)
+- **Sovereign Admin Operations Deck (Vercel):** https://detaildock-ops.vercel.app (and https://detaildock-admin-adobe12.vercel.app)
 - **Backend API Service (Render):** https://detaildock-api.onrender.com
 - **Health Check Endpoint:** https://detaildock-api.onrender.com/api/v1/health
+- **Dynamic Website CMS API:** https://detaildock-api.onrender.com/api/v1/cms/content
 - **Public Catalog API:** https://detaildock-api.onrender.com/api/v1/services
 - **Database:** MongoDB Atlas M0 Cluster (`cluster0.na6yl4b.mongodb.net/detaildock`)
 - **Media CDN:** Cloudinary Cloud (`wrptkj0e`)
