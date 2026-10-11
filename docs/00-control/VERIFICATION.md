@@ -1762,7 +1762,7 @@ All claims of completion must be verified with concrete evidence before receivin
 ## TASK-044: Admin Operations & Service Catalog Deck Atelier Polish (Waves A1 & A2)
 
 - **Task ID:** TASK-044
-- **Status:** `ATTEMPTED` (Wave A1 Verified)
+- **Status:** `VERIFIED`
 - **Date:** 2026-10-11
 - **Classification:** `ARCHITECTURAL`
 
@@ -1773,16 +1773,27 @@ All claims of completion must be verified with concrete evidence before receivin
    - Refined `AdminKpiRow.jsx` to Obsidian Nero cards with amber hover states, replaced developer jargon ("Authoritative multi-stage packages" -> "Bespoke multi-stage preservation suites"), and kept exact E2E metric labels (`Total Studio Revenue` and `Cleanroom Utilization`).
    - Overhauled `KanbanBoard.jsx` with `whitespace-nowrap` on tracking codes and time slots to prevent line-wrapping glitches, and styled cards in Concourse obsidian with glowing amber accents while maintaining all stage buttons (`Confirm Bay`, `Stage in Bay`, `Mark Ready`, `Release Vehicle`).
    - Pass all Playwright E2E tests (6/6 passing) and deploy live to Vercel production.
+2. **Wave A2 (Admin Login, Catalog & Pricing Cockpit Modal, Studio Settings Modal & Booking Detail Modal):**
+   - Upgraded `AdminLogin.jsx` to Obsidian Nero (`#0B0E14`) with glowing Tuscan Amber lock badge, monospace uppercase micro-labels, and glowing action button while preserving demo fill and test assertions (`Fill Demo Admin Credentials`, `Authenticate & Open Pipeline`).
+   - Restyled `CatalogManagerModal.jsx` into a Concourse pricing cockpit with amber active tabs, eliminated developer jargon ("All adjustments synchronize instantaneously with the live studio pricing engine and active client reservations"), and polished modal controls.
+   - Restyled `StudioSettingsModal.jsx` with obsidian form inputs and glowing amber save button (`Save White-Label Identity`).
+   - Polished `BookingDetailModal.jsx` with Obsidian telemetry pods, DVI inspection inputs, and Concourse buttons.
+   - Fixed modal containing block stacking context issue by moving modals outside the animated container in `AdminPage.jsx`, ensuring perfect viewport centering.
+   - Pass all Playwright E2E tests (6/6 passing) and deploy live to Vercel production.
 
 ### Verification Evidence:
 - **Playwright E2E Suite Run:**
-  - Output: `6 passed (19.8s)` with zero failures across all flows including Test 5 (Admin Operations Deck).
+  - Output: `6 passed (40.4s)` with zero failures across all flows including Test 5 (Admin Operations Deck).
 - **Production Deployment:**
-  - Deployed to Vercel production: `https://client-mauve-zeta-13.vercel.app/admin` (Deployment `dpl_BMfsGzTQZ5cA2aHi5PdZSHNssBVg`).
+  - Deployed to Vercel production: `https://client-mauve-zeta-13.vercel.app/admin` (Deployment `dpl_C6MpVkes5RMTez6DXKwxrncy9MGd`).
 - **Visual Evidence Artifacts:**
   - `admin_wave_a1_unauth_landing.png` (verified unauthenticated login screen with generous dock breathing room and font-display heading).
   - `admin_wave_a1_deck_header_kpis.png` (verified authenticated deck top with Obsidian Nero header card, live cleanroom badge, quick actions, and polished KPI metric row).
   - `admin_wave_a1_kanban_cards.png` (verified Kanban pipeline cards with single-line whitespace-nowrap tracking codes, clean time slot badges, and gold hover borders).
+  - `admin_wave_a2_login_card.png` (verified luxury Obsidian Nero login card with glowing lock badge, monospace labels, and glowing amber button).
+  - `admin_wave_a2_catalog_modal.png` (verified perfectly centered Concourse Catalog & Pricing Cockpit modal with Tuscan Amber active tabs and zero overflow).
+  - `admin_wave_a2_settings_modal.png` (verified perfectly centered Studio Identity & Location Settings modal with obsidian inputs and glowing amber button).
+  - `admin_wave_a2_booking_detail_modal.png` (verified perfectly centered Booking Detail modal with telemetry pods, PDF invoice link, and 1-click dispatch hub).
 
 
 

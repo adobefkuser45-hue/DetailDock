@@ -629,7 +629,32 @@
   - Production Deployment: Live on Vercel at `https://client-mauve-zeta-13.vercel.app/admin` (`dpl_BMfsGzTQZ5cA2aHi5PdZSHNssBVg`).
   - Git Sync: Committed and pushed to `origin main` (`5a80ca1`).
   - Visual Evidence: Captured `admin_wave_a1_unauth_landing.png`, `admin_wave_a1_deck_header_kpis.png`, and `admin_wave_a1_kanban_cards.png`.
-- **Status:** Wave A1 is fully VERIFIED and deployed live to production. Ready for Wave A2 (Modals & Login Card).
+## 2026-10-11 — Session 32: Admin Operations Deck (/admin) Polish — Wave A2 Complete & All 6 Routes Verified
+
+- **Action:** Executed Wave A2 of the UI/UX audit and Concourse Atelier polish on the Admin Operations Deck (`/admin`), completing all 6 core application routes across DetailDock.
+- **Implemented:**
+  - `AdminLogin.jsx`:
+    - Redesigned login card with Obsidian Nero (`#0B0E14`) surface, radiant amber lock icon badge (`bg-[#F59E0B]/15 border-[#F59E0B]/30`), monospace uppercase micro-labels (`ADMIN EMAIL ADDRESS`, `PASSPHRASE AUTHENTICATION`), Obsidian `#111622` inputs with amber focus rings, and glowing amber submit button (`glow-amber`).
+    - Maintained exact E2E test selectors and labels (`Fill Demo Admin Credentials`, `Authenticate & Open Pipeline`).
+  - `CatalogManagerModal.jsx`:
+    - Upgraded modal container to Obsidian Nero `#0B0E14` with deep shadow and clean header.
+    - Styled tabs with Tuscan Amber active indicators (`border-[#F59E0B] text-[#F59E0B] font-mono`).
+    - Replaced developer jargon in footer note ("All adjustments synchronize instantaneously with the live studio pricing engine and active client reservations").
+    - Polished close button and form input micro-interactions.
+  - `StudioSettingsModal.jsx`:
+    - Updated modal frame to Obsidian Nero `#0B0E14`, Tuscan Amber building icon, `#0B0E14` inputs with amber focus rings, and glowing amber save button (`Save White-Label Identity`).
+  - `BookingDetailModal.jsx`:
+    - Elevated telemetry pods to Obsidian Nero `#111622`, refined DVI inputs and ceramic warranty tools, and added glowing amber action buttons.
+  - `AdminPage.jsx`:
+    - Fixed CSS stacking context containing block bug by moving modals outside the `animate-fadeIn` container into a React Fragment, ensuring all modals are perfectly centered within the screen viewport rather than pushed down by page scroll.
+- **Verified:**
+  - Vite client production build: compiled in 488ms with 0 errors.
+  - Playwright E2E Suite (`tests/e2e/detaildock.spec.js`): All 6/6 tests passing in 40.4s (100% pass rate).
+  - Production Deployment: Live on Vercel at `https://client-mauve-zeta-13.vercel.app/admin` (`dpl_C6MpVkes5RMTez6DXKwxrncy9MGd`).
+  - Git Sync: Committed and pushed to `origin main` (`6e9204e`).
+  - Visual Evidence: Captured `admin_wave_a2_login_card.png`, `admin_wave_a2_catalog_modal.png`, `admin_wave_a2_settings_modal.png`, and `admin_wave_a2_booking_detail_modal.png`.
+- **Status:** Waves A1 and A2 are fully VERIFIED and deployed live to production. All 6 core application routes (`/`, `/builder`, `/book`, `/track/:code`, `/garage`, `/admin`) are 100% polished, authenticated, responsive, and Concourse Atelier-grade.
+
 
 
 
