@@ -97,18 +97,18 @@ export const StudioSettingsModal = ({ isOpen, onClose, token }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn text-left">
-      <div className="w-full max-w-2xl rounded-3xl bg-[#101522] border-2 border-[#1D2536] shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
+      <div className="w-full max-w-2xl rounded-3xl bg-[#0B0E14] border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.9)] overflow-hidden max-h-[90vh] flex flex-col">
         {/* Header */}
-        <div className="p-6 border-b border-[#1D2536] flex items-center justify-between">
+        <div className="p-6 border-b border-white/10 flex items-center justify-between bg-[#111622]">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#0284C7]/20 border border-[#38BDF8]/40 flex items-center justify-center text-[#38BDF8]">
+            <div className="w-10 h-10 rounded-xl bg-[#F59E0B]/15 border border-[#F59E0B]/30 flex items-center justify-center text-[#F59E0B]">
               <Building2 className="w-5 h-5" />
             </div>
             <div>
-              <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#38BDF8] bg-[#0284C7]/10 px-2 py-0.5 rounded border border-[#0284C7]/20">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#F59E0B] bg-[#F59E0B]/10 px-2 py-0.5 rounded border border-[#F59E0B]/20">
                 White-Label Customizer
               </span>
-              <h3 className="text-xl font-extrabold text-white mt-1">
+              <h3 className="text-xl font-extrabold text-[#F8FAFC] mt-1 font-display">
                 Studio Identity & Location Settings
               </h3>
             </div>
@@ -116,7 +116,7 @@ export const StudioSettingsModal = ({ isOpen, onClose, token }) => {
 
           <button
             onClick={onClose}
-            className="p-2 text-[#94A3B8] hover:text-white rounded-xl hover:bg-[#161D2E] transition-colors"
+            className="p-2 text-[#94A3B8] hover:text-white rounded-xl hover:bg-white/5 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -141,7 +141,7 @@ export const StudioSettingsModal = ({ isOpen, onClose, token }) => {
           {/* Section: Business Branding */}
           <div className="space-y-3">
             <h4 className="text-xs font-mono font-bold uppercase text-[#94A3B8] tracking-wider flex items-center gap-2">
-              <Building2 className="w-3.5 h-3.5 text-[#38BDF8]" />
+              <Building2 className="w-3.5 h-3.5 text-[#F59E0B]" />
               <span>Business Brand & Contacts</span>
             </h4>
 
@@ -155,7 +155,7 @@ export const StudioSettingsModal = ({ isOpen, onClose, token }) => {
                 onChange={(e) => handleChange('studioName', e.target.value)}
                 placeholder="e.g. Apex Auto Detailing Spa"
                 required
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#090C12] border border-[#1D2536] focus:border-[#38BDF8] text-xs text-white focus:outline-none transition-colors"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#111622] border border-white/10 focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/50 text-xs text-[#F8FAFC] placeholder-[#64748B] focus:outline-none transition-colors"
               />
             </div>
 
@@ -170,7 +170,7 @@ export const StudioSettingsModal = ({ isOpen, onClose, token }) => {
                   onChange={(e) => handleChange('contactPhone', e.target.value)}
                   placeholder="+1 (555) 348-2450"
                   required
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#090C12] border border-[#1D2536] focus:border-[#38BDF8] text-xs text-white focus:outline-none transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#111622] border border-white/10 focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/50 text-xs text-[#F8FAFC] placeholder-[#64748B] focus:outline-none transition-colors"
                 />
               </div>
 
@@ -184,16 +184,16 @@ export const StudioSettingsModal = ({ isOpen, onClose, token }) => {
                   onChange={(e) => handleChange('contactEmail', e.target.value)}
                   placeholder="concierge@detaildock.com"
                   required
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#090C12] border border-[#1D2536] focus:border-[#38BDF8] text-xs text-white focus:outline-none transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#111622] border border-white/10 focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/50 text-xs text-[#F8FAFC] placeholder-[#64748B] focus:outline-none transition-colors"
                 />
               </div>
             </div>
           </div>
 
           {/* Section: Physical Atelier Location */}
-          <div className="space-y-3 pt-2 border-t border-[#1D2536]">
+          <div className="space-y-3 pt-2 border-t border-white/10">
             <h4 className="text-xs font-mono font-bold uppercase text-[#94A3B8] tracking-wider flex items-center gap-2">
-              <MapPin className="w-3.5 h-3.5 text-[#38BDF8]" />
+              <MapPin className="w-3.5 h-3.5 text-[#F59E0B]" />
               <span>Studio Physical Address</span>
             </h4>
 
@@ -207,7 +207,7 @@ export const StudioSettingsModal = ({ isOpen, onClose, token }) => {
                 onChange={(e) => handleChange('street', e.target.value)}
                 placeholder="1440 Velocity Way, Suite 100"
                 required
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#090C12] border border-[#1D2536] focus:border-[#38BDF8] text-xs text-white focus:outline-none transition-colors"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#111622] border border-white/10 focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/50 text-xs text-[#F8FAFC] placeholder-[#64748B] focus:outline-none transition-colors"
               />
             </div>
 
@@ -222,7 +222,7 @@ export const StudioSettingsModal = ({ isOpen, onClose, token }) => {
                   onChange={(e) => handleChange('city', e.target.value)}
                   placeholder="Austin"
                   required
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#090C12] border border-[#1D2536] focus:border-[#38BDF8] text-xs text-white focus:outline-none transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#111622] border border-white/10 focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/50 text-xs text-[#F8FAFC] placeholder-[#64748B] focus:outline-none transition-colors"
                 />
               </div>
 
@@ -236,7 +236,7 @@ export const StudioSettingsModal = ({ isOpen, onClose, token }) => {
                   onChange={(e) => handleChange('state', e.target.value)}
                   placeholder="TX"
                   required
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#090C12] border border-[#1D2536] focus:border-[#38BDF8] text-xs text-white focus:outline-none transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#111622] border border-white/10 focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/50 text-xs text-[#F8FAFC] placeholder-[#64748B] focus:outline-none transition-colors"
                 />
               </div>
 
@@ -250,16 +250,16 @@ export const StudioSettingsModal = ({ isOpen, onClose, token }) => {
                   onChange={(e) => handleChange('zip', e.target.value)}
                   placeholder="78701"
                   required
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#090C12] border border-[#1D2536] focus:border-[#38BDF8] text-xs text-white focus:outline-none transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#111622] border border-white/10 focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/50 text-xs text-[#F8FAFC] placeholder-[#64748B] focus:outline-none transition-colors"
                 />
               </div>
             </div>
           </div>
 
           {/* Section: Facility Operations & Bays */}
-          <div className="space-y-3 pt-2 border-t border-[#1D2536]">
+          <div className="space-y-3 pt-2 border-t border-white/10">
             <h4 className="text-xs font-mono font-bold uppercase text-[#94A3B8] tracking-wider flex items-center gap-2">
-              <Warehouse className="w-3.5 h-3.5 text-[#38BDF8]" />
+              <Warehouse className="w-3.5 h-3.5 text-[#F59E0B]" />
               <span>Facility Capacity & Operating Hours</span>
             </h4>
 
@@ -274,7 +274,7 @@ export const StudioSettingsModal = ({ isOpen, onClose, token }) => {
                   onChange={(e) => handleChange('openTime', e.target.value)}
                   placeholder="09:00 AM"
                   required
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#090C12] border border-[#1D2536] focus:border-[#38BDF8] text-xs text-white focus:outline-none transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#111622] border border-white/10 focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/50 text-xs text-[#F8FAFC] placeholder-[#64748B] focus:outline-none transition-colors"
                 />
               </div>
 
@@ -288,7 +288,7 @@ export const StudioSettingsModal = ({ isOpen, onClose, token }) => {
                   onChange={(e) => handleChange('closeTime', e.target.value)}
                   placeholder="06:00 PM"
                   required
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#090C12] border border-[#1D2536] focus:border-[#38BDF8] text-xs text-white focus:outline-none transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#111622] border border-white/10 focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/50 text-xs text-[#F8FAFC] placeholder-[#64748B] focus:outline-none transition-colors"
                 />
               </div>
 
@@ -299,7 +299,7 @@ export const StudioSettingsModal = ({ isOpen, onClose, token }) => {
                 <select
                   value={formData.maxBayCapacity}
                   onChange={(e) => handleChange('maxBayCapacity', e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#090C12] border border-[#1D2536] focus:border-[#38BDF8] text-xs text-white focus:outline-none transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#111622] border border-white/10 focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/50 text-xs text-[#F8FAFC] focus:outline-none transition-colors"
                 >
                   <option value={1}>1 Detailing Bay</option>
                   <option value={2}>2 Detailing Bays</option>
@@ -311,11 +311,11 @@ export const StudioSettingsModal = ({ isOpen, onClose, token }) => {
           </div>
 
           {/* Action Buttons */}
-          <div className="pt-4 border-t border-[#1D2536] flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
             <button
               type="button"
               onClick={handleResetDefaults}
-              className="text-xs text-[#64748B] hover:text-[#94A3B8] flex items-center gap-1.5 transition-colors"
+              className="text-xs text-[#94A3B8] hover:text-[#F8FAFC] flex items-center gap-1.5 transition-colors font-mono"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Reset Factory Defaults</span>
@@ -327,7 +327,7 @@ export const StudioSettingsModal = ({ isOpen, onClose, token }) => {
                 variant="ghost"
                 size="sm"
                 onClick={onClose}
-                className="w-full sm:w-auto text-xs"
+                className="w-full sm:w-auto text-xs border border-white/10 text-[#CBD5E1] hover:text-white"
               >
                 Cancel
               </Button>
@@ -337,7 +337,7 @@ export const StudioSettingsModal = ({ isOpen, onClose, token }) => {
                 size="sm"
                 isLoading={saving}
                 icon={Save}
-                className="w-full sm:w-auto text-xs glow-cyan-sm"
+                className="w-full sm:w-auto text-xs glow-amber font-bold"
               >
                 Save White-Label Identity
               </Button>

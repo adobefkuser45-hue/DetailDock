@@ -106,12 +106,12 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
-      <div className="w-full max-w-2xl rounded-3xl bg-[#101522] border-2 border-[#1D2536] shadow-2xl overflow-hidden max-h-[90vh] flex flex-col text-left">
+      <div className="w-full max-w-2xl rounded-3xl bg-[#0B0E14] border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.9)] overflow-hidden max-h-[90vh] flex flex-col text-left">
         
         {/* Modal Header */}
-        <div className="p-6 border-b border-[#1D2536] flex items-center justify-between">
+        <div className="p-6 border-b border-white/10 flex items-center justify-between bg-[#111622]">
           <div className="flex items-center gap-3">
-            <span className="text-xl sm:text-2xl font-black font-mono text-[#38BDF8]">
+            <span className="text-xl sm:text-2xl font-black font-mono text-[#F59E0B]">
               {booking.bookingCode}
             </span>
             <Badge status={booking.status} size="md" />
@@ -128,7 +128,7 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
 
           <button
             onClick={onClose}
-            className="p-2 rounded-xl bg-[#161D2E] text-[#94A3B8] hover:text-white transition-colors"
+            className="p-2 rounded-xl bg-white/5 border border-white/10 text-[#94A3B8] hover:text-white transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -140,9 +140,9 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
           {/* Quick Telemetry Pods */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {/* Vehicle */}
-            <div className="p-3.5 rounded-xl bg-[#090C12] border border-[#1D2536]">
-              <span className="text-[#64748B] uppercase font-bold flex items-center gap-1 mb-1">
-                <Car className="w-3.5 h-3.5 text-[#38BDF8]" />
+            <div className="p-3.5 rounded-xl bg-[#111622] border border-white/10">
+              <span className="text-[#94A3B8] uppercase font-bold flex items-center gap-1 mb-1 font-mono text-[10px]">
+                <Car className="w-3.5 h-3.5 text-[#F59E0B]" />
                 Vehicle Spec
               </span>
               <div className="font-bold text-white text-sm">
@@ -154,8 +154,8 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
             </div>
 
             {/* Client */}
-            <div className="p-3.5 rounded-xl bg-[#090C12] border border-[#1D2536]">
-              <span className="text-[#64748B] uppercase font-bold flex items-center gap-1 mb-1">
+            <div className="p-3.5 rounded-xl bg-[#111622] border border-white/10">
+              <span className="text-[#94A3B8] uppercase font-bold flex items-center gap-1 mb-1 font-mono text-[10px]">
                 <User className="w-3.5 h-3.5 text-[#F59E0B]" />
                 Customer
               </span>
@@ -168,31 +168,31 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
             </div>
 
             {/* Schedule */}
-            <div className="p-3.5 rounded-xl bg-[#090C12] border border-[#1D2536]">
-              <span className="text-[#64748B] uppercase font-bold flex items-center gap-1 mb-1">
+            <div className="p-3.5 rounded-xl bg-[#111622] border border-white/10">
+              <span className="text-[#94A3B8] uppercase font-bold flex items-center gap-1 mb-1 font-mono text-[10px]">
                 <Warehouse className="w-3.5 h-3.5 text-[#10B981]" />
                 Bay Allocation
               </span>
               <div className="font-bold text-white text-sm">
                 Cleanroom Bay {booking.bayNumber || 1}
               </div>
-              <div className="text-[#38BDF8] mt-0.5 font-mono">
+              <div className="text-[#F59E0B] mt-0.5 font-mono">
                 {scheduledDate} ({booking.scheduledTimeSlot})
               </div>
             </div>
           </div>
 
           {/* Pricing & Service Breakdown */}
-          <div className="p-4 rounded-xl bg-[#161D2E] border border-[#1D2536] space-y-2">
-            <div className="flex items-center justify-between pb-1 border-b border-[#1D2536]">
-              <div className="font-bold text-white uppercase text-[11px] text-[#94A3B8]">
+          <div className="p-4 rounded-xl bg-[#111622] border border-white/10 space-y-2">
+            <div className="flex items-center justify-between pb-1 border-b border-white/10">
+              <div className="font-bold uppercase text-[11px] text-[#94A3B8] font-mono tracking-wider">
                 Financial Breakdown & Settlement
               </div>
               <a
                 href={getInvoiceDownloadUrl(booking.bookingCode)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#38BDF8] hover:underline flex items-center gap-1 text-[11px] font-semibold"
+                className="text-[#F59E0B] hover:underline flex items-center gap-1 text-[11px] font-semibold"
               >
                 <FileDown className="w-3.5 h-3.5" />
                 <span>Download PDF Invoice</span>
@@ -209,16 +209,16 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
                 <span className="font-mono text-[#F59E0B]">+${Number(a.price).toFixed(2)}</span>
               </div>
             ))}
-            <div className="pt-2 border-t border-[#1D2536] flex justify-between font-bold text-white text-sm">
+            <div className="pt-2 border-t border-white/10 flex justify-between font-bold text-white text-sm">
               <span>Total Invoice Amount:</span>
-              <span className="font-mono text-[#38BDF8] text-base">${Number(booking.totalPrice || 0).toFixed(2)}</span>
+              <span className="font-mono text-[#F59E0B] text-base">${Number(booking.totalPrice || 0).toFixed(2)}</span>
             </div>
           </div>
 
           {/* Customer Special Notes */}
           {booking.notes && (
-            <div className="p-4 rounded-xl bg-[#090C12] border border-[#1D2536]">
-              <div className="text-[11px] font-bold uppercase text-[#94A3B8] mb-1">
+            <div className="p-4 rounded-xl bg-[#111622] border border-white/10">
+              <div className="text-[11px] font-bold uppercase text-[#94A3B8] font-mono tracking-wider mb-1">
                 Customer Special Request / Handling Notes
               </div>
               <p className="text-white italic">"{booking.notes}"</p>
@@ -226,19 +226,19 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
           )}
 
           {/* Direct Client Communications Dispatch Hub */}
-          <div className="p-4 rounded-xl bg-[#161D2E] border border-[#2A364E] space-y-3">
+          <div className="p-4 rounded-xl bg-[#111622] border border-white/10 space-y-3">
             <div className="flex items-center justify-between">
-              <div className="text-xs font-bold uppercase text-white tracking-wider flex items-center gap-1.5">
+              <div className="text-xs font-bold uppercase text-white tracking-wider flex items-center gap-1.5 font-mono">
                 <MessageSquare className="w-3.5 h-3.5 text-[#25D366]" />
                 <span>Direct Client Dispatch Hub</span>
               </div>
-              <span className="text-[11px] font-mono text-[#38BDF8]">
+              <span className="text-[11px] font-mono text-[#F59E0B]">
                 {customer.phone || 'No phone'}
               </span>
             </div>
 
             <p className="text-xs text-[#94A3B8]">
-              Instantly notify customer of stage <span className="text-[#38BDF8] font-bold">({booking.status})</span> with 1-click via WhatsApp or SMS:
+              Instantly notify customer of stage <span className="text-[#F59E0B] font-bold">({booking.status})</span> with 1-click via WhatsApp or SMS:
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
@@ -253,7 +253,7 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
                   <span>Send WhatsApp Alert</span>
                 </a>
               ) : (
-                <div className="text-xs text-[#64748B] p-2 bg-[#090C12] rounded-xl border border-[#1D2536] text-center">
+                <div className="text-xs text-[#64748B] p-2 bg-[#0B0E14] rounded-xl border border-white/10 text-center">
                   No mobile on file
                 </div>
               )}
@@ -261,7 +261,7 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
               {customer.phone ? (
                 <a
                   href={`sms:${(customer.phone || '').replace(/[^\d]/g, '')}?body=${encodeURIComponent(`DetailDock Atelier: Update on your ${vehicle.year || ''} ${vehicle.make || ''} ${vehicle.model || ''} (Ref: ${booking.bookingCode}). Current status: ${booking.status}. Track live: https://client-mauve-zeta-13.vercel.app/track/${booking.bookingCode}`)}`}
-                  className="py-2.5 px-3 rounded-xl bg-[#38BDF8]/15 hover:bg-[#38BDF8]/25 border border-[#38BDF8]/40 text-[#38BDF8] text-xs font-bold flex items-center justify-center gap-2 transition-colors"
+                  className="py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-white text-xs font-bold flex items-center justify-center gap-2 transition-colors"
                 >
                   <Smartphone className="w-4 h-4" />
                   <span>Send SMS Message</span>
@@ -271,9 +271,9 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
           </div>
 
           {/* DIGITAL CERAMIC WARRANTY & DVI INSPECTION TOOLS */}
-          <div className="p-4 rounded-xl bg-[#090C12] border border-[#1E293B] space-y-4">
+          <div className="p-4 rounded-xl bg-[#111622] border border-white/10 space-y-4">
             <div className="flex items-center justify-between">
-              <div className="text-xs font-bold uppercase text-[#D97706] flex items-center gap-2">
+              <div className="text-xs font-bold uppercase text-[#F59E0B] flex items-center gap-2 font-mono tracking-wider">
                 <Award className="w-4 h-4" />
                 <span>Ceramic Coating Warranty & DVI Inspection</span>
               </div>
@@ -287,44 +287,44 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
             {/* DVI Telemetry Inputs */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <label className="text-[10px] text-[#94A3B8] block mb-1">Intake Depth (µm)</label>
+                <label className="text-[10px] font-mono uppercase tracking-wider text-[#94A3B8] block mb-1">Intake Depth (µm)</label>
                 <input
                   type="number"
                   value={dviData.clearCoatDepthMicrons}
                   onChange={(e) => setDviData({ ...dviData, clearCoatDepthMicrons: e.target.value })}
-                  className="w-full bg-[#161D2E] border border-[#1D2536] rounded-lg px-2.5 py-1.5 text-xs text-white font-mono"
+                  className="w-full bg-[#0B0E14] border border-white/15 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono focus:outline-none focus:border-[#F59E0B]"
                 />
               </div>
               <div>
-                <label className="text-[10px] text-[#94A3B8] block mb-1">Final Gloss (GU)</label>
+                <label className="text-[10px] font-mono uppercase tracking-wider text-[#94A3B8] block mb-1">Final Gloss (GU)</label>
                 <input
                   type="number"
                   step="0.1"
                   value={dviData.finalGlossUnits}
                   onChange={(e) => setDviData({ ...dviData, finalGlossUnits: e.target.value })}
-                  className="w-full bg-[#161D2E] border border-[#1D2536] rounded-lg px-2.5 py-1.5 text-xs text-white font-mono"
+                  className="w-full bg-[#0B0E14] border border-white/15 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono focus:outline-none focus:border-[#F59E0B]"
                 />
               </div>
               <div>
-                <label className="text-[10px] text-[#94A3B8] block mb-1">Defect Elim (%)</label>
+                <label className="text-[10px] font-mono uppercase tracking-wider text-[#94A3B8] block mb-1">Defect Elim (%)</label>
                 <input
                   type="number"
                   value={dviData.swirlDefectEliminationPercent}
                   onChange={(e) => setDviData({ ...dviData, swirlDefectEliminationPercent: e.target.value })}
-                  className="w-full bg-[#161D2E] border border-[#1D2536] rounded-lg px-2.5 py-1.5 text-xs text-white font-mono"
+                  className="w-full bg-[#0B0E14] border border-white/15 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono focus:outline-none focus:border-[#F59E0B]"
                 />
               </div>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-[#1E293B]">
+            <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-white/10">
               <button
                 type="button"
                 onClick={handleSaveDvi}
                 disabled={isSavingDvi}
-                className="px-3 py-1.5 rounded-lg bg-[#38BDF8]/20 hover:bg-[#38BDF8]/30 text-[#38BDF8] border border-[#38BDF8]/40 text-xs font-bold flex items-center gap-1.5 transition"
+                className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-white border border-white/15 text-xs font-bold flex items-center gap-1.5 transition"
               >
-                <Microscope className="w-3.5 h-3.5" />
+                <Microscope className="w-3.5 h-3.5 text-[#F59E0B]" />
                 {isSavingDvi ? 'Saving DVI...' : dviSuccess ? 'DVI Saved!' : 'Save DVI Telemetry'}
               </button>
 
@@ -335,7 +335,7 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
                     target="_blank"
                     rel="noopener noreferrer"
                     download
-                    className="px-3 py-1.5 rounded-lg bg-[#161D2E] border border-[#2A364E] text-[#F59E0B] hover:text-white text-xs font-bold flex items-center gap-1 transition"
+                    className="px-3 py-1.5 rounded-lg bg-[#0B0E14] border border-white/15 text-[#F59E0B] hover:text-white text-xs font-bold flex items-center gap-1 transition"
                   >
                     <FileDown className="w-3.5 h-3.5" />
                     PDF
@@ -345,7 +345,7 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
                   type="button"
                   onClick={handleIssueWarranty}
                   disabled={isIssuingWarranty}
-                  className="px-3.5 py-1.5 rounded-lg bg-[#D97706] hover:bg-[#B45309] text-white text-xs font-bold flex items-center gap-1.5 transition shadow"
+                  className="px-3.5 py-1.5 rounded-lg bg-[#F59E0B] hover:bg-[#D97706] text-black font-extrabold text-xs flex items-center gap-1.5 transition shadow-[0_0_15px_rgba(245,158,11,0.2)]"
                 >
                   <Award className="w-3.5 h-3.5" />
                   {isIssuingWarranty ? 'Generating...' : warrantySuccess ? `Issued ${warrantySuccess}` : 'Issue 3-Yr Warranty'}
@@ -355,20 +355,20 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
           </div>
 
           {/* UPDATE STATUS & SETTLEMENT FORM */}
-          <form onSubmit={handleSubmit} className="p-4 rounded-xl bg-[#090C12] border border-[#2A364E] space-y-4">
-            <div className="text-xs font-bold uppercase text-[#38BDF8] tracking-wider">
+          <form onSubmit={handleSubmit} className="p-4 rounded-xl bg-[#111622] border border-white/10 space-y-4">
+            <div className="text-xs font-bold uppercase text-[#F59E0B] tracking-wider font-mono">
               Update Appointment Stage & Payment Settlement
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="text-[11px] text-[#94A3B8] block mb-1">
+                <label className="text-[10px] font-mono uppercase tracking-wider text-[#94A3B8] block mb-1">
                   Target Stage Status:
                 </label>
                 <select
                   value={selectedStatus}
                   onChange={(e) => setSelectedStatus(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-[#161D2E] border border-[#1D2536] text-white focus:outline-none focus:border-[#38BDF8]"
+                  className="w-full px-3 py-2 rounded-xl bg-[#0B0E14] border border-white/15 text-white focus:outline-none focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/30"
                 >
                   <option value="Pending">Pending (Requested)</option>
                   <option value="Confirmed">Confirmed (Bay Allocated)</option>
@@ -380,13 +380,13 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
               </div>
 
               <div>
-                <label className="text-[11px] text-[#94A3B8] block mb-1">
+                <label className="text-[10px] font-mono uppercase tracking-wider text-[#94A3B8] block mb-1">
                   Assigned Studio Bay:
                 </label>
                 <select
                   value={bayNumber}
                   onChange={(e) => setBayNumber(Number(e.target.value))}
-                  className="w-full px-3 py-2 rounded-xl bg-[#161D2E] border border-[#1D2536] text-white focus:outline-none focus:border-[#38BDF8]"
+                  className="w-full px-3 py-2 rounded-xl bg-[#0B0E14] border border-white/15 text-white focus:outline-none focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/30"
                 >
                   <option value={1}>Cleanroom Bay 1</option>
                   <option value={2}>Cleanroom Bay 2</option>
@@ -397,13 +397,13 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
             {/* Payment Settlement Controls */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
               <div>
-                <label className="text-[11px] text-[#94A3B8] block mb-1">
+                <label className="text-[10px] font-mono uppercase tracking-wider text-[#94A3B8] block mb-1">
                   Payment Status:
                 </label>
                 <select
                   value={paymentStatus}
                   onChange={(e) => setPaymentStatus(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-[#161D2E] border border-[#1D2536] text-white focus:outline-none focus:border-[#38BDF8]"
+                  className="w-full px-3 py-2 rounded-xl bg-[#0B0E14] border border-white/15 text-white focus:outline-none focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/30"
                 >
                   <option value="unpaid">Unpaid / Due on Arrival</option>
                   <option value="deposit_paid">Deposit Paid ($50.00)</option>
@@ -414,13 +414,13 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
               </div>
 
               <div>
-                <label className="text-[11px] text-[#94A3B8] block mb-1">
+                <label className="text-[10px] font-mono uppercase tracking-wider text-[#94A3B8] block mb-1">
                   Settlement Method:
                 </label>
                 <select
                   value={paymentMethod}
                   onChange={(e) => setPaymentMethod(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-[#161D2E] border border-[#1D2536] text-white focus:outline-none focus:border-[#38BDF8]"
+                  className="w-full px-3 py-2 rounded-xl bg-[#0B0E14] border border-white/15 text-white focus:outline-none focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/30"
                 >
                   <option value="studio_pay">Pay at Studio Arrival</option>
                   <option value="stripe">Online Card (Stripe)</option>
@@ -431,7 +431,7 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
             </div>
 
             <div>
-              <label className="text-[11px] text-[#94A3B8] block mb-1">
+              <label className="text-[10px] font-mono uppercase tracking-wider text-[#94A3B8] block mb-1">
                 Technician Inspection Remark (Logged in Audit History):
               </label>
               <textarea
@@ -439,7 +439,7 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
                 placeholder="e.g. Scangrip defect inspection complete; clear coat swirl elimination at 98 GU; applying dual-layer 9H ceramic."
                 value={adminNote}
                 onChange={(e) => setAdminNote(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl bg-[#161D2E] border border-[#1D2536] text-white placeholder-[#64748B] focus:outline-none focus:border-[#38BDF8]"
+                className="w-full px-3 py-2 rounded-xl bg-[#0B0E14] border border-white/15 text-white placeholder-[#64748B] focus:outline-none focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]/30"
               />
             </div>
 
@@ -448,7 +448,7 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
               variant="primary"
               size="md"
               isLoading={isUpdating}
-              className="w-full glow-cyan-sm"
+              className="w-full glow-amber font-bold"
             >
               Save Stage Transition & Settlement
             </Button>
@@ -457,12 +457,12 @@ export const BookingDetailModal = ({ booking, onClose, onUpdateStatus, isUpdatin
         </div>
 
         {/* Modal Footer */}
-        <div className="p-4 border-t border-[#1D2536] bg-[#090C12] flex items-center justify-between text-xs">
+        <div className="p-4 border-t border-white/10 bg-[#111622] flex items-center justify-between text-xs">
           <a
             href={`/track/${booking.bookingCode}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#38BDF8] hover:underline flex items-center gap-1 font-mono"
+            className="text-[#F59E0B] hover:underline flex items-center gap-1 font-mono font-bold"
           >
             <ExternalLink className="w-3.5 h-3.5" />
             <span>Open Public Telemetry View</span>

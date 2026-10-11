@@ -425,7 +425,8 @@ export const AdminPage = () => {
 
   // Authenticated Atelier Command Deck
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 sm:pt-36 sm:pb-28 space-y-8 animate-fadeIn">
+    <>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 sm:pt-36 sm:pb-28 space-y-8 animate-fadeIn">
       
       {/* Top Operations Header */}
       <div className="p-6 sm:p-8 rounded-3xl bg-[#0B0E14] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.7)] flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden text-left">
@@ -574,31 +575,32 @@ export const AdminPage = () => {
         />
       )}
 
-      {/* Inspection & Status Transition Modal */}
-      {selectedBookingForModal && (
-        <BookingDetailModal
-          booking={selectedBookingForModal}
-          onClose={() => setSelectedBookingForModal(null)}
-          onUpdateStatus={handleModalStatusUpdate}
-          isUpdating={isUpdatingId === (selectedBookingForModal._id || selectedBookingForModal.id || selectedBookingForModal.bookingCode)}
-        />
-      )}
-
-      {/* Studio White-Label Customizer Modal */}
-      <StudioSettingsModal
-        isOpen={settingsModalOpen}
-        onClose={() => setSettingsModalOpen(false)}
-        token={token}
-      />
-
-      {/* Service Catalog & Pricing Manager Modal */}
-      <CatalogManagerModal
-        isOpen={catalogModalOpen}
-        onClose={() => setCatalogModalOpen(false)}
-        token={token}
-        onCatalogUpdated={() => loadDashboardData(true)}
-      />
-
     </div>
-  );
+
+    {/* Inspection & Status Transition Modal */}
+    {selectedBookingForModal && (
+      <BookingDetailModal
+        booking={selectedBookingForModal}
+        onClose={() => setSelectedBookingForModal(null)}
+        onUpdateStatus={handleModalStatusUpdate}
+        isUpdating={isUpdatingId === (selectedBookingForModal._id || selectedBookingForModal.id || selectedBookingForModal.bookingCode)}
+      />
+    )}
+
+    {/* Studio White-Label Customizer Modal */}
+    <StudioSettingsModal
+      isOpen={settingsModalOpen}
+      onClose={() => setSettingsModalOpen(false)}
+      token={token}
+    />
+
+    {/* Service Catalog & Pricing Manager Modal */}
+    <CatalogManagerModal
+      isOpen={catalogModalOpen}
+      onClose={() => setCatalogModalOpen(false)}
+      token={token}
+      onCatalogUpdated={() => loadDashboardData(true)}
+    />
+  </>
+);
 };

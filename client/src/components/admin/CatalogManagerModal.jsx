@@ -236,23 +236,23 @@ export const CatalogManagerModal = ({ isOpen, onClose, token, onCatalogUpdated }
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
-      <div className="bg-[#0D121F] border border-[#1E293B] rounded-2xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl text-left overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto animate-fadeIn">
+      <div className="bg-[#0B0E14] border border-white/10 rounded-2xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-[0_25px_60px_rgba(0,0,0,0.9)] text-left overflow-hidden">
         
         {/* Modal Header */}
-        <div className="p-6 border-b border-[#1E293B] flex items-center justify-between bg-[#10172A]/70">
+        <div className="p-6 border-b border-white/10 flex items-center justify-between bg-[#111622]">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-[#38BDF8]/10 text-[#38BDF8] border border-[#38BDF8]/20">
+            <div className="p-2.5 rounded-xl bg-[#F59E0B]/15 text-[#F59E0B] border border-[#F59E0B]/30">
               <SlidersHorizontal className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-white flex items-center gap-2">
+              <h2 className="text-xl font-bold text-[#F8FAFC] flex items-center gap-2 font-display">
                 Service Catalog & Pricing Cockpit
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#10B981]/20 text-[#10B981] border border-[#10B981]/30">
                   Live Sync
                 </span>
               </h2>
-              <p className="text-xs text-[#94A3B8]">
+              <p className="text-xs text-[#94A3B8] mt-0.5">
                 Configure detailing packages, add-ons, and chassis multipliers. Changes persist to MongoDB Atlas and update all client pages instantly.
               </p>
             </div>
@@ -260,21 +260,21 @@ export const CatalogManagerModal = ({ isOpen, onClose, token, onCatalogUpdated }
           <button 
             onClick={onClose}
             aria-label="Close catalog modal"
-            className="p-2 text-[#94A3B8] hover:text-white rounded-lg hover:bg-[#1E293B] transition"
+            className="p-2 text-[#94A3B8] hover:text-white rounded-lg hover:bg-white/5 transition"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex items-center justify-between px-6 border-b border-[#1E293B] bg-[#0B0F19]">
+        <div className="flex items-center justify-between px-6 border-b border-white/10 bg-[#0B0E14]">
           <div className="flex gap-2">
             <button
               onClick={() => setActiveTab('packages')}
-              className={`py-3.5 px-4 text-xs font-bold uppercase tracking-wider border-b-2 transition flex items-center gap-2 ${
+              className={`py-3.5 px-4 text-xs font-bold uppercase tracking-wider border-b-2 transition flex items-center gap-2 font-mono ${
                 activeTab === 'packages'
-                  ? 'border-[#38BDF8] text-[#38BDF8]'
-                  : 'border-transparent text-[#94A3B8] hover:text-white'
+                  ? 'border-[#F59E0B] text-[#F59E0B]'
+                  : 'border-transparent text-[#94A3B8] hover:text-[#F8FAFC]'
               }`}
             >
               <Layers className="w-4 h-4" />
@@ -282,10 +282,10 @@ export const CatalogManagerModal = ({ isOpen, onClose, token, onCatalogUpdated }
             </button>
             <button
               onClick={() => setActiveTab('addons')}
-              className={`py-3.5 px-4 text-xs font-bold uppercase tracking-wider border-b-2 transition flex items-center gap-2 ${
+              className={`py-3.5 px-4 text-xs font-bold uppercase tracking-wider border-b-2 transition flex items-center gap-2 font-mono ${
                 activeTab === 'addons'
-                  ? 'border-[#38BDF8] text-[#38BDF8]'
-                  : 'border-transparent text-[#94A3B8] hover:text-white'
+                  ? 'border-[#F59E0B] text-[#F59E0B]'
+                  : 'border-transparent text-[#94A3B8] hover:text-[#F8FAFC]'
               }`}
             >
               <Sparkles className="w-4 h-4" />
@@ -293,10 +293,10 @@ export const CatalogManagerModal = ({ isOpen, onClose, token, onCatalogUpdated }
             </button>
             <button
               onClick={() => setActiveTab('categories')}
-              className={`py-3.5 px-4 text-xs font-bold uppercase tracking-wider border-b-2 transition flex items-center gap-2 ${
+              className={`py-3.5 px-4 text-xs font-bold uppercase tracking-wider border-b-2 transition flex items-center gap-2 font-mono ${
                 activeTab === 'categories'
-                  ? 'border-[#38BDF8] text-[#38BDF8]'
-                  : 'border-transparent text-[#94A3B8] hover:text-white'
+                  ? 'border-[#F59E0B] text-[#F59E0B]'
+                  : 'border-transparent text-[#94A3B8] hover:text-[#F8FAFC]'
               }`}
             >
               <Car className="w-4 h-4" />
@@ -773,13 +773,13 @@ export const CatalogManagerModal = ({ isOpen, onClose, token, onCatalogUpdated }
         </div>
 
         {/* Modal Footer */}
-        <div className="p-4 border-t border-[#1E293B] bg-[#10172A]/70 flex items-center justify-between">
-          <span className="text-[11px] text-[#64748B]">
-            All pricing adjustments execute deterministic calculations on the authoritative backend.
+        <div className="p-4 border-t border-white/10 bg-[#111622] flex flex-col sm:flex-row items-center justify-between gap-3">
+          <span className="text-[11px] text-[#94A3B8] font-mono text-center sm:text-left">
+            All adjustments synchronize instantaneously with the live studio pricing engine and active client reservations.
           </span>
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded-xl bg-[#1E293B] hover:bg-[#2A364E] text-white text-xs font-bold transition"
+            className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-[#CBD5E1] hover:text-white text-xs font-bold transition flex-shrink-0"
           >
             Close Catalog Cockpit
           </button>
