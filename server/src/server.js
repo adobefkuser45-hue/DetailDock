@@ -40,7 +40,10 @@ const allowedOrigins = [
   process.env.ADMIN_URL,
   'http://localhost:5173',
   'http://localhost:5174',
-  'https://client-mauve-zeta-13.vercel.app'
+  'https://client-mauve-zeta-13.vercel.app',
+  'https://detaildock-ops.vercel.app',
+  'https://detaildock-admin-adobe12.vercel.app',
+  'https://detaildock-admin.vercel.app'
 ].filter(Boolean);
 
 app.use(cors({

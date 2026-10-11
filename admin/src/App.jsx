@@ -251,7 +251,7 @@ export function App() {
               </span>
             </div>
             <div className="text-[11px] text-slate-400 font-mono hidden sm:block">
-              Dedicated Studio Operations Deck • Port 5174
+              Dedicated Studio Operations Deck • Concourse Control
             </div>
           </div>
         </div>
